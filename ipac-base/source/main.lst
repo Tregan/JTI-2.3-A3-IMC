@@ -1,0 +1,301 @@
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s 			page 1
+
+
+   1               		.file	"main.c"
+   2               		.arch atmega2561
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  10               		.text
+  11               	.global	SysInitIO
+  12               		.type	SysInitIO, @function
+  13               	SysInitIO:
+  14               	/* prologue: frame size=0 */
+  15               	/* prologue end (size=0) */
+  16 0000 87EF      		ldi r24,lo8(-9)
+  17 0002 84B9      		out 36-0x20,r24
+  18 0004 8CE0      		ldi r24,lo8(12)
+  19 0006 8AB9      		out 42-0x20,r24
+  20 0008 8BB1      		in r24,43-0x20
+  21 000a 8C70      		andi r24,lo8(12)
+  22 000c 836F      		ori r24,lo8(-13)
+  23 000e 8BB9      		out 43-0x20,r24
+  24 0010 8EE8      		ldi r24,lo8(-114)
+  25 0012 8DB9      		out 45-0x20,r24
+  26 0014 8EB1      		in r24,46-0x20
+  27 0016 8E78      		andi r24,lo8(-114)
+  28 0018 8160      		ori r24,lo8(1)
+  29 001a 8EB9      		out 46-0x20,r24
+  30 001c 85B7      		in r24,85-0x20
+  31 001e 8068      		ori r24,lo8(-128)
+  32 0020 85BF      		out 85-0x20,r24
+  33 0022 85B7      		in r24,85-0x20
+  34 0024 8068      		ori r24,lo8(-128)
+  35 0026 85BF      		out 85-0x20,r24
+  36 0028 8EE0      		ldi r24,lo8(14)
+  37 002a 80BB      		out 48-0x20,r24
+  38 002c 81B3      		in r24,49-0x20
+  39 002e 8E70      		andi r24,lo8(14)
+  40 0030 816F      		ori r24,lo8(-15)
+  41 0032 81BB      		out 49-0x20,r24
+  42 0034 88E1      		ldi r24,lo8(24)
+  43 0036 83BB      		out 51-0x20,r24
+  44               	/* epilogue: frame size=0 */
+  45 0038 0895      		ret
+  46               	/* epilogue end (size=1) */
+  47               	/* function SysInitIO size 29 (28) */
+  48               		.size	SysInitIO, .-SysInitIO
+  49               	.global	NutAppMain
+  50               		.type	NutAppMain, @function
+  51               	NutAppMain:
+  52               	/* prologue: frame size=18 */
+  53 003a EF92      		push r14
+  54 003c FF92      		push r15
+  55 003e 0F93      		push r16
+  56 0040 1F93      		push r17
+  57 0042 CF93      		push r28
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s 			page 2
+
+
+  58 0044 DF93      		push r29
+  59 0046 CDB7      		in r28,__SP_L__
+  60 0048 DEB7      		in r29,__SP_H__
+  61 004a 6297      		sbiw r28,18
+  62 004c 0FB6      		in __tmp_reg__,__SREG__
+  63 004e F894      		cli
+  64 0050 DEBF      		out __SP_H__,r29
+  65 0052 0FBE      		out __SREG__,__tmp_reg__
+  66 0054 CDBF      		out __SP_L__,r28
+  67               	/* prologue end (size=14) */
+  68 0056 0E94 0000 		call WatchDogDisable
+  69 005a 84E6      		ldi r24,lo8(100)
+  70 005c 0E94 0000 		call NutDelay
+  71 0060 0E94 0000 		call SysInitIO
+  72 0064 0E94 0000 		call SPIinit
+  73 0068 0E94 0000 		call LedInit
+  74 006c 0E94 0000 		call LcdLowLevelInit
+  75 0070 0E94 0000 		call Uart0DriverInit
+  76 0074 0E94 0000 		call Uart0DriverStart
+  77 0078 0E94 0000 		call LogInit
+  78 007c 80E0      		ldi r24,lo8(__c.2551)
+  79 007e 90E0      		ldi r25,hi8(__c.2551)
+  80 0080 9F93      		push r25
+  81 0082 8F93      		push r24
+  82 0084 16EC      		ldi r17,lo8(-58)
+  83 0086 1F93      		push r17
+  84 0088 0E94 0000 		call LogMsg_P
+  85 008c 0E94 0000 		call CardInit
+  86 0090 0E94 0000 		call X12Init
+  87 0094 CE01      		movw r24,r28
+  88 0096 0196      		adiw r24,1
+  89 0098 0E94 0000 		call X12RtcGetClock
+  90 009c 0F90      		pop __tmp_reg__
+  91 009e 0F90      		pop __tmp_reg__
+  92 00a0 0F90      	 	pop __tmp_reg__
+  93 00a2 892B      		or r24,r25
+  94 00a4 01F4      		brne .L4
+  95 00a6 8981      		ldd r24,Y+1
+  96 00a8 9A81      		ldd r25,Y+2
+  97 00aa 9F93      		push r25
+  98 00ac 8F93      		push r24
+  99 00ae 8B81      		ldd r24,Y+3
+ 100 00b0 9C81      		ldd r25,Y+4
+ 101 00b2 9F93      		push r25
+ 102 00b4 8F93      		push r24
+ 103 00b6 8D81      		ldd r24,Y+5
+ 104 00b8 9E81      		ldd r25,Y+6
+ 105 00ba 9F93      		push r25
+ 106 00bc 8F93      		push r24
+ 107 00be 80E0      		ldi r24,lo8(__c.2553)
+ 108 00c0 90E0      		ldi r25,hi8(__c.2553)
+ 109 00c2 9F93      		push r25
+ 110 00c4 8F93      		push r24
+ 111 00c6 1F93      		push r17
+ 112 00c8 0E94 0000 		call LogMsg_P
+ 113 00cc 8DB7      		in r24,__SP_L__
+ 114 00ce 9EB7      		in r25,__SP_H__
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s 			page 3
+
+
+ 115 00d0 0996      		adiw r24,9
+ 116 00d2 0FB6      		in __tmp_reg__,__SREG__
+ 117 00d4 F894      		cli
+ 118 00d6 9EBF      		out __SP_H__,r25
+ 119 00d8 0FBE      		out __SREG__,__tmp_reg__
+ 120 00da 8DBF      		out __SP_L__,r24
+ 121               	.L4:
+ 122 00dc 0E94 0000 		call At45dbInit
+ 123 00e0 0E94 0000 		call RcInit
+ 124 00e4 0E94 0000 		call KbInit
+ 125 00e8 40E0      		ldi r20,lo8(0)
+ 126 00ea 50E0      		ldi r21,hi8(0)
+ 127 00ec 60E0      		ldi r22,lo8(gs(SysMainBeatInterrupt))
+ 128 00ee 70E0      		ldi r23,hi8(gs(SysMainBeatInterrupt))
+ 129 00f0 80E0      		ldi r24,lo8(sig_OVERFLOW0)
+ 130 00f2 90E0      		ldi r25,hi8(sig_OVERFLOW0)
+ 131 00f4 0E94 0000 		call NutRegisterIrqHandler
+ 132 00f8 892B      		or r24,r25
+ 133 00fa 01F4      		brne .L6
+ 134 00fc 85B5      		in r24,69-0x20
+ 135 00fe 8460      		ori r24,lo8(4)
+ 136 0100 85BD      		out 69-0x20,r24
+ 137 0102 A89A      		sbi 53-0x20,0
+ 138 0104 8091 6E00 		lds r24,110
+ 139 0108 8160      		ori r24,lo8(1)
+ 140 010a 8093 6E00 		sts 110,r24
+ 141               	.L6:
+ 142 010e 81E0      		ldi r24,lo8(1)
+ 143 0110 0E94 0000 		call NutThreadSetPriority
+ 144               	/* #APP */
+ 145 0114 7894      		sei
+ 146               	/* #NOAPP */
+ 147 0116 64E6      		ldi r22,lo8(100)
+ 148 0118 70E0      		ldi r23,hi8(100)
+ 149 011a 80E0      		ldi r24,hlo8(100)
+ 150 011c 90E0      		ldi r25,hhi8(100)
+ 151 011e 0E94 0000 		call NutSleep
+ 152 0122 EE24      		clr r14
+ 153 0124 FF24      		clr r15
+ 154 0126 01E0      		ldi r16,lo8(1)
+ 155 0128 10E0      		ldi r17,hi8(1)
+ 156               	.L8:
+ 157 012a 1F93      		push r17
+ 158 012c 0F93      		push r16
+ 159 012e 80E0      		ldi r24,lo8(__c.2555)
+ 160 0130 90E0      		ldi r25,hi8(__c.2555)
+ 161 0132 9F93      		push r25
+ 162 0134 8F93      		push r24
+ 163 0136 86EC      		ldi r24,lo8(-58)
+ 164 0138 8F93      		push r24
+ 165 013a 0E94 0000 		call LogMsg_P
+ 166 013e 84E0      		ldi r24,lo8(4)
+ 167 0140 0E94 0000 		call LedControl
+ 168 0144 0F90      		pop __tmp_reg__
+ 169 0146 0F90      		pop __tmp_reg__
+ 170 0148 0F90      		pop __tmp_reg__
+ 171 014a 0F90      		pop __tmp_reg__
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s 			page 4
+
+
+ 172 014c 0F90      		pop __tmp_reg__
+ 173 014e EF28      		or r14,r15
+ 174 0150 01F0      		breq .L9
+ 175 0152 81E0      		ldi r24,lo8(1)
+ 176 0154 0E94 0000 		call LcdBackLight
+ 177 0158 EE24      		clr r14
+ 178 015a FF24      		clr r15
+ 179 015c 00C0      		rjmp .L14
+ 180               	.L9:
+ 181 015e 80E0      		ldi r24,lo8(0)
+ 182 0160 0E94 0000 		call LcdBackLight
+ 183 0164 81E0      		ldi r24,lo8(1)
+ 184 0166 E82E      		mov r14,r24
+ 185 0168 F12C      		mov r15,__zero_reg__
+ 186               	.L14:
+ 187 016a 0E94 0000 		call WatchDogRestart
+ 188 016e 64E6      		ldi r22,lo8(100)
+ 189 0170 70E0      		ldi r23,hi8(100)
+ 190 0172 80E0      		ldi r24,hlo8(100)
+ 191 0174 90E0      		ldi r25,hhi8(100)
+ 192 0176 0E94 0000 		call NutSleep
+ 193 017a C801      		movw r24,r16
+ 194 017c 6FE0      		ldi r22,lo8(15)
+ 195 017e 70E0      		ldi r23,hi8(15)
+ 196 0180 0E94 0000 		call __divmodhi4
+ 197 0184 0F5F      		subi r16,lo8(-(1))
+ 198 0186 1F4F      		sbci r17,hi8(-(1))
+ 199 0188 892B      		or r24,r25
+ 200 018a 01F4      		brne .L14
+ 201 018c 00C0      		rjmp .L8
+ 202               	/* epilogue: frame size=18 */
+ 203               	/* epilogue: noreturn */
+ 204               	/* epilogue end (size=0) */
+ 205               	/* function NutAppMain size 171 (157) */
+ 206               		.size	NutAppMain, .-NutAppMain
+ 207               		.type	SysMainBeatInterrupt, @function
+ 208               	SysMainBeatInterrupt:
+ 209               	/* prologue: frame size=0 */
+ 210               	/* prologue end (size=0) */
+ 211 018e 0E94 0000 		call KbScan
+ 212 0192 0E94 0000 		call CardCheckCard
+ 213               	/* epilogue: frame size=0 */
+ 214 0196 0895      		ret
+ 215               	/* epilogue end (size=1) */
+ 216               	/* function SysMainBeatInterrupt size 5 (4) */
+ 217               		.size	SysMainBeatInterrupt, .-SysMainBeatInterrupt
+ 218               		.section	.progmem.data,"a",@progbits
+ 219               		.type	__c.2555, @object
+ 220               		.size	__c.2555, 25
+ 221               	__c.2555:
+ 222 0000 5965 7321 		.string	"Yes!, I'm alive ... [%d]"
+ 222      2C20 4927 
+ 222      6D20 616C 
+ 222      6976 6520 
+ 222      2E2E 2E20 
+ 223               		.type	__c.2553, @object
+ 224               		.size	__c.2553, 26
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s 			page 5
+
+
+ 225               	__c.2553:
+ 226 0019 5254 4320 		.string	"RTC time [%02d:%02d:%02d]"
+ 226      7469 6D65 
+ 226      205B 2530 
+ 226      3264 3A25 
+ 226      3032 643A 
+ 227               		.type	__c.2551, @object
+ 228               		.size	__c.2551, 12
+ 229               	__c.2551:
+ 230 0033 4865 6C6C 		.string	"Hello World"
+ 230      6F20 576F 
+ 230      726C 6400 
+ 231               	/* File "source/main.c": code  205 = 0x00cd ( 189), prologues  14, epilogues   2 */
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:3      *ABS*:0000003f __SREG__
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:13     .text:00000000 SysInitIO
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:51     .text:0000003a NutAppMain
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:229    .progmem.data:00000033 __c.2551
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:225    .progmem.data:00000019 __c.2553
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:208    .text:0000018e SysMainBeatInterrupt
+C:\Users\Bas\AppData\Local\Temp/cc3ID5Vk.s:221    .progmem.data:00000000 __c.2555
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+WatchDogDisable
+NutDelay
+SPIinit
+LedInit
+LcdLowLevelInit
+Uart0DriverInit
+Uart0DriverStart
+LogInit
+LogMsg_P
+CardInit
+X12Init
+X12RtcGetClock
+At45dbInit
+RcInit
+KbInit
+sig_OVERFLOW0
+NutRegisterIrqHandler
+NutThreadSetPriority
+NutSleep
+LedControl
+LcdBackLight
+WatchDogRestart
+__divmodhi4
+KbScan
+CardCheckCard
