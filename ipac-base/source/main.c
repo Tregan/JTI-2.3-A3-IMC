@@ -190,6 +190,25 @@ static void SysControlMainBeat(u_char OnOff)
     }
 }
 
+THREAD(ThreadA, args)
+{
+    for(;;)
+    {
+        NutSleep(500);
+        LedControl(LED_POWER_ON);
+    }
+}
+
+THREAD(ThreadB, args)
+{
+    for(;;)
+    {
+        NutSleep(500);
+        LedControl(LED_POWER_OFF);
+    }
+}
+
+
 /* ����������������������������������������������������������������������� */
 /*!
  * \brief Main entry of the SIR firmware
@@ -264,14 +283,29 @@ int main(void)
      */
     NutThreadSetPriority(1);
 
+    NutThreadCreate("MainA", ThreadA, NULL, 1024);
+    NutThreadCreate("MainB", ThreadB, NULL, 1024);
+    
     /* Enable global interrupts */
     sei();
-	
+
+    int count = 0;
     for (;;)
     {
         NutSleep(100);
-
-        //Add code here!
+        u_char key = KbGetKey();
+        if(key != KEY_UNDEFINED)
+        {
+            count = 0;
+            LcdBackLight(LCD_BACKLIGHT_ON);
+        }
+        
+        count++;
+        
+        if(count >= 20)
+        {
+            LcdBackLight(LCD_BACKLIGHT_OFF);
+        }
         
         WatchDogRestart();
     }
