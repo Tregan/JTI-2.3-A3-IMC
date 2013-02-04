@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 1
 
 
    1               		.file	"vs10xx.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
   55 002c 0E94 0000 		call VsPlayerInterrupts
   56 0030 982F      		mov r25,r24
   57 0032 8091 0000 		lds r24,vs_status
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 2
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 2
 
 
   58 0036 8130      		cpi r24,lo8(1)
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  112 006a CF93      		push r28
  113 006c DF93      		push r29
  114               	/* prologue end (size=4) */
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 3
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 3
 
 
  115 006e EC01      		movw r28,r24
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  169               	/* epilogue: frame size=0 */
  170 00cc 1F91      		pop r17
  171 00ce 0895      		ret
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 4
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 4
 
 
  172               	/* epilogue end (size=2) */
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  226 0122 90E0      		ldi r25,hi8(0)
  227 0124 0E94 0000 		call SPIselect
  228 0128 2C98      		cbi 37-0x20,4
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 5
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 5
 
 
  229 012a 82E0      		ldi r24,lo8(2)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  283 0194 EF90      		pop r14
  284 0196 DF90      		pop r13
  285 0198 0895      		ret
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 6
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 6
 
 
  286               	/* epilogue end (size=6) */
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  340 01ee 63E0      		ldi r22,lo8(3)
  341 01f0 70E0      		ldi r23,hi8(3)
  342 01f2 80E0      		ldi r24,lo8(on.2552)
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 7
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 7
 
 
  343 01f4 90E0      		ldi r25,hi8(on.2552)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  397               	.global	VsBeep
  398               		.type	VsBeep, @function
  399               	VsBeep:
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 8
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 8
 
 
  400               	/* prologue: frame size=1 */
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  454 02c6 70E0      		ldi r23,hi8(4)
  455 02c8 C801      		movw r24,r16
  456 02ca 0E94 0000 		call VsSdiWrite_P
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 9
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 9
 
 
  457 02ce 8D2D      		mov r24,r13
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  511 0324 FF92      		push r15
  512 0326 0F93      		push r16
  513 0328 1F93      		push r17
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 10
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 10
 
 
  514               	/* prologue end (size=5) */
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  568 0398 0E94 0000 		call VsPlayerInterrupts
  569 039c C801      		movw r24,r16
  570               	/* epilogue: frame size=0 */
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 11
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 11
 
 
  571 039e 1F91      		pop r17
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  625 03f0 2435      		cpi r18,lo8(16724)
  626 03f2 3807      		cpc r19,r24
  627 03f4 01F0      		breq .L55
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 12
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 12
 
 
  628 03f6 8DE4      		ldi r24,hi8(19764)
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  682               		.size	VsStreamValid, .-VsStreamValid
  683               	.global	VsPlayerInit
  684               		.type	VsPlayerInit, @function
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 13
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 13
 
 
  685               	VsPlayerInit:
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  739 04d2 82E0      		ldi r24,lo8(2)
  740 04d4 00C0      		rjmp .L70
  741               	.L65:
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 14
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 14
 
 
  742 04d6 81E0      		ldi r24,lo8(1)
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  796               	/* #APP */
  797 053a 7894      		sei
  798               	/* #NOAPP */
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 15
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 15
 
 
  799 053c 1A82      		std Y+2,__zero_reg__
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  853 05a6 0894      		sec
  854 05a8 C11C      		adc r12,__zero_reg__
  855 05aa D11C      		adc r13,__zero_reg__
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 16
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 16
 
 
  856               	.L85:
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  910               	/* #APP */
  911 060a 6591      		lpm r22, Z+
  912 060c 7491      		lpm r23, Z
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 17
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 17
 
 
  913               		
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  967 066a 90E0      		ldi r25,hi8(0)
  968               	/* epilogue: frame size=0 */
  969 066c DF91      		pop r29
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 18
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 18
 
 
  970 066e CF91      		pop r28
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1024               	/* function VsMemoryTest size 49 (42) */
  1025               		.size	VsMemoryTest, .-VsMemoryTest
  1026               	.global	dtab
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 19
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 19
 
 
  1027               		.section	.progmem.data,"a",@progbits
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1081 0064 D557      		.word	22485
  1082 0066 0000      		.word	0
  1083 0068 4D00      		.word	77
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 20
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 20
 
 
  1084 006a 0028      		.word	10240
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1138 00d6 053E      		.word	15877
  1139 00d8 14B8      		.word	-18412
  1140 00da 2536      		.word	13861
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 21
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 21
 
 
  1141 00dc 2400      		.word	36
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1195 0148 2400      		.word	36
  1196 014a 8443      		.word	17284
  1197 014c 8344      		.word	17539
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 22
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 22
 
 
  1198 014e 9663      		.word	25494
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1252 01ba 0000      		.word	0
  1253 01bc 8827      		.word	10120
  1254 01be 0930      		.word	12297
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 23
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 23
 
 
  1255 01c0 D01B      		.word	7120
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1309 022c 8840      		.word	16520
  1310 022e 4C18      		.word	6220
  1311 0230 00F4      		.word	-3072
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 24
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 24
 
 
  1312 0232 0540      		.word	16389
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1366 029e D536      		.word	14037
  1367 02a0 0000      		.word	0
  1368 02a2 2400      		.word	36
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 25
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 25
 
 
  1369 02a4 0600      		.word	6
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1423 0310 0600      		.word	6
  1424 0312 1100      		.word	17
  1425 0314 0000      		.word	0
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 26
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 26
 
 
  1426 0316 5218      		.word	6226
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1480               		.size	end.2553, 4
  1481               	end.2553:
  1482 0372 0000 0000 		.skip 4,0
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 27
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 27
 
 
  1483               		.type	on.2552, @object
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1537 039c 06        		.byte	6
  1538 039d 06        		.byte	6
  1539 039e 06        		.byte	6
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 28
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 28
 
 
  1540 039f 06        		.byte	6
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1594 03d5 06        		.byte	6
  1595 03d6 06        		.byte	6
  1596 03d7 06        		.byte	6
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 29
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 29
 
 
  1597 03d8 06        		.byte	6
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1651 040e 06        		.byte	6
  1652 040f 06        		.byte	6
  1653 0410 06        		.byte	6
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 30
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 30
 
 
  1654 0411 06        		.byte	6
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1708 0447 06        		.byte	6
  1709 0448 06        		.byte	6
  1710 0449 06        		.byte	6
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 31
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 31
 
 
  1711 044a 06        		.byte	6
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1765 0480 06        		.byte	6
  1766 0481 06        		.byte	6
  1767 0482 06        		.byte	6
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 32
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 32
 
 
  1768 0483 06        		.byte	6
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1822 04b9 06        		.byte	6
  1823 04ba 06        		.byte	6
  1824 04bb 06        		.byte	6
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 33
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 33
 
 
  1825 04bc 06        		.byte	6
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1879 04f2 06        		.byte	6
  1880 04f3 06        		.byte	6
  1881 04f4 06        		.byte	6
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 34
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 34
 
 
  1882 04f5 06        		.byte	6
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1936 052b 06        		.byte	6
  1937 052c 06        		.byte	6
  1938 052d 06        		.byte	6
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 35
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 35
 
 
  1939 052e 06        		.byte	6
@@ -2062,51 +2062,51 @@ GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 1
  1957 0540 06        		.byte	6
  1958               		.lcomm g_vs_type,2
  1959               	/* File "source/vs10xx.c": code  906 = 0x038a ( 722), prologues  84, epilogues 100 */
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 36
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 36
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 vs10xx.c
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:3      *ABS*:0000003f __SREG__
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:13     .text:00000000 VsPlayerInterrupts
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:51     .text:0000002a VsPlayerStop
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:3      *ABS*:0000003f __SREG__
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:13     .text:00000000 VsPlayerInterrupts
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:51     .text:0000002a VsPlayerStop
                              .bss:00000000 vs_status
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:73     .text:0000004a VsGetStatus
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:85     .text:00000052 VsGetType
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1517   .bss:00000001 g_vs_type
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:97     .text:0000005c VsGetTypeHex
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:108    .text:00000066 VsSdiWrite_P
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:148    .text:000000a0 VsBeepStop
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1474   .progmem.data:0000036e off.2559
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1470   .progmem.data:0000036a end.2560
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:176    .text:000000d0 VsSdiWrite
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:212    .text:00000108 VsRegWrite
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:253    .text:0000015a VsSetVolume
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:291    .text:0000019a VsPlayerSetMode
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:319    .text:000001c6 VsBeepStartRaw
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1485   .progmem.data:00000376 on.2552
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1481   .progmem.data:00000372 end.2553
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:375    .text:00000230 VsBeepStart
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:399    .text:00000250 VsBeep
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1502   .progmem.data:00000381 on.2527
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1491   .progmem.data:00000379 end.2529
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1495   .progmem.data:0000037d off.2528
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:481    .text:000002f4 VsPlayerReset
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:507    .text:00000320 VsRegRead
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:555    .text:00000380 VsGetVolume
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:580    .text:000003a6 VsRegInfo
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:606    .text:000003ce VsStreamValid
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:685    .text:00000452 VsPlayerInit
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:767    .text:00000502 VsPlayerFeed
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:894    .text:000005ec VsPlayerKick
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1030   .progmem.data:00000000 dtab
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1520   .progmem.data:0000038c atab
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:979    .text:00000676 VsMemoryTest
-C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s:1508   .progmem.data:00000384 mtcmd.2487
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:73     .text:0000004a VsGetStatus
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:85     .text:00000052 VsGetType
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1517   .bss:00000001 g_vs_type
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:97     .text:0000005c VsGetTypeHex
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:108    .text:00000066 VsSdiWrite_P
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:148    .text:000000a0 VsBeepStop
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1474   .progmem.data:0000036e off.2559
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1470   .progmem.data:0000036a end.2560
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:176    .text:000000d0 VsSdiWrite
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:212    .text:00000108 VsRegWrite
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:253    .text:0000015a VsSetVolume
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:291    .text:0000019a VsPlayerSetMode
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:319    .text:000001c6 VsBeepStartRaw
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1485   .progmem.data:00000376 on.2552
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1481   .progmem.data:00000372 end.2553
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:375    .text:00000230 VsBeepStart
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:399    .text:00000250 VsBeep
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1502   .progmem.data:00000381 on.2527
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1491   .progmem.data:00000379 end.2529
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1495   .progmem.data:0000037d off.2528
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:481    .text:000002f4 VsPlayerReset
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:507    .text:00000320 VsRegRead
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:555    .text:00000380 VsGetVolume
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:580    .text:000003a6 VsRegInfo
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:606    .text:000003ce VsStreamValid
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:685    .text:00000452 VsPlayerInit
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:767    .text:00000502 VsPlayerFeed
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:894    .text:000005ec VsPlayerKick
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1030   .progmem.data:00000000 dtab
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1520   .progmem.data:0000038c atab
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:979    .text:00000676 VsMemoryTest
+C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s:1508   .progmem.data:00000384 mtcmd.2487
 
 UNDEFINED SYMBOLS
 __do_copy_data
@@ -2122,7 +2122,7 @@ sig_INTERRUPT6
 NutRegisterIrqHandler
 NutIrqSetMode
 NutSegBufReadCommit
-GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccAySFp9.s 			page 37
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccaBEB4f.s 			page 37
 
 
 NutSegBufReadRequest
