@@ -241,7 +241,6 @@ int main(void)
         LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec );
     }
 
-
     if (At45dbInit()==AT45DB041B)
     {
         // ......
@@ -271,17 +270,9 @@ int main(void)
     for (;;)
     {
         NutSleep(100);
-        u_char key = KbGetKey();
 
-        LogMsg_P(LOG_INFO, PSTR("Key Value ... [%d]"),key);
-        if(key != KEY_UNDEFINED)
-        {
-            LcdBackLight(LCD_BACKLIGHT_ON);
-        }
-        else
-        {
-            LcdBackLight(LCD_BACKLIGHT_OFF);
-        }
+        //Add code here!
+        
         WatchDogRestart();
     }
 

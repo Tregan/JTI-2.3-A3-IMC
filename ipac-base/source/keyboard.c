@@ -6,7 +6,6 @@
  *  \date 26 september 2003
  */
 
-
 #define LOG_MODULE  LOG_KEYBOARD_MODULE
 
 #include <sys/atom.h>
@@ -61,7 +60,6 @@ static u_char KeyRepeatArray[KEY_NROF_KEYS];
 static void KbClearEvent(HANDLE*);
 static u_char KbRemapKey(u_short LongKey);
 
-
 /*!
  * \addtogroup Keyboard
  */
@@ -71,9 +69,6 @@ static u_char KbRemapKey(u_short LongKey);
 /*-------------------------------------------------------------------------*/
 /*                         start of code                                   */
 /*-------------------------------------------------------------------------*/
-
-
-
 
 /* ����������������������������������������������������������������������� */
 /*!
@@ -135,7 +130,6 @@ void KbScan()
     asm("nop\n\tnop");                    // small delay
     KeyNibble3 = inp(KB_IN_READ) & KB_ROW_MASK;
     sbi (KB_OUT_WRITE_B, KB_COL_3);
-
 
     /*
      *  we want to detect exactly 1 key in exactly 1 colom
