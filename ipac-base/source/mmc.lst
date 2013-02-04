@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 1
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s 			page 1
 
 
    1               		.file	"mmc.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 1
   55 0058 1092 0000 		sts (CardState)+1,__zero_reg__
   56 005c 1092 0000 		sts CardState,__zero_reg__
   57 0060 00C0      		rjmp .L2
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 2
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s 			page 2
 
 
   58               	.L5:
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 1
  112               		.size	CardStatus, .-CardStatus
  113               	.global	CardClose
  114               		.type	CardClose, @function
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 3
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s 			page 3
 
 
  115               	CardClose:
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 1
  169 0110 8F93      		push r24
  170 0112 0E94 0000 		call LogMsg_P
  171 0116 0F90      		pop __tmp_reg__
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 4
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s 			page 4
 
 
  172 0118 0F90      		pop __tmp_reg__
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 1
  226 0176 67E0      		ldi r22,lo8(7)
  227 0178 70E0      		ldi r23,hi8(7)
  228 017a 80E0      		ldi r24,lo8(devFATMMC0)
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 5
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s 			page 5
 
 
  229 017c 90E0      		ldi r25,hi8(devFATMMC0)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 1
  283 01f2 0F90      		pop __tmp_reg__
  284 01f4 0F90      	 	pop __tmp_reg__
  285 01f6 2FEF      		ldi r18,hi8(-1)
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 6
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s 			page 6
 
 
  286 01f8 8F3F      		cpi r24,lo8(-1)
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 1
  340 0256 8F93      		push r24
  341 0258 0E94 0000 		call LogMsg_P
  342 025c 0E94 0000 		call CardInitCard
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 7
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s 			page 7
 
 
  343 0260 0F90      		pop __tmp_reg__
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 1
  392               		.size	__c.2538, 13
  393               	__c.2538:
  394 0017 4361 7264 		.string	"Card removed"
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 8
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s 			page 8
 
 
  394      2072 656D 
@@ -452,34 +452,34 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 1
  410               		.lcomm CardState,2
  411               		.lcomm g_tStatus,2
  412               	/* File "source/mmc.c": code  343 = 0x0157 ( 291), prologues  25, epilogues  27 */
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s 			page 9
+GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 mmc.c
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:3      *ABS*:0000003f __SREG__
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:13     .text:00000000 CardCheckCard
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:409    .bss:00000003 CardState
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:408    .bss:00000002 ValidateCounter
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:399    .bss:00000001 CardPresentFlag
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:91     .text:0000009e CardCheckPresent
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:103    .text:000000a6 CardStatus
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:410    .bss:00000005 g_tStatus
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:115    .text:000000b0 CardClose
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:125    .text:000000b2 CardInit
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:389    .progmem.data:0000000e __c.2558
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:322    .text:00000234 CardPresent
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:385    .progmem.data:00000000 __c.2560
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:192    .text:00000132 CardInitCard
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:406    .progmem.data:00000061 __c.2512
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:402    .progmem.data:00000032 __c.2514
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:3      *ABS*:0000003f __SREG__
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:13     .text:00000000 CardCheckCard
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:409    .bss:00000003 CardState
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:408    .bss:00000002 ValidateCounter
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:399    .bss:00000001 CardPresentFlag
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:91     .text:0000009e CardCheckPresent
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:103    .text:000000a6 CardStatus
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:410    .bss:00000005 g_tStatus
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:115    .text:000000b0 CardClose
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:125    .text:000000b2 CardInit
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:389    .progmem.data:0000000e __c.2558
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:322    .text:00000234 CardPresent
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:385    .progmem.data:00000000 __c.2560
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:192    .text:00000132 CardInitCard
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:406    .progmem.data:00000061 __c.2512
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:402    .progmem.data:00000032 __c.2514
                              .bss:00000000 OldCardStatus.2535
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:397    .progmem.data:00000024 __c.2536
-C:\Users\Bas\AppData\Local\Temp/ccIfERPn.s:393    .progmem.data:00000017 __c.2538
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:397    .progmem.data:00000024 __c.2536
+C:\Users\Bas\AppData\Local\Temp/ccQPl1Xa.s:393    .progmem.data:00000017 __c.2538
 
 UNDEFINED SYMBOLS
 __do_copy_data

@@ -17,6 +17,7 @@
 #include "keyboard.h"
 #include "portio.h"
 #include "system.h"
+#include "log.h"
 
 /*-------------------------------------------------------------------------*/
 /* local defines                                                          */
@@ -155,7 +156,8 @@ void KbScan()
     KeyFound |= (KeyNibble1 & 0x00F0);          // b7..b4 in 'KeyNibble1' to b7...b4  in 'KeyFound' -- do nothing
     KeyFound |= ((KeyNibble2<<4) & 0x0F00);     // b7..b4 in 'KeyNibble2' to b11..b8  in 'KeyFound' << shift 4 left
     KeyFound |= ((KeyNibble3<<8) & 0xF000);     // b7..b4 in 'KeyNibble3' to b15..b12 in 'KeyFound' << shift 8 left
-    KeyBuffer[0] = KeyFound;
+    //Added by Niels
+    KeyBuffer[0] = KbRemapKey(KeyFound);
 
 #endif  // USE_JTAG
 
@@ -235,7 +237,6 @@ void KbSetKeyRepeating(u_char Key, u_char Property)
 /* ����������������������������������������������������������������������� */
 int KbWaitForKeyEvent(u_long dwTimeout)
 {
-
     int nError = KB_OK;
     int nTimeout;
 
@@ -316,10 +317,10 @@ void KbInit()
     HoldCounter=0;
 
     // arrow keys are repeating keys by default
-    //KbSetKeyRepeating(KEY_UP, KEY_REPEAT);
-    //KbSetKeyRepeating(KEY_DOWN, KEY_REPEAT);
-    //KbSetKeyRepeating(KEY_LEFT, KEY_REPEAT);
-    //KbSetKeyRepeating(KEY_RIGHT, KEY_REPEAT);
+    KbSetKeyRepeating(KEY_UP, KEY_REPEAT);
+    KbSetKeyRepeating(KEY_DOWN, KEY_REPEAT);
+    KbSetKeyRepeating(KEY_LEFT, KEY_REPEAT);
+    KbSetKeyRepeating(KEY_RIGHT, KEY_REPEAT);
 }
 /* ---------- end of module ------------------------------------------------ */
 

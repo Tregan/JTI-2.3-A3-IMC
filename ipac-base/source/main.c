@@ -204,17 +204,17 @@ static void SysControlMainBeat(u_char OnOff)
 /* ����������������������������������������������������������������������� */
 int main(void)
 {
-	int t = 0;
-	int x = 0;
-	
-	/* 
-	 * Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
-	 *
-	 */
-	tm gmt;
-	/*
-	 * Kroeske: Ook kan 'struct _tm gmt' Zie bovenstaande link
-	 */
+    int t = 0;
+    int x = 0;
+
+    /* 
+     * Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
+     *
+     */
+    tm gmt;
+    /*
+     * Kroeske: Ook kan 'struct _tm gmt' Zie bovenstaande link
+     */
 	
     /*
      *  First disable the watchdog
@@ -225,26 +225,20 @@ int main(void)
 
     SysInitIO();
 	
-	SPIinit();
+    SPIinit();
     
-	LedInit();
-	
-	LcdLowLevelInit();
-
     Uart0DriverInit();
     Uart0DriverStart();
-	LogInit();
-	LogMsg_P(LOG_INFO, PSTR("Hello World"));
+    LogInit();
+    LogMsg_P(LOG_INFO, PSTR("Hello World"));
 
-    CardInit();
-
-	/*
-	 * Kroeske: sources in rtc.c en rtc.h
-	 */
+    /*
+     * Kroeske: sources in rtc.c en rtc.h
+     */
     X12Init();
     if (X12RtcGetClock(&gmt) == 0)
     {
-		LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec );
+        LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec );
     }
 
 
@@ -253,10 +247,16 @@ int main(void)
         // ......
     }
 
-
+    //Initialize SDCard
+    CardInit();
+    //Initialize remote control
     RcInit();
-    
-	KbInit();
+    //Initialize keyboard
+    KbInit();
+    //Initialize LED light
+    LedInit();
+    //Initialize LCD screen
+    LcdLowLevelInit();
 
     SysControlMainBeat(ON);             // enable 4.4 msecs hartbeat interrupt
 
@@ -265,15 +265,16 @@ int main(void)
      */
     NutThreadSetPriority(1);
 
-	/* Enable global interrupts */
-	sei();
+    /* Enable global interrupts */
+    sei();
 	
     for (;;)
     {
         NutSleep(100);
         u_char key = KbGetKey();
-        //LogMsg_P(LOG_INFO, PSTR("Key Value ... [%d]"),key);
-        if(key != 255)
+
+        LogMsg_P(LOG_INFO, PSTR("Key Value ... [%d]"),key);
+        if(key != KEY_UNDEFINED)
         {
             LcdBackLight(LCD_BACKLIGHT_ON);
         }
