@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s 			page 1
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s 			page 1
 
 
    1               		.file	"keyboard.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s 			page 1
   55 003e 991F      		rol r25
   56 0040 3A95      		dec r19
   57 0042 01F4      		brne 1b
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s 			page 2
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s 			page 2
 
 
   58 0044 482B      		or r20,r24
@@ -71,194 +71,183 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s 			page 1
   65 0052 532B      		or r21,r19
   66 0054 5093 0000 		sts (KeyFound)+1,r21
   67 0058 4093 0000 		sts KeyFound,r20
-  68               	/* epilogue: frame size=0 */
-  69 005c 0895      		ret
-  70               	/* epilogue end (size=1) */
-  71               	/* function KbScan size 55 (54) */
-  72               		.size	KbScan, .-KbScan
-  73               	.global	KbSetKeyRepeating
-  74               		.type	KbSetKeyRepeating, @function
-  75               	KbSetKeyRepeating:
-  76               	/* prologue: frame size=0 */
-  77               	/* prologue end (size=0) */
-  78 005e E82F      		mov r30,r24
-  79 0060 862F      		mov r24,r22
-  80 0062 8150      		subi r24,lo8(-(-1))
-  81 0064 8230      		cpi r24,lo8(2)
-  82 0066 00F4      		brsh .L7
-  83 0068 E031      		cpi r30,lo8(16)
-  84 006a 00F4      		brsh .L7
-  85 006c FF27      		clr r31
-  86 006e E050      		subi r30,lo8(-(KeyRepeatArray))
-  87 0070 F040      		sbci r31,hi8(-(KeyRepeatArray))
-  88 0072 6083      		st Z,r22
-  89               	.L7:
-  90 0074 0895      		ret
-  91               	/* epilogue: frame size=0 */
-  92               	/* epilogue: noreturn */
-  93               	/* epilogue end (size=0) */
-  94               	/* function KbSetKeyRepeating size 12 (12) */
-  95               		.size	KbSetKeyRepeating, .-KbSetKeyRepeating
-  96               	.global	KbGetKey
-  97               		.type	KbGetKey, @function
-  98               	KbGetKey:
-  99               	/* prologue: frame size=0 */
- 100               	/* prologue end (size=0) */
- 101 0076 8091 0000 		lds r24,KeyBuffer
- 102 007a 9927      		clr r25
- 103               	/* epilogue: frame size=0 */
- 104 007c 0895      		ret
- 105               	/* epilogue end (size=1) */
- 106               	/* function KbGetKey size 4 (3) */
- 107               		.size	KbGetKey, .-KbGetKey
- 108               	.global	KbInjectKey
- 109               		.type	KbInjectKey, @function
- 110               	KbInjectKey:
- 111               	/* prologue: frame size=0 */
- 112               	/* prologue end (size=0) */
- 113 007e 8093 0000 		sts KeyBuffer,r24
- 114 0082 E091 0000 		lds r30,hKBEvent
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s 			page 3
+  68 005c 4093 0000 		sts KeyBuffer,r20
+  69               	/* epilogue: frame size=0 */
+  70 0060 0895      		ret
+  71               	/* epilogue end (size=1) */
+  72               	/* function KbScan size 57 (56) */
+  73               		.size	KbScan, .-KbScan
+  74               	.global	KbSetKeyRepeating
+  75               		.type	KbSetKeyRepeating, @function
+  76               	KbSetKeyRepeating:
+  77               	/* prologue: frame size=0 */
+  78               	/* prologue end (size=0) */
+  79 0062 E82F      		mov r30,r24
+  80 0064 862F      		mov r24,r22
+  81 0066 8150      		subi r24,lo8(-(-1))
+  82 0068 8230      		cpi r24,lo8(2)
+  83 006a 00F4      		brsh .L7
+  84 006c E031      		cpi r30,lo8(16)
+  85 006e 00F4      		brsh .L7
+  86 0070 FF27      		clr r31
+  87 0072 E050      		subi r30,lo8(-(KeyRepeatArray))
+  88 0074 F040      		sbci r31,hi8(-(KeyRepeatArray))
+  89 0076 6083      		st Z,r22
+  90               	.L7:
+  91 0078 0895      		ret
+  92               	/* epilogue: frame size=0 */
+  93               	/* epilogue: noreturn */
+  94               	/* epilogue end (size=0) */
+  95               	/* function KbSetKeyRepeating size 12 (12) */
+  96               		.size	KbSetKeyRepeating, .-KbSetKeyRepeating
+  97               	.global	KbGetKey
+  98               		.type	KbGetKey, @function
+  99               	KbGetKey:
+ 100               	/* prologue: frame size=0 */
+ 101               	/* prologue end (size=0) */
+ 102 007a 8091 0000 		lds r24,KeyBuffer
+ 103 007e 9927      		clr r25
+ 104               	/* epilogue: frame size=0 */
+ 105 0080 0895      		ret
+ 106               	/* epilogue end (size=1) */
+ 107               	/* function KbGetKey size 4 (3) */
+ 108               		.size	KbGetKey, .-KbGetKey
+ 109               	.global	KbInjectKey
+ 110               		.type	KbInjectKey, @function
+ 111               	KbInjectKey:
+ 112               	/* prologue: frame size=0 */
+ 113               	/* prologue end (size=0) */
+ 114 0082 8093 0000 		sts KeyBuffer,r24
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s 			page 3
 
 
- 115 0086 F091 0000 		lds r31,(hKBEvent)+1
- 116 008a 3097      		sbiw r30,0
- 117 008c 01F4      		brne .L11
- 118 008e 8FEF      		ldi r24,lo8(-1)
- 119 0090 9FEF      		ldi r25,hi8(-1)
- 120 0092 9093 0000 		sts (hKBEvent)+1,r25
- 121 0096 8093 0000 		sts hKBEvent,r24
- 122 009a 0895      		ret
- 123               	.L11:
- 124 009c 8FEF      		ldi r24,hi8(-1)
- 125 009e EF3F      		cpi r30,lo8(-1)
- 126 00a0 F807      		cpc r31,r24
- 127 00a2 01F0      		breq .L15
- 128 00a4 8481      		ldd r24,Z+4
- 129 00a6 9581      		ldd r25,Z+5
- 130 00a8 0196      		adiw r24,1
- 131 00aa 9583      		std Z+5,r25
- 132 00ac 8483      		std Z+4,r24
- 133               	.L15:
- 134 00ae 0895      		ret
- 135               	/* epilogue: frame size=0 */
- 136               	/* epilogue: noreturn */
- 137               	/* epilogue end (size=0) */
- 138               	/* function KbInjectKey size 25 (25) */
- 139               		.size	KbInjectKey, .-KbInjectKey
- 140               	.global	KbInit
- 141               		.type	KbInit, @function
- 142               	KbInit:
- 143               	/* prologue: frame size=0 */
- 144               	/* prologue end (size=0) */
- 145 00b0 A39A      		sbi 52-0x20,3
- 146 00b2 A49A      		sbi 52-0x20,4
- 147 00b4 5B9A      		sbi 43-0x20,3
- 148 00b6 5A9A      		sbi 43-0x20,2
- 149 00b8 1092 0000 		sts KbState,__zero_reg__
- 150 00bc 8FEF      		ldi r24,lo8(-1)
- 151 00be 9FEF      		ldi r25,hi8(-1)
- 152 00c0 9093 0000 		sts (KeyFound)+1,r25
- 153 00c4 8093 0000 		sts KeyFound,r24
- 154               	/* #APP */
- 155 00c8 0FB6      		in  __tmp_reg__, __SREG__
- 156 00ca F894      		cli
- 157 00cc 0F92      		push __tmp_reg__
- 158               		
- 159               	/* #NOAPP */
- 160 00ce 1092 0000 		sts (hKBEvent)+1,__zero_reg__
- 161 00d2 1092 0000 		sts hKBEvent,__zero_reg__
- 162               	/* #APP */
- 163 00d6 0F90      		pop __tmp_reg__
- 164 00d8 0FBE      		out __SREG__, __tmp_reg__
- 165               		
- 166               	/* #NOAPP */
- 167 00da 8FEF      		ldi r24,lo8(-1)
- 168 00dc 8093 0000 		sts KeyBuffer,r24
- 169 00e0 E0E0      		ldi r30,lo8(KeyRepeatArray)
- 170 00e2 F0E0      		ldi r31,hi8(KeyRepeatArray)
- 171 00e4 82E0      		ldi r24,lo8(2)
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s 			page 4
+ 115 0086 E091 0000 		lds r30,hKBEvent
+ 116 008a F091 0000 		lds r31,(hKBEvent)+1
+ 117 008e 3097      		sbiw r30,0
+ 118 0090 01F4      		brne .L11
+ 119 0092 8FEF      		ldi r24,lo8(-1)
+ 120 0094 9FEF      		ldi r25,hi8(-1)
+ 121 0096 9093 0000 		sts (hKBEvent)+1,r25
+ 122 009a 8093 0000 		sts hKBEvent,r24
+ 123 009e 0895      		ret
+ 124               	.L11:
+ 125 00a0 8FEF      		ldi r24,hi8(-1)
+ 126 00a2 EF3F      		cpi r30,lo8(-1)
+ 127 00a4 F807      		cpc r31,r24
+ 128 00a6 01F0      		breq .L15
+ 129 00a8 8481      		ldd r24,Z+4
+ 130 00aa 9581      		ldd r25,Z+5
+ 131 00ac 0196      		adiw r24,1
+ 132 00ae 9583      		std Z+5,r25
+ 133 00b0 8483      		std Z+4,r24
+ 134               	.L15:
+ 135 00b2 0895      		ret
+ 136               	/* epilogue: frame size=0 */
+ 137               	/* epilogue: noreturn */
+ 138               	/* epilogue end (size=0) */
+ 139               	/* function KbInjectKey size 25 (25) */
+ 140               		.size	KbInjectKey, .-KbInjectKey
+ 141               	.global	KbInit
+ 142               		.type	KbInit, @function
+ 143               	KbInit:
+ 144               	/* prologue: frame size=0 */
+ 145               	/* prologue end (size=0) */
+ 146 00b4 A39A      		sbi 52-0x20,3
+ 147 00b6 A49A      		sbi 52-0x20,4
+ 148 00b8 5B9A      		sbi 43-0x20,3
+ 149 00ba 5A9A      		sbi 43-0x20,2
+ 150 00bc 1092 0000 		sts KbState,__zero_reg__
+ 151 00c0 8FEF      		ldi r24,lo8(-1)
+ 152 00c2 9FEF      		ldi r25,hi8(-1)
+ 153 00c4 9093 0000 		sts (KeyFound)+1,r25
+ 154 00c8 8093 0000 		sts KeyFound,r24
+ 155               	/* #APP */
+ 156 00cc 0FB6      		in  __tmp_reg__, __SREG__
+ 157 00ce F894      		cli
+ 158 00d0 0F92      		push __tmp_reg__
+ 159               		
+ 160               	/* #NOAPP */
+ 161 00d2 1092 0000 		sts (hKBEvent)+1,__zero_reg__
+ 162 00d6 1092 0000 		sts hKBEvent,__zero_reg__
+ 163               	/* #APP */
+ 164 00da 0F90      		pop __tmp_reg__
+ 165 00dc 0FBE      		out __SREG__, __tmp_reg__
+ 166               		
+ 167               	/* #NOAPP */
+ 168 00de 8FEF      		ldi r24,lo8(-1)
+ 169 00e0 8093 0000 		sts KeyBuffer,r24
+ 170 00e4 E0E0      		ldi r30,lo8(KeyRepeatArray)
+ 171 00e6 F0E0      		ldi r31,hi8(KeyRepeatArray)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s 			page 4
 
 
- 172               	.L17:
- 173 00e6 8193      		st Z+,r24
- 174 00e8 90E0      		ldi r25,hi8(KeyRepeatArray+16)
- 175 00ea E030      		cpi r30,lo8(KeyRepeatArray+16)
- 176 00ec F907      		cpc r31,r25
- 177 00ee 01F4      		brne .L17
- 178 00f0 1092 0000 		sts (HoldCounter)+1,__zero_reg__
- 179 00f4 1092 0000 		sts HoldCounter,__zero_reg__
- 180 00f8 61E0      		ldi r22,lo8(1)
- 181 00fa 88E0      		ldi r24,lo8(8)
- 182 00fc 0E94 0000 		call KbSetKeyRepeating
- 183 0100 61E0      		ldi r22,lo8(1)
- 184 0102 8BE0      		ldi r24,lo8(11)
- 185 0104 0E94 0000 		call KbSetKeyRepeating
- 186 0108 61E0      		ldi r22,lo8(1)
- 187 010a 8AE0      		ldi r24,lo8(10)
- 188 010c 0E94 0000 		call KbSetKeyRepeating
- 189 0110 61E0      		ldi r22,lo8(1)
- 190 0112 8CE0      		ldi r24,lo8(12)
- 191 0114 0E94 0000 		call KbSetKeyRepeating
- 192               	/* epilogue: frame size=0 */
- 193 0118 0895      		ret
- 194               	/* epilogue end (size=1) */
- 195               	/* function KbInit size 62 (61) */
- 196               		.size	KbInit, .-KbInit
- 197               	.global	KbWaitForKeyEvent
- 198               		.type	KbWaitForKeyEvent, @function
- 199               	KbWaitForKeyEvent:
- 200               	/* prologue: frame size=0 */
- 201               	/* prologue end (size=0) */
- 202 011a AB01      		movw r20,r22
- 203 011c BC01      		movw r22,r24
- 204 011e 80E0      		ldi r24,lo8(hKBEvent)
- 205 0120 90E0      		ldi r25,hi8(hKBEvent)
- 206 0122 0E94 0000 		call NutEventWait
- 207 0126 20E0      		ldi r18,lo8(0)
- 208 0128 30E0      		ldi r19,hi8(0)
- 209 012a 8F5F      		subi r24,lo8(-1)
- 210 012c 9F4F      		sbci r25,hi8(-1)
- 211 012e 01F4      		brne .L23
- 212 0130 21E0      		ldi r18,lo8(1)
- 213 0132 30E0      		ldi r19,hi8(1)
- 214               	.L23:
- 215 0134 C901      		movw r24,r18
- 216               	/* epilogue: frame size=0 */
- 217 0136 0895      		ret
- 218               	/* epilogue end (size=1) */
- 219               	/* function KbWaitForKeyEvent size 16 (15) */
- 220               		.size	KbWaitForKeyEvent, .-KbWaitForKeyEvent
- 221               		.lcomm hKBEvent,2
- 222               		.lcomm KeyFound,2
- 223               		.lcomm KeyBuffer,1
- 224               		.lcomm HoldCounter,2
- 225               		.lcomm KbState,1
- 226               		.lcomm KeyRepeatArray,16
- 227               	/* File "source/keyboard.c": code  174 = 0x00ae ( 170), prologues   0, epilogues   4 */
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s 			page 5
+ 172 00e8 82E0      		ldi r24,lo8(2)
+ 173               	.L17:
+ 174 00ea 8193      		st Z+,r24
+ 175 00ec 90E0      		ldi r25,hi8(KeyRepeatArray+16)
+ 176 00ee E030      		cpi r30,lo8(KeyRepeatArray+16)
+ 177 00f0 F907      		cpc r31,r25
+ 178 00f2 01F4      		brne .L17
+ 179 00f4 1092 0000 		sts (HoldCounter)+1,__zero_reg__
+ 180 00f8 1092 0000 		sts HoldCounter,__zero_reg__
+ 181               	/* epilogue: frame size=0 */
+ 182 00fc 0895      		ret
+ 183               	/* epilogue end (size=1) */
+ 184               	/* function KbInit size 46 (45) */
+ 185               		.size	KbInit, .-KbInit
+ 186               	.global	KbWaitForKeyEvent
+ 187               		.type	KbWaitForKeyEvent, @function
+ 188               	KbWaitForKeyEvent:
+ 189               	/* prologue: frame size=0 */
+ 190               	/* prologue end (size=0) */
+ 191 00fe AB01      		movw r20,r22
+ 192 0100 BC01      		movw r22,r24
+ 193 0102 80E0      		ldi r24,lo8(hKBEvent)
+ 194 0104 90E0      		ldi r25,hi8(hKBEvent)
+ 195 0106 0E94 0000 		call NutEventWait
+ 196 010a 20E0      		ldi r18,lo8(0)
+ 197 010c 30E0      		ldi r19,hi8(0)
+ 198 010e 8F5F      		subi r24,lo8(-1)
+ 199 0110 9F4F      		sbci r25,hi8(-1)
+ 200 0112 01F4      		brne .L23
+ 201 0114 21E0      		ldi r18,lo8(1)
+ 202 0116 30E0      		ldi r19,hi8(1)
+ 203               	.L23:
+ 204 0118 C901      		movw r24,r18
+ 205               	/* epilogue: frame size=0 */
+ 206 011a 0895      		ret
+ 207               	/* epilogue end (size=1) */
+ 208               	/* function KbWaitForKeyEvent size 16 (15) */
+ 209               		.size	KbWaitForKeyEvent, .-KbWaitForKeyEvent
+ 210               		.lcomm hKBEvent,2
+ 211               		.lcomm KeyFound,2
+ 212               		.lcomm KeyBuffer,1
+ 213               		.lcomm HoldCounter,2
+ 214               		.lcomm KbState,1
+ 215               		.lcomm KeyRepeatArray,16
+ 216               	/* File "source/keyboard.c": code  160 = 0x00a0 ( 156), prologues   0, epilogues   4 */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 keyboard.c
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:3      *ABS*:0000003f __SREG__
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:13     .text:00000000 KbScan
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:221    .bss:00000002 KeyFound
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:75     .text:0000005e KbSetKeyRepeating
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:225    .bss:00000008 KeyRepeatArray
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:98     .text:00000076 KbGetKey
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:222    .bss:00000004 KeyBuffer
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:110    .text:0000007e KbInjectKey
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:3      *ABS*:0000003f __SREG__
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:13     .text:00000000 KbScan
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:210    .bss:00000002 KeyFound
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:211    .bss:00000004 KeyBuffer
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:76     .text:00000062 KbSetKeyRepeating
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:214    .bss:00000008 KeyRepeatArray
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:99     .text:0000007a KbGetKey
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:111    .text:00000082 KbInjectKey
                              .bss:00000000 hKBEvent
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:142    .text:000000b0 KbInit
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:224    .bss:00000007 KbState
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:223    .bss:00000005 HoldCounter
-C:\Users\Bas\AppData\Local\Temp/ccHfisXL.s:199    .text:0000011a KbWaitForKeyEvent
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:143    .text:000000b4 KbInit
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:213    .bss:00000007 KbState
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:212    .bss:00000005 HoldCounter
+C:\Users\Robin\AppData\Local\Temp/ccjwNe9I.s:188    .text:000000fe KbWaitForKeyEvent
 
 UNDEFINED SYMBOLS
 __do_copy_data
