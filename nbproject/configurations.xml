@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="88">
+<configurationDescriptor version="84">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df root="." name="JTI-2.3-A3-IMC">
+    <df name="JTI-2.3-A3-IMC" root=".">
+      <df name="Documenten">
+        <df name="Groepsinformatie">
+        </df>
+        <df name="Project Documentatie">
+        </df>
+      </df>
       <df name="ipac-base">
         <df name="include">
           <in>display.h</in>
@@ -28,6 +34,8 @@
           <in>display.c</in>
           <in>fat.c</in>
           <in>flash.c</in>
+          <in>http.c</in>
+          <in>inet.c</in>
           <in>keyboard.c</in>
           <in>led.c</in>
           <in>log.c</in>
@@ -36,8 +44,10 @@
           <in>mmcdrv.c</in>
           <in>remcon.c</in>
           <in>rtc.c</in>
+          <in>session.c</in>
           <in>spidrv.c</in>
           <in>uart0driver.c</in>
+          <in>util.c</in>
           <in>vs10xx.c</in>
           <in>watchdog.c</in>
         </df>
@@ -71,86 +81,82 @@
           <executablePath></executablePath>
           <cTool>
             <incDir>
-              <pElem>ipac-base/include</pElem>
-              <pElem>C:/ethernut-4.3.3/nut/include</pElem>
-              <pElem>C:/winavr/avr/include</pElem>
-              <pElem>ipac-base</pElem>
+              <pElem>ipac-base/source</pElem>
             </incDir>
-            <preprocessorList>
-              <Elem>NUTOS_VERSION=433</Elem>
-              <Elem>NUT_CPU_FREQ=14745600</Elem>
-              <Elem>__HARVARD_ARCH__</Elem>
-            </preprocessorList>
           </cTool>
         </makeTool>
       </makefileType>
-      <item path="ipac-base/include/display.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/display.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/fat.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/fat.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/fatdrv.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/flash.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/flash.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/http.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/keyboard.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/inet.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/led.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/keyboard.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/log.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/led.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/mmc.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/log.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/mmcdrv.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/mmc.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/platform.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/mmcdrv.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/portio.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/remcon.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/remcon.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/rtc.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/rtc.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/session.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/spidrv.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/spidrv.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/system.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/uart0driver.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/typedefs.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/util.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/uart0driver.h" ex="false" tool="3" flavor2="0">
+      <item path="ipac-base/source/vs10xx.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
-      <item path="ipac-base/include/vs10xx.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ipac-base/include/watchdog.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ipac-base/source/display.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/fat.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/flash.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/keyboard.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/led.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/log.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/main.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/mmc.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/mmcdrv.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/remcon.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/rtc.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/spidrv.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/uart0driver.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/vs10xx.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="ipac-base/source/watchdog.c" ex="false" tool="0" flavor2="0">
+      <item path="ipac-base/source/watchdog.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
     </conf>
   </confs>
