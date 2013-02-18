@@ -223,9 +223,6 @@ THREAD(ThreadB, args)
 /* ����������������������������������������������������������������������� */
 int main(void)
 {
-    int t = 0;
-    int x = 0;
-
     /* 
      * Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
      *
@@ -249,21 +246,6 @@ int main(void)
     Uart0DriverInit();
     Uart0DriverStart();
     LogInit();
-    LogMsg_P(LOG_INFO, PSTR("Hello World"));
-
-    /*
-     * Kroeske: sources in rtc.c en rtc.h
-     */
-    X12Init();
-    if (X12RtcGetClock(&gmt) == 0)
-    {
-        LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec );
-    }
-
-    if (At45dbInit()==AT45DB041B)
-    {
-        // ......
-    }
 
     //Initialize SDCard
     CardInit();
@@ -277,6 +259,55 @@ int main(void)
     LcdLowLevelInit();
 
     SysControlMainBeat(ON);             // enable 4.4 msecs hartbeat interrupt
+    
+    //Initialize persistent data chip
+    if (At45dbInit()==AT45DB041B)
+    {
+        //Test for checking if persistent data works.
+        //Hint: It does.
+        /*int firstTime = 3;
+        LogMsg_P(LOG_INFO, PSTR("Initial value %02d"), firstTime);
+        At45dbPageRead(0, &firstTime, 1);
+        LogMsg_P(LOG_INFO, PSTR("Value after reading %02d"), firstTime);
+        firstTime = 1;
+        At45dbPageWrite(0, &firstTime, 1);
+        LogMsg_P(LOG_INFO, PSTR("Value after setting %02d"), firstTime);
+        At45dbPageRead(0, &firstTime, 1);
+        LogMsg_P(LOG_INFO, PSTR("Value after reading again %02d"), firstTime);*/
+        
+        int firstStartup;
+        //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
+        At45dbPageRead(0, &firstStartup, sizeof(int));
+        LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+        
+        //First startup, set the timezone!
+        //if(firstStartup != 1)
+        //{
+            LogMsg_P(LOG_INFO, PSTR("First startup, waiting for timeZone input"));
+            //TODO temp, you must input the timeZone.
+            float timeZone = 1.0f;
+            //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
+            //Put the address of timeZone as a parameter, and the bytesize is the size of a float
+            At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(float));
+            LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %f"), timeZone);
+            At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(float));
+            LogMsg_P(LOG_INFO, PSTR("Value from SRAM: %f"), timeZone);
+            
+            firstStartup = 1;
+            At45dbPageWrite(0, &firstStartup, sizeof(int));
+            LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+        //}
+    }
+    
+    //Initialize RTC
+    X12Init(); 
+    //TODO Sync time on startup, using X12RtcSetClock(&gmt) and time from internet.
+    //Use time from internet to set values of gmt struct
+    //Temp
+    if (X12RtcGetClock(&gmt) == 0)
+    {
+        LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec );
+    }
 
     /*
      * Increase our priority so we can feed the watchdog.
