@@ -88,6 +88,8 @@ extern void LcdInit(void);
 extern void LcdLowLevelInit(void);
 
 void LcdTimeDisplay(char text[]);
+void LcdWriteTitle(char text[]);
+void LcdWriteSecondLine(char text[]);
 
 #endif /* _Display_H */
 /*  ����  End Of File  �������� �������������������������������������������� */

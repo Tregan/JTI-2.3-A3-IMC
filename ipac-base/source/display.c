@@ -222,6 +222,11 @@ static void LcdWaitBusy()
 /*-------------------------------------------------------------------------*/
 
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \Writes bytes to specific locations.
+ */
+/* ����������������������������������������������������������������������� */
 void WriteByteToLocation(u_char locationByte, u_char byteToWrite)
 {
         LcdWriteByte(WRITE_COMMAND, locationByte);
@@ -239,6 +244,11 @@ void LcdTimeDisplay(char text[])
     u_char c;
     
     LcdBackLight(LCD_BACKLIGHT_ON);
+   
+    if(strlen(text) > 8)
+    {
+        return;
+    }
     
     for(i = 0; i < strlen(text); i++)
     {
@@ -257,6 +267,82 @@ void LcdTimeDisplay(char text[])
     }
 }
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \Fills out the title portion of the screen.
+ */
+/* ����������������������������������������������������������������������� */
+void LcdWriteTitle(char text[])
+{
+    int i;
+    int maxChars = 7;
+    u_char c;
+    
+    if(strlen(text) < 7)
+    {
+        maxChars = strlen(text);
+    }
+    
+    LcdBackLight(LCD_BACKLIGHT_ON);
+       
+    for(i = 0; i < maxChars; i++)
+    {
+        switch(i)
+        {
+            case 0:     c = LINE_1_1; break;
+            case 1:     c = LINE_1_2; break;
+            case 2:     c = LINE_1_3; break;
+            case 3:     c = LINE_1_4; break;
+            case 4:     c = LINE_1_5; break;
+            case 5:     c = LINE_1_6; break;
+            case 6:     c = LINE_1_7; break;
+        }
+        WriteByteToLocation(c, text[i]);
+    }
+}
+
+/* ����������������������������������������������������������������������� */
+/*!
+ * \Fills out the second row of the display.
+ */
+/* ����������������������������������������������������������������������� */
+void LcdWriteSecondLine(char text[])
+{
+    int i;
+    int maxChars = 16;
+    u_char c;
+    
+    if(strlen(text) < 16)
+    {
+        maxChars = strlen(text);
+    }
+    
+    LcdBackLight(LCD_BACKLIGHT_ON);
+       
+    for(i = 0; i < maxChars; i++)
+    {
+        switch(i)
+        {
+            case 0:     c = LINE_2_1; break;
+            case 1:     c = LINE_2_2; break;
+            case 2:     c = LINE_2_3; break;
+            case 3:     c = LINE_2_4; break;
+            case 4:     c = LINE_2_5; break;
+            case 5:     c = LINE_2_6; break;
+            case 6:     c = LINE_2_7; break;
+            case 7:     c = LINE_2_8; break;
+            case 8:     c = LINE_2_9; break;
+            case 9:     c = LINE_2_10; break;
+            case 10:     c = LINE_2_11; break;
+            case 11:     c = LINE_2_12; break;
+            case 12:     c = LINE_2_13; break;
+            case 13:     c = LINE_2_14; break;
+            case 14:     c = LINE_2_15; break;
+            case 15:     c = LINE_2_16; break;
+        }
+        WriteByteToLocation(c, text[i]);
+    }
+}
 
 
 
