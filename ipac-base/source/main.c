@@ -320,7 +320,6 @@ int main(void)
     /* Enable global interrupts */
     sei();
 
-    int count = 0;
     for (;;)
     {
         NutSleep(500);
