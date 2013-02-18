@@ -292,22 +292,24 @@ int main(void)
     int count = 0;
     for (;;)
     {
-        NutSleep(100);
-        u_char key = KbGetKey();
-        if(key != KEY_UNDEFINED)
-        {
-            count = 0;
-            LcdBackLight(LCD_BACKLIGHT_ON);
-        }
+        NutSleep(500);
+//        u_char key = KbGetKey();
+//        if(key != KEY_UNDEFINED)
+//        {
+//            count = 0;
+//            LcdBackLight(LCD_BACKLIGHT_ON);
+//        }
+//        
+//        count++;
+//        
+//        if(count >= 20)
+//        {
+//            LcdBackLight(LCD_BACKLIGHT_OFF);
+//        }
+//        
+//        WatchDogRestart();
         
-        count++;
-        
-        if(count >= 20)
-        {
-            LcdBackLight(LCD_BACKLIGHT_OFF);
-        }
-        
-        WatchDogRestart();
+        LcdTimeDisplay("13:35:15");
     }
 
     return(0);      // never reached, but 'main()' returns a non-void, so.....

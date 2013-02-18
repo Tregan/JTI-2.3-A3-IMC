@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s 			page 1
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 1
 
 
    1               		.file	"display.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s 			page 1
   55               	/* #NOAPP */
   56 0032 7298      		cbi 46-0x20,2
   57 0034 8A98      		cbi 49-0x20,2
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s 			page 2
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 2
 
 
   58 0036 8AB1      		in r24,42-0x20
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s 			page 1
  112 007e 682F      		mov r22,r24
  113 0080 83E0      		ldi r24,lo8(3)
  114 0082 0E94 0000 		call LcdWriteByte
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s 			page 3
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 3
 
 
  115               	/* epilogue: frame size=0 */
@@ -126,72 +126,232 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s 			page 1
  117               	/* epilogue end (size=1) */
  118               	/* function LcdChar size 5 (4) */
  119               		.size	LcdChar, .-LcdChar
- 120               	.global	LcdLowLevelInit
- 121               		.type	LcdLowLevelInit, @function
- 122               	LcdLowLevelInit:
+ 120               	.global	WriteByteToLocation
+ 121               		.type	WriteByteToLocation, @function
+ 122               	WriteByteToLocation:
  123               	/* prologue: frame size=0 */
  124 0088 1F93      		push r17
  125               	/* prologue end (size=1) */
- 126 008a 8CE8      		ldi r24,lo8(-116)
- 127 008c 0E94 0000 		call NutDelay
- 128 0090 10E0      		ldi r17,lo8(0)
- 129               	.L21:
- 130 0092 63E3      		ldi r22,lo8(51)
- 131 0094 82E0      		ldi r24,lo8(2)
- 132 0096 0E94 0000 		call LcdWriteNibble
- 133 009a 84E0      		ldi r24,lo8(4)
- 134 009c 0E94 0000 		call NutDelay
- 135 00a0 1F5F      		subi r17,lo8(-(1))
- 136 00a2 1330      		cpi r17,lo8(3)
- 137 00a4 01F4      		brne .L21
- 138 00a6 62E2      		ldi r22,lo8(34)
- 139 00a8 82E0      		ldi r24,lo8(2)
- 140 00aa 0E94 0000 		call LcdWriteNibble
- 141 00ae 81E0      		ldi r24,lo8(1)
- 142 00b0 0E94 0000 		call NutDelay
- 143 00b4 68E2      		ldi r22,lo8(40)
- 144 00b6 82E0      		ldi r24,lo8(2)
- 145 00b8 0E94 0000 		call LcdWriteByte
- 146 00bc 85E0      		ldi r24,lo8(5)
- 147 00be 0E94 0000 		call NutDelay
- 148 00c2 6CE0      		ldi r22,lo8(12)
- 149 00c4 82E0      		ldi r24,lo8(2)
- 150 00c6 0E94 0000 		call LcdWriteByte
- 151 00ca 85E0      		ldi r24,lo8(5)
- 152 00cc 0E94 0000 		call NutDelay
- 153 00d0 61E0      		ldi r22,lo8(1)
- 154 00d2 82E0      		ldi r24,lo8(2)
- 155 00d4 0E94 0000 		call LcdWriteByte
- 156 00d8 85E0      		ldi r24,lo8(5)
- 157 00da 0E94 0000 		call NutDelay
- 158 00de 66E0      		ldi r22,lo8(6)
- 159 00e0 82E0      		ldi r24,lo8(2)
- 160 00e2 0E94 0000 		call LcdWriteByte
- 161 00e6 60E8      		ldi r22,lo8(-128)
- 162 00e8 82E0      		ldi r24,lo8(2)
- 163 00ea 0E94 0000 		call LcdWriteByte
- 164               	/* epilogue: frame size=0 */
- 165 00ee 1F91      		pop r17
- 166 00f0 0895      		ret
- 167               	/* epilogue end (size=2) */
- 168               	/* function LcdLowLevelInit size 53 (50) */
- 169               		.size	LcdLowLevelInit, .-LcdLowLevelInit
- 170               	/* File "source/display.c": code  125 = 0x007d ( 115), prologues   3, epilogues   7 */
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s 			page 4
+ 126 008a 162F      		mov r17,r22
+ 127 008c 682F      		mov r22,r24
+ 128 008e 82E0      		ldi r24,lo8(2)
+ 129 0090 0E94 0000 		call LcdWriteByte
+ 130 0094 612F      		mov r22,r17
+ 131 0096 83E0      		ldi r24,lo8(3)
+ 132 0098 0E94 0000 		call LcdWriteByte
+ 133               	/* epilogue: frame size=0 */
+ 134 009c 1F91      		pop r17
+ 135 009e 0895      		ret
+ 136               	/* epilogue end (size=2) */
+ 137               	/* function WriteByteToLocation size 12 (9) */
+ 138               		.size	WriteByteToLocation, .-WriteByteToLocation
+ 139               	.global	LcdTimeDisplay
+ 140               		.type	LcdTimeDisplay, @function
+ 141               	LcdTimeDisplay:
+ 142               	/* prologue: frame size=1 */
+ 143 00a0 CF92      		push r12
+ 144 00a2 DF92      		push r13
+ 145 00a4 EF92      		push r14
+ 146 00a6 FF92      		push r15
+ 147 00a8 0F93      		push r16
+ 148 00aa 1F93      		push r17
+ 149 00ac CF93      		push r28
+ 150 00ae DF93      		push r29
+ 151 00b0 CDB7      		in r28,__SP_L__
+ 152 00b2 DEB7      		in r29,__SP_H__
+ 153 00b4 2197      		sbiw r28,1
+ 154 00b6 0FB6      		in __tmp_reg__,__SREG__
+ 155 00b8 F894      		cli
+ 156 00ba DEBF      		out __SP_H__,r29
+ 157 00bc 0FBE      		out __SREG__,__tmp_reg__
+ 158 00be CDBF      		out __SP_L__,r28
+ 159               	/* prologue end (size=16) */
+ 160 00c0 8C01      		movw r16,r24
+ 161 00c2 81E0      		ldi r24,lo8(1)
+ 162 00c4 0E94 0000 		call LcdBackLight
+ 163 00c8 CC24      		clr r12
+ 164 00ca DD24      		clr r13
+ 165 00cc 7801      		movw r14,r16
+ 166 00ce 00C0      		rjmp .L23
+ 167               	.L24:
+ 168 00d0 83E0      		ldi r24,lo8(3)
+ 169 00d2 C816      		cp r12,r24
+ 170 00d4 D104      		cpc r13,__zero_reg__
+ 171 00d6 01F0      		breq .L29
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 4
+
+
+ 172 00d8 E4E0      		ldi r30,lo8(4)
+ 173 00da CE16      		cp r12,r30
+ 174 00dc D104      		cpc r13,__zero_reg__
+ 175 00de 04F4      		brge .L34
+ 176 00e0 F1E0      		ldi r31,lo8(1)
+ 177 00e2 CF16      		cp r12,r31
+ 178 00e4 D104      		cpc r13,__zero_reg__
+ 179 00e6 01F0      		breq .L27
+ 180 00e8 82E0      		ldi r24,lo8(2)
+ 181 00ea C816      		cp r12,r24
+ 182 00ec D104      		cpc r13,__zero_reg__
+ 183 00ee 04F4      		brge .L28
+ 184 00f0 C114      		cp r12,__zero_reg__
+ 185 00f2 D104      		cpc r13,__zero_reg__
+ 186 00f4 01F0      		breq .L26
+ 187 00f6 00C0      		rjmp .L25
+ 188               	.L34:
+ 189 00f8 E5E0      		ldi r30,lo8(5)
+ 190 00fa CE16      		cp r12,r30
+ 191 00fc D104      		cpc r13,__zero_reg__
+ 192 00fe 01F0      		breq .L31
+ 193 0100 F5E0      		ldi r31,lo8(5)
+ 194 0102 CF16      		cp r12,r31
+ 195 0104 D104      		cpc r13,__zero_reg__
+ 196 0106 04F0      		brlt .L30
+ 197 0108 86E0      		ldi r24,lo8(6)
+ 198 010a C816      		cp r12,r24
+ 199 010c D104      		cpc r13,__zero_reg__
+ 200 010e 01F0      		breq .L32
+ 201 0110 E7E0      		ldi r30,lo8(7)
+ 202 0112 CE16      		cp r12,r30
+ 203 0114 D104      		cpc r13,__zero_reg__
+ 204 0116 01F4      		brne .L25
+ 205 0118 9FE8      		ldi r25,lo8(-113)
+ 206 011a 00C0      		rjmp .L25
+ 207               	.L26:
+ 208 011c 98E8      		ldi r25,lo8(-120)
+ 209 011e 00C0      		rjmp .L25
+ 210               	.L27:
+ 211 0120 99E8      		ldi r25,lo8(-119)
+ 212 0122 00C0      		rjmp .L25
+ 213               	.L28:
+ 214 0124 9AE8      		ldi r25,lo8(-118)
+ 215 0126 00C0      		rjmp .L25
+ 216               	.L29:
+ 217 0128 9BE8      		ldi r25,lo8(-117)
+ 218 012a 00C0      		rjmp .L25
+ 219               	.L30:
+ 220 012c 9CE8      		ldi r25,lo8(-116)
+ 221 012e 00C0      		rjmp .L25
+ 222               	.L31:
+ 223 0130 9DE8      		ldi r25,lo8(-115)
+ 224 0132 00C0      		rjmp .L25
+ 225               	.L32:
+ 226 0134 9EE8      		ldi r25,lo8(-114)
+ 227               	.L25:
+ 228 0136 F701      		movw r30,r14
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 5
+
+
+ 229 0138 6191      		ld r22,Z+
+ 230 013a 7F01      		movw r14,r30
+ 231 013c 892F      		mov r24,r25
+ 232 013e 9983      		std Y+1,r25
+ 233 0140 0E94 0000 		call WriteByteToLocation
+ 234 0144 0894      		sec
+ 235 0146 C11C      		adc r12,__zero_reg__
+ 236 0148 D11C      		adc r13,__zero_reg__
+ 237 014a 9981      		ldd r25,Y+1
+ 238               	.L23:
+ 239 014c F801      		movw r30,r16
+ 240 014e 0190      		ld __tmp_reg__,Z+
+ 241 0150 0020      		tst __tmp_reg__
+ 242 0152 01F4      		brne .-6
+ 243 0154 3197      		sbiw r30,1
+ 244 0156 E01B      		sub r30,r16
+ 245 0158 F10B      		sbc r31,r17
+ 246 015a CE16      		cp r12,r30
+ 247 015c DF06      		cpc r13,r31
+ 248 015e 00F4      		brsh .+2
+ 249 0160 00C0      		rjmp .L24
+ 250               	/* epilogue: frame size=1 */
+ 251 0162 2196      		adiw r28,1
+ 252 0164 0FB6      		in __tmp_reg__,__SREG__
+ 253 0166 F894      		cli
+ 254 0168 DEBF      		out __SP_H__,r29
+ 255 016a 0FBE      		out __SREG__,__tmp_reg__
+ 256 016c CDBF      		out __SP_L__,r28
+ 257 016e DF91      		pop r29
+ 258 0170 CF91      		pop r28
+ 259 0172 1F91      		pop r17
+ 260 0174 0F91      		pop r16
+ 261 0176 FF90      		pop r15
+ 262 0178 EF90      		pop r14
+ 263 017a DF90      		pop r13
+ 264 017c CF90      		pop r12
+ 265 017e 0895      		ret
+ 266               	/* epilogue end (size=15) */
+ 267               	/* function LcdTimeDisplay size 112 (81) */
+ 268               		.size	LcdTimeDisplay, .-LcdTimeDisplay
+ 269               	.global	LcdLowLevelInit
+ 270               		.type	LcdLowLevelInit, @function
+ 271               	LcdLowLevelInit:
+ 272               	/* prologue: frame size=0 */
+ 273 0180 1F93      		push r17
+ 274               	/* prologue end (size=1) */
+ 275 0182 8CE8      		ldi r24,lo8(-116)
+ 276 0184 0E94 0000 		call NutDelay
+ 277 0188 10E0      		ldi r17,lo8(0)
+ 278               	.L38:
+ 279 018a 63E3      		ldi r22,lo8(51)
+ 280 018c 82E0      		ldi r24,lo8(2)
+ 281 018e 0E94 0000 		call LcdWriteNibble
+ 282 0192 84E0      		ldi r24,lo8(4)
+ 283 0194 0E94 0000 		call NutDelay
+ 284 0198 1F5F      		subi r17,lo8(-(1))
+ 285 019a 1330      		cpi r17,lo8(3)
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 6
+
+
+ 286 019c 01F4      		brne .L38
+ 287 019e 62E2      		ldi r22,lo8(34)
+ 288 01a0 82E0      		ldi r24,lo8(2)
+ 289 01a2 0E94 0000 		call LcdWriteNibble
+ 290 01a6 81E0      		ldi r24,lo8(1)
+ 291 01a8 0E94 0000 		call NutDelay
+ 292 01ac 68E2      		ldi r22,lo8(40)
+ 293 01ae 82E0      		ldi r24,lo8(2)
+ 294 01b0 0E94 0000 		call LcdWriteByte
+ 295 01b4 85E0      		ldi r24,lo8(5)
+ 296 01b6 0E94 0000 		call NutDelay
+ 297 01ba 6CE0      		ldi r22,lo8(12)
+ 298 01bc 82E0      		ldi r24,lo8(2)
+ 299 01be 0E94 0000 		call LcdWriteByte
+ 300 01c2 85E0      		ldi r24,lo8(5)
+ 301 01c4 0E94 0000 		call NutDelay
+ 302 01c8 61E0      		ldi r22,lo8(1)
+ 303 01ca 82E0      		ldi r24,lo8(2)
+ 304 01cc 0E94 0000 		call LcdWriteByte
+ 305 01d0 85E0      		ldi r24,lo8(5)
+ 306 01d2 0E94 0000 		call NutDelay
+ 307 01d6 66E0      		ldi r22,lo8(6)
+ 308 01d8 82E0      		ldi r24,lo8(2)
+ 309 01da 0E94 0000 		call LcdWriteByte
+ 310 01de 60E8      		ldi r22,lo8(-128)
+ 311 01e0 82E0      		ldi r24,lo8(2)
+ 312 01e2 0E94 0000 		call LcdWriteByte
+ 313               	/* epilogue: frame size=0 */
+ 314 01e6 1F91      		pop r17
+ 315 01e8 0895      		ret
+ 316               	/* epilogue end (size=2) */
+ 317               	/* function LcdLowLevelInit size 53 (50) */
+ 318               		.size	LcdLowLevelInit, .-LcdLowLevelInit
+ 319               	/* File "source/display.c": code  249 = 0x00f9 ( 205), prologues  20, epilogues  24 */
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 display.c
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:3      *ABS*:0000003f __SREG__
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:13     .text:00000000 LcdBackLight
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:32     .text:00000010 LcdWriteNibble
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:71     .text:00000046 LcdWriteByte
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:109    .text:0000007e LcdChar
-C:\Users\Bas\AppData\Local\Temp/ccq0CMmk.s:122    .text:00000088 LcdLowLevelInit
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:3      *ABS*:0000003f __SREG__
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:13     .text:00000000 LcdBackLight
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:32     .text:00000010 LcdWriteNibble
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:71     .text:00000046 LcdWriteByte
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:109    .text:0000007e LcdChar
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:122    .text:00000088 WriteByteToLocation
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:141    .text:000000a0 LcdTimeDisplay
+C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:271    .text:00000180 LcdLowLevelInit
 
 UNDEFINED SYMBOLS
 __do_copy_data

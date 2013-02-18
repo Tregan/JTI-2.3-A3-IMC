@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s 			page 1
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 1
 
 
    1               		.file	"main.c"
@@ -56,247 +56,233 @@ GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s 			page 1
   52               	.LC1:
   53 0006 4D61 696E 		.string	"MainB"
   53      4200 
-  54               		.text
-  55               	.global	NutAppMain
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s 			page 2
+  54               	.LC2:
+  55 000c 3133 3A33 		.string	"13:35:15"
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 2
 
 
-  56               		.type	NutAppMain, @function
-  57               	NutAppMain:
-  58               	/* prologue: frame size=18 */
-  59 003a 0F93      		push r16
-  60 003c 1F93      		push r17
-  61 003e CF93      		push r28
-  62 0040 DF93      		push r29
-  63 0042 CDB7      		in r28,__SP_L__
-  64 0044 DEB7      		in r29,__SP_H__
-  65 0046 6297      		sbiw r28,18
-  66 0048 0FB6      		in __tmp_reg__,__SREG__
-  67 004a F894      		cli
-  68 004c DEBF      		out __SP_H__,r29
-  69 004e 0FBE      		out __SREG__,__tmp_reg__
-  70 0050 CDBF      		out __SP_L__,r28
-  71               	/* prologue end (size=12) */
-  72 0052 0E94 0000 		call WatchDogDisable
-  73 0056 84E6      		ldi r24,lo8(100)
-  74 0058 0E94 0000 		call NutDelay
-  75 005c 0E94 0000 		call SysInitIO
-  76 0060 0E94 0000 		call SPIinit
-  77 0064 0E94 0000 		call Uart0DriverInit
-  78 0068 0E94 0000 		call Uart0DriverStart
-  79 006c 0E94 0000 		call LogInit
-  80 0070 80E0      		ldi r24,lo8(__c.2563)
-  81 0072 90E0      		ldi r25,hi8(__c.2563)
-  82 0074 9F93      		push r25
-  83 0076 8F93      		push r24
-  84 0078 16EC      		ldi r17,lo8(-58)
-  85 007a 1F93      		push r17
-  86 007c 0E94 0000 		call LogMsg_P
-  87 0080 0E94 0000 		call X12Init
-  88 0084 CE01      		movw r24,r28
-  89 0086 0196      		adiw r24,1
-  90 0088 0E94 0000 		call X12RtcGetClock
-  91 008c 0F90      		pop __tmp_reg__
-  92 008e 0F90      		pop __tmp_reg__
-  93 0090 0F90      	 	pop __tmp_reg__
-  94 0092 892B      		or r24,r25
-  95 0094 01F4      		brne .L4
-  96 0096 8981      		ldd r24,Y+1
-  97 0098 9A81      		ldd r25,Y+2
-  98 009a 9F93      		push r25
-  99 009c 8F93      		push r24
- 100 009e 8B81      		ldd r24,Y+3
- 101 00a0 9C81      		ldd r25,Y+4
- 102 00a2 9F93      		push r25
- 103 00a4 8F93      		push r24
- 104 00a6 8D81      		ldd r24,Y+5
- 105 00a8 9E81      		ldd r25,Y+6
- 106 00aa 9F93      		push r25
- 107 00ac 8F93      		push r24
- 108 00ae 80E0      		ldi r24,lo8(__c.2565)
- 109 00b0 90E0      		ldi r25,hi8(__c.2565)
- 110 00b2 9F93      		push r25
- 111 00b4 8F93      		push r24
- 112 00b6 1F93      		push r17
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s 			page 3
+  55      353A 3135 
+  55      00
+  56               		.text
+  57               	.global	NutAppMain
+  58               		.type	NutAppMain, @function
+  59               	NutAppMain:
+  60               	/* prologue: frame size=18 */
+  61 003a 1F93      		push r17
+  62 003c CF93      		push r28
+  63 003e DF93      		push r29
+  64 0040 CDB7      		in r28,__SP_L__
+  65 0042 DEB7      		in r29,__SP_H__
+  66 0044 6297      		sbiw r28,18
+  67 0046 0FB6      		in __tmp_reg__,__SREG__
+  68 0048 F894      		cli
+  69 004a DEBF      		out __SP_H__,r29
+  70 004c 0FBE      		out __SREG__,__tmp_reg__
+  71 004e CDBF      		out __SP_L__,r28
+  72               	/* prologue end (size=11) */
+  73 0050 0E94 0000 		call WatchDogDisable
+  74 0054 84E6      		ldi r24,lo8(100)
+  75 0056 0E94 0000 		call NutDelay
+  76 005a 0E94 0000 		call SysInitIO
+  77 005e 0E94 0000 		call SPIinit
+  78 0062 0E94 0000 		call Uart0DriverInit
+  79 0066 0E94 0000 		call Uart0DriverStart
+  80 006a 0E94 0000 		call LogInit
+  81 006e 80E0      		ldi r24,lo8(__c.2565)
+  82 0070 90E0      		ldi r25,hi8(__c.2565)
+  83 0072 9F93      		push r25
+  84 0074 8F93      		push r24
+  85 0076 16EC      		ldi r17,lo8(-58)
+  86 0078 1F93      		push r17
+  87 007a 0E94 0000 		call LogMsg_P
+  88 007e 0E94 0000 		call X12Init
+  89 0082 CE01      		movw r24,r28
+  90 0084 0196      		adiw r24,1
+  91 0086 0E94 0000 		call X12RtcGetClock
+  92 008a 0F90      		pop __tmp_reg__
+  93 008c 0F90      		pop __tmp_reg__
+  94 008e 0F90      	 	pop __tmp_reg__
+  95 0090 892B      		or r24,r25
+  96 0092 01F4      		brne .L4
+  97 0094 8981      		ldd r24,Y+1
+  98 0096 9A81      		ldd r25,Y+2
+  99 0098 9F93      		push r25
+ 100 009a 8F93      		push r24
+ 101 009c 8B81      		ldd r24,Y+3
+ 102 009e 9C81      		ldd r25,Y+4
+ 103 00a0 9F93      		push r25
+ 104 00a2 8F93      		push r24
+ 105 00a4 8D81      		ldd r24,Y+5
+ 106 00a6 9E81      		ldd r25,Y+6
+ 107 00a8 9F93      		push r25
+ 108 00aa 8F93      		push r24
+ 109 00ac 80E0      		ldi r24,lo8(__c.2567)
+ 110 00ae 90E0      		ldi r25,hi8(__c.2567)
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 3
 
 
- 113 00b8 0E94 0000 		call LogMsg_P
- 114 00bc 8DB7      		in r24,__SP_L__
- 115 00be 9EB7      		in r25,__SP_H__
- 116 00c0 0996      		adiw r24,9
- 117 00c2 0FB6      		in __tmp_reg__,__SREG__
- 118 00c4 F894      		cli
- 119 00c6 9EBF      		out __SP_H__,r25
- 120 00c8 0FBE      		out __SREG__,__tmp_reg__
- 121 00ca 8DBF      		out __SP_L__,r24
- 122               	.L4:
- 123 00cc 0E94 0000 		call At45dbInit
- 124 00d0 0E94 0000 		call CardInit
- 125 00d4 0E94 0000 		call RcInit
- 126 00d8 0E94 0000 		call KbInit
- 127 00dc 0E94 0000 		call LedInit
- 128 00e0 0E94 0000 		call LcdLowLevelInit
- 129 00e4 40E0      		ldi r20,lo8(0)
- 130 00e6 50E0      		ldi r21,hi8(0)
- 131 00e8 60E0      		ldi r22,lo8(gs(SysMainBeatInterrupt))
- 132 00ea 70E0      		ldi r23,hi8(gs(SysMainBeatInterrupt))
- 133 00ec 80E0      		ldi r24,lo8(sig_OVERFLOW0)
- 134 00ee 90E0      		ldi r25,hi8(sig_OVERFLOW0)
- 135 00f0 0E94 0000 		call NutRegisterIrqHandler
- 136 00f4 892B      		or r24,r25
- 137 00f6 01F4      		brne .L6
- 138 00f8 85B5      		in r24,69-0x20
- 139 00fa 8460      		ori r24,lo8(4)
- 140 00fc 85BD      		out 69-0x20,r24
- 141 00fe A89A      		sbi 53-0x20,0
- 142 0100 8091 6E00 		lds r24,110
- 143 0104 8160      		ori r24,lo8(1)
- 144 0106 8093 6E00 		sts 110,r24
- 145               	.L6:
- 146 010a 81E0      		ldi r24,lo8(1)
- 147 010c 0E94 0000 		call NutThreadSetPriority
- 148 0110 20E0      		ldi r18,lo8(1024)
- 149 0112 34E0      		ldi r19,hi8(1024)
- 150 0114 40E0      		ldi r20,lo8(0)
- 151 0116 50E0      		ldi r21,hi8(0)
- 152 0118 60E0      		ldi r22,lo8(gs(ThreadA))
- 153 011a 70E0      		ldi r23,hi8(gs(ThreadA))
- 154 011c 80E0      		ldi r24,lo8(.LC0)
- 155 011e 90E0      		ldi r25,hi8(.LC0)
- 156 0120 0E94 0000 		call NutThreadCreate
- 157 0124 20E0      		ldi r18,lo8(1024)
- 158 0126 34E0      		ldi r19,hi8(1024)
- 159 0128 40E0      		ldi r20,lo8(0)
- 160 012a 50E0      		ldi r21,hi8(0)
- 161 012c 60E0      		ldi r22,lo8(gs(ThreadB))
- 162 012e 70E0      		ldi r23,hi8(gs(ThreadB))
- 163 0130 80E0      		ldi r24,lo8(.LC1)
- 164 0132 90E0      		ldi r25,hi8(.LC1)
- 165 0134 0E94 0000 		call NutThreadCreate
- 166               	/* #APP */
- 167 0138 7894      		sei
- 168               	/* #NOAPP */
- 169 013a 00E0      		ldi r16,lo8(0)
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s 			page 4
+ 111 00b0 9F93      		push r25
+ 112 00b2 8F93      		push r24
+ 113 00b4 1F93      		push r17
+ 114 00b6 0E94 0000 		call LogMsg_P
+ 115 00ba 8DB7      		in r24,__SP_L__
+ 116 00bc 9EB7      		in r25,__SP_H__
+ 117 00be 0996      		adiw r24,9
+ 118 00c0 0FB6      		in __tmp_reg__,__SREG__
+ 119 00c2 F894      		cli
+ 120 00c4 9EBF      		out __SP_H__,r25
+ 121 00c6 0FBE      		out __SREG__,__tmp_reg__
+ 122 00c8 8DBF      		out __SP_L__,r24
+ 123               	.L4:
+ 124 00ca 0E94 0000 		call At45dbInit
+ 125 00ce 0E94 0000 		call CardInit
+ 126 00d2 0E94 0000 		call RcInit
+ 127 00d6 0E94 0000 		call KbInit
+ 128 00da 0E94 0000 		call LedInit
+ 129 00de 0E94 0000 		call LcdLowLevelInit
+ 130 00e2 40E0      		ldi r20,lo8(0)
+ 131 00e4 50E0      		ldi r21,hi8(0)
+ 132 00e6 60E0      		ldi r22,lo8(gs(SysMainBeatInterrupt))
+ 133 00e8 70E0      		ldi r23,hi8(gs(SysMainBeatInterrupt))
+ 134 00ea 80E0      		ldi r24,lo8(sig_OVERFLOW0)
+ 135 00ec 90E0      		ldi r25,hi8(sig_OVERFLOW0)
+ 136 00ee 0E94 0000 		call NutRegisterIrqHandler
+ 137 00f2 892B      		or r24,r25
+ 138 00f4 01F4      		brne .L6
+ 139 00f6 85B5      		in r24,69-0x20
+ 140 00f8 8460      		ori r24,lo8(4)
+ 141 00fa 85BD      		out 69-0x20,r24
+ 142 00fc A89A      		sbi 53-0x20,0
+ 143 00fe 8091 6E00 		lds r24,110
+ 144 0102 8160      		ori r24,lo8(1)
+ 145 0104 8093 6E00 		sts 110,r24
+ 146               	.L6:
+ 147 0108 81E0      		ldi r24,lo8(1)
+ 148 010a 0E94 0000 		call NutThreadSetPriority
+ 149 010e 20E0      		ldi r18,lo8(1024)
+ 150 0110 34E0      		ldi r19,hi8(1024)
+ 151 0112 40E0      		ldi r20,lo8(0)
+ 152 0114 50E0      		ldi r21,hi8(0)
+ 153 0116 60E0      		ldi r22,lo8(gs(ThreadA))
+ 154 0118 70E0      		ldi r23,hi8(gs(ThreadA))
+ 155 011a 80E0      		ldi r24,lo8(.LC0)
+ 156 011c 90E0      		ldi r25,hi8(.LC0)
+ 157 011e 0E94 0000 		call NutThreadCreate
+ 158 0122 20E0      		ldi r18,lo8(1024)
+ 159 0124 34E0      		ldi r19,hi8(1024)
+ 160 0126 40E0      		ldi r20,lo8(0)
+ 161 0128 50E0      		ldi r21,hi8(0)
+ 162 012a 60E0      		ldi r22,lo8(gs(ThreadB))
+ 163 012c 70E0      		ldi r23,hi8(gs(ThreadB))
+ 164 012e 80E0      		ldi r24,lo8(.LC1)
+ 165 0130 90E0      		ldi r25,hi8(.LC1)
+ 166 0132 0E94 0000 		call NutThreadCreate
+ 167               	/* #APP */
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 4
 
 
- 170 013c 10E0      		ldi r17,hi8(0)
- 171               	.L8:
- 172 013e 64E6      		ldi r22,lo8(100)
- 173 0140 70E0      		ldi r23,hi8(100)
- 174 0142 80E0      		ldi r24,hlo8(100)
- 175 0144 90E0      		ldi r25,hhi8(100)
- 176 0146 0E94 0000 		call NutSleep
- 177 014a 0E94 0000 		call KbGetKey
- 178 014e 8838      		cpi r24,lo8(-120)
- 179 0150 01F0      		breq .L9
- 180 0152 81E0      		ldi r24,lo8(1)
- 181 0154 0E94 0000 		call LcdBackLight
- 182 0158 01E0      		ldi r16,lo8(1)
- 183 015a 10E0      		ldi r17,hi8(1)
- 184 015c 00C0      		rjmp .L11
- 185               	.L9:
- 186 015e 0F5F      		subi r16,lo8(-(1))
- 187 0160 1F4F      		sbci r17,hi8(-(1))
- 188 0162 0431      		cpi r16,20
- 189 0164 1105      		cpc r17,__zero_reg__
- 190 0166 04F0      		brlt .L11
- 191 0168 80E0      		ldi r24,lo8(0)
- 192 016a 0E94 0000 		call LcdBackLight
- 193               	.L11:
- 194 016e 0E94 0000 		call WatchDogRestart
- 195 0172 00C0      		rjmp .L8
- 196               	/* epilogue: frame size=18 */
- 197               	/* epilogue: noreturn */
- 198               	/* epilogue end (size=0) */
- 199               	/* function NutAppMain size 158 (146) */
- 200               		.size	NutAppMain, .-NutAppMain
- 201               		.type	SysMainBeatInterrupt, @function
- 202               	SysMainBeatInterrupt:
- 203               	/* prologue: frame size=0 */
- 204               	/* prologue end (size=0) */
- 205 0174 0E94 0000 		call KbScan
- 206 0178 0E94 0000 		call CardCheckCard
- 207               	/* epilogue: frame size=0 */
- 208 017c 0895      		ret
- 209               	/* epilogue end (size=1) */
- 210               	/* function SysMainBeatInterrupt size 5 (4) */
- 211               		.size	SysMainBeatInterrupt, .-SysMainBeatInterrupt
- 212               	.global	ThreadB
- 213               		.type	ThreadB, @function
- 214               	ThreadB:
- 215               	/* prologue: frame size=0 */
- 216               	/* prologue end (size=0) */
- 217               	.L18:
- 218 017e 64EF      		ldi r22,lo8(500)
- 219 0180 71E0      		ldi r23,hi8(500)
- 220 0182 80E0      		ldi r24,hlo8(500)
- 221 0184 90E0      		ldi r25,hhi8(500)
- 222 0186 0E94 0000 		call NutSleep
- 223 018a 83E0      		ldi r24,lo8(3)
- 224 018c 0E94 0000 		call LedControl
- 225 0190 00C0      		rjmp .L18
- 226               	/* epilogue: frame size=0 */
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s 			page 5
+ 168 0136 7894      		sei
+ 169               	/* #NOAPP */
+ 170               	.L8:
+ 171 0138 64EF      		ldi r22,lo8(500)
+ 172 013a 71E0      		ldi r23,hi8(500)
+ 173 013c 80E0      		ldi r24,hlo8(500)
+ 174 013e 90E0      		ldi r25,hhi8(500)
+ 175 0140 0E94 0000 		call NutSleep
+ 176 0144 80E0      		ldi r24,lo8(.LC2)
+ 177 0146 90E0      		ldi r25,hi8(.LC2)
+ 178 0148 0E94 0000 		call LcdTimeDisplay
+ 179 014c 00C0      		rjmp .L8
+ 180               	/* epilogue: frame size=18 */
+ 181               	/* epilogue: noreturn */
+ 182               	/* epilogue end (size=0) */
+ 183               	/* function NutAppMain size 139 (128) */
+ 184               		.size	NutAppMain, .-NutAppMain
+ 185               		.type	SysMainBeatInterrupt, @function
+ 186               	SysMainBeatInterrupt:
+ 187               	/* prologue: frame size=0 */
+ 188               	/* prologue end (size=0) */
+ 189 014e 0E94 0000 		call KbScan
+ 190 0152 0E94 0000 		call CardCheckCard
+ 191               	/* epilogue: frame size=0 */
+ 192 0156 0895      		ret
+ 193               	/* epilogue end (size=1) */
+ 194               	/* function SysMainBeatInterrupt size 5 (4) */
+ 195               		.size	SysMainBeatInterrupt, .-SysMainBeatInterrupt
+ 196               	.global	ThreadB
+ 197               		.type	ThreadB, @function
+ 198               	ThreadB:
+ 199               	/* prologue: frame size=0 */
+ 200               	/* prologue end (size=0) */
+ 201               	.L14:
+ 202 0158 64EF      		ldi r22,lo8(500)
+ 203 015a 71E0      		ldi r23,hi8(500)
+ 204 015c 80E0      		ldi r24,hlo8(500)
+ 205 015e 90E0      		ldi r25,hhi8(500)
+ 206 0160 0E94 0000 		call NutSleep
+ 207 0164 83E0      		ldi r24,lo8(3)
+ 208 0166 0E94 0000 		call LedControl
+ 209 016a 00C0      		rjmp .L14
+ 210               	/* epilogue: frame size=0 */
+ 211               	/* epilogue: noreturn */
+ 212               	/* epilogue end (size=0) */
+ 213               	/* function ThreadB size 10 (10) */
+ 214               		.size	ThreadB, .-ThreadB
+ 215               	.global	ThreadA
+ 216               		.type	ThreadA, @function
+ 217               	ThreadA:
+ 218               	/* prologue: frame size=0 */
+ 219               	/* prologue end (size=0) */
+ 220               	.L18:
+ 221 016c 64EF      		ldi r22,lo8(500)
+ 222 016e 71E0      		ldi r23,hi8(500)
+ 223 0170 80E0      		ldi r24,hlo8(500)
+ 224 0172 90E0      		ldi r25,hhi8(500)
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 5
 
 
- 227               	/* epilogue: noreturn */
- 228               	/* epilogue end (size=0) */
- 229               	/* function ThreadB size 10 (10) */
- 230               		.size	ThreadB, .-ThreadB
- 231               	.global	ThreadA
- 232               		.type	ThreadA, @function
- 233               	ThreadA:
- 234               	/* prologue: frame size=0 */
- 235               	/* prologue end (size=0) */
- 236               	.L22:
- 237 0192 64EF      		ldi r22,lo8(500)
- 238 0194 71E0      		ldi r23,hi8(500)
- 239 0196 80E0      		ldi r24,hlo8(500)
- 240 0198 90E0      		ldi r25,hhi8(500)
- 241 019a 0E94 0000 		call NutSleep
- 242 019e 82E0      		ldi r24,lo8(2)
- 243 01a0 0E94 0000 		call LedControl
- 244 01a4 00C0      		rjmp .L22
- 245               	/* epilogue: frame size=0 */
- 246               	/* epilogue: noreturn */
- 247               	/* epilogue end (size=0) */
- 248               	/* function ThreadA size 10 (10) */
- 249               		.size	ThreadA, .-ThreadA
- 250               		.section	.progmem.data,"a",@progbits
- 251               		.type	__c.2565, @object
- 252               		.size	__c.2565, 26
- 253               	__c.2565:
- 254 0000 5254 4320 		.string	"RTC time [%02d:%02d:%02d]"
- 254      7469 6D65 
- 254      205B 2530 
- 254      3264 3A25 
- 254      3032 643A 
- 255               		.type	__c.2563, @object
- 256               		.size	__c.2563, 12
- 257               	__c.2563:
- 258 001a 4865 6C6C 		.string	"Hello World"
- 258      6F20 576F 
- 258      726C 6400 
- 259               	/* File "source/main.c": code  212 = 0x00d4 ( 198), prologues  12, epilogues   2 */
-GAS LISTING C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s 			page 6
+ 225 0174 0E94 0000 		call NutSleep
+ 226 0178 82E0      		ldi r24,lo8(2)
+ 227 017a 0E94 0000 		call LedControl
+ 228 017e 00C0      		rjmp .L18
+ 229               	/* epilogue: frame size=0 */
+ 230               	/* epilogue: noreturn */
+ 231               	/* epilogue end (size=0) */
+ 232               	/* function ThreadA size 10 (10) */
+ 233               		.size	ThreadA, .-ThreadA
+ 234               		.section	.progmem.data,"a",@progbits
+ 235               		.type	__c.2567, @object
+ 236               		.size	__c.2567, 26
+ 237               	__c.2567:
+ 238 0000 5254 4320 		.string	"RTC time [%02d:%02d:%02d]"
+ 238      7469 6D65 
+ 238      205B 2530 
+ 238      3264 3A25 
+ 238      3032 643A 
+ 239               		.type	__c.2565, @object
+ 240               		.size	__c.2565, 12
+ 241               	__c.2565:
+ 242 001a 4865 6C6C 		.string	"Hello World"
+ 242      6F20 576F 
+ 242      726C 6400 
+ 243               	/* File "source/main.c": code  193 = 0x00c1 ( 180), prologues  11, epilogues   2 */
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:3      *ABS*:0000003f __SREG__
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:13     .text:00000000 SysInitIO
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:57     .text:0000003a NutAppMain
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:257    .progmem.data:0000001a __c.2563
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:253    .progmem.data:00000000 __c.2565
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:202    .text:00000174 SysMainBeatInterrupt
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:233    .text:00000192 ThreadA
-C:\Users\Bas\AppData\Local\Temp/ccUZHOHP.s:214    .text:0000017e ThreadB
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:3      *ABS*:0000003f __SREG__
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:13     .text:00000000 SysInitIO
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:59     .text:0000003a NutAppMain
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:241    .progmem.data:0000001a __c.2565
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:237    .progmem.data:00000000 __c.2567
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:186    .text:0000014e SysMainBeatInterrupt
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:217    .text:0000016c ThreadA
+C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:198    .text:00000158 ThreadB
 
 UNDEFINED SYMBOLS
 __do_copy_data
@@ -321,9 +307,7 @@ NutRegisterIrqHandler
 NutThreadSetPriority
 NutThreadCreate
 NutSleep
-KbGetKey
-LcdBackLight
-WatchDogRestart
+LcdTimeDisplay
 KbScan
 CardCheckCard
 LedControl
