@@ -241,9 +241,7 @@ void WriteByteToLocation(u_char locationByte, u_char byteToWrite)
 void LcdTimeDisplay(char text[])
 {
     int i;
-    u_char c;
-    
-    LcdBackLight(LCD_BACKLIGHT_ON);
+    u_char c = '\0';
    
     if(strlen(text) > 8)
     {
@@ -276,14 +274,12 @@ void LcdWriteTitle(char text[])
 {
     int i;
     int maxChars = 7;
-    u_char c;
+    u_char c = '\0';
     
     if(strlen(text) < 7)
     {
         maxChars = strlen(text);
     }
-    
-    LcdBackLight(LCD_BACKLIGHT_ON);
        
     for(i = 0; i < maxChars; i++)
     {
@@ -310,14 +306,12 @@ void LcdWriteSecondLine(char text[])
 {
     int i;
     int maxChars = 16;
-    u_char c;
+    u_char c = '\0';
     
     if(strlen(text) < 16)
     {
         maxChars = strlen(text);
     }
-    
-    LcdBackLight(LCD_BACKLIGHT_ON);
        
     for(i = 0; i < maxChars; i++)
     {

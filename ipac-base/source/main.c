@@ -284,14 +284,40 @@ int main(void)
         //if(firstStartup != 1)
         //{
             LogMsg_P(LOG_INFO, PSTR("First startup, waiting for timeZone input"));
-            //TODO temp, you must input the timeZone.
-            float timeZone = 1.0f;
+            
+            LcdBackLight(LCD_BACKLIGHT_ON);
+            LcdWriteTitle("Timezone");
+            int timeZone = 0;
+            
+            for (;;)
+            {
+                char output[20];
+                if(timeZone > -1)
+                    sprintf(output, "UTC +%d ", timeZone);
+                else
+                    sprintf(output, "UTC %d ", timeZone);
+                LcdWriteSecondLine(output);
+                
+                NutSleep(500);
+                u_char key = KbGetKey();
+                if(key == KEY_UP)
+                    timeZone++;
+                else if(key == KEY_DOWN)
+                    timeZone--;
+                else if(key == KEY_OK)
+                    break;
+                
+                WatchDogRestart();
+            }
+            
+            LcdBackLight(LCD_BACKLIGHT_OFF);
+            
             //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
             //Put the address of timeZone as a parameter, and the bytesize is the size of a float
-            At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(float));
-            LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %f"), timeZone);
-            At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(float));
-            LogMsg_P(LOG_INFO, PSTR("Value from SRAM: %f"), timeZone);
+            At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
+            LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
+            At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
+            LogMsg_P(LOG_INFO, PSTR("Value from SRAM: %d"), timeZone);
             
             firstStartup = 1;
             At45dbPageWrite(0, &firstStartup, sizeof(int));
@@ -324,21 +350,21 @@ int main(void)
     for (;;)
     {
         NutSleep(500);
-//        u_char key = KbGetKey();
-//        if(key != KEY_UNDEFINED)
-//        {
-//            count = 0;
-//            LcdBackLight(LCD_BACKLIGHT_ON);
-//        }
-//        
-//        count++;
-//        
-//        if(count >= 20)
-//        {
-//            LcdBackLight(LCD_BACKLIGHT_OFF);
-//        }
-//        
-//        WatchDogRestart();
+        u_char key = KbGetKey();
+        if(key != KEY_UNDEFINED)
+        {
+            count = 0;
+            LcdBackLight(LCD_BACKLIGHT_ON);
+        }
+        
+        count++;
+        
+        if(count >= 20)
+        {
+            LcdBackLight(LCD_BACKLIGHT_OFF);
+        }
+        
+        WatchDogRestart();
         
         LcdTimeDisplay("13:35:15");
     }
