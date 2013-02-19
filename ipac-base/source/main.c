@@ -41,6 +41,7 @@
 
 #include <time.h>
 #include "rtc.h"
+#include "menu.h"
 
 
 /*-------------------------------------------------------------------------*/
@@ -334,6 +335,8 @@ int main(void)
     LedInit();
     //Initialize LCD screen
     LcdLowLevelInit();
+    //Initialize Menu
+    MenuInit();
 
     SysControlMainBeat(ON);             // enable 4.4 msecs hartbeat interrupt
     
