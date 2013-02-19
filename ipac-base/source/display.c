@@ -34,6 +34,10 @@
 /* local variable definitions                                              */
 /*-------------------------------------------------------------------------*/
 
+char * title = NULL;
+char * secondline = NULL;
+int titlebool;
+int secondlinebool;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -51,6 +55,40 @@ static void LcdWaitBusy(void);
 /*-------------------------------------------------------------------------*/
 /*                         start of code                                   */
 /*-------------------------------------------------------------------------*/
+
+THREAD(TitleThread, args)
+{
+    int i = 0;
+    int count = 0;
+    int length = strlen(title);
+    char shorterString[7];
+    
+    for(;;)
+    {
+        LogMsg_P(LOG_INFO, PSTR("Thread werkt %02d"), strlen(title));
+        NutSleep(5000);
+        
+        if(titlebool == 0)
+        {
+            NutThreadExit();
+        }
+        
+        memset(shorterString, 0, 7);
+        for(i = count; i < count + 7; i++)
+        {
+            shorterString[i - count] = title[i];
+        }
+        
+        LcdWriteShortTitle(shorterString);
+        
+        if(strlen(title) == length - 7)
+        {
+            count = 0;
+        }
+        
+        count++;
+    }
+}
 
 /* ����������������������������������������������������������������������� */
 /*!
@@ -256,18 +294,14 @@ void LcdTimeDisplay(char text[])
 /* ����������������������������������������������������������������������� */
 void LcdWriteTitle(char text[])
 {
-    int i;
-    int maxChars = 7;
-    
-    if(strlen(text) < 7)
+    if(strlen(text) <= 7)
     {
-        maxChars = strlen(text);
+        titlebool = 0;
+        LcdWriteShortTitle(text);
     }
-    
-    WriteByteToLocation(LINE_1_1, text[0]);
-    for(i = 1; i < strlen(text); i++)
+    else
     {
-        LcdChar(text[i]);
+        LcdScrollTitle(text);
     }
 }
 
@@ -305,22 +339,61 @@ void LcdClearAll()
         LcdClearTitleLine();
 }
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \Clears the title.
+ */
+/* ����������������������������������������������������������������������� */
 void LcdClearTitle()
 {
         LcdWriteTitle("       ");
 }
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \Clears the second line.
+ */
+/* ����������������������������������������������������������������������� */
 void LcdClearLine()
 {
         LcdWriteSecondLine("                ");
 }
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \Clears the the second line and the title.
+ */
+/* ����������������������������������������������������������������������� */
 void LcdClearTitleLine()
 {
     LcdClearLine();
     LcdClearTitle();
 }
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \Scrolls through the text for the title in a separate thread.
+ */
+/* ����������������������������������������������������������������������� */
+void LcdScrollTitle(char text[])
+{
+    title = text;
+    titlebool = 1;
+    NutThreadSetPriority(1);
+    NutThreadCreate("LcdA", TitleThread, text, 1024);
+    NutThreadSetPriority(0);
+}
+
+void LcdWriteShortTitle(char text[])
+{
+    int i;
+    
+    WriteByteToLocation(LINE_1_1, text[0]);
+    for(i = 1; i < 7; i++)
+    {
+        LcdChar(text[i]);
+    }
+}
 
 /* ---------- end of module ------------------------------------------------ */
 
