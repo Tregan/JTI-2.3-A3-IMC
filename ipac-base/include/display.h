@@ -91,6 +91,11 @@ void LcdTimeDisplay(char text[]);
 void LcdWriteTitle(char text[]);
 void LcdWriteSecondLine(char text[]);
 
+void LcdClearAll(void);
+void LcdClearTitle(void);
+void LcdClearLine(void);
+void LcdClearTitleLine(void);
+
 #endif /* _Display_H */
 /*  ����  End Of File  �������� �������������������������������������������� */
 
