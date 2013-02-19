@@ -360,10 +360,13 @@ int main(void)
     X12Init(); 
     //TODO Sync time on startup, using X12RtcSetClock(&gmt) and time from internet.
     //Use time from internet to set values of gmt struct
-    //Temp
+    //Temp, only for testing atm!
     if (X12RtcGetClock(&gmt) == 0)
     {
-        LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec );
+        LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+        gmt.tm_hour = 12;
+        gmt.tm_min = 20;
+        X12RtcSetClock(&gmt);
     }
     
     /*
@@ -395,9 +398,19 @@ int main(void)
             LcdBackLight(LCD_BACKLIGHT_OFF);
         }
         
-        WatchDogRestart();
+        //Display time
+        if (X12RtcGetClock(&gmt) == 0)
+        {
+            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+            //Create an output for the string
+            char output[20];
+            //Create string from the time ints
+            sprintf(output, "%02d:%02d:%02d", gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+            //Display the current time
+            LcdTimeDisplay(output);
+        }
         
-        LcdTimeDisplay("13:35:15");
+        WatchDogRestart();
     }
 
     return(0);      // never reached, but 'main()' returns a non-void, so.....
