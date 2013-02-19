@@ -304,6 +304,9 @@ void InitializeTimeZone(void)
         At45dbPageWrite(0, &firstStartup, sizeof(int));
         if(DEBUG)
             LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+        
+        //Clear the display
+        LcdClearAll();
     }
 }
 
