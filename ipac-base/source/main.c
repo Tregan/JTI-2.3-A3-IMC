@@ -360,6 +360,9 @@ int main(void)
 
     SysControlMainBeat(ON);             // enable 4.4 msecs hartbeat interrupt
     
+    //Temp, only for testing first startup. Erase SRAM page 0
+    At45dbPageErase(0);
+    
     //Initialize persistent data chip
     if (At45dbInit()==AT45DB041B)
     {
