@@ -52,6 +52,8 @@
 /*-------------------------------------------------------------------------*/
 int timeZone;
 int timeZoneSet;
+//Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
+tm gmt;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -190,7 +192,12 @@ static void SysControlMainBeat(u_char OnOff)
 /* Threads                                                                 */
 /*-------------------------------------------------------------------------*/
 
-//Keyboard Thread for setting the timeZone
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief Thread for setting the timeZone
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
 THREAD(KBThreadTimeZone, args)
 {
     for(;;)
@@ -237,6 +244,7 @@ THREAD(ThreadB, args)
 /* ����������������������������������������������������������������������� */
 /*!
  * \brief Starts the check for firstStartup, and if so: waits for timeZone input
+ * \author Bas
  */
 /* ����������������������������������������������������������������������� */
 void InitializeTimeZone(void)
@@ -291,6 +299,27 @@ void InitializeTimeZone(void)
 
 /* ����������������������������������������������������������������������� */
 /*!
+ * \brief Displays the current time (from RTC) on the screen
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
+void ShowCurrentTime(void)
+{
+    //Display time
+    if (X12RtcGetClock(&gmt) == 0)
+    {
+        LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+        //Create an output for the string
+        char output[20];
+        //Create string from the time ints
+        sprintf(output, "%02d:%02d:%02d", gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+        //Display the current time
+        LcdTimeDisplay(output);
+    }
+}
+
+/* ����������������������������������������������������������������������� */
+/*!
  * \brief Main entry of the SIR firmware
  *
  * All the initialisations before entering the for(;;) loop are done BEFORE
@@ -303,12 +332,6 @@ void InitializeTimeZone(void)
 /* ����������������������������������������������������������������������� */
 int main(void)
 {
-    /* 
-     * Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
-     *
-     */
-    tm gmt;
-	
     /*
      *  First disable the watchdog
      */
@@ -398,17 +421,8 @@ int main(void)
             LcdBackLight(LCD_BACKLIGHT_OFF);
         }
         
-        //Display time
-        if (X12RtcGetClock(&gmt) == 0)
-        {
-            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
-            //Create an output for the string
-            char output[20];
-            //Create string from the time ints
-            sprintf(output, "%02d:%02d:%02d", gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
-            //Display the current time
-            LcdTimeDisplay(output);
-        }
+        //Show the time
+        ShowCurrentTime();
         
         WatchDogRestart();
     }
