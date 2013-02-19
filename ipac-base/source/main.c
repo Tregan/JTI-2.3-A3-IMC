@@ -13,9 +13,6 @@
  *  \date 19 december 2003
  */
  
- 
- 
-
 #define LOG_MODULE  LOG_MAIN_MODULE
 
 /*--------------------------------------------------------------------------*/
@@ -53,7 +50,8 @@
 /*-------------------------------------------------------------------------*/
 /* local variable definitions                                              */
 /*-------------------------------------------------------------------------*/
-
+int timeZone;
+int timeZoneSet;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -91,14 +89,12 @@ static void SysControlMainBeat(u_char);
 /* ����������������������������������������������������������������������� */
 static void SysMainBeatInterrupt(void *p)
 {
-
     /*
      *  scan for valid keys AND check if a MMCard is inserted or removed
      */
     KbScan();
     CardCheckCard();
 }
-
 
 /* ����������������������������������������������������������������������� */
 /*!
@@ -190,6 +186,35 @@ static void SysControlMainBeat(u_char OnOff)
     }
 }
 
+/*-------------------------------------------------------------------------*/
+/* Threads                                                                 */
+/*-------------------------------------------------------------------------*/
+
+//Keyboard Thread for setting the timeZone
+THREAD(KBThreadTimeZone, args)
+{
+    for(;;)
+    {
+        NutSleep(200);
+        //Wait for keyboard event
+        if(KbWaitForKeyEvent(500) != KB_ERROR)
+        {
+            u_char key = KbGetKey();
+            if(key == KEY_UP && timeZone <= 13)
+                timeZone++;
+            else if(key == KEY_DOWN && timeZone >= -11)
+                timeZone--;
+            else if(key == KEY_OK)
+            {
+                timeZoneSet = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
+        }
+    }
+}
+
+//ThreadA for turning on LED
 THREAD(ThreadA, args)
 {
     for(;;)
@@ -199,6 +224,7 @@ THREAD(ThreadA, args)
     }
 }
 
+//ThreadB for turning off LED
 THREAD(ThreadB, args)
 {
     for(;;)
@@ -208,6 +234,60 @@ THREAD(ThreadB, args)
     }
 }
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief Starts the check for firstStartup, and if so: waits for timeZone input
+ */
+/* ����������������������������������������������������������������������� */
+void InitializeTimeZone(void)
+{
+    int firstStartup;
+    //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
+    At45dbPageRead(0, &firstStartup, sizeof(int));
+    LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+
+    //First startup, set the timezone!
+    if(firstStartup != 1)
+    {
+        LogMsg_P(LOG_INFO, PSTR("First startup, waiting for timeZone input"));
+
+        LcdBackLight(LCD_BACKLIGHT_ON);
+        LcdWriteTitle("Timezone");
+        timeZone = 0;
+        timeZoneSet = 0;
+        
+        //Create the Keyboard Thread for setting the timeZone
+        NutThreadCreate("KBThreadTimeZone", KBThreadTimeZone, NULL, 1024);
+
+        while(timeZoneSet != 1)
+        {
+            NutSleep(100);
+
+            //array of 20 chars should be enough for "UTC +(or -)14"
+            char output[20];
+            if(timeZone > -1)
+                sprintf(output, "UTC +%d ", timeZone);
+            else
+                sprintf(output, "UTC %d ", timeZone);
+            LcdWriteSecondLine(output);
+
+            WatchDogRestart();
+        }
+
+        LcdBackLight(LCD_BACKLIGHT_OFF);
+
+        //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
+        //Put the address of timeZone as a parameter, and the bytesize is the size of a float
+        At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
+        LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
+        At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
+        LogMsg_P(LOG_INFO, PSTR("Value of timeZone from SRAM: %d"), timeZone);
+
+        firstStartup = 1;
+        At45dbPageWrite(0, &firstStartup, sizeof(int));
+        LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+    }
+}
 
 /* ����������������������������������������������������������������������� */
 /*!
@@ -228,9 +308,6 @@ int main(void)
      *
      */
     tm gmt;
-    /*
-     * Kroeske: Ook kan 'struct _tm gmt' Zie bovenstaande link
-     */
 	
     /*
      *  First disable the watchdog
@@ -275,54 +352,8 @@ int main(void)
         At45dbPageRead(0, &firstTime, 1);
         LogMsg_P(LOG_INFO, PSTR("Value after reading again %02d"), firstTime);*/
         
-        int firstStartup;
-        //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
-        At45dbPageRead(0, &firstStartup, sizeof(int));
-        LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
-        
-        //First startup, set the timezone!
-        //if(firstStartup != 1)
-        //{
-            LogMsg_P(LOG_INFO, PSTR("First startup, waiting for timeZone input"));
-            
-            LcdBackLight(LCD_BACKLIGHT_ON);
-            LcdWriteTitle("Timezone");
-            int timeZone = 0;
-            
-            for (;;)
-            {
-                char output[20];
-                if(timeZone > -1)
-                    sprintf(output, "UTC +%d ", timeZone);
-                else
-                    sprintf(output, "UTC %d ", timeZone);
-                LcdWriteSecondLine(output);
-                
-                NutSleep(500);
-                u_char key = KbGetKey();
-                if(key == KEY_UP)
-                    timeZone++;
-                else if(key == KEY_DOWN)
-                    timeZone--;
-                else if(key == KEY_OK)
-                    break;
-                
-                WatchDogRestart();
-            }
-            
-            LcdBackLight(LCD_BACKLIGHT_OFF);
-            
-            //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
-            //Put the address of timeZone as a parameter, and the bytesize is the size of a float
-            At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
-            LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
-            At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
-            LogMsg_P(LOG_INFO, PSTR("Value from SRAM: %d"), timeZone);
-            
-            firstStartup = 1;
-            At45dbPageWrite(0, &firstStartup, sizeof(int));
-            LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
-        //}
+        //timeZone check
+        InitializeTimeZone();
     }
     
     //Initialize RTC
@@ -334,12 +365,12 @@ int main(void)
     {
         LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec );
     }
-
+    
     /*
      * Increase our priority so we can feed the watchdog.
      */
     NutThreadSetPriority(1);
-
+    
     NutThreadCreate("MainA", ThreadA, NULL, 1024);
     NutThreadCreate("MainB", ThreadB, NULL, 1024);
     

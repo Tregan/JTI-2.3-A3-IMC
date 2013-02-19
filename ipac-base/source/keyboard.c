@@ -152,6 +152,10 @@ void KbScan()
     KeyFound |= ((KeyNibble3<<8) & 0xF000);     // b7..b4 in 'KeyNibble3' to b15..b12 in 'KeyFound' << shift 8 left
     //Added by Niels
     KeyBuffer[0] = KbRemapKey(KeyFound);
+    
+    //Generate event
+    if(KeyBuffer[0] != KEY_UNDEFINED)
+        NutEventPostFromIrq(&hKBEvent);
 
 #endif  // USE_JTAG
 
@@ -311,10 +315,10 @@ void KbInit()
     HoldCounter=0;
 
     // arrow keys are repeating keys by default
-    KbSetKeyRepeating(KEY_UP, KEY_REPEAT);
+    /*KbSetKeyRepeating(KEY_UP, KEY_REPEAT);
     KbSetKeyRepeating(KEY_DOWN, KEY_REPEAT);
     KbSetKeyRepeating(KEY_LEFT, KEY_REPEAT);
-    KbSetKeyRepeating(KEY_RIGHT, KEY_REPEAT);
+    KbSetKeyRepeating(KEY_RIGHT, KEY_REPEAT);*/
 }
 /* ---------- end of module ------------------------------------------------ */
 
