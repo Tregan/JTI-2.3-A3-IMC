@@ -50,6 +50,9 @@
 /*-------------------------------------------------------------------------*/
 /* local variable definitions                                              */
 /*-------------------------------------------------------------------------*/
+//Enable of disable debugging messages and functionality (1 = on, 0 = off)
+const int DEBUG = 1;
+
 int timeZone;
 int timeZoneSet;
 //Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
@@ -252,12 +255,15 @@ void InitializeTimeZone(void)
     int firstStartup;
     //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
     At45dbPageRead(0, &firstStartup, sizeof(int));
-    LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+    
+    if(DEBUG)
+        LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
 
     //First startup, set the timezone!
     if(firstStartup != 1)
     {
-        LogMsg_P(LOG_INFO, PSTR("First startup, waiting for timeZone input"));
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("First startup, waiting for timeZone input"));
 
         LcdBackLight(LCD_BACKLIGHT_ON);
         LcdWriteTitle("Timezone");
@@ -287,13 +293,17 @@ void InitializeTimeZone(void)
         //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
         //Put the address of timeZone as a parameter, and the bytesize is the size of a float
         At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
-        LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
+        
         At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
-        LogMsg_P(LOG_INFO, PSTR("Value of timeZone from SRAM: %d"), timeZone);
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("Value of timeZone from SRAM: %d"), timeZone);
 
         firstStartup = 1;
         At45dbPageWrite(0, &firstStartup, sizeof(int));
-        LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
     }
 }
 
@@ -308,7 +318,9 @@ void ShowCurrentTime(void)
     //Display time
     if (X12RtcGetClock(&gmt) == 0)
     {
-        LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+        
         //Create an output for the string
         char output[20];
         //Create string from the time ints
@@ -360,8 +372,9 @@ int main(void)
 
     SysControlMainBeat(ON);             // enable 4.4 msecs hartbeat interrupt
     
-    //Temp, only for testing first startup. Erase SRAM page 0
-    At45dbPageErase(0);
+    //If debugging is enabled, erase the firstStartup page (pgn 0)
+    if(DEBUG == 1)
+        At45dbPageErase(0);
     
     //Initialize persistent data chip
     if (At45dbInit()==AT45DB041B)
@@ -389,7 +402,9 @@ int main(void)
     //Temp, only for testing atm!
     if (X12RtcGetClock(&gmt) == 0)
     {
-        LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+        
         gmt.tm_hour = 12;
         gmt.tm_min = 20;
         X12RtcSetClock(&gmt);
