@@ -36,8 +36,8 @@
 
 char * title = NULL;
 char * secondline = NULL;
-int titlebool;
-int secondlinebool;
+int titlebool = 0;
+int secondlinebool = 0;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -60,33 +60,94 @@ THREAD(TitleThread, args)
 {
     int i = 0;
     int count = 0;
-    int length = strlen(title);
     char shorterString[7];
-    
+        
     for(;;)
     {
-        LogMsg_P(LOG_INFO, PSTR("Thread werkt %02d"), strlen(title));
-        NutSleep(5000);
+        NutSleep(1000);
         
-        if(titlebool == 0)
+        if(titlebool == 1)
         {
-            NutThreadExit();
-        }
-        
-        memset(shorterString, 0, 7);
-        for(i = count; i < count + 7; i++)
-        {
-            shorterString[i - count] = title[i];
-        }
-        
-        LcdWriteShortTitle(shorterString);
-        
-        if(strlen(title) == length - 7)
-        {
+            titlebool = 2;
             count = 0;
         }
         
-        count++;
+        if(strlen(title) < 7)
+        {
+            LcdWriteShortTitle(title);
+        }
+        else
+        {
+            if(count == 1)
+            {
+                NutSleep(2000);
+            }
+
+            memset(shorterString, 0, 7);
+            for(i = count; i < count + 7; i++)
+            {
+                shorterString[i - count] = title[i];
+            }
+
+            LcdWriteShortTitle(shorterString);
+            count++;
+            
+            if(title[count + 6] == '\0')
+            {
+                LogMsg_P(LOG_INFO, PSTR("End of title detected"));
+                count = 0;
+                NutSleep(2000);
+            }
+
+        }
+    }
+}
+
+
+THREAD(SecondLineThread, args)
+{
+    int i = 0;
+    int count = 0;
+    char shorterString[16];
+        
+    for(;;)
+    {
+        NutSleep(1000);
+        
+        if(secondlinebool == 1)
+        {
+            secondlinebool = 2;
+            count = 0;
+        }
+        
+        if(strlen(secondline) < 16)
+        {
+            LcdWriteShortSecondLine(secondline);
+        }
+        else
+        {
+            if(count == 1)
+            {
+                NutSleep(2000);
+            }
+
+            memset(shorterString, 0, 16);
+            for(i = count; i < count + 16; i++)
+            {
+                shorterString[i - count] = secondline[i];
+            }
+
+            LcdWriteShortSecondLine(shorterString);
+            count++;
+            
+            if(secondline[count + 15] == '\0')
+            {
+                LogMsg_P(LOG_INFO, PSTR("End of second line detected"));
+                count = 0;
+                NutSleep(2000);
+            }
+
+        }
     }
 }
 
@@ -294,15 +355,14 @@ void LcdTimeDisplay(char text[])
 /* ����������������������������������������������������������������������� */
 void LcdWriteTitle(char text[])
 {
-    if(strlen(text) <= 7)
+    title = text;
+    if(titlebool == 0)
     {
-        titlebool = 0;
-        LcdWriteShortTitle(text);
+        NutThreadSetPriority(1);
+        NutThreadCreate("LcdA", TitleThread, text, 1024);
+        NutThreadSetPriority(0);
     }
-    else
-    {
-        LcdScrollTitle(text);
-    }
+    titlebool = 1;
 }
 
 /* ����������������������������������������������������������������������� */
@@ -312,19 +372,14 @@ void LcdWriteTitle(char text[])
 /* ����������������������������������������������������������������������� */
 void LcdWriteSecondLine(char text[])
 {
-    int i;
-    int maxChars = 16;
-    
-    if(strlen(text) < 16)
+    secondline = text;
+    if(secondlinebool == 0)
     {
-        maxChars = strlen(text);
+        NutThreadSetPriority(1);
+        NutThreadCreate("LcdB", SecondLineThread, text, 1024);
+        NutThreadSetPriority(0);
     }
-       
-    WriteByteToLocation(LINE_2_1, text[0]);
-    for(i = 1; i < strlen(text); i++)
-    {
-        LcdChar(text[i]);
-    }
+    secondlinebool = 1;
 }
 
 
@@ -370,26 +425,23 @@ void LcdClearTitleLine()
     LcdClearTitle();
 }
 
-/* ����������������������������������������������������������������������� */
-/*!
- * \Scrolls through the text for the title in a separate thread.
- */
-/* ����������������������������������������������������������������������� */
-void LcdScrollTitle(char text[])
-{
-    title = text;
-    titlebool = 1;
-    NutThreadSetPriority(1);
-    NutThreadCreate("LcdA", TitleThread, text, 1024);
-    NutThreadSetPriority(0);
-}
-
 void LcdWriteShortTitle(char text[])
 {
     int i;
     
     WriteByteToLocation(LINE_1_1, text[0]);
     for(i = 1; i < 7; i++)
+    {
+        LcdChar(text[i]);
+    }
+}
+
+void LcdWriteShortSecondLine(char text[])
+{
+    int i;
+    
+    WriteByteToLocation(LINE_2_1, text[0]);
+    for(i = 1; i < 16; i++)
     {
         LcdChar(text[i]);
     }
