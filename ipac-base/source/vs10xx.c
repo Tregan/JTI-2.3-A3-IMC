@@ -874,7 +874,9 @@ int VsBeep(u_char fsin, u_short ms)
 
     return(0);
 }
-
+/*
+ * SoundA is an quick repating sound
+ */
 int SoundA()
 {
     VsBeep(100, 200);
@@ -884,6 +886,9 @@ int SoundA()
     return 0;
 }
 
+/*
+ * SoundB is an slow repeating sound on a high pitch
+ */
 int SoundB()
 {   
     VsBeep(80, 500);
