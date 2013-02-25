@@ -860,18 +860,35 @@ int VsBeep(u_char fsin, u_short ms)
 
     VsPlayerSetMode(VS_SM_TESTS);
 
-    fsin = (fsin* 16) + 56;
+    //fsin = (fsin* 16) + 56;
     VsSdiWrite_P(on, sizeof(on));
     VsSdiWrite(&fsin, 1);
     VsSdiWrite_P(end, sizeof(end));
-    NutDelay(ms);
+    NutSleep(ms);
     VsSdiWrite_P(off, sizeof(off));
     VsSdiWrite_P(end, sizeof(end));
+    
 
     /* Enable decoder interrupts. */
     VsPlayerInterrupts(ief);
 
     return(0);
+}
+
+int SoundA()
+{
+    VsBeep(100, 200);
+    NutSleep(100);
+    VsBeep(100, 200);
+    NutSleep(500);
+    return 0;
+}
+
+int SoundB()
+{   
+    VsBeep(80, 500);
+    NutSleep(500);
+    return 0;
 }
 
 /*!
