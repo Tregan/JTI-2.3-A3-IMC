@@ -170,7 +170,7 @@ THREAD(MenuThread, args)
 void DisplayItem(char text[], int clear)
 {
     if(clear == 1)
-        LcdWriteSecondLine("                ");
+        LcdClearLine();
     
     LcdWriteSecondLine(text);
 }
