@@ -233,7 +233,7 @@ THREAD(KBThreadManualTime, args)
     
     for(;;)
     {
-        NutSleep(200);
+        NutSleep(300);
         //Wait for keyboard event
         if(KbWaitForKeyEvent(500) != KB_ERROR)
         {
