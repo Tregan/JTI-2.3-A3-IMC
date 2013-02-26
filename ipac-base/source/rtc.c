@@ -236,7 +236,8 @@ int X12RtcGetAlarm(int idx, struct _tm *tm, int *aflgs)
         if (data[1] & X12RTC_MNA_EMN)
         {
             *aflgs |= RTC_ALARM_MINUTE;
-            tm->tm_min = BCD2BIN(data[1]);
+            //Matthijs: Added: 0x70, seems logical with 0 to 59
+            tm->tm_min = BCD2BIN(data[1] & 0x7F);
         }
         if (data[2] & X12RTC_HRA_EHR)
         {
@@ -246,12 +247,14 @@ int X12RtcGetAlarm(int idx, struct _tm *tm, int *aflgs)
         if (data[3] & X12RTC_DTA_EDT)
         {
             *aflgs |= RTC_ALARM_MDAY;
-            tm->tm_mday = BCD2BIN(data[3]);
+            //Matthijs: Added: 0x70, not logical
+            tm->tm_mday = BCD2BIN(data[3] & 0x7F);
         }
         if (data[4] & X12RTC_MOA_EMO)
         {
             *aflgs |= RTC_ALARM_MONTH;
-            tm->tm_mon = BCD2BIN(data[4]) - 1;
+            //Matthijs: Added: 0x70, not logical
+            tm->tm_mon = BCD2BIN(data[4] & 0x7F) - 1;
         }
         if (data[6] & X12RTC_DWA_EDW)
         {
@@ -468,4 +471,72 @@ int X12Init(void)
     return (rc);
 }
 
+/*!
+ * \brief sets AlarmA
+ * 
+ * \param hours        : 0 - 23 hours from midnight
+ * 
+ * \param minutes      : 0 - 59 minutes in hour
+ * 
+ * \param seconds     : 0 - 59 seconds in minutes
+ * 
+ * \author Matthijs
+ */
+void setAlarmA(int hours, int minutes, int seconds)
+{
+    tm alarmA;
+    
+    alarmA.tm_hour = hours;
+    alarmA.tm_min = minutes;
+    alarmA.tm_sec = seconds;
+    
+    // flags 7 becaus that is sec, min, hours in binary
+    int succes = X12RtcSetAlarm(0, &alarmA, 7);
+    
+    if(succes == 0)
+    {
+          //goed
+    }
+    else
+    {
+        //fout
+    }
+}
+
+/*!
+ * \brief sets AlarmB
+ * 
+ * \param month     : 0 - 11 month of the year
+ * 
+ * \param dayMonth     : 1 - 31 seconds in minutes
+ * 
+ * \param hours        : 0 - 23 hours from midnight
+ * 
+ * \param minutes      : 0 - 59 minutes in hour
+ * 
+ * \param seconds     : 0 - 59 seconds in minutes
+ *
+ * \author Matthijs
+ */
+void setAlarmB(int month, int dayMonth, int hours, int minutes, int seconds)
+{
+    tm alarmB;
+    
+    alarmB.tm_sec = seconds; 
+    alarmB.tm_min = minutes;    
+    alarmB.tm_hour = hours;     
+    alarmB.tm_mday = dayMonth;  
+    alarmB.tm_mon = month;      
+    
+    int succes = X12RtcSetAlarm(1, &alarmB, 31);
+        
+    if(succes == 0)
+    {
+        //klaar    
+    }
+    else
+    {
+        //fout!
+    }
+}
 

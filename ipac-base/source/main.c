@@ -51,11 +51,13 @@
 /*-------------------------------------------------------------------------*/
 /* local variable definitions                                              */
 /*-------------------------------------------------------------------------*/
-//Enable of disable debugging messages and functionality (1 = on, 0 = off)
+//Enable or disable debugging messages and functionality (1 = on, 0 = off)
 const int DEBUG = 1;
 
 int timeZone;
 int timeZoneSet;
+int timeSetManually;
+int selectedTimeUnit;
 //Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
 tm gmt;
 
@@ -225,6 +227,100 @@ THREAD(KBThreadTimeZone, args)
     }
 }
 
+THREAD(KBThreadManualTime, args)
+{
+    //Time units: 0 = hours, 1 = minutes, 2 = seconds
+    selectedTimeUnit = 0;
+    
+    for(;;)
+    {
+        NutSleep(300);
+        //Wait for keyboard event
+        if(KbWaitForKeyEvent(500) != KB_ERROR)
+        {
+            u_char key = KbGetKey();
+            if(key == KEY_UP)
+            {
+                switch(selectedTimeUnit)
+                {
+                    case 0:
+                        if(gmt.tm_hour >= 23)
+                            gmt.tm_hour = 0;
+                        else
+                            gmt.tm_hour++;
+                        break;
+                    case 1:
+                        if(gmt.tm_min >= 59)
+                            gmt.tm_min = 0;
+                        else
+                            gmt.tm_min++;
+                        break;
+                    case 2:
+                        if(gmt.tm_sec >= 59)
+                            gmt.tm_sec = 0;
+                        else
+                            gmt.tm_sec++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_DOWN)
+            {
+                switch(selectedTimeUnit)
+                {
+                    case 0:
+                        if(gmt.tm_hour <= 0)
+                            gmt.tm_hour = 23;
+                        else
+                            gmt.tm_hour--;
+                        break;
+                    case 1:
+                        if(gmt.tm_min <= 0)
+                            gmt.tm_min = 59;
+                        else
+                            gmt.tm_min--;
+                        break;
+                    case 2:
+                        if(gmt.tm_sec <= 0)
+                            gmt.tm_sec = 59;
+                        else
+                            gmt.tm_sec--;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_LEFT)
+            {
+                //Set to seconds if it already is at hours
+                if(selectedTimeUnit <= 0)
+                {
+                    selectedTimeUnit = 2;
+                }
+                else
+                    selectedTimeUnit--;
+            }
+            else if(key == KEY_RIGHT)
+            {
+                //Set to hours if it already is at seconds
+                if(selectedTimeUnit >= 2)
+                {
+                    selectedTimeUnit = 0;
+                }
+                else
+                    selectedTimeUnit++;
+            }
+            else if(key == KEY_OK)
+            {
+                timeSetManually = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
+        }
+    }
+}
+
 //ThreadA for turning on LED
 THREAD(ThreadA, args)
 {
@@ -253,6 +349,9 @@ THREAD(ThreadB, args)
 /* ����������������������������������������������������������������������� */
 void InitializeTimeZone(void)
 {
+    //Clear display
+    LcdClearAll();
+    
     int firstStartup;
     //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
     At45dbPageRead(0, &firstStartup, sizeof(int));
@@ -267,7 +366,7 @@ void InitializeTimeZone(void)
             LogMsg_P(LOG_INFO, PSTR("First startup, waiting for timeZone input"));
 
         LcdBackLight(LCD_BACKLIGHT_ON);
-        LcdWriteTitle("Timezone");
+        LcdWriteTitle("Set Timezone");
         timeZone = 0;
         timeZoneSet = 0;
         
@@ -336,6 +435,66 @@ void ShowCurrentTime(void)
 
 /* ����������������������������������������������������������������������� */
 /*!
+ * \brief Manually set the time
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
+void setTimeManually(void)
+{
+    //Get the current time from RTC and store it in gmt struct
+    X12RtcGetClock(&gmt);
+            
+    timeSetManually = 0;
+    
+    //Create the Keyboard Thread for setting the timeZone
+    NutThreadCreate("KBThreadManualTime", KBThreadManualTime, NULL, 1024);
+    
+    //Backlight on during setting
+    LcdBackLight(LCD_BACKLIGHT_ON);
+    //Clear the title
+    LcdClearTitle();
+    LcdWriteTitle("Set Time Manually");
+    
+    //Show the current time, but do NOT update it! We're setting a time, updating while setting would be very silly
+    ShowCurrentTime();
+    
+    char output[20];
+    
+    while(timeSetManually != 1)
+    {
+        NutSleep(100);
+        
+        //Clear the second line
+        LcdClearLine();
+        
+        switch(selectedTimeUnit)
+        {
+            case 0:
+                sprintf(output, "Set Hours: %02d", gmt.tm_hour);
+                LcdWriteSecondLine(output);
+                break;
+            case 1:
+                sprintf(output, "Set Minutes: %02d", gmt.tm_min);
+                LcdWriteSecondLine(output);
+                break;
+            case 2:
+                sprintf(output, "Set Seconds: %02d", gmt.tm_sec);
+                LcdWriteSecondLine(output);
+                break;
+            default:
+                break;
+        }
+    }
+    //Clear display
+    LcdClearAll();
+    //Backlight no longer needed, turn off
+    LcdBackLight(LCD_BACKLIGHT_OFF);
+    //Write the gmt struct to RTC
+    X12RtcSetClock(&gmt);
+}
+
+/* ����������������������������������������������������������������������� */
+/*!
  * \brief Main entry of the SIR firmware
  *
  * All the initialisations before entering the for(;;) loop are done BEFORE
@@ -378,6 +537,9 @@ int main(void)
 
     SysControlMainBeat(ON);             // enable 4.4 msecs hartbeat interrupt
     
+    /* Enable global interrupts */
+    sei();
+    
     //If debugging is enabled, erase the firstStartup page (pgn 0)
     if(DEBUG == 1)
         At45dbPageErase(0);
@@ -411,10 +573,11 @@ int main(void)
         if(DEBUG)
             LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
         
-        gmt.tm_hour = 12;
-        gmt.tm_min = 20;
         X12RtcSetClock(&gmt);
     }
+    
+    //Temp, put inside menu when that's done :)
+    setTimeManually();
     
     /*
      * Increase our priority so we can feed the watchdog.
@@ -423,9 +586,6 @@ int main(void)
     
     NutThreadCreate("MainA", ThreadA, NULL, 1024);
     NutThreadCreate("MainB", ThreadB, NULL, 1024);
-    
-    /* Enable global interrupts */
-    sei();
 
     int count = 0;
     for (;;)
@@ -445,7 +605,7 @@ int main(void)
             LcdBackLight(LCD_BACKLIGHT_OFF);
         }
         
-        //Show the time
+        //Show the current time
         ShowCurrentTime();
         
         WatchDogRestart();
