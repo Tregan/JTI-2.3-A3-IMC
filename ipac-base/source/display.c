@@ -61,11 +61,10 @@ THREAD(TitleThread, args)
     int i = 0;
     int count = 0;
     char shorterString[7];
+    int length;
         
     for(;;)
-    {
-        NutSleep(1000);
-        
+    {        
         if(titlebool == 1)
         {
             titlebool = 2;
@@ -80,7 +79,7 @@ THREAD(TitleThread, args)
         {
             if(count == 1)
             {
-                NutSleep(2000);
+                NutSleep(1000);
             }
 
             memset(shorterString, 0, 7);
@@ -96,10 +95,11 @@ THREAD(TitleThread, args)
             {
                 LogMsg_P(LOG_INFO, PSTR("End of title detected"));
                 count = 0;
-                NutSleep(2000);
+                NutSleep(1000);
             }
-
+            NutSleep(900);
         }
+        NutSleep(100);
     }
 }
 
@@ -109,11 +109,10 @@ THREAD(SecondLineThread, args)
     int i = 0;
     int count = 0;
     char shorterString[16];
+    int length;
         
     for(;;)
-    {
-        NutSleep(1000);
-        
+    {        
         if(secondlinebool == 1)
         {
             secondlinebool = 2;
@@ -146,8 +145,9 @@ THREAD(SecondLineThread, args)
                 count = 0;
                 NutSleep(2000);
             }
-
+            NutSleep(900);
         }
+        NutSleep(100);
     }
 }
 
@@ -427,11 +427,15 @@ void LcdClearTitleLine()
 
 void LcdWriteShortTitle(char text[])
 {
-    int i;
+    int i = 1;
     
     WriteByteToLocation(LINE_1_1, text[0]);
     for(i = 1; i < 7; i++)
     {
+        if(text[i] == '\0')
+        {
+            return;
+        }
         LcdChar(text[i]);
     }
 }
@@ -443,6 +447,10 @@ void LcdWriteShortSecondLine(char text[])
     WriteByteToLocation(LINE_2_1, text[0]);
     for(i = 1; i < 16; i++)
     {
+        if(text[i] == '\0')
+        {
+            return;
+        }
         LcdChar(text[i]);
     }
 }
