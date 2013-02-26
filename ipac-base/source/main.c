@@ -570,8 +570,6 @@ int main(void)
         if(DEBUG)
             LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
         
-        gmt.tm_hour = 12;
-        gmt.tm_min = 20;
         X12RtcSetClock(&gmt);
     }
     
