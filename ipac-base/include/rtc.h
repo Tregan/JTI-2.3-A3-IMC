@@ -154,5 +154,8 @@ extern int X12RtcWrite(int nv, CONST u_char *buff, size_t len);
 extern int X12EepromRead(u_int addr, void *buff, size_t len);
 extern int X12EepromWrite(u_int addr, CONST void *buff, size_t len);
 
+extern void setAlarmA(int hours, int minutes, int seconds);
+extern void setAlarmB(int month, int dayMonth, int hours, int minutes, int seconds);
+
 /* End of prototypes */
 #endif
