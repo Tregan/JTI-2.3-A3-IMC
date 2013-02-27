@@ -38,6 +38,7 @@
 #include "watchdog.h"
 #include "flash.h"
 #include "spidrv.h"
+#include "network.h"
 
 #include <time.h>
 #include "rtc.h"
@@ -59,7 +60,7 @@ int timeZoneSet;
 int timeSetManually;
 int selectedTimeUnit;
 //Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
-tm gmt;
+tm datetime;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -244,22 +245,22 @@ THREAD(KBThreadManualTime, args)
                 switch(selectedTimeUnit)
                 {
                     case 0:
-                        if(gmt.tm_hour >= 23)
-                            gmt.tm_hour = 0;
+                        if(datetime.tm_hour >= 23)
+                            datetime.tm_hour = 0;
                         else
-                            gmt.tm_hour++;
+                            datetime.tm_hour++;
                         break;
                     case 1:
-                        if(gmt.tm_min >= 59)
-                            gmt.tm_min = 0;
+                        if(datetime.tm_min >= 59)
+                            datetime.tm_min = 0;
                         else
-                            gmt.tm_min++;
+                            datetime.tm_min++;
                         break;
                     case 2:
-                        if(gmt.tm_sec >= 59)
-                            gmt.tm_sec = 0;
+                        if(datetime.tm_sec >= 59)
+                            datetime.tm_sec = 0;
                         else
-                            gmt.tm_sec++;
+                            datetime.tm_sec++;
                         break;
                     default:
                         break;
@@ -270,22 +271,22 @@ THREAD(KBThreadManualTime, args)
                 switch(selectedTimeUnit)
                 {
                     case 0:
-                        if(gmt.tm_hour <= 0)
-                            gmt.tm_hour = 23;
+                        if(datetime.tm_hour <= 0)
+                            datetime.tm_hour = 23;
                         else
-                            gmt.tm_hour--;
+                            datetime.tm_hour--;
                         break;
                     case 1:
-                        if(gmt.tm_min <= 0)
-                            gmt.tm_min = 59;
+                        if(datetime.tm_min <= 0)
+                            datetime.tm_min = 59;
                         else
-                            gmt.tm_min--;
+                            datetime.tm_min--;
                         break;
                     case 2:
-                        if(gmt.tm_sec <= 0)
-                            gmt.tm_sec = 59;
+                        if(datetime.tm_sec <= 0)
+                            datetime.tm_sec = 59;
                         else
-                            gmt.tm_sec--;
+                            datetime.tm_sec--;
                         break;
                     default:
                         break;
@@ -419,15 +420,15 @@ void InitializeTimeZone(void)
 void ShowCurrentTime(void)
 {
     //Display time
-    if (X12RtcGetClock(&gmt) == 0)
+    if (X12RtcGetClock(&datetime) == 0)
     {
         if(DEBUG)
-            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), datetime.tm_hour, datetime.tm_min, datetime.tm_sec);
         
         //Create an output for the string
         char output[20];
         //Create string from the time ints
-        sprintf(output, "%02d:%02d:%02d", gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+        sprintf(output, "%02d:%02d:%02d", datetime.tm_hour, datetime.tm_min, datetime.tm_sec);
         //Display the current time
         LcdTimeDisplay(output);
     }
@@ -442,7 +443,7 @@ void ShowCurrentTime(void)
 void setTimeManually(void)
 {
     //Get the current time from RTC and store it in gmt struct
-    X12RtcGetClock(&gmt);
+    X12RtcGetClock(&datetime);
             
     timeSetManually = 0;
     
@@ -470,15 +471,15 @@ void setTimeManually(void)
         switch(selectedTimeUnit)
         {
             case 0:
-                sprintf(output, "Set Hours: %02d", gmt.tm_hour);
+                sprintf(output, "Set Hours: %02d", datetime.tm_hour);
                 LcdWriteSecondLine(output);
                 break;
             case 1:
-                sprintf(output, "Set Minutes: %02d", gmt.tm_min);
+                sprintf(output, "Set Minutes: %02d", datetime.tm_min);
                 LcdWriteSecondLine(output);
                 break;
             case 2:
-                sprintf(output, "Set Seconds: %02d", gmt.tm_sec);
+                sprintf(output, "Set Seconds: %02d", datetime.tm_sec);
                 LcdWriteSecondLine(output);
                 break;
             default:
@@ -490,7 +491,26 @@ void setTimeManually(void)
     //Backlight no longer needed, turn off
     LcdBackLight(LCD_BACKLIGHT_OFF);
     //Write the gmt struct to RTC
-    X12RtcSetClock(&gmt);
+    X12RtcSetClock(&datetime);
+}
+
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief Set _timezone of time.h
+ * \author Niels & Bas
+ */
+/* ����������������������������������������������������������������������� */
+void setTimeZone(int* timeZone)
+{
+    if((-12 <= *timeZone) && (*timeZone <= 14))
+    {
+        printf("timezone = %d\n", *timeZone);
+        _timezone = -*timeZone * 60 * 60;
+    }
+    else
+    {
+        _timezone = 0;
+    }
 }
 
 /* ����������������������������������������������������������������������� */
@@ -564,17 +584,14 @@ int main(void)
     }
     
     //Initialize RTC
-    X12Init(); 
-    //TODO Sync time on startup, using X12RtcSetClock(&gmt) and time from internet.
-    //Use time from internet to set values of gmt struct
-    //Temp, only for testing atm!
-    if (X12RtcGetClock(&gmt) == 0)
-    {
-        if(DEBUG)
-            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
-        
-        X12RtcSetClock(&gmt);
-    }
+    X12Init();
+    
+    //Initialize network
+    NetworkInit();
+    //Set timezone of time.h to our timezone
+    setTimeZone(&timeZone);
+    //Query NTP server and set time
+    NTP(&datetime);
     
     //Temp, put inside menu when that's done :)
     setTimeManually();

@@ -93,7 +93,7 @@ THREAD(TitleThread, args)
             
             if(title[count + 6] == '\0')
             {
-                LogMsg_P(LOG_INFO, PSTR("End of title detected"));
+                //LogMsg_P(LOG_INFO, PSTR("End of title detected"));
                 count = 0;
                 NutSleep(1000);
             }
@@ -141,7 +141,7 @@ THREAD(SecondLineThread, args)
             
             if(secondline[count + 15] == '\0')
             {
-                LogMsg_P(LOG_INFO, PSTR("End of second line detected"));
+                //LogMsg_P(LOG_INFO, PSTR("End of second line detected"));
                 count = 0;
                 NutSleep(1000);
             }
