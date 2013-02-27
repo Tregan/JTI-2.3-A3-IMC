@@ -39,7 +39,8 @@ CFILES =        main.c			\
                 fat.c			\
 				flash.c			\
 				rtc.c			\
-				menu.c
+				menu.c			\
+				network.c
 			
 				
 # Header files.
@@ -55,7 +56,7 @@ HFILES =        display.h        keyboard.h              \
                 flash.h          spidrv.h         command.h      \
                 parse.h          mmcdrv.h         fat.h          \
                 fatdrv.h         flash.h	  	rtc.h	\
-				menu.h
+				menu.h			 network.h
 
 
 # Alle source files in de ./source dir

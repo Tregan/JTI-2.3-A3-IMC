@@ -37,12 +37,14 @@ int NetworkInit()
     printf("in networkinit\n");
  
     //Register Ethernet controller.
+    //TODO test if the if-statement can go away, it shouldn't have to be here.
     if (NutRegisterDevice(&DEV_ETHER, 0, 0)) 
     {
         puts("Registering " DEV_ETHER_NAME " failed.");
     }
     //Configure network.
-    else if (NutDhcpIfConfig(DEV_ETHER_NAME, NULL, 0)) 
+    //TODO test the timeout, 10 seconds atm, but may need to be higher or lower.
+    else if (NutDhcpIfConfig(DEV_ETHER_NAME, NULL, 10000)) 
     {
         puts("Configuring " DEV_ETHER_NAME " failed.");
     }

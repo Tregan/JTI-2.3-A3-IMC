@@ -593,6 +593,7 @@ int main(void)
     //Query NTP server and set time
     NTP(&datetime);
     
+    //TODO if there's no network, set time manually... WTB timeout in networkinit!
     //Temp, put inside menu when that's done :)
     setTimeManually();
     
