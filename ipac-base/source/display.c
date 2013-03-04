@@ -70,6 +70,7 @@ THREAD(TitleThread, args)
             count = 0;
         }
         
+        LcdWriteShortTitle("       ");
         if(strlen(title) < 7)
         {
             LcdWriteShortTitle(title);
@@ -117,6 +118,7 @@ THREAD(SecondLineThread, args)
             count = 0;
         }
         
+        LcdWriteShortSecondLine("                ");
         if(strlen(secondline) < 16)
         {
             LcdWriteShortSecondLine(secondline);
@@ -426,48 +428,32 @@ void LcdClearTitleLine()
 void LcdWriteShortTitle(char text[])
 {
     int i = 1;
-    int check = 0;
     
     WriteByteToLocation(LINE_1_1, text[0]);
     for(i = 1; i < 7; i++)
     {
         if(text[i] == '\0')
         {
-                check = 1;
+            return;
         }
         
-        if(check == 1)
-        {
-                LcdChar(" ");
-        }
-        else
-        {
-                LcdChar(text[i]);
-        }
+        LcdChar(text[i]);
     }
 }
 
 void LcdWriteShortSecondLine(char text[])
 {
     int i;
-    int check = 0;
     
     WriteByteToLocation(LINE_2_1, text[0]);
     for(i = 1; i < 16; i++)
     {
         if(text[i] == '\0')
         {
-                check = 1;
+            return;
         }
         
-        if(check == 1)
-        {
-                LcdChar(" ");
-        }
-        else
-        {
-                LcdChar(text[i]);
-        }
+        LcdChar(text[i]);
     }
 }
 
