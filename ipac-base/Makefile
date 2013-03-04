@@ -56,7 +56,7 @@ HFILES =        display.h        keyboard.h              \
                 flash.h          spidrv.h         command.h      \
                 parse.h          mmcdrv.h         fat.h          \
                 fatdrv.h         flash.h	  	rtc.h	\
-				menu.h			 network.h
+				menu.h			 network.h		main.h	
 
 
 # Alle source files in de ./source dir

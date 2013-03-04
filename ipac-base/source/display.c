@@ -120,7 +120,7 @@ THREAD(SecondLineThread, args)
         
         if(strlen(secondline) < 16)
         {
-            LcdWriteShortSecondLine("                ")
+            LcdWriteShortSecondLine("                ");
             LcdWriteShortSecondLine(secondline);
         }
         else
