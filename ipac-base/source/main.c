@@ -580,7 +580,7 @@ int main(void)
     if(!NTP(&datetime))
     {
         LcdWriteTitle("Failed.");
-        LcdWriteSecondLine("Set time manually");
+        LcdWriteSecondLine("No time obtained");
         NutSleep(2000);
         setTimeManually();
     }

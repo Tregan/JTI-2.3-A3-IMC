@@ -141,30 +141,31 @@ THREAD(MenuThread, args)
             }
         }
         
-        //Display actions
-        char* item;
-        
-        switch(menu_enabled)
-        {
-            case 0: 
-                DisplayItem("", 1);
-                break;
-            case 1: 
-                item = menuitems[menu_item];
-                DisplayItem(item, 1);
-                break;
-        }
-        switch(submenu_enabled)
-        {
-            case 0: 
-                // Do nothing for now.
-                break;
-            case 1: 
-                DisplayItem(menusubitems[menu_item][menu_subitem].text, 1);
-                break;
-        }
         if(menu_enabled)
         {
+            //Display actions
+            char* item;
+
+            switch(menu_enabled)
+            {
+                case 0: 
+                    DisplayItem("", 1);
+                    break;
+                case 1: 
+                    item = menuitems[menu_item];
+                    DisplayItem(item, 1);
+                    break;
+            }
+            switch(submenu_enabled)
+            {
+                case 0: 
+                    // Do nothing for now.
+                    break;
+                case 1: 
+                    DisplayItem(menusubitems[menu_item][menu_subitem].text, 1);
+                    break;
+            }
+        
             while(1)
             {
                 u_char key = KbGetKey();
