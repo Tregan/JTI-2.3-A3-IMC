@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="84">
+<configurationDescriptor version="88">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df name="ipac-base" root=".">
+    <df root="." name="ipac-base">
       <df name="include">
         <in>display.h</in>
         <in>fat.h</in>
@@ -10,8 +10,10 @@
         <in>keyboard.h</in>
         <in>led.h</in>
         <in>log.h</in>
+        <in>menu.h</in>
         <in>mmc.h</in>
         <in>mmcdrv.h</in>
+        <in>network.h</in>
         <in>platform.h</in>
         <in>portio.h</in>
         <in>remcon.h</in>
@@ -27,20 +29,18 @@
         <in>display.c</in>
         <in>fat.c</in>
         <in>flash.c</in>
-        <in>http.c</in>
-        <in>inet.c</in>
         <in>keyboard.c</in>
         <in>led.c</in>
         <in>log.c</in>
         <in>main.c</in>
+        <in>menu.c</in>
         <in>mmc.c</in>
         <in>mmcdrv.c</in>
+        <in>network.c</in>
         <in>remcon.c</in>
         <in>rtc.c</in>
-        <in>session.c</in>
         <in>spidrv.c</in>
         <in>uart0driver.c</in>
-        <in>util.c</in>
         <in>vs10xx.c</in>
         <in>watchdog.c</in>
       </df>
@@ -61,7 +61,7 @@
     <conf name="Default" type="0">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
-        <compilerSet>default</compilerSet>
+        <compilerSet>WinAVR|WinAVR</compilerSet>
       </toolsSet>
       <codeAssistance>
       </codeAssistance>
@@ -86,6 +86,82 @@
           </cTool>
         </makeTool>
       </makefileType>
+      <item path="include/display.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/fat.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/fatdrv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/flash.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/keyboard.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/led.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/log.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/menu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mmc.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mmcdrv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/platform.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/portio.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/remcon.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rtc.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/spidrv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/system.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/typedefs.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/uart0driver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/vs10xx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/watchdog.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/display.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/fat.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/flash.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/keyboard.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/led.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/log.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/menu.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/mmc.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/mmcdrv.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/network.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/remcon.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/rtc.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/spidrv.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/uart0driver.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/vs10xx.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/watchdog.c" ex="false" tool="0" flavor2="0">
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>
