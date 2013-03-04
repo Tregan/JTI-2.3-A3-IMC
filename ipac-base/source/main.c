@@ -39,10 +39,12 @@
 #include "flash.h"
 #include "spidrv.h"
 #include "network.h"
+#include "shoutcast.h"
 
 #include <time.h>
 #include "rtc.h"
 #include "menu.h"
+#include "player.h"
 
 
 /*-------------------------------------------------------------------------*/
@@ -593,6 +595,9 @@ int main(void)
     //Query NTP server and set time
     NTP(&datetime);
     
+    initPlayer();
+    initInet();
+    
     //TODO if there's no network, set time manually... WTB timeout in networkinit!
     //Temp, put inside menu when that's done :)
     setTimeManually();
@@ -605,6 +610,9 @@ int main(void)
     NutThreadCreate("MainA", ThreadA, NULL, 1024);
     NutThreadCreate("MainB", ThreadB, NULL, 1024);
 
+    connectToStream();
+    playStream();
+    
     int count = 0;
     for (;;)
     {
