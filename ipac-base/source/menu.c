@@ -14,6 +14,7 @@
 #include "display.h"
 #include "keyboard.h"
 #include "log.h"
+#include "main.h"
 
 #define LOG_MODULE  LOG_MENU_MODULE
 
@@ -31,7 +32,7 @@ int menu_subitem = 0;
 //Define a struct for SubMenu Items
 struct menuSubItem {
     char* text;
-    void (*function)(void);;
+    void (*function)(void);
 };
 
 /*
@@ -56,7 +57,7 @@ char* menuitems[3] = {
 struct menuSubItem menusubitems[3][2] = {
     {{"Radio", &ShowSetting}, {"SD", &ShowSetting}},
     {{"Alarm 2", &ShowSetting}, {"Alarm 2", &ShowSetting}},
-    {{"Time Zone", &ShowSetting}, {"IP Adress", &ShowSetting}}
+    {{"Timezone", &InitializeTimeZone}, {"IP Adress", &ShowSetting}}
 };
 
 /*

@@ -11,7 +11,7 @@ void ShowSetting(void);
 
 //Standard Function for Menu.
 void DisplayItem(char text[], int);
-void    MenuInit(void);
+void MenuInit(void);
 
 #ifdef __cplusplus
 }
