@@ -341,6 +341,11 @@ THREAD(ThreadB, args)
     }
 }
 
+/*!
+ * \brief Snooze Function for Alarm A.
+ * \author Farhad
+ */
+
 u_char setVolume = 50;  
 int snooze = 1;
 int snoozeMathTime;
@@ -358,7 +363,7 @@ THREAD(Snoozethread, args)
     for(;;)
     {   
         // Store current time in 1 integer to calculate .
-        // Hours are x100, Minutes are x100 and Seconds are x1.
+        // Hours are x1000, Minutes are x100 and Seconds are x1.
         // Example: 01:02:03 will be 1203 and 21:00:31 will be 21031.
         int mathTime = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec);
         u_char key = KbGetKey();   
@@ -370,6 +375,7 @@ THREAD(Snoozethread, args)
             // Time that snoozebutton gets pressed.
             snoozeMathTime = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec); 
             snooze = 2;
+            // For Testing purposes
             LogMsg_P(LOG_INFO, PSTR("SNOOZE"));    
             //Set the volume higher for the next snooze.
             if(setVolume != 0)
@@ -378,10 +384,12 @@ THREAD(Snoozethread, args)
                 VsSetVolume(setVolume,setVolume);
             }      
         }  
+        // When the snooze button is pressed and the SnoozeDelay is done it will go back to playing the alarm.
         if(snooze == 2 && mathTime - snoozeMathTime > SnoozeDelay)
         {
             snooze = 1;
         }
+        // If snooze button didnt get pressed it will play the alarm.
         if(snooze == 1)
         {
             SoundA();
