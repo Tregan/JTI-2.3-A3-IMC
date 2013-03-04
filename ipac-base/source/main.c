@@ -53,8 +53,9 @@
 /* local variable definitions                                              */
 /*-------------------------------------------------------------------------*/
 //Enable or disable debugging messages and functionality (1 = on, 0 = off)
-const int DEBUG = 1;
+const int DEBUG = 0;
 
+int pauseCurrentTime;
 int timeZone;
 int timeZoneSet;
 int timeSetManually;
@@ -353,7 +354,7 @@ void setTimeZone(int* timeZone)
 {
     if((-12 <= *timeZone) && (*timeZone <= 14))
     {
-        printf("timezone = %d\n", *timeZone);
+        printf("\ntimezone = %d", *timeZone);
         _timezone = -*timeZone * 60 * 60;
     }
     else
@@ -377,19 +378,26 @@ void InitializeTimeZone(void)
     //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
     At45dbPageRead(0, &firstStartup, sizeof(int));
     
-    if(DEBUG)
+    //If debugging is enabled, erase the firstStartup page (pgn 0)
+    if(DEBUG == 1)
+    {
+        firstStartup = 1;
         LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+    }
 
-    //First startup, set the timezone!
-    if(!firstStartup || setTimezoneFromMenu)
+    //First startup or called from menu, set the timezone!
+    if(firstStartup || setTimezoneFromMenu)
     {
         if(DEBUG)
             LogMsg_P(LOG_INFO, PSTR("Waiting for timeZone input"));
 
         LcdBackLight(LCD_BACKLIGHT_ON);
         LcdWriteTitle("Set Timezone");
-        timeZone = 0;
         timeZoneSet = 0;
+        if(firstStartup)
+            timeZone = 0;
+        else
+            timeZone = -(_timezone /60) / 60;
         
         //Create the Keyboard Thread for setting the timeZone
         NutThreadCreate("KBThreadTimeZone", KBThreadTimeZone, NULL, 1024);
@@ -411,42 +419,40 @@ void InitializeTimeZone(void)
 
         LcdBackLight(LCD_BACKLIGHT_OFF);
         
-        if(!firstStartup)
+        if(firstStartup)
         {
-            //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
-            //Put the address of timeZone as a parameter, and the bytesize is the size of a float
-            At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
-            if(DEBUG)
-                LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
-
-            At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
-            if(DEBUG)
-                LogMsg_P(LOG_INFO, PSTR("Value of timeZone from SRAM: %d"), timeZone);
-
-            firstStartup = 1;
+            firstStartup = 0;
             At45dbPageWrite(0, &firstStartup, sizeof(int));
             if(DEBUG)
                 LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
         }
         
+        //Time changed, because timezone changed
         if(setTimezoneFromMenu)
         {
-            printf("\nTimezone set: %d", timeZone);
-            printf("\nTimezone from time.h: %ld", -(_timezone / 60) / 60);
             int test = timeZone - (-(_timezone / 60) / 60);
-            printf("\n _timezone - timezone = %d", test);
-            
             datetime.tm_hour += test;
+            
             //Write the gmt struct to RTC
             X12RtcSetClock(&datetime);
         }
         
-        //Clear the display
-        LcdClearAll();
-        
-        //Set timezone of time.h to our timezone
-        setTimeZone(&timeZone);
+        At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
     }
+    else if(!firstStartup)
+    {
+        //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
+        //Put the address of timeZone as a parameter, and the bytesize is the size of a float
+        At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
+    }
+    
+    //Clear the display
+    LcdClearAll();
+
+    //Set timezone of time.h to our timezone
+    setTimeZone(&timeZone);
 }
 
 /* ����������������������������������������������������������������������� */
@@ -480,6 +486,9 @@ void ShowCurrentTime(void)
 /* ����������������������������������������������������������������������� */
 void setTimeManually(void)
 {
+    //While setting the time, we do not want to see it updated, undoing our changes
+    pauseCurrentTime = 1;
+    
     //Get the current time from RTC and store it in gmt struct
     X12RtcGetClock(&datetime);
             
@@ -530,6 +539,8 @@ void setTimeManually(void)
     LcdBackLight(LCD_BACKLIGHT_OFF);
     //Write the gmt struct to RTC
     X12RtcSetClock(&datetime);
+    //Done, start updating the current time again
+    pauseCurrentTime = 0;
 }
 
 /* ����������������������������������������������������������������������� */
@@ -577,10 +588,6 @@ int main(void)
     /* Enable global interrupts */
     sei();
     
-    //If debugging is enabled, erase the firstStartup page (pgn 0)
-    if(DEBUG == 1)
-        At45dbPageErase(0);
-    
     //Initialize persistent data chip
     if (At45dbInit()==AT45DB041B)
     {      
@@ -608,6 +615,9 @@ int main(void)
     //Initialize Menu
     MenuInit();
     
+    //Do not pause the updating of the current time;
+    pauseCurrentTime = 0;
+    
     /*
      * Increase our priority so we can feed the watchdog.
      */
@@ -630,12 +640,13 @@ int main(void)
         count++;
         
         if(count >= 20)
-        {
             LcdBackLight(LCD_BACKLIGHT_OFF);
-        }
         
-        //Show the current time
-        ShowCurrentTime();
+        if(!pauseCurrentTime)
+        {
+            //Show the current time
+            ShowCurrentTime();
+        }
         
         WatchDogRestart();
     }
