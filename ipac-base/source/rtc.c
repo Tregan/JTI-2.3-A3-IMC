@@ -540,3 +540,127 @@ void setAlarmB(int month, int dayMonth, int hours, int minutes, int seconds)
     }
 }
 
+/*!
+ * \brief Clears AlarmA or AlarmB
+ * 
+ * \param ID     A or B - witch alarm must be cleared
+ * 
+ * \author Matthijs
+ */
+void ClearAlarm(char ID)
+{
+    if(ID == 'a')
+    {
+        X12RtcSetAlarm(0,NULL, 63);
+    }
+    
+    if(ID == 'b')
+    {
+        X12RtcSetAlarm(1,NULL, 63);
+    }
+}
+
+
+// waardes voor de alarmen, of ze zijn afgegaan of niet
+int AlarmAWent = 0;
+int AlarmBWent = 0;
+
+/*!
+ * \brief thread that checks the alarms every 10 seconds
+ * 
+ * \author Matthijs
+ */
+THREAD(AlarmThread, args)
+{
+    u_long flags;
+       
+    for(;;)
+    {
+        int succes = X12RtcGetStatus(&flags);
+        int i;
+        
+        for(i = 0; i <=10; i++)
+        {
+                NutSleep(1000);
+        }
+        
+        //power fail
+        if(flags == 0)
+        {
+            printf("\n ========== Power Fial ========== \n");
+            X12RtcClearStatus(0);
+        }
+
+        //alarm A
+        if(flags == 32)
+        {
+            printf("\n ========== Alarm 0 =========== \n");
+            if(AlarmAWent == 0)
+            {
+                //==============================================AlarmA==================================
+                AlarmAWent = 1;
+                SoundA();  
+                X12RtcClearStatus(32);
+            }
+        }
+
+        //alarm B
+        if(flags == 64)
+        {
+            printf("\n ============ Alarm 1================== \n");
+            if(AlarmBWent == 0)
+            {
+                //==============================================AlarmB==================================
+                AlarmBWent = 1;
+                SoundB();
+               X12RtcClearStatus(64);
+            }
+        }
+
+        //both alarms
+        if(flags == 96)
+        {
+            //kijkt of alarm a of b nog niet heeft geluid, en speelt die dan
+            printf("\n ========== Alarm 0 en 1  ========= \n");
+            
+            //kijkt welke van de 2 nog niet is afgegaan en speelt die dan nog af
+            if(AlarmAWent == 0)
+            {
+                //==============================================AlarmA==================================
+                AlarmAWent = 1;
+                SoundA();  
+                X12RtcClearStatus(32);
+            }
+            if(AlarmBWent == 0)
+            {
+                //==============================================AlarmB==================================
+                AlarmBWent = 1;
+                SoundB();
+                X12RtcClearStatus(64);
+            }
+            
+        }
+
+        if(succes == 0)
+        {
+            //succes
+        }
+        else
+        {
+            //error
+        }
+    }
+}
+
+/*!
+ * \brief start the alarm check thread
+ * 
+ * \author Matthijs
+ */
+void startAlarmThread(void)
+{
+    NutThreadSetPriority(1);
+    NutThreadCreate("AlarmThread1", AlarmThread, NULL, 1024);
+}
+
+

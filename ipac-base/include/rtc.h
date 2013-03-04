@@ -156,6 +156,8 @@ extern int X12EepromWrite(u_int addr, CONST void *buff, size_t len);
 
 extern void setAlarmA(int hours, int minutes, int seconds);
 extern void setAlarmB(int month, int dayMonth, int hours, int minutes, int seconds);
+extern void ClearAlarm(char ID);
+extern void startAlarmThread(void);
 
 /* End of prototypes */
 #endif
