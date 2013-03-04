@@ -54,10 +54,10 @@ char* menuitems[3] = {
     "Settings"
 };
 
-struct menuSubItem menusubitems[3][2] = {
+struct menuSubItem menusubitems[3][4] = {
     {{"Radio", &ShowSetting}, {"SD", &ShowSetting}},
     {{"Alarm 2", &ShowSetting}, {"Alarm 2", &ShowSetting}},
-    {{"Timezone", &InitializeTimeZone}, {"IP Adress", &ShowSetting}}
+    {{"Timezone", &InitializeTimeZone}, {"Time", &setTimeManually}, {"Date", &ShowSetting}, {"IP Adress", &ShowSetting}}
 };
 
 /*
