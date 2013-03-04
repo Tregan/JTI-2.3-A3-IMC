@@ -445,6 +445,7 @@ void LcdWriteShortTitle(char text[])
                 LcdChar(text[i]);
         }
     }
+    LcdChar(".");
 }
 
 void LcdWriteShortSecondLine(char text[])
@@ -469,6 +470,7 @@ void LcdWriteShortSecondLine(char text[])
                 LcdChar(text[i]);
         }
     }
+    LcdChar(".");
 }
 
 /* ---------- end of module ------------------------------------------------ */
