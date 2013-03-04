@@ -609,9 +609,8 @@ int main(void)
     
     NutThreadCreate("MainA", ThreadA, NULL, 1024);
     NutThreadCreate("MainB", ThreadB, NULL, 1024);
-
-    connectToStream();
-    playStream();
+    
+    setStream("81.173.3.132", 8082);
     
     int count = 0;
     for (;;)
