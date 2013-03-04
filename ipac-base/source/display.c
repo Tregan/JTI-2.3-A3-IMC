@@ -70,9 +70,9 @@ THREAD(TitleThread, args)
             count = 0;
         }
         
-        LcdWriteShortTitle("       ");
         if(strlen(title) < 7)
         {
+            LcdWriteShortTitle("       ");
             LcdWriteShortTitle(title);
         }
         else
@@ -118,9 +118,9 @@ THREAD(SecondLineThread, args)
             count = 0;
         }
         
-        LcdWriteShortSecondLine("                ");
         if(strlen(secondline) < 16)
         {
+            LcdWriteShortSecondLine("                ")
             LcdWriteShortSecondLine(secondline);
         }
         else
