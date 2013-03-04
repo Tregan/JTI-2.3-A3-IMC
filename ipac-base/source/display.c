@@ -61,7 +61,6 @@ THREAD(TitleThread, args)
     int i = 0;
     int count = 0;
     char shorterString[7];
-    int length;
         
     for(;;)
     {   
@@ -71,11 +70,11 @@ THREAD(TitleThread, args)
             count = 0;
         }
         
-        if(strlen(title) < 7)
+        if((strlen(title) < 7) && (strlen(title) > 0))
         {
             LcdWriteShortTitle(title);
         }
-        else
+        else if (strlen(title) >= 7)
         {
             if(count == 1)
             {
@@ -109,7 +108,6 @@ THREAD(SecondLineThread, args)
     int i = 0;
     int count = 0;
     char shorterString[16];
-    int length;
         
     for(;;)
     {        
@@ -119,11 +117,11 @@ THREAD(SecondLineThread, args)
             count = 0;
         }
         
-        if(strlen(secondline) < 16)
+        if((strlen(secondline)) < 16 && (strlen(secondline) > 0))
         {
             LcdWriteShortSecondLine(secondline);
         }
-        else
+        else if(strlen >= 16)
         {
             if(count == 1)
             {
