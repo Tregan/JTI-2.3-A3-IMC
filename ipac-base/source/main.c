@@ -38,11 +38,10 @@
 #include "watchdog.h"
 #include "flash.h"
 #include "spidrv.h"
-#include "network.h"
 
 #include <time.h>
 #include "rtc.h"
-#include "menu.h"
+#include "vs10xx.h"
 
 
 /*-------------------------------------------------------------------------*/
@@ -60,7 +59,7 @@ int timeZoneSet;
 int timeSetManually;
 int selectedTimeUnit;
 //Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
-tm datetime;
+tm gmt;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -245,22 +244,22 @@ THREAD(KBThreadManualTime, args)
                 switch(selectedTimeUnit)
                 {
                     case 0:
-                        if(datetime.tm_hour >= 23)
-                            datetime.tm_hour = 0;
+                        if(gmt.tm_hour >= 23)
+                            gmt.tm_hour = 0;
                         else
-                            datetime.tm_hour++;
+                            gmt.tm_hour++;
                         break;
                     case 1:
-                        if(datetime.tm_min >= 59)
-                            datetime.tm_min = 0;
+                        if(gmt.tm_min >= 59)
+                            gmt.tm_min = 0;
                         else
-                            datetime.tm_min++;
+                            gmt.tm_min++;
                         break;
                     case 2:
-                        if(datetime.tm_sec >= 59)
-                            datetime.tm_sec = 0;
+                        if(gmt.tm_sec >= 59)
+                            gmt.tm_sec = 0;
                         else
-                            datetime.tm_sec++;
+                            gmt.tm_sec++;
                         break;
                     default:
                         break;
@@ -271,22 +270,22 @@ THREAD(KBThreadManualTime, args)
                 switch(selectedTimeUnit)
                 {
                     case 0:
-                        if(datetime.tm_hour <= 0)
-                            datetime.tm_hour = 23;
+                        if(gmt.tm_hour <= 0)
+                            gmt.tm_hour = 23;
                         else
-                            datetime.tm_hour--;
+                            gmt.tm_hour--;
                         break;
                     case 1:
-                        if(datetime.tm_min <= 0)
-                            datetime.tm_min = 59;
+                        if(gmt.tm_min <= 0)
+                            gmt.tm_min = 59;
                         else
-                            datetime.tm_min--;
+                            gmt.tm_min--;
                         break;
                     case 2:
-                        if(datetime.tm_sec <= 0)
-                            datetime.tm_sec = 59;
+                        if(gmt.tm_sec <= 0)
+                            gmt.tm_sec = 59;
                         else
-                            datetime.tm_sec--;
+                            gmt.tm_sec--;
                         break;
                     default:
                         break;
@@ -341,6 +340,60 @@ THREAD(ThreadB, args)
         LedControl(LED_POWER_OFF);
     }
 }
+
+u_char setVolume = 50;  
+int snooze = 1;
+int snoozeMathTime;
+
+THREAD(Snoozethread, args)
+{
+    //The time when the snooze function gets called.
+    int mathTimeStart = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec); 
+    //Set the volume of the snooze.
+    VsSetVolume(setVolume,setVolume); 
+    // The time it takes before the second snooze starts again.
+    int SnoozeDelay = 200;
+    // The maximum time that the snooze function will go off.
+    int MaxSnoozeTime = 2000;
+    for(;;)
+    {   
+        // Store current time in 1 integer to calculate .
+        // Hours are x100, Minutes are x100 and Seconds are x1.
+        // Example: 01:02:03 will be 1203 and 21:00:31 will be 21031.
+        int mathTime = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec);
+        u_char key = KbGetKey();   
+        // For Testing purposes
+        LogMsg_P(LOG_INFO, PSTR("SnoozeTime %d"), mathTime - snoozeMathTime);
+        // If the snooze button (currently button 4) is pressed the alarm will turn offfor a certain time (SnoozeDelay) and the volume for the next period will be raised (setVolume).
+        if(key == KEY_04 && snooze == 1)
+        {
+            // Time that snoozebutton gets pressed.
+            snoozeMathTime = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec); 
+            snooze = 2;
+            LogMsg_P(LOG_INFO, PSTR("SNOOZE"));    
+            //Set the volume higher for the next snooze.
+            if(setVolume != 0)
+            {
+                setVolume -= 5;
+                VsSetVolume(setVolume,setVolume);
+            }      
+        }  
+        if(snooze == 2 && mathTime - snoozeMathTime > SnoozeDelay)
+        {
+            snooze = 1;
+        }
+        if(snooze == 1)
+        {
+            SoundA();
+        }
+        // If snooze takes longer than the value set at MaxSnoozeTime the snooze function will stop.
+        if((mathTime - mathTimeStart) > MaxSnoozeTime)
+        {
+            NutThreadExit();
+        }      
+    }
+}
+
 
 /* ����������������������������������������������������������������������� */
 /*!
@@ -420,15 +473,15 @@ void InitializeTimeZone(void)
 void ShowCurrentTime(void)
 {
     //Display time
-    if (X12RtcGetClock(&datetime) == 0)
+    if (X12RtcGetClock(&gmt) == 0)
     {
         if(DEBUG)
-            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), datetime.tm_hour, datetime.tm_min, datetime.tm_sec);
+            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
         
         //Create an output for the string
         char output[20];
         //Create string from the time ints
-        sprintf(output, "%02d:%02d:%02d", datetime.tm_hour, datetime.tm_min, datetime.tm_sec);
+        sprintf(output, "%02d:%02d:%02d", gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
         //Display the current time
         LcdTimeDisplay(output);
     }
@@ -443,7 +496,7 @@ void ShowCurrentTime(void)
 void setTimeManually(void)
 {
     //Get the current time from RTC and store it in gmt struct
-    X12RtcGetClock(&datetime);
+    X12RtcGetClock(&gmt);
             
     timeSetManually = 0;
     
@@ -471,15 +524,15 @@ void setTimeManually(void)
         switch(selectedTimeUnit)
         {
             case 0:
-                sprintf(output, "Set Hours: %02d", datetime.tm_hour);
+                sprintf(output, "Set Hours: %02d", gmt.tm_hour);
                 LcdWriteSecondLine(output);
                 break;
             case 1:
-                sprintf(output, "Set Minutes: %02d", datetime.tm_min);
+                sprintf(output, "Set Minutes: %02d", gmt.tm_min);
                 LcdWriteSecondLine(output);
                 break;
             case 2:
-                sprintf(output, "Set Seconds: %02d", datetime.tm_sec);
+                sprintf(output, "Set Seconds: %02d", gmt.tm_sec);
                 LcdWriteSecondLine(output);
                 break;
             default:
@@ -491,26 +544,7 @@ void setTimeManually(void)
     //Backlight no longer needed, turn off
     LcdBackLight(LCD_BACKLIGHT_OFF);
     //Write the gmt struct to RTC
-    X12RtcSetClock(&datetime);
-}
-
-/* ����������������������������������������������������������������������� */
-/*!
- * \brief Set _timezone of time.h
- * \author Niels & Bas
- */
-/* ����������������������������������������������������������������������� */
-void setTimeZone(int* timeZone)
-{
-    if((-12 <= *timeZone) && (*timeZone <= 14))
-    {
-        printf("timezone = %d\n", *timeZone);
-        _timezone = -*timeZone * 60 * 60;
-    }
-    else
-    {
-        _timezone = 0;
-    }
+    X12RtcSetClock(&gmt);
 }
 
 /* ����������������������������������������������������������������������� */
@@ -552,8 +586,7 @@ int main(void)
     LedInit();
     //Initialize LCD screen
     LcdLowLevelInit();
-    //Initialize Menu
-    MenuInit();
+    VsPlayerInit();
 
     SysControlMainBeat(ON);             // enable 4.4 msecs hartbeat interrupt
     
@@ -584,16 +617,20 @@ int main(void)
     }
     
     //Initialize RTC
-    X12Init();
+    X12Init(); 
+    //TODO Sync time on startup, using X12RtcSetClock(&gmt) and time from internet.
+    //Use time from internet to set values of gmt struct
+    //Temp, only for testing atm!
+    if (X12RtcGetClock(&gmt) == 0)
+    {
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("RTC time [%02d:%02d:%02d]"), gmt.tm_hour, gmt.tm_min, gmt.tm_sec);
+        
+        gmt.tm_hour = 12;
+        gmt.tm_min = 20;
+        X12RtcSetClock(&gmt);
+    }
     
-    //Initialize network
-    NetworkInit();
-    //Set timezone of time.h to our timezone
-    setTimeZone(&timeZone);
-    //Query NTP server and set time
-    NTP(&datetime);
-    
-    //TODO if there's no network, set time manually... WTB timeout in networkinit!
     //Temp, put inside menu when that's done :)
     setTimeManually();
     
@@ -602,8 +639,9 @@ int main(void)
      */
     NutThreadSetPriority(1);
     
-    NutThreadCreate("MainA", ThreadA, NULL, 1024);
-    NutThreadCreate("MainB", ThreadB, NULL, 1024);
+    //NutThreadCreate("MainA", ThreadA, NULL, 1024);
+    //NutThreadCreate("MainB", ThreadB, NULL, 1024);
+    NutThreadCreate("Snoozethread", Snoozethread, NULL, 1024);
 
     int count = 0;
     for (;;)

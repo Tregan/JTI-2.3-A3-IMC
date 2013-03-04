@@ -64,7 +64,7 @@ THREAD(TitleThread, args)
     int length;
         
     for(;;)
-    {   
+    {        
         if(titlebool == 1)
         {
             titlebool = 2;
@@ -79,7 +79,7 @@ THREAD(TitleThread, args)
         {
             if(count == 1)
             {
-                NutSleep(400);
+                NutSleep(1000);
             }
 
             memset(shorterString, 0, 7);
@@ -93,11 +93,11 @@ THREAD(TitleThread, args)
             
             if(title[count + 6] == '\0')
             {
-                //LogMsg_P(LOG_INFO, PSTR("End of title detected"));
+                LogMsg_P(LOG_INFO, PSTR("End of title detected"));
                 count = 0;
                 NutSleep(1000);
             }
-            NutSleep(650);
+            NutSleep(900);
         }
         NutSleep(100);
     }
@@ -127,7 +127,7 @@ THREAD(SecondLineThread, args)
         {
             if(count == 1)
             {
-                NutSleep(400);
+                NutSleep(2000);
             }
 
             memset(shorterString, 0, 16);
@@ -141,11 +141,11 @@ THREAD(SecondLineThread, args)
             
             if(secondline[count + 15] == '\0')
             {
-                //LogMsg_P(LOG_INFO, PSTR("End of second line detected"));
+                LogMsg_P(LOG_INFO, PSTR("End of second line detected"));
                 count = 0;
-                NutSleep(1000);
+                NutSleep(2000);
             }
-            NutSleep(650);
+            NutSleep(900);
         }
         NutSleep(100);
     }
@@ -371,7 +371,7 @@ void LcdWriteTitle(char text[])
  */
 /* ����������������������������������������������������������������������� */
 void LcdWriteSecondLine(char text[])
-{    
+{
     secondline = text;
     if(secondlinebool == 0)
     {

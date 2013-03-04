@@ -877,7 +877,7 @@ int VsBeep(u_char fsin, u_short ms)
 /*
  * SoundA is an quick repating sound
  */
-int SoundA()
+int SoundA(void)
 {
     VsBeep(100, 200);
     NutSleep(100);
@@ -889,12 +889,12 @@ int SoundA()
 /*
  * SoundB is an slow repeating sound on a high pitch
  */
-int SoundB()
-{   
-    VsBeep(80, 500);
-    NutSleep(500);
-    return 0;
-}
+//int SoundB(void)
+//{   
+//    VsBeep(80, 500);
+//    NutSleep(500);
+ //   return 0;
+//}
 
 /*!
  * \brief Sine wave beep start.

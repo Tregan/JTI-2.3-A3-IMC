@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 1
 
 
    1               		.file	"rtc.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
   55 004e 2297      		sbiw r28,2
   56 0050 0FB6      		in __tmp_reg__,__SREG__
   57 0052 F894      		cli
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 2
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 2
 
 
   58 0054 DEBF      		out __SP_H__,r29
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  112               	X12RtcReadRegs:
  113               	/* prologue: frame size=2 */
  114 00b0 AF92      		push r10
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 3
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 3
 
 
  115 00b2 BF92      		push r11
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  169 0118 FF90      		pop r15
  170 011a EF90      		pop r14
  171 011c DF90      		pop r13
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 4
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 4
 
 
  172 011e CF90      		pop r12
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  226 018c B383      		std Z+3,r27
  227               	.L14:
  228 018e 8091 0000 		lds r24,rtc_status
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 5
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 5
 
 
  229 0192 9091 0000 		lds r25,(rtc_status)+1
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  283               	X12RtcGetClock:
  284               	/* prologue: frame size=8 */
  285 01e4 EF92      		push r14
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 6
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 6
 
 
  286 01e6 FF92      		push r15
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  340 0252 3327      		clr r19
  341 0254 C901      		movw r24,r18
  342 0256 8F73      		andi r24,lo8(63)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 7
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 7
 
 
  343 0258 9070      		andi r25,hi8(63)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  397 02c4 9927      		clr r25
  398 02c6 8F70      		andi r24,lo8(15)
  399 02c8 9070      		andi r25,hi8(15)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 8
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 8
 
 
  400 02ca 8C59      		subi r24,lo8(-(100))
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  454 0324 EF92      		push r14
  455 0326 FF92      		push r15
  456 0328 0F93      		push r16
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 9
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 9
 
 
  457 032a 1F93      		push r17
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  511 0392 0E94 0000 		call TwMasterTransact
  512               	.L30:
  513               	/* epilogue: frame size=3 */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 10
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 10
 
 
  514 0396 2396      		adiw r28,3
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  568 03f4 B108      		sbc r11,__zero_reg__
  569 03f6 A114      		cp r10,__zero_reg__
  570 03f8 B104      		cpc r11,__zero_reg__
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 11
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 11
 
 
  571 03fa 01F4      		brne .L35
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  625 0454 6F92      		push r6
  626 0456 7F92      		push r7
  627 0458 8F92      		push r8
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 12
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 12
 
 
  628 045a 9F92      		push r9
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  682 04c6 8C01      		movw r16,r24
  683 04c8 892B      		or r24,r25
  684 04ca 01F4      		brne .L51
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 13
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 13
 
 
  685 04cc CC24      		clr r12
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  739 0538 BF90      		pop r11
  740 053a AF90      		pop r10
  741 053c 9F90      		pop r9
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 14
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 14
 
 
  742 053e 8F90      		pop r8
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  796 05a0 8C01      		movw r16,r24
  797               	.L60:
  798 05a2 80E0      		ldi r24,lo8(0)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 15
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 15
 
 
  799 05a4 90E0      		ldi r25,hi8(0)
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  853 05fe 6115      		cp r22,__zero_reg__
  854 0600 7105      		cpc r23,__zero_reg__
  855 0602 01F4      		brne .+2
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 16
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 16
 
 
  856 0604 00C0      		rjmp .L65
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  910 0678 280F      		add r18,r24
  911 067a 2068      		ori r18,lo8(-128)
  912 067c 2D83      		std Y+5,r18
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 17
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 17
 
 
  913               	.L71:
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  967 06ee 70E0      		ldi r23,hi8(10)
  968 06f0 0E94 0000 		call __divmodhi4
  969 06f4 280F      		add r18,r24
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 18
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 18
 
 
  970 06f6 2068      		ori r18,lo8(-128)
@@ -1049,447 +1049,586 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 1
  995               	/* epilogue end (size=13) */
  996               	/* function X12RtcSetAlarm size 176 (149) */
  997               		.size	X12RtcSetAlarm, .-X12RtcSetAlarm
- 998               	.global	X12RtcGetAlarm
- 999               		.type	X12RtcGetAlarm, @function
- 1000               	X12RtcGetAlarm:
- 1001               	/* prologue: frame size=8 */
- 1002 0726 EF92      		push r14
- 1003 0728 FF92      		push r15
- 1004 072a 0F93      		push r16
- 1005 072c 1F93      		push r17
- 1006 072e CF93      		push r28
- 1007 0730 DF93      		push r29
- 1008 0732 CDB7      		in r28,__SP_L__
- 1009 0734 DEB7      		in r29,__SP_H__
- 1010 0736 2897      		sbiw r28,8
- 1011 0738 0FB6      		in __tmp_reg__,__SREG__
- 1012 073a F894      		cli
- 1013 073c DEBF      		out __SP_H__,r29
- 1014 073e 0FBE      		out __SREG__,__tmp_reg__
- 1015 0740 CDBF      		out __SP_L__,r28
- 1016               	/* prologue end (size=14) */
- 1017 0742 7B01      		movw r14,r22
- 1018 0744 8A01      		movw r16,r20
- 1019 0746 FA01      		movw r30,r20
- 1020 0748 1182      		std Z+1,__zero_reg__
- 1021 074a 1082      		st Z,__zero_reg__
- 1022 074c 92E1      		ldi r25,lo8(18)
- 1023 074e FB01      		movw r30,r22
- 1024 0750 1192      		st Z+,__zero_reg__
- 1025 0752 9A95      	        dec r25
- 1026 0754 01F4      		brne .-6
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 19
+ 998               	.global	setAlarmB
+ 999               		.type	setAlarmB, @function
+ 1000               	setAlarmB:
+ 1001               	/* prologue: frame size=18 */
+ 1002 0726 0F93      		push r16
+ 1003 0728 1F93      		push r17
+ 1004 072a CF93      		push r28
+ 1005 072c DF93      		push r29
+ 1006 072e CDB7      		in r28,__SP_L__
+ 1007 0730 DEB7      		in r29,__SP_H__
+ 1008 0732 6297      		sbiw r28,18
+ 1009 0734 0FB6      		in __tmp_reg__,__SREG__
+ 1010 0736 F894      		cli
+ 1011 0738 DEBF      		out __SP_H__,r29
+ 1012 073a 0FBE      		out __SREG__,__tmp_reg__
+ 1013 073c CDBF      		out __SP_L__,r28
+ 1014               	/* prologue end (size=12) */
+ 1015 073e 1A83      		std Y+2,r17
+ 1016 0740 0983      		std Y+1,r16
+ 1017 0742 3C83      		std Y+4,r19
+ 1018 0744 2B83      		std Y+3,r18
+ 1019 0746 5E83      		std Y+6,r21
+ 1020 0748 4D83      		std Y+5,r20
+ 1021 074a 7887      		std Y+8,r23
+ 1022 074c 6F83      		std Y+7,r22
+ 1023 074e 9A87      		std Y+10,r25
+ 1024 0750 8987      		std Y+9,r24
+ 1025 0752 4FE1      		ldi r20,lo8(31)
+ 1026 0754 50E0      		ldi r21,hi8(31)
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 19
 
 
- 1027 0756 48E0      		ldi r20,lo8(8)
- 1028 0758 50E0      		ldi r21,hi8(8)
- 1029 075a BE01      		movw r22,r28
- 1030 075c 6F5F      		subi r22,lo8(-(1))
- 1031 075e 7F4F      		sbci r23,hi8(-(1))
- 1032 0760 880F      		lsl r24
- 1033 0762 880F      		lsl r24
- 1034 0764 880F      		lsl r24
- 1035 0766 0E94 0000 		call X12RtcReadRegs
- 1036 076a BC01      		movw r22,r24
- 1037 076c 892B      		or r24,r25
- 1038 076e 01F0      		breq .+2
- 1039 0770 00C0      		rjmp .L80
- 1040 0772 2981      		ldd r18,Y+1
- 1041 0774 27FF      		sbrs r18,7
- 1042 0776 00C0      		rjmp .L82
- 1043 0778 F801      		movw r30,r16
- 1044 077a 8081      		ld r24,Z
- 1045 077c 9181      		ldd r25,Z+1
- 1046 077e 8160      		ori r24,lo8(1)
- 1047 0780 9183      		std Z+1,r25
- 1048 0782 8083      		st Z,r24
- 1049 0784 3327      		clr r19
- 1050 0786 C901      		movw r24,r18
- 1051 0788 8F77      		andi r24,lo8(127)
- 1052 078a 9070      		andi r25,hi8(127)
- 1053 078c F4E0      		ldi r31,4
- 1054 078e 9595      	1:	asr r25
- 1055 0790 8795      		ror r24
- 1056 0792 FA95      		dec r31
- 1057 0794 01F4      		brne 1b
- 1058 0796 AC01      		movw r20,r24
- 1059 0798 E3E0      		ldi r30,3
- 1060 079a 440F      	1:	lsl r20
- 1061 079c 551F      		rol r21
- 1062 079e EA95      		dec r30
- 1063 07a0 01F4      		brne 1b
- 1064 07a2 880F      		lsl r24
- 1065 07a4 991F      		rol r25
- 1066 07a6 840F      		add r24,r20
- 1067 07a8 951F      		adc r25,r21
- 1068 07aa 2F70      		andi r18,lo8(15)
- 1069 07ac 3070      		andi r19,hi8(15)
- 1070 07ae 820F      		add r24,r18
- 1071 07b0 931F      		adc r25,r19
- 1072 07b2 F701      		movw r30,r14
- 1073 07b4 9183      		std Z+1,r25
- 1074 07b6 8083      		st Z,r24
- 1075               	.L82:
- 1076 07b8 3A81      		ldd r19,Y+2
- 1077 07ba 37FF      		sbrs r19,7
- 1078 07bc 00C0      		rjmp .L84
- 1079 07be F801      		movw r30,r16
- 1080 07c0 8081      		ld r24,Z
- 1081 07c2 9181      		ldd r25,Z+1
- 1082 07c4 8260      		ori r24,lo8(2)
- 1083 07c6 9183      		std Z+1,r25
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 20
+ 1027 0756 BE01      		movw r22,r28
+ 1028 0758 6F5F      		subi r22,lo8(-(1))
+ 1029 075a 7F4F      		sbci r23,hi8(-(1))
+ 1030 075c 81E0      		ldi r24,lo8(1)
+ 1031 075e 90E0      		ldi r25,hi8(1)
+ 1032 0760 0E94 0000 		call X12RtcSetAlarm
+ 1033               	/* epilogue: frame size=18 */
+ 1034 0764 6296      		adiw r28,18
+ 1035 0766 0FB6      		in __tmp_reg__,__SREG__
+ 1036 0768 F894      		cli
+ 1037 076a DEBF      		out __SP_H__,r29
+ 1038 076c 0FBE      		out __SREG__,__tmp_reg__
+ 1039 076e CDBF      		out __SP_L__,r28
+ 1040 0770 DF91      		pop r29
+ 1041 0772 CF91      		pop r28
+ 1042 0774 1F91      		pop r17
+ 1043 0776 0F91      		pop r16
+ 1044 0778 0895      		ret
+ 1045               	/* epilogue end (size=11) */
+ 1046               	/* function setAlarmB size 42 (19) */
+ 1047               		.size	setAlarmB, .-setAlarmB
+ 1048               	.global	setAlarmA
+ 1049               		.type	setAlarmA, @function
+ 1050               	setAlarmA:
+ 1051               	/* prologue: frame size=18 */
+ 1052 077a CF93      		push r28
+ 1053 077c DF93      		push r29
+ 1054 077e CDB7      		in r28,__SP_L__
+ 1055 0780 DEB7      		in r29,__SP_H__
+ 1056 0782 6297      		sbiw r28,18
+ 1057 0784 0FB6      		in __tmp_reg__,__SREG__
+ 1058 0786 F894      		cli
+ 1059 0788 DEBF      		out __SP_H__,r29
+ 1060 078a 0FBE      		out __SREG__,__tmp_reg__
+ 1061 078c CDBF      		out __SP_L__,r28
+ 1062               	/* prologue end (size=10) */
+ 1063 078e 9E83      		std Y+6,r25
+ 1064 0790 8D83      		std Y+5,r24
+ 1065 0792 7C83      		std Y+4,r23
+ 1066 0794 6B83      		std Y+3,r22
+ 1067 0796 5A83      		std Y+2,r21
+ 1068 0798 4983      		std Y+1,r20
+ 1069 079a 47E0      		ldi r20,lo8(7)
+ 1070 079c 50E0      		ldi r21,hi8(7)
+ 1071 079e BE01      		movw r22,r28
+ 1072 07a0 6F5F      		subi r22,lo8(-(1))
+ 1073 07a2 7F4F      		sbci r23,hi8(-(1))
+ 1074 07a4 80E0      		ldi r24,lo8(0)
+ 1075 07a6 90E0      		ldi r25,hi8(0)
+ 1076 07a8 0E94 0000 		call X12RtcSetAlarm
+ 1077               	/* epilogue: frame size=18 */
+ 1078 07ac 6296      		adiw r28,18
+ 1079 07ae 0FB6      		in __tmp_reg__,__SREG__
+ 1080 07b0 F894      		cli
+ 1081 07b2 DEBF      		out __SP_H__,r29
+ 1082 07b4 0FBE      		out __SREG__,__tmp_reg__
+ 1083 07b6 CDBF      		out __SP_L__,r28
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 20
 
 
- 1084 07c8 8083      		st Z,r24
- 1085 07ca 832F      		mov r24,r19
- 1086 07cc 8295      		swap r24
- 1087 07ce 8F70      		andi r24,0x0f
- 1088 07d0 2AE0      		ldi r18,lo8(10)
- 1089 07d2 829F      		mul r24,r18
- 1090 07d4 C001      		movw r24,r0
- 1091 07d6 1124      		clr r1
- 1092 07d8 3F70      		andi r19,lo8(15)
- 1093 07da 830F      		add r24,r19
- 1094 07dc 911D      		adc r25,__zero_reg__
- 1095 07de F701      		movw r30,r14
- 1096 07e0 9383      		std Z+3,r25
- 1097 07e2 8283      		std Z+2,r24
- 1098               	.L84:
- 1099 07e4 2B81      		ldd r18,Y+3
- 1100 07e6 27FF      		sbrs r18,7
- 1101 07e8 00C0      		rjmp .L86
- 1102 07ea F801      		movw r30,r16
- 1103 07ec 8081      		ld r24,Z
- 1104 07ee 9181      		ldd r25,Z+1
- 1105 07f0 8460      		ori r24,lo8(4)
- 1106 07f2 9183      		std Z+1,r25
- 1107 07f4 8083      		st Z,r24
- 1108 07f6 3327      		clr r19
- 1109 07f8 C901      		movw r24,r18
- 1110 07fa 8F77      		andi r24,lo8(127)
- 1111 07fc 9070      		andi r25,hi8(127)
- 1112 07fe A4E0      		ldi r26,4
- 1113 0800 9595      	1:	asr r25
- 1114 0802 8795      		ror r24
- 1115 0804 AA95      		dec r26
- 1116 0806 01F4      		brne 1b
- 1117 0808 AC01      		movw r20,r24
- 1118 080a F3E0      		ldi r31,3
- 1119 080c 440F      	1:	lsl r20
- 1120 080e 551F      		rol r21
- 1121 0810 FA95      		dec r31
- 1122 0812 01F4      		brne 1b
- 1123 0814 880F      		lsl r24
- 1124 0816 991F      		rol r25
- 1125 0818 840F      		add r24,r20
- 1126 081a 951F      		adc r25,r21
- 1127 081c 2F70      		andi r18,lo8(15)
- 1128 081e 3070      		andi r19,hi8(15)
- 1129 0820 820F      		add r24,r18
- 1130 0822 931F      		adc r25,r19
- 1131 0824 F701      		movw r30,r14
- 1132 0826 9583      		std Z+5,r25
- 1133 0828 8483      		std Z+4,r24
- 1134               	.L86:
- 1135 082a 3C81      		ldd r19,Y+4
- 1136 082c 37FF      		sbrs r19,7
- 1137 082e 00C0      		rjmp .L88
- 1138 0830 F801      		movw r30,r16
- 1139 0832 8081      		ld r24,Z
- 1140 0834 9181      		ldd r25,Z+1
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 21
+ 1084 07b8 DF91      		pop r29
+ 1085 07ba CF91      		pop r28
+ 1086 07bc 0895      		ret
+ 1087               	/* epilogue end (size=9) */
+ 1088               	/* function setAlarmA size 34 (15) */
+ 1089               		.size	setAlarmA, .-setAlarmA
+ 1090               	.global	X12RtcGetAlarm
+ 1091               		.type	X12RtcGetAlarm, @function
+ 1092               	X12RtcGetAlarm:
+ 1093               	/* prologue: frame size=8 */
+ 1094 07be EF92      		push r14
+ 1095 07c0 FF92      		push r15
+ 1096 07c2 0F93      		push r16
+ 1097 07c4 1F93      		push r17
+ 1098 07c6 CF93      		push r28
+ 1099 07c8 DF93      		push r29
+ 1100 07ca CDB7      		in r28,__SP_L__
+ 1101 07cc DEB7      		in r29,__SP_H__
+ 1102 07ce 2897      		sbiw r28,8
+ 1103 07d0 0FB6      		in __tmp_reg__,__SREG__
+ 1104 07d2 F894      		cli
+ 1105 07d4 DEBF      		out __SP_H__,r29
+ 1106 07d6 0FBE      		out __SREG__,__tmp_reg__
+ 1107 07d8 CDBF      		out __SP_L__,r28
+ 1108               	/* prologue end (size=14) */
+ 1109 07da 7B01      		movw r14,r22
+ 1110 07dc 8A01      		movw r16,r20
+ 1111 07de FA01      		movw r30,r20
+ 1112 07e0 1182      		std Z+1,__zero_reg__
+ 1113 07e2 1082      		st Z,__zero_reg__
+ 1114 07e4 92E1      		ldi r25,lo8(18)
+ 1115 07e6 FB01      		movw r30,r22
+ 1116 07e8 1192      		st Z+,__zero_reg__
+ 1117 07ea 9A95      	        dec r25
+ 1118 07ec 01F4      		brne .-6
+ 1119 07ee 48E0      		ldi r20,lo8(8)
+ 1120 07f0 50E0      		ldi r21,hi8(8)
+ 1121 07f2 BE01      		movw r22,r28
+ 1122 07f4 6F5F      		subi r22,lo8(-(1))
+ 1123 07f6 7F4F      		sbci r23,hi8(-(1))
+ 1124 07f8 880F      		lsl r24
+ 1125 07fa 880F      		lsl r24
+ 1126 07fc 880F      		lsl r24
+ 1127 07fe 0E94 0000 		call X12RtcReadRegs
+ 1128 0802 BC01      		movw r22,r24
+ 1129 0804 892B      		or r24,r25
+ 1130 0806 01F0      		breq .+2
+ 1131 0808 00C0      		rjmp .L84
+ 1132 080a 2981      		ldd r18,Y+1
+ 1133 080c 27FF      		sbrs r18,7
+ 1134 080e 00C0      		rjmp .L86
+ 1135 0810 F801      		movw r30,r16
+ 1136 0812 8081      		ld r24,Z
+ 1137 0814 9181      		ldd r25,Z+1
+ 1138 0816 8160      		ori r24,lo8(1)
+ 1139 0818 9183      		std Z+1,r25
+ 1140 081a 8083      		st Z,r24
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 21
 
 
- 1141 0836 8860      		ori r24,lo8(8)
- 1142 0838 9183      		std Z+1,r25
- 1143 083a 8083      		st Z,r24
- 1144 083c 832F      		mov r24,r19
- 1145 083e 8295      		swap r24
- 1146 0840 8F70      		andi r24,0x0f
- 1147 0842 2AE0      		ldi r18,lo8(10)
- 1148 0844 829F      		mul r24,r18
- 1149 0846 C001      		movw r24,r0
- 1150 0848 1124      		clr r1
- 1151 084a 3F70      		andi r19,lo8(15)
- 1152 084c 830F      		add r24,r19
- 1153 084e 911D      		adc r25,__zero_reg__
- 1154 0850 F701      		movw r30,r14
- 1155 0852 9783      		std Z+7,r25
- 1156 0854 8683      		std Z+6,r24
- 1157               	.L88:
- 1158 0856 3D81      		ldd r19,Y+5
- 1159 0858 37FF      		sbrs r19,7
- 1160 085a 00C0      		rjmp .L90
- 1161 085c F801      		movw r30,r16
- 1162 085e 8081      		ld r24,Z
- 1163 0860 9181      		ldd r25,Z+1
- 1164 0862 8061      		ori r24,lo8(16)
- 1165 0864 9183      		std Z+1,r25
- 1166 0866 8083      		st Z,r24
- 1167 0868 832F      		mov r24,r19
- 1168 086a 8295      		swap r24
- 1169 086c 8F70      		andi r24,0x0f
- 1170 086e 2AE0      		ldi r18,lo8(10)
- 1171 0870 829F      		mul r24,r18
- 1172 0872 C001      		movw r24,r0
- 1173 0874 1124      		clr r1
- 1174 0876 3F70      		andi r19,lo8(15)
- 1175 0878 830F      		add r24,r19
- 1176 087a 911D      		adc r25,__zero_reg__
- 1177 087c 0197      		sbiw r24,1
- 1178 087e F701      		movw r30,r14
- 1179 0880 9187      		std Z+9,r25
- 1180 0882 8087      		std Z+8,r24
- 1181               	.L90:
- 1182 0884 3F81      		ldd r19,Y+7
- 1183 0886 37FF      		sbrs r19,7
- 1184 0888 00C0      		rjmp .L80
- 1185 088a F801      		movw r30,r16
- 1186 088c 8081      		ld r24,Z
- 1187 088e 9181      		ldd r25,Z+1
- 1188 0890 8068      		ori r24,lo8(128)
- 1189 0892 9183      		std Z+1,r25
- 1190 0894 8083      		st Z,r24
- 1191 0896 832F      		mov r24,r19
- 1192 0898 8295      		swap r24
- 1193 089a 8F70      		andi r24,0x0f
- 1194 089c 2AE0      		ldi r18,lo8(10)
- 1195 089e 829F      		mul r24,r18
- 1196 08a0 C001      		movw r24,r0
- 1197 08a2 1124      		clr r1
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 22
+ 1141 081c 3327      		clr r19
+ 1142 081e C901      		movw r24,r18
+ 1143 0820 8F77      		andi r24,lo8(127)
+ 1144 0822 9070      		andi r25,hi8(127)
+ 1145 0824 F4E0      		ldi r31,4
+ 1146 0826 9595      	1:	asr r25
+ 1147 0828 8795      		ror r24
+ 1148 082a FA95      		dec r31
+ 1149 082c 01F4      		brne 1b
+ 1150 082e AC01      		movw r20,r24
+ 1151 0830 E3E0      		ldi r30,3
+ 1152 0832 440F      	1:	lsl r20
+ 1153 0834 551F      		rol r21
+ 1154 0836 EA95      		dec r30
+ 1155 0838 01F4      		brne 1b
+ 1156 083a 880F      		lsl r24
+ 1157 083c 991F      		rol r25
+ 1158 083e 840F      		add r24,r20
+ 1159 0840 951F      		adc r25,r21
+ 1160 0842 2F70      		andi r18,lo8(15)
+ 1161 0844 3070      		andi r19,hi8(15)
+ 1162 0846 820F      		add r24,r18
+ 1163 0848 931F      		adc r25,r19
+ 1164 084a F701      		movw r30,r14
+ 1165 084c 9183      		std Z+1,r25
+ 1166 084e 8083      		st Z,r24
+ 1167               	.L86:
+ 1168 0850 2A81      		ldd r18,Y+2
+ 1169 0852 27FF      		sbrs r18,7
+ 1170 0854 00C0      		rjmp .L88
+ 1171 0856 F801      		movw r30,r16
+ 1172 0858 8081      		ld r24,Z
+ 1173 085a 9181      		ldd r25,Z+1
+ 1174 085c 8260      		ori r24,lo8(2)
+ 1175 085e 9183      		std Z+1,r25
+ 1176 0860 8083      		st Z,r24
+ 1177 0862 3327      		clr r19
+ 1178 0864 C901      		movw r24,r18
+ 1179 0866 8F77      		andi r24,lo8(127)
+ 1180 0868 9070      		andi r25,hi8(127)
+ 1181 086a A4E0      		ldi r26,4
+ 1182 086c 9595      	1:	asr r25
+ 1183 086e 8795      		ror r24
+ 1184 0870 AA95      		dec r26
+ 1185 0872 01F4      		brne 1b
+ 1186 0874 AC01      		movw r20,r24
+ 1187 0876 F3E0      		ldi r31,3
+ 1188 0878 440F      	1:	lsl r20
+ 1189 087a 551F      		rol r21
+ 1190 087c FA95      		dec r31
+ 1191 087e 01F4      		brne 1b
+ 1192 0880 880F      		lsl r24
+ 1193 0882 991F      		rol r25
+ 1194 0884 840F      		add r24,r20
+ 1195 0886 951F      		adc r25,r21
+ 1196 0888 2F70      		andi r18,lo8(15)
+ 1197 088a 3070      		andi r19,hi8(15)
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 22
 
 
- 1198 08a4 3F70      		andi r19,lo8(15)
- 1199 08a6 830F      		add r24,r19
- 1200 08a8 911D      		adc r25,__zero_reg__
- 1201 08aa F701      		movw r30,r14
- 1202 08ac 9587      		std Z+13,r25
- 1203 08ae 8487      		std Z+12,r24
- 1204               	.L80:
- 1205 08b0 CB01      		movw r24,r22
- 1206               	/* epilogue: frame size=8 */
- 1207 08b2 2896      		adiw r28,8
- 1208 08b4 0FB6      		in __tmp_reg__,__SREG__
- 1209 08b6 F894      		cli
- 1210 08b8 DEBF      		out __SP_H__,r29
- 1211 08ba 0FBE      		out __SREG__,__tmp_reg__
- 1212 08bc CDBF      		out __SP_L__,r28
- 1213 08be DF91      		pop r29
- 1214 08c0 CF91      		pop r28
- 1215 08c2 1F91      		pop r17
- 1216 08c4 0F91      		pop r16
- 1217 08c6 FF90      		pop r15
- 1218 08c8 EF90      		pop r14
- 1219 08ca 0895      		ret
- 1220               	/* epilogue end (size=13) */
- 1221               	/* function X12RtcGetAlarm size 211 (184) */
- 1222               		.size	X12RtcGetAlarm, .-X12RtcGetAlarm
- 1223               	.global	X12RtcSetClock
- 1224               		.type	X12RtcSetClock, @function
- 1225               	X12RtcSetClock:
- 1226               	/* prologue: frame size=10 */
- 1227 08cc 0F93      		push r16
- 1228 08ce 1F93      		push r17
- 1229 08d0 CF93      		push r28
- 1230 08d2 DF93      		push r29
- 1231 08d4 CDB7      		in r28,__SP_L__
- 1232 08d6 DEB7      		in r29,__SP_H__
- 1233 08d8 2A97      		sbiw r28,10
- 1234 08da 0FB6      		in __tmp_reg__,__SREG__
- 1235 08dc F894      		cli
- 1236 08de DEBF      		out __SP_H__,r29
- 1237 08e0 0FBE      		out __SREG__,__tmp_reg__
- 1238 08e2 CDBF      		out __SP_L__,r28
- 1239               	/* prologue end (size=12) */
- 1240 08e4 8C01      		movw r16,r24
- 1241 08e6 8AE0      		ldi r24,lo8(10)
- 1242 08e8 FE01      		movw r30,r28
- 1243 08ea 3196      		adiw r30,1
- 1244 08ec 1192      		st Z+,__zero_reg__
- 1245 08ee 8A95      	        dec r24
- 1246 08f0 01F4      		brne .-6
- 1247 08f2 0115      		cp r16,__zero_reg__
- 1248 08f4 1105      		cpc r17,__zero_reg__
- 1249 08f6 01F4      		brne .+2
- 1250 08f8 00C0      		rjmp .L95
- 1251 08fa 80E3      		ldi r24,lo8(48)
- 1252 08fc 8A83      		std Y+2,r24
- 1253 08fe F801      		movw r30,r16
- 1254 0900 4081      		ld r20,Z
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 23
+ 1198 088c 820F      		add r24,r18
+ 1199 088e 931F      		adc r25,r19
+ 1200 0890 F701      		movw r30,r14
+ 1201 0892 9383      		std Z+3,r25
+ 1202 0894 8283      		std Z+2,r24
+ 1203               	.L88:
+ 1204 0896 2B81      		ldd r18,Y+3
+ 1205 0898 27FF      		sbrs r18,7
+ 1206 089a 00C0      		rjmp .L90
+ 1207 089c F801      		movw r30,r16
+ 1208 089e 8081      		ld r24,Z
+ 1209 08a0 9181      		ldd r25,Z+1
+ 1210 08a2 8460      		ori r24,lo8(4)
+ 1211 08a4 9183      		std Z+1,r25
+ 1212 08a6 8083      		st Z,r24
+ 1213 08a8 3327      		clr r19
+ 1214 08aa C901      		movw r24,r18
+ 1215 08ac 8F77      		andi r24,lo8(127)
+ 1216 08ae 9070      		andi r25,hi8(127)
+ 1217 08b0 44E0      		ldi r20,4
+ 1218 08b2 9595      	1:	asr r25
+ 1219 08b4 8795      		ror r24
+ 1220 08b6 4A95      		dec r20
+ 1221 08b8 01F4      		brne 1b
+ 1222 08ba AC01      		movw r20,r24
+ 1223 08bc B3E0      		ldi r27,3
+ 1224 08be 440F      	1:	lsl r20
+ 1225 08c0 551F      		rol r21
+ 1226 08c2 BA95      		dec r27
+ 1227 08c4 01F4      		brne 1b
+ 1228 08c6 880F      		lsl r24
+ 1229 08c8 991F      		rol r25
+ 1230 08ca 840F      		add r24,r20
+ 1231 08cc 951F      		adc r25,r21
+ 1232 08ce 2F70      		andi r18,lo8(15)
+ 1233 08d0 3070      		andi r19,hi8(15)
+ 1234 08d2 820F      		add r24,r18
+ 1235 08d4 931F      		adc r25,r19
+ 1236 08d6 F701      		movw r30,r14
+ 1237 08d8 9583      		std Z+5,r25
+ 1238 08da 8483      		std Z+4,r24
+ 1239               	.L90:
+ 1240 08dc 2C81      		ldd r18,Y+4
+ 1241 08de 27FF      		sbrs r18,7
+ 1242 08e0 00C0      		rjmp .L92
+ 1243 08e2 F801      		movw r30,r16
+ 1244 08e4 8081      		ld r24,Z
+ 1245 08e6 9181      		ldd r25,Z+1
+ 1246 08e8 8860      		ori r24,lo8(8)
+ 1247 08ea 9183      		std Z+1,r25
+ 1248 08ec 8083      		st Z,r24
+ 1249 08ee 3327      		clr r19
+ 1250 08f0 C901      		movw r24,r18
+ 1251 08f2 8F77      		andi r24,lo8(127)
+ 1252 08f4 9070      		andi r25,hi8(127)
+ 1253 08f6 F4E0      		ldi r31,4
+ 1254 08f8 9595      	1:	asr r25
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 23
 
 
- 1255 0902 5181      		ldd r21,Z+1
- 1256 0904 842F      		mov r24,r20
- 1257 0906 6AE0      		ldi r22,lo8(10)
- 1258 0908 0E94 0000 		call __udivmodqi4
- 1259 090c 282F      		mov r18,r24
- 1260 090e 2295      		swap r18
- 1261 0910 207F      		andi r18,0xf0
- 1262 0912 CA01      		movw r24,r20
- 1263 0914 6AE0      		ldi r22,lo8(10)
- 1264 0916 70E0      		ldi r23,hi8(10)
- 1265 0918 0E94 0000 		call __divmodhi4
- 1266 091c 280F      		add r18,r24
- 1267 091e 2B83      		std Y+3,r18
- 1268 0920 4281      		ldd r20,Z+2
- 1269 0922 5381      		ldd r21,Z+3
- 1270 0924 842F      		mov r24,r20
- 1271 0926 6AE0      		ldi r22,lo8(10)
- 1272 0928 0E94 0000 		call __udivmodqi4
- 1273 092c 282F      		mov r18,r24
- 1274 092e 2295      		swap r18
- 1275 0930 207F      		andi r18,0xf0
- 1276 0932 CA01      		movw r24,r20
- 1277 0934 6AE0      		ldi r22,lo8(10)
- 1278 0936 70E0      		ldi r23,hi8(10)
- 1279 0938 0E94 0000 		call __divmodhi4
- 1280 093c 280F      		add r18,r24
- 1281 093e 2C83      		std Y+4,r18
- 1282 0940 4481      		ldd r20,Z+4
- 1283 0942 5581      		ldd r21,Z+5
- 1284 0944 842F      		mov r24,r20
- 1285 0946 6AE0      		ldi r22,lo8(10)
- 1286 0948 0E94 0000 		call __udivmodqi4
- 1287 094c 282F      		mov r18,r24
- 1288 094e 2295      		swap r18
- 1289 0950 207F      		andi r18,0xf0
- 1290 0952 CA01      		movw r24,r20
- 1291 0954 6AE0      		ldi r22,lo8(10)
- 1292 0956 70E0      		ldi r23,hi8(10)
- 1293 0958 0E94 0000 		call __divmodhi4
- 1294 095c 280F      		add r18,r24
- 1295 095e 2068      		ori r18,lo8(-128)
- 1296 0960 2D83      		std Y+5,r18
- 1297 0962 4681      		ldd r20,Z+6
- 1298 0964 5781      		ldd r21,Z+7
- 1299 0966 842F      		mov r24,r20
- 1300 0968 6AE0      		ldi r22,lo8(10)
- 1301 096a 0E94 0000 		call __udivmodqi4
- 1302 096e 282F      		mov r18,r24
- 1303 0970 2295      		swap r18
- 1304 0972 207F      		andi r18,0xf0
- 1305 0974 CA01      		movw r24,r20
- 1306 0976 6AE0      		ldi r22,lo8(10)
- 1307 0978 70E0      		ldi r23,hi8(10)
- 1308 097a 0E94 0000 		call __divmodhi4
- 1309 097e 280F      		add r18,r24
- 1310 0980 2E83      		std Y+6,r18
- 1311 0982 4085      		ldd r20,Z+8
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 24
+ 1255 08fa 8795      		ror r24
+ 1256 08fc FA95      		dec r31
+ 1257 08fe 01F4      		brne 1b
+ 1258 0900 AC01      		movw r20,r24
+ 1259 0902 E3E0      		ldi r30,3
+ 1260 0904 440F      	1:	lsl r20
+ 1261 0906 551F      		rol r21
+ 1262 0908 EA95      		dec r30
+ 1263 090a 01F4      		brne 1b
+ 1264 090c 880F      		lsl r24
+ 1265 090e 991F      		rol r25
+ 1266 0910 840F      		add r24,r20
+ 1267 0912 951F      		adc r25,r21
+ 1268 0914 2F70      		andi r18,lo8(15)
+ 1269 0916 3070      		andi r19,hi8(15)
+ 1270 0918 820F      		add r24,r18
+ 1271 091a 931F      		adc r25,r19
+ 1272 091c F701      		movw r30,r14
+ 1273 091e 9783      		std Z+7,r25
+ 1274 0920 8683      		std Z+6,r24
+ 1275               	.L92:
+ 1276 0922 2D81      		ldd r18,Y+5
+ 1277 0924 27FF      		sbrs r18,7
+ 1278 0926 00C0      		rjmp .L94
+ 1279 0928 F801      		movw r30,r16
+ 1280 092a 8081      		ld r24,Z
+ 1281 092c 9181      		ldd r25,Z+1
+ 1282 092e 8061      		ori r24,lo8(16)
+ 1283 0930 9183      		std Z+1,r25
+ 1284 0932 8083      		st Z,r24
+ 1285 0934 3327      		clr r19
+ 1286 0936 C901      		movw r24,r18
+ 1287 0938 8F77      		andi r24,lo8(127)
+ 1288 093a 9070      		andi r25,hi8(127)
+ 1289 093c A4E0      		ldi r26,4
+ 1290 093e 9595      	1:	asr r25
+ 1291 0940 8795      		ror r24
+ 1292 0942 AA95      		dec r26
+ 1293 0944 01F4      		brne 1b
+ 1294 0946 AC01      		movw r20,r24
+ 1295 0948 F3E0      		ldi r31,3
+ 1296 094a 440F      	1:	lsl r20
+ 1297 094c 551F      		rol r21
+ 1298 094e FA95      		dec r31
+ 1299 0950 01F4      		brne 1b
+ 1300 0952 880F      		lsl r24
+ 1301 0954 991F      		rol r25
+ 1302 0956 840F      		add r24,r20
+ 1303 0958 951F      		adc r25,r21
+ 1304 095a 2F70      		andi r18,lo8(15)
+ 1305 095c 3070      		andi r19,hi8(15)
+ 1306 095e 820F      		add r24,r18
+ 1307 0960 931F      		adc r25,r19
+ 1308 0962 0197      		sbiw r24,1
+ 1309 0964 F701      		movw r30,r14
+ 1310 0966 9187      		std Z+9,r25
+ 1311 0968 8087      		std Z+8,r24
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 24
 
 
- 1312 0984 5185      		ldd r21,Z+9
- 1313 0986 842F      		mov r24,r20
- 1314 0988 8F5F      		subi r24,lo8(-(1))
- 1315 098a 6AE0      		ldi r22,lo8(10)
- 1316 098c 0E94 0000 		call __udivmodqi4
- 1317 0990 282F      		mov r18,r24
- 1318 0992 2295      		swap r18
- 1319 0994 207F      		andi r18,0xf0
- 1320 0996 CA01      		movw r24,r20
- 1321 0998 0196      		adiw r24,1
- 1322 099a 6AE0      		ldi r22,lo8(10)
- 1323 099c 70E0      		ldi r23,hi8(10)
- 1324 099e 0E94 0000 		call __divmodhi4
- 1325 09a2 280F      		add r18,r24
- 1326 09a4 2F83      		std Y+7,r18
- 1327 09a6 4285      		ldd r20,Z+10
- 1328 09a8 5385      		ldd r21,Z+11
- 1329 09aa 4436      		cpi r20,100
- 1330 09ac 5105      		cpc r21,__zero_reg__
- 1331 09ae 04F0      		brlt .L97
- 1332 09b0 842F      		mov r24,r20
- 1333 09b2 8456      		subi r24,lo8(-(-100))
- 1334 09b4 6AE0      		ldi r22,lo8(10)
- 1335 09b6 0E94 0000 		call __udivmodqi4
- 1336 09ba 282F      		mov r18,r24
- 1337 09bc 2295      		swap r18
- 1338 09be 207F      		andi r18,0xf0
- 1339 09c0 CA01      		movw r24,r20
- 1340 09c2 8456      		subi r24,lo8(-(-100))
- 1341 09c4 9040      		sbci r25,hi8(-(-100))
- 1342 09c6 6AE0      		ldi r22,lo8(10)
- 1343 09c8 70E0      		ldi r23,hi8(10)
- 1344 09ca 0E94 0000 		call __divmodhi4
- 1345 09ce 280F      		add r18,r24
- 1346 09d0 2887      		std Y+8,r18
- 1347 09d2 80E2      		ldi r24,lo8(32)
- 1348 09d4 00C0      		rjmp .L101
- 1349               	.L97:
- 1350 09d6 842F      		mov r24,r20
- 1351 09d8 6AE0      		ldi r22,lo8(10)
- 1352 09da 0E94 0000 		call __udivmodqi4
- 1353 09de 282F      		mov r18,r24
- 1354 09e0 2295      		swap r18
- 1355 09e2 207F      		andi r18,0xf0
- 1356 09e4 CA01      		movw r24,r20
- 1357 09e6 6AE0      		ldi r22,lo8(10)
- 1358 09e8 70E0      		ldi r23,hi8(10)
- 1359 09ea 0E94 0000 		call __divmodhi4
- 1360 09ee 280F      		add r18,r24
- 1361 09f0 2887      		std Y+8,r18
- 1362 09f2 89E1      		ldi r24,lo8(25)
- 1363               	.L101:
- 1364 09f4 8A87      		std Y+10,r24
- 1365 09f6 F801      		movw r30,r16
- 1366 09f8 8485      		ldd r24,Z+12
- 1367 09fa 8987      		std Y+9,r24
- 1368               	.L95:
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 25
+ 1312               	.L94:
+ 1313 096a 3F81      		ldd r19,Y+7
+ 1314 096c 37FF      		sbrs r19,7
+ 1315 096e 00C0      		rjmp .L84
+ 1316 0970 F801      		movw r30,r16
+ 1317 0972 8081      		ld r24,Z
+ 1318 0974 9181      		ldd r25,Z+1
+ 1319 0976 8068      		ori r24,lo8(128)
+ 1320 0978 9183      		std Z+1,r25
+ 1321 097a 8083      		st Z,r24
+ 1322 097c 832F      		mov r24,r19
+ 1323 097e 8295      		swap r24
+ 1324 0980 8F70      		andi r24,0x0f
+ 1325 0982 2AE0      		ldi r18,lo8(10)
+ 1326 0984 829F      		mul r24,r18
+ 1327 0986 C001      		movw r24,r0
+ 1328 0988 1124      		clr r1
+ 1329 098a 3F70      		andi r19,lo8(15)
+ 1330 098c 830F      		add r24,r19
+ 1331 098e 911D      		adc r25,__zero_reg__
+ 1332 0990 F701      		movw r30,r14
+ 1333 0992 9587      		std Z+13,r25
+ 1334 0994 8487      		std Z+12,r24
+ 1335               	.L84:
+ 1336 0996 CB01      		movw r24,r22
+ 1337               	/* epilogue: frame size=8 */
+ 1338 0998 2896      		adiw r28,8
+ 1339 099a 0FB6      		in __tmp_reg__,__SREG__
+ 1340 099c F894      		cli
+ 1341 099e DEBF      		out __SP_H__,r29
+ 1342 09a0 0FBE      		out __SREG__,__tmp_reg__
+ 1343 09a2 CDBF      		out __SP_L__,r28
+ 1344 09a4 DF91      		pop r29
+ 1345 09a6 CF91      		pop r28
+ 1346 09a8 1F91      		pop r17
+ 1347 09aa 0F91      		pop r16
+ 1348 09ac FF90      		pop r15
+ 1349 09ae EF90      		pop r14
+ 1350 09b0 0895      		ret
+ 1351               	/* epilogue end (size=13) */
+ 1352               	/* function X12RtcGetAlarm size 250 (223) */
+ 1353               		.size	X12RtcGetAlarm, .-X12RtcGetAlarm
+ 1354               	.global	X12RtcSetClock
+ 1355               		.type	X12RtcSetClock, @function
+ 1356               	X12RtcSetClock:
+ 1357               	/* prologue: frame size=10 */
+ 1358 09b2 0F93      		push r16
+ 1359 09b4 1F93      		push r17
+ 1360 09b6 CF93      		push r28
+ 1361 09b8 DF93      		push r29
+ 1362 09ba CDB7      		in r28,__SP_L__
+ 1363 09bc DEB7      		in r29,__SP_H__
+ 1364 09be 2A97      		sbiw r28,10
+ 1365 09c0 0FB6      		in __tmp_reg__,__SREG__
+ 1366 09c2 F894      		cli
+ 1367 09c4 DEBF      		out __SP_H__,r29
+ 1368 09c6 0FBE      		out __SREG__,__tmp_reg__
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 25
 
 
- 1369 09fc 4AE0      		ldi r20,lo8(10)
- 1370 09fe 50E0      		ldi r21,hi8(10)
- 1371 0a00 BE01      		movw r22,r28
- 1372 0a02 6F5F      		subi r22,lo8(-(1))
- 1373 0a04 7F4F      		sbci r23,hi8(-(1))
- 1374 0a06 80E0      		ldi r24,lo8(0)
- 1375 0a08 90E0      		ldi r25,hi8(0)
- 1376 0a0a 0E94 0000 		call X12RtcWrite
- 1377               	/* epilogue: frame size=10 */
- 1378 0a0e 2A96      		adiw r28,10
- 1379 0a10 0FB6      		in __tmp_reg__,__SREG__
- 1380 0a12 F894      		cli
- 1381 0a14 DEBF      		out __SP_H__,r29
- 1382 0a16 0FBE      		out __SREG__,__tmp_reg__
- 1383 0a18 CDBF      		out __SP_L__,r28
- 1384 0a1a DF91      		pop r29
- 1385 0a1c CF91      		pop r28
- 1386 0a1e 1F91      		pop r17
- 1387 0a20 0F91      		pop r16
- 1388 0a22 0895      		ret
- 1389               	/* epilogue end (size=11) */
- 1390               	/* function X12RtcSetClock size 172 (149) */
- 1391               		.size	X12RtcSetClock, .-X12RtcSetClock
- 1392               		.lcomm rtc_status,4
- 1393               	/* File "source/rtc.c": code 1300 = 0x0514 ( 951), prologues 178, epilogues 171 */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s 			page 26
+ 1369 09c8 CDBF      		out __SP_L__,r28
+ 1370               	/* prologue end (size=12) */
+ 1371 09ca 8C01      		movw r16,r24
+ 1372 09cc 8AE0      		ldi r24,lo8(10)
+ 1373 09ce FE01      		movw r30,r28
+ 1374 09d0 3196      		adiw r30,1
+ 1375 09d2 1192      		st Z+,__zero_reg__
+ 1376 09d4 8A95      	        dec r24
+ 1377 09d6 01F4      		brne .-6
+ 1378 09d8 0115      		cp r16,__zero_reg__
+ 1379 09da 1105      		cpc r17,__zero_reg__
+ 1380 09dc 01F4      		brne .+2
+ 1381 09de 00C0      		rjmp .L99
+ 1382 09e0 80E3      		ldi r24,lo8(48)
+ 1383 09e2 8A83      		std Y+2,r24
+ 1384 09e4 F801      		movw r30,r16
+ 1385 09e6 4081      		ld r20,Z
+ 1386 09e8 5181      		ldd r21,Z+1
+ 1387 09ea 842F      		mov r24,r20
+ 1388 09ec 6AE0      		ldi r22,lo8(10)
+ 1389 09ee 0E94 0000 		call __udivmodqi4
+ 1390 09f2 282F      		mov r18,r24
+ 1391 09f4 2295      		swap r18
+ 1392 09f6 207F      		andi r18,0xf0
+ 1393 09f8 CA01      		movw r24,r20
+ 1394 09fa 6AE0      		ldi r22,lo8(10)
+ 1395 09fc 70E0      		ldi r23,hi8(10)
+ 1396 09fe 0E94 0000 		call __divmodhi4
+ 1397 0a02 280F      		add r18,r24
+ 1398 0a04 2B83      		std Y+3,r18
+ 1399 0a06 4281      		ldd r20,Z+2
+ 1400 0a08 5381      		ldd r21,Z+3
+ 1401 0a0a 842F      		mov r24,r20
+ 1402 0a0c 6AE0      		ldi r22,lo8(10)
+ 1403 0a0e 0E94 0000 		call __udivmodqi4
+ 1404 0a12 282F      		mov r18,r24
+ 1405 0a14 2295      		swap r18
+ 1406 0a16 207F      		andi r18,0xf0
+ 1407 0a18 CA01      		movw r24,r20
+ 1408 0a1a 6AE0      		ldi r22,lo8(10)
+ 1409 0a1c 70E0      		ldi r23,hi8(10)
+ 1410 0a1e 0E94 0000 		call __divmodhi4
+ 1411 0a22 280F      		add r18,r24
+ 1412 0a24 2C83      		std Y+4,r18
+ 1413 0a26 4481      		ldd r20,Z+4
+ 1414 0a28 5581      		ldd r21,Z+5
+ 1415 0a2a 842F      		mov r24,r20
+ 1416 0a2c 6AE0      		ldi r22,lo8(10)
+ 1417 0a2e 0E94 0000 		call __udivmodqi4
+ 1418 0a32 282F      		mov r18,r24
+ 1419 0a34 2295      		swap r18
+ 1420 0a36 207F      		andi r18,0xf0
+ 1421 0a38 CA01      		movw r24,r20
+ 1422 0a3a 6AE0      		ldi r22,lo8(10)
+ 1423 0a3c 70E0      		ldi r23,hi8(10)
+ 1424 0a3e 0E94 0000 		call __divmodhi4
+ 1425 0a42 280F      		add r18,r24
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 26
+
+
+ 1426 0a44 2068      		ori r18,lo8(-128)
+ 1427 0a46 2D83      		std Y+5,r18
+ 1428 0a48 4681      		ldd r20,Z+6
+ 1429 0a4a 5781      		ldd r21,Z+7
+ 1430 0a4c 842F      		mov r24,r20
+ 1431 0a4e 6AE0      		ldi r22,lo8(10)
+ 1432 0a50 0E94 0000 		call __udivmodqi4
+ 1433 0a54 282F      		mov r18,r24
+ 1434 0a56 2295      		swap r18
+ 1435 0a58 207F      		andi r18,0xf0
+ 1436 0a5a CA01      		movw r24,r20
+ 1437 0a5c 6AE0      		ldi r22,lo8(10)
+ 1438 0a5e 70E0      		ldi r23,hi8(10)
+ 1439 0a60 0E94 0000 		call __divmodhi4
+ 1440 0a64 280F      		add r18,r24
+ 1441 0a66 2E83      		std Y+6,r18
+ 1442 0a68 4085      		ldd r20,Z+8
+ 1443 0a6a 5185      		ldd r21,Z+9
+ 1444 0a6c 842F      		mov r24,r20
+ 1445 0a6e 8F5F      		subi r24,lo8(-(1))
+ 1446 0a70 6AE0      		ldi r22,lo8(10)
+ 1447 0a72 0E94 0000 		call __udivmodqi4
+ 1448 0a76 282F      		mov r18,r24
+ 1449 0a78 2295      		swap r18
+ 1450 0a7a 207F      		andi r18,0xf0
+ 1451 0a7c CA01      		movw r24,r20
+ 1452 0a7e 0196      		adiw r24,1
+ 1453 0a80 6AE0      		ldi r22,lo8(10)
+ 1454 0a82 70E0      		ldi r23,hi8(10)
+ 1455 0a84 0E94 0000 		call __divmodhi4
+ 1456 0a88 280F      		add r18,r24
+ 1457 0a8a 2F83      		std Y+7,r18
+ 1458 0a8c 4285      		ldd r20,Z+10
+ 1459 0a8e 5385      		ldd r21,Z+11
+ 1460 0a90 4436      		cpi r20,100
+ 1461 0a92 5105      		cpc r21,__zero_reg__
+ 1462 0a94 04F0      		brlt .L101
+ 1463 0a96 842F      		mov r24,r20
+ 1464 0a98 8456      		subi r24,lo8(-(-100))
+ 1465 0a9a 6AE0      		ldi r22,lo8(10)
+ 1466 0a9c 0E94 0000 		call __udivmodqi4
+ 1467 0aa0 282F      		mov r18,r24
+ 1468 0aa2 2295      		swap r18
+ 1469 0aa4 207F      		andi r18,0xf0
+ 1470 0aa6 CA01      		movw r24,r20
+ 1471 0aa8 8456      		subi r24,lo8(-(-100))
+ 1472 0aaa 9040      		sbci r25,hi8(-(-100))
+ 1473 0aac 6AE0      		ldi r22,lo8(10)
+ 1474 0aae 70E0      		ldi r23,hi8(10)
+ 1475 0ab0 0E94 0000 		call __divmodhi4
+ 1476 0ab4 280F      		add r18,r24
+ 1477 0ab6 2887      		std Y+8,r18
+ 1478 0ab8 80E2      		ldi r24,lo8(32)
+ 1479 0aba 00C0      		rjmp .L105
+ 1480               	.L101:
+ 1481 0abc 842F      		mov r24,r20
+ 1482 0abe 6AE0      		ldi r22,lo8(10)
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 27
+
+
+ 1483 0ac0 0E94 0000 		call __udivmodqi4
+ 1484 0ac4 282F      		mov r18,r24
+ 1485 0ac6 2295      		swap r18
+ 1486 0ac8 207F      		andi r18,0xf0
+ 1487 0aca CA01      		movw r24,r20
+ 1488 0acc 6AE0      		ldi r22,lo8(10)
+ 1489 0ace 70E0      		ldi r23,hi8(10)
+ 1490 0ad0 0E94 0000 		call __divmodhi4
+ 1491 0ad4 280F      		add r18,r24
+ 1492 0ad6 2887      		std Y+8,r18
+ 1493 0ad8 89E1      		ldi r24,lo8(25)
+ 1494               	.L105:
+ 1495 0ada 8A87      		std Y+10,r24
+ 1496 0adc F801      		movw r30,r16
+ 1497 0ade 8485      		ldd r24,Z+12
+ 1498 0ae0 8987      		std Y+9,r24
+ 1499               	.L99:
+ 1500 0ae2 4AE0      		ldi r20,lo8(10)
+ 1501 0ae4 50E0      		ldi r21,hi8(10)
+ 1502 0ae6 BE01      		movw r22,r28
+ 1503 0ae8 6F5F      		subi r22,lo8(-(1))
+ 1504 0aea 7F4F      		sbci r23,hi8(-(1))
+ 1505 0aec 80E0      		ldi r24,lo8(0)
+ 1506 0aee 90E0      		ldi r25,hi8(0)
+ 1507 0af0 0E94 0000 		call X12RtcWrite
+ 1508               	/* epilogue: frame size=10 */
+ 1509 0af4 2A96      		adiw r28,10
+ 1510 0af6 0FB6      		in __tmp_reg__,__SREG__
+ 1511 0af8 F894      		cli
+ 1512 0afa DEBF      		out __SP_H__,r29
+ 1513 0afc 0FBE      		out __SREG__,__tmp_reg__
+ 1514 0afe CDBF      		out __SP_L__,r28
+ 1515 0b00 DF91      		pop r29
+ 1516 0b02 CF91      		pop r28
+ 1517 0b04 1F91      		pop r17
+ 1518 0b06 0F91      		pop r16
+ 1519 0b08 0895      		ret
+ 1520               	/* epilogue end (size=11) */
+ 1521               	/* function X12RtcSetClock size 172 (149) */
+ 1522               		.size	X12RtcSetClock, .-X12RtcSetClock
+ 1523               		.lcomm rtc_status,4
+ 1524               	/* File "source/rtc.c": code 1415 = 0x0587 (1024), prologues 200, epilogues 191 */
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 rtc.c
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:3      *ABS*:0000003f __SREG__
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:13     .text:00000000 X12RtcClearStatus
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:3      *ABS*:0000003f __SREG__
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:13     .text:00000000 X12RtcClearStatus
                              .bss:00000000 rtc_status
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:41     .text:00000036 X12EepromRead
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:112    .text:000000b0 X12RtcReadRegs
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:181    .text:00000126 X12RtcGetStatus
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:247    .text:000001ac X12Init
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:283    .text:000001e4 X12RtcGetClock
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:448    .text:0000031c X12WriteEnable
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:535    .text:000003b8 X12WaitReady
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:619    .text:0000044c X12EepromWrite
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:755    .text:0000054e X12RtcWrite
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:822    .text:000005c6 X12RtcSetAlarm
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:1000   .text:00000726 X12RtcGetAlarm
-C:\Users\Blommers\AppData\Local\Temp/cc6ENf2f.s:1225   .text:000008cc X12RtcSetClock
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:41     .text:00000036 X12EepromRead
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:112    .text:000000b0 X12RtcReadRegs
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:181    .text:00000126 X12RtcGetStatus
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:247    .text:000001ac X12Init
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:283    .text:000001e4 X12RtcGetClock
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:448    .text:0000031c X12WriteEnable
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:535    .text:000003b8 X12WaitReady
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:619    .text:0000044c X12EepromWrite
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:755    .text:0000054e X12RtcWrite
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:822    .text:000005c6 X12RtcSetAlarm
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:1000   .text:00000726 setAlarmB
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:1050   .text:0000077a setAlarmA
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:1092   .text:000007be X12RtcGetAlarm
+C:\Users\Farhad1\AppData\Local\Temp/cckZADji.s:1356   .text:000009b2 X12RtcSetClock
 
 UNDEFINED SYMBOLS
 __do_copy_data
