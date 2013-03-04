@@ -74,31 +74,6 @@ THREAD(MenuThread, args)
         if(key != KEY_UNDEFINED)
         {
             LcdBackLight(LCD_BACKLIGHT_ON);
-            if(key == KEY_SETUP)
-            {
-                menu_enabled = 1;
-            }
-            else{
-                if(key == KEY_OK)
-                {
-                    if(menu_enabled == 1)
-                        submenu_enabled = 1;
-                }
-                else
-                {
-                    if(key == KEY_ESC)
-                    {
-                        if(submenu_enabled == 1)
-                            submenu_enabled = 0;
-                        else
-                        {
-                            submenu_enabled = 0;
-                            menu_enabled = 0;
-                        }
-
-                    }
-                }
-            }
             
             //Menu Controlls
             if(menu_enabled == 1 && submenu_enabled == 0)
@@ -122,6 +97,8 @@ THREAD(MenuThread, args)
             {
                 if(key == KEY_OK)
                 {
+                    menu_enabled = 0;
+                    submenu_enabled = 0;
                     struct menuSubItem item = menusubitems[menu_item][menu_subitem];
                     item.function();
                 }
@@ -137,6 +114,33 @@ THREAD(MenuThread, args)
                     if(menu_subitem+1 <= (sizeof(menusubitems[menu_item])/sizeof(menusubitems[menu_item][0]))-1)
                     {
                         menu_subitem += 1;
+                    }
+                }
+            }
+            
+            if(key == KEY_SETUP)
+            {
+                menu_enabled = 1;
+            }
+            else{
+                if(key == KEY_OK)
+                {
+                    if(menu_enabled == 1)
+                        submenu_enabled = 1;
+                }
+                else
+                {
+                    if(key == KEY_ESC)
+                    {
+                        if(submenu_enabled == 1)
+                            submenu_enabled = 0;
+                        else
+                        {
+                            submenu_enabled = 0;
+                            menu_enabled = 0;
+                            LcdClearLine();
+                        }
+
                     }
                 }
             }

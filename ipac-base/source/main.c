@@ -58,6 +58,7 @@ const int DEBUG = 1;
 int timeZone;
 int timeZoneSet;
 int timeSetManually;
+int setTimezoneFromMenu;
 int selectedTimeUnit;
 //Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
 tm datetime;
@@ -344,6 +345,25 @@ THREAD(ThreadB, args)
 
 /* ����������������������������������������������������������������������� */
 /*!
+ * \brief Set _timezone of time.h
+ * \author Niels & Bas
+ */
+/* ����������������������������������������������������������������������� */
+void setTimeZone(int* timeZone)
+{
+    if((-12 <= *timeZone) && (*timeZone <= 14))
+    {
+        printf("timezone = %d\n", *timeZone);
+        _timezone = -*timeZone * 60 * 60;
+    }
+    else
+    {
+        _timezone = 0;
+    }
+}
+
+/* ����������������������������������������������������������������������� */
+/*!
  * \brief Starts the check for firstStartup, and if so: waits for timeZone input
  * \author Bas
  */
@@ -361,10 +381,10 @@ void InitializeTimeZone(void)
         LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
 
     //First startup, set the timezone!
-    if(firstStartup != 1)
+    if(!firstStartup || setTimezoneFromMenu)
     {
         if(DEBUG)
-            LogMsg_P(LOG_INFO, PSTR("First startup, waiting for timeZone input"));
+            LogMsg_P(LOG_INFO, PSTR("Waiting for timeZone input"));
 
         LcdBackLight(LCD_BACKLIGHT_ON);
         LcdWriteTitle("Set Timezone");
@@ -390,24 +410,42 @@ void InitializeTimeZone(void)
         }
 
         LcdBackLight(LCD_BACKLIGHT_OFF);
-
-        //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
-        //Put the address of timeZone as a parameter, and the bytesize is the size of a float
-        At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
-        if(DEBUG)
-            LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
         
-        At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
-        if(DEBUG)
-            LogMsg_P(LOG_INFO, PSTR("Value of timeZone from SRAM: %d"), timeZone);
+        if(!firstStartup)
+        {
+            //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
+            //Put the address of timeZone as a parameter, and the bytesize is the size of a float
+            At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
+            if(DEBUG)
+                LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
 
-        firstStartup = 1;
-        At45dbPageWrite(0, &firstStartup, sizeof(int));
-        if(DEBUG)
-            LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+            At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
+            if(DEBUG)
+                LogMsg_P(LOG_INFO, PSTR("Value of timeZone from SRAM: %d"), timeZone);
+
+            firstStartup = 1;
+            At45dbPageWrite(0, &firstStartup, sizeof(int));
+            if(DEBUG)
+                LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+        }
+        
+        if(setTimezoneFromMenu)
+        {
+            printf("\nTimezone set: %d", timeZone);
+            printf("\nTimezone from time.h: %ld", -(_timezone / 60) / 60);
+            int test = timeZone - (-(_timezone / 60) / 60);
+            printf("\n _timezone - timezone = %d", test);
+            
+            datetime.tm_hour += test;
+            //Write the gmt struct to RTC
+            X12RtcSetClock(&datetime);
+        }
         
         //Clear the display
         LcdClearAll();
+        
+        //Set timezone of time.h to our timezone
+        setTimeZone(&timeZone);
     }
 }
 
@@ -496,25 +534,6 @@ void setTimeManually(void)
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \brief Set _timezone of time.h
- * \author Niels & Bas
- */
-/* ����������������������������������������������������������������������� */
-void setTimeZone(int* timeZone)
-{
-    if((-12 <= *timeZone) && (*timeZone <= 14))
-    {
-        printf("timezone = %d\n", *timeZone);
-        _timezone = -*timeZone * 60 * 60;
-    }
-    else
-    {
-        _timezone = 0;
-    }
-}
-
-/* ����������������������������������������������������������������������� */
-/*!
  * \brief Main entry of the SIR firmware
  *
  * All the initialisations before entering the for(;;) loop are done BEFORE
@@ -567,6 +586,8 @@ int main(void)
     {      
         //timeZone check
         InitializeTimeZone();
+        //From now on, set the timezone from the menu
+        setTimezoneFromMenu = 1;
     }
     
     //Initialize RTC
@@ -574,8 +595,7 @@ int main(void)
     
     //Initialize network
     NetworkInit();
-    //Set timezone of time.h to our timezone
-    setTimeZone(&timeZone);
+    
     //Query NTP server and set time. If no time was set, set it manually.
     if(!NTP(&datetime))
     {
