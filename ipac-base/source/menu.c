@@ -47,7 +47,12 @@ void ShowSetting()
 //END OF MENU ACTION
 
 //!DEFINE FUNCTION ABOVE!//
-char* menuitems[3] = {"Music","Alarm","Settings"};
+char* menuitems[3] = {
+    "Music",
+    "Alarm",
+    "Settings"
+};
+
 struct menuSubItem menusubitems[3][2] = {
     {{"Radio", &ShowSetting}, {"SD", &ShowSetting}},
     {{"Alarm 2", &ShowSetting}, {"Alarm 2", &ShowSetting}},
