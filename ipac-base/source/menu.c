@@ -163,11 +163,14 @@ THREAD(MenuThread, args)
                 DisplayItem(menusubitems[menu_item][menu_subitem].text, 1);
                 break;
         }
-        while(1)
+        if(menu_enabled)
         {
-            u_char key = KbGetKey();
-            if(key == KEY_UNDEFINED)
-                break;
+            while(1)
+            {
+                u_char key = KbGetKey();
+                if(key == KEY_UNDEFINED)
+                    break;
+            }
         }
     }
 }

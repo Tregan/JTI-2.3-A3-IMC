@@ -453,7 +453,7 @@ void setTimeManually(void)
     //Backlight on during setting
     LcdBackLight(LCD_BACKLIGHT_ON);
     //Clear the title
-    LcdClearTitle();
+    LcdClearAll();
     LcdWriteTitle("Set Time Manually");
     
     //Show the current time, but do NOT update it! We're setting a time, updating while setting would be very silly
@@ -552,8 +552,6 @@ int main(void)
     LedInit();
     //Initialize LCD screen
     LcdLowLevelInit();
-    //Initialize Menu
-    MenuInit();
 
     SysControlMainBeat(ON);             // enable 4.4 msecs hartbeat interrupt
     
@@ -566,19 +564,7 @@ int main(void)
     
     //Initialize persistent data chip
     if (At45dbInit()==AT45DB041B)
-    {
-        //Test for checking if persistent data works.
-        //Hint: It does.
-        /*int firstTime = 3;
-        LogMsg_P(LOG_INFO, PSTR("Initial value %02d"), firstTime);
-        At45dbPageRead(0, &firstTime, 1);
-        LogMsg_P(LOG_INFO, PSTR("Value after reading %02d"), firstTime);
-        firstTime = 1;
-        At45dbPageWrite(0, &firstTime, 1);
-        LogMsg_P(LOG_INFO, PSTR("Value after setting %02d"), firstTime);
-        At45dbPageRead(0, &firstTime, 1);
-        LogMsg_P(LOG_INFO, PSTR("Value after reading again %02d"), firstTime);*/
-        
+    {      
         //timeZone check
         InitializeTimeZone();
     }
@@ -590,12 +576,17 @@ int main(void)
     NetworkInit();
     //Set timezone of time.h to our timezone
     setTimeZone(&timeZone);
-    //Query NTP server and set time
-    NTP(&datetime);
+    //Query NTP server and set time. If no time was set, set it manually.
+    if(!NTP(&datetime))
+    {
+        LcdWriteTitle("Failed.");
+        LcdWriteSecondLine("Set time manually");
+        NutSleep(2000);
+        setTimeManually();
+    }
     
-    //TODO if there's no network, set time manually... WTB timeout in networkinit!
-    //Temp, put inside menu when that's done :)
-    setTimeManually();
+    //Initialize Menu
+    MenuInit();
     
     /*
      * Increase our priority so we can feed the watchdog.

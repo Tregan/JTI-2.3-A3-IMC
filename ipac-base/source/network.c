@@ -25,6 +25,7 @@
 #include <string.h>
 #include <time.h>
 #include "rtc.h"
+#include "display.h"
  
 
 //Hard coded network configuration.
@@ -34,24 +35,34 @@
 
 int NetworkInit()
 {
-    printf("in networkinit\n");
- 
     //Register Ethernet controller.
-    //TODO test if the if-statement can go away, it shouldn't have to be here.
+    LcdBackLight(LCD_BACKLIGHT_ON);
+    LcdWriteSecondLine("Registering device...");
+    printf("\nRegistering device...");
     if (NutRegisterDevice(&DEV_ETHER, 0, 0)) 
     {
         puts("Registering " DEV_ETHER_NAME " failed.");
     }
-    //Configure network.
-    //TODO test the timeout, 10 seconds atm, but may need to be higher or lower.
-    else if (NutDhcpIfConfig(DEV_ETHER_NAME, NULL, 10000)) 
+    else
     {
-        puts("Configuring " DEV_ETHER_NAME " failed.");
+        LcdClearLine();
+        LcdWriteSecondLine("Configuring network...");
+        printf("\nConfiguring network...");
+        
+        //Configure network.
+        if (NutDhcpIfConfig(DEV_ETHER_NAME, NULL, 60000) == 0)
+            printf("\nNetwork configured. Now try 'ping %s' on your PC.\n", inet_ntoa(confnet.cdn_ip_addr));
+        else
+        {
+            puts("\nError: Cannot configure network.");
+            printf("%d", NutDhcpError(DEV_ETHER_NAME));
+        }
+        
+        
     }
-    else {
-        printf("Now try 'ping %s' on your PC.\n", inet_ntoa(confnet.cdn_ip_addr));
-    }
-
+    
+    LcdClearLine();
+    LcdBackLight(LCD_BACKLIGHT_OFF);
     return 0;
 }
 
@@ -60,41 +71,64 @@ int NTP(tm* datetime)
     time_t ntp_time = 2;
     uint32_t timeserver = 0;
  
-    puts("NTP\n");
- 
     //Retrieve time from the NTP server.
-    puts("Retrieving time from ntp");
+    puts("\nRetrieving time from ntp");
+    LcdBackLight(LCD_BACKLIGHT_ON);
+    LcdWriteSecondLine("Retrieving time from NTP...");
  
     timeserver = inet_addr("78.192.65.63");
     
-    int attemptNr = 0;
-    for (;;) 
+    int success = 0;
+    int error = NutDhcpError(DEV_ETHER_NAME);
+    printf("\nStatus in NTP: %d. Error: %d", NutDhcpStatus(DEV_ETHER_NAME), error);
+    
+    if(error == 0)
     {
-        if (NutSNTPGetTime(&timeserver, &ntp_time) == 0) 
+        int attemptNr = 0;
+        for (;;) 
         {
-            break;
-        } else 
-        {
-            NutSleep(1000);
-            printf("%d, Failed to retrieve time. Retrying...\n", attemptNr);
-            
-            if(attemptNr == 10)
+            if (NutSNTPGetTime(&timeserver, &ntp_time) == 0) 
             {
-                printf("Retrieving NTP, server timed out. There will not be synced with the NTP server!\n");
-                datetime->tm_hour = 0;
-                datetime->tm_min = 0;
-                datetime->tm_sec = 0;
-                return 0;
+                success = 1;
+                break;
             }
-            attemptNr++;
+            else 
+            {
+                NutSleep(1000);
+                printf("\n%d, Failed to retrieve time. Retrying...", attemptNr);
+
+                if(attemptNr == 10)
+                {
+                    break;
+                }
+                attemptNr++;
+            }
         }
     }
-    puts("Done.\n");
+    
+    //If time was not retrieved from the NTP server
+    if(!success)
+    {
+        printf("\nError retrieving NTP. Time not synced with the NTP server!");
+        datetime->tm_hour = 0;
+        datetime->tm_min = 0;
+        datetime->tm_sec = 0;
+
+        datetime = localtime(&ntp_time);
+        X12RtcSetClock(datetime);
+
+        LcdClearLine();
+        LcdBackLight(LCD_BACKLIGHT_OFF);
+
+        return 0;
+    }
  
     datetime = localtime(&ntp_time);
     X12RtcSetClock(datetime);
  
-    printf("NTP time is: %02d:%02d:%02d\n", datetime->tm_hour, datetime->tm_min, datetime->tm_sec);
+    printf("\nSuccess. NTP time is: %02d:%02d:%02d", datetime->tm_hour, datetime->tm_min, datetime->tm_sec);
+    LcdClearLine();
+    LcdBackLight(LCD_BACKLIGHT_OFF);
     
     return 1;
 }
