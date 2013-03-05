@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 1
 
 
    1               		.file	"log.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
   55 0040 F894      		cli
   56 0042 DEBF      		out __SP_H__,r29
   57 0044 0FBE      		out __SREG__,__tmp_reg__
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 2
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 2
 
 
   58 0046 CDBF      		out __SP_L__,r28
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  112 00ae F070      		andi r31,hi8(15)
  113 00b0 E050      		subi r30,lo8(-(binhex.2227))
  114 00b2 F040      		sbci r31,hi8(-(binhex.2227))
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 3
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 3
 
 
  115 00b4 8081      		ld r24,Z
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  169 011a F901      		movw r30,r18
  170 011c E00F      		add r30,r16
  171 011e F11F      		adc r31,r17
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 4
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 4
 
 
  172 0120 8083      		st Z,r24
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  226 0186 FF90      		pop r15
  227 0188 EF90      		pop r14
  228 018a DF90      		pop r13
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 5
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 5
 
 
  229 018c CF90      		pop r12
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  283 01da 7091 0000 		lds r23,(g_tStream)+1
  284 01de 6115      		cp r22,__zero_reg__
  285 01e0 7105      		cpc r23,__zero_reg__
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 6
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 6
 
 
  286 01e2 01F4      		brne .+2
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  340 0244 00C0      		rjmp .L50
  341               	.L45:
  342 0246 80E0      		ldi r24,lo8(__c.2064)
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 7
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 7
 
 
  343 0248 90E0      		ldi r25,hi8(__c.2064)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  397 02b0 2834      		cpi r18,lo8(72)
  398 02b2 01F4      		brne .+2
  399 02b4 00C0      		rjmp .L60
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 8
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 8
 
 
  400 02b6 2035      		cpi r18,lo8(80)
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  454 031a 01F0      		breq .L77
  455 031c 203C      		cpi r18,lo8(-64)
  456 031e 01F4      		brne .L51
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 9
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 9
 
 
  457 0320 00C0      		rjmp .L75
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  511 0372 80E0      		ldi r24,lo8(__c.2111)
  512 0374 90E0      		ldi r25,hi8(__c.2111)
  513 0376 00C0      		rjmp .L89
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 10
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 10
 
 
  514               	.L73:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  568 03c8 90E0      		ldi r25,hi8(__c.2153)
  569 03ca 00C0      		rjmp .L89
  570               	.L70:
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 11
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 11
 
 
  571 03cc 80E0      		ldi r24,lo8(__c.2156)
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  625 042a 0E94 0000 		call fflush
  626               	/* epilogue: frame size=0 */
  627 042e 0895      		ret
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 12
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 12
 
 
  628               	/* epilogue end (size=1) */
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  682               		.type	__c.2073, @object
  683               		.size	__c.2073, 9
  684               	__c.2073:
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 13
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 13
 
 
  685 0002 0A23 4465 		.string	"\n#Debug "
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  721 0054 5744 3A20 		.string	"WD: "
  721      00
  722               		.type	__c.2168, @object
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 14
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 14
 
 
  723               		.size	__c.2168, 5
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  766               		.type	__c.2135, @object
  767               		.size	__c.2135, 5
  768               	__c.2135:
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 15
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 15
 
 
  769 0090 5243 3A20 		.string	"RC: "
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  812               	__c.2102:
  813 00c7 4854 3A20 		.string	"HT: "
  813      00
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 16
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 16
 
 
  814               		.type	__c.2099, @object
@@ -934,67 +934,67 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 1
  838               		.lcomm g_tLevel,1
  839               		.lcomm g_tStream,2
  840               	/* File "source/log.c": code  549 = 0x0225 ( 471), prologues  38, epilogues  40 */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 17
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 log.c
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:3      *ABS*:0000003f __SREG__
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:13     .text:00000000 LogSetLevel
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:3      *ABS*:0000003f __SREG__
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:13     .text:00000000 LogSetLevel
                              .bss:00000000 g_tLevel
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:30     .text:00000012 HexDump
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:660    .data:00000000 binhex.2227
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:246    .text:000001a4 LogChar_P
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:838    .bss:00000001 g_tStream
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:267    .text:000001be LogMsg_P
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:684    .progmem.data:00000002 __c.2073
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:680    .progmem.data:00000000 __c.2076
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:712    .progmem.data:00000041 __c.2052
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:708    .progmem.data:00000038 __c.2055
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:704    .progmem.data:0000002f __c.2058
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:700    .progmem.data:00000026 __c.2061
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:696    .progmem.data:0000001d __c.2064
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:692    .progmem.data:00000014 __c.2067
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:688    .progmem.data:0000000b __c.2070
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:720    .progmem.data:00000054 __c.2171
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:716    .progmem.data:0000004a __c.2174
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:836    .progmem.data:000000e5 __c.2084
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:832    .progmem.data:000000e0 __c.2087
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:828    .progmem.data:000000db __c.2090
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:824    .progmem.data:000000d6 __c.2093
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:820    .progmem.data:000000d1 __c.2096
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:816    .progmem.data:000000cc __c.2099
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:812    .progmem.data:000000c7 __c.2102
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:808    .progmem.data:000000c2 __c.2105
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:804    .progmem.data:000000bd __c.2108
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:800    .progmem.data:000000b8 __c.2111
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:796    .progmem.data:000000b3 __c.2114
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:792    .progmem.data:000000ae __c.2117
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:788    .progmem.data:000000a9 __c.2120
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:784    .progmem.data:000000a4 __c.2123
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:780    .progmem.data:0000009f __c.2126
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:776    .progmem.data:0000009a __c.2129
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:772    .progmem.data:00000095 __c.2132
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:768    .progmem.data:00000090 __c.2135
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:764    .progmem.data:0000008b __c.2138
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:760    .progmem.data:00000086 __c.2141
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:756    .progmem.data:00000081 __c.2144
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:752    .progmem.data:0000007c __c.2147
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:748    .progmem.data:00000077 __c.2150
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:744    .progmem.data:00000072 __c.2153
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:740    .progmem.data:0000006d __c.2156
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:736    .progmem.data:00000068 __c.2159
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:732    .progmem.data:00000063 __c.2162
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:728    .progmem.data:0000005e __c.2165
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:724    .progmem.data:00000059 __c.2168
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:618    .text:0000041a LogClose
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:633    .text:00000430 LogOpen
-C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s:646    .text:0000043e LogInit
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccr7qloc.s 			page 18
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:30     .text:00000012 HexDump
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:660    .data:00000000 binhex.2227
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:246    .text:000001a4 LogChar_P
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:838    .bss:00000001 g_tStream
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:267    .text:000001be LogMsg_P
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:684    .progmem.data:00000002 __c.2073
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:680    .progmem.data:00000000 __c.2076
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:712    .progmem.data:00000041 __c.2052
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:708    .progmem.data:00000038 __c.2055
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:704    .progmem.data:0000002f __c.2058
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:700    .progmem.data:00000026 __c.2061
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:696    .progmem.data:0000001d __c.2064
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:692    .progmem.data:00000014 __c.2067
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:688    .progmem.data:0000000b __c.2070
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:720    .progmem.data:00000054 __c.2171
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:716    .progmem.data:0000004a __c.2174
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:836    .progmem.data:000000e5 __c.2084
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:832    .progmem.data:000000e0 __c.2087
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:828    .progmem.data:000000db __c.2090
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:824    .progmem.data:000000d6 __c.2093
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:820    .progmem.data:000000d1 __c.2096
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:816    .progmem.data:000000cc __c.2099
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:812    .progmem.data:000000c7 __c.2102
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:808    .progmem.data:000000c2 __c.2105
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:804    .progmem.data:000000bd __c.2108
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:800    .progmem.data:000000b8 __c.2111
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:796    .progmem.data:000000b3 __c.2114
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:792    .progmem.data:000000ae __c.2117
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:788    .progmem.data:000000a9 __c.2120
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:784    .progmem.data:000000a4 __c.2123
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:780    .progmem.data:0000009f __c.2126
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:776    .progmem.data:0000009a __c.2129
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:772    .progmem.data:00000095 __c.2132
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:768    .progmem.data:00000090 __c.2135
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:764    .progmem.data:0000008b __c.2138
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:760    .progmem.data:00000086 __c.2141
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:756    .progmem.data:00000081 __c.2144
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:752    .progmem.data:0000007c __c.2147
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:748    .progmem.data:00000077 __c.2150
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:744    .progmem.data:00000072 __c.2153
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:740    .progmem.data:0000006d __c.2156
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:736    .progmem.data:00000068 __c.2159
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:732    .progmem.data:00000063 __c.2162
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:728    .progmem.data:0000005e __c.2165
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:724    .progmem.data:00000059 __c.2168
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:618    .text:0000041a LogClose
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:633    .text:00000430 LogOpen
+C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s:646    .text:0000043e LogInit
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKuXE5m.s 			page 18
 
 
 

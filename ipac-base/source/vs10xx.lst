@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 1
 
 
    1               		.file	"vs10xx.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
   55 002c 0E94 0000 		call VsPlayerInterrupts
   56 0030 982F      		mov r25,r24
   57 0032 8091 0000 		lds r24,vs_status
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 2
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 2
 
 
   58 0036 8130      		cpi r24,lo8(1)
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  112 006a CF93      		push r28
  113 006c DF93      		push r29
  114               	/* prologue end (size=4) */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 3
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 3
 
 
  115 006e EC01      		movw r28,r24
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  169               	/* epilogue: frame size=0 */
  170 00cc 1F91      		pop r17
  171 00ce 0895      		ret
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 4
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 4
 
 
  172               	/* epilogue end (size=2) */
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  226 0122 90E0      		ldi r25,hi8(0)
  227 0124 0E94 0000 		call SPIselect
  228 0128 2C98      		cbi 37-0x20,4
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 5
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 5
 
 
  229 012a 82E0      		ldi r24,lo8(2)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  283 0194 EF90      		pop r14
  284 0196 DF90      		pop r13
  285 0198 0895      		ret
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 6
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 6
 
 
  286               	/* epilogue end (size=6) */
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  340 01ee 63E0      		ldi r22,lo8(3)
  341 01f0 70E0      		ldi r23,hi8(3)
  342 01f2 80E0      		ldi r24,lo8(on.2553)
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 7
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 7
 
 
  343 01f4 90E0      		ldi r25,hi8(on.2553)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  397               	.global	VsBeep
  398               		.type	VsBeep, @function
  399               	VsBeep:
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 8
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 8
 
 
  400               	/* prologue: frame size=1 */
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  454 02c4 0E94 0000 		call VsSdiWrite_P
  455 02c8 64E0      		ldi r22,lo8(4)
  456 02ca 70E0      		ldi r23,hi8(4)
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 9
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 9
 
 
  457 02cc C601      		movw r24,r12
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  511               	/* function SoundA size 25 (24) */
  512               		.size	SoundA, .-SoundA
  513               		.type	VsRegRead, @function
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 10
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 10
 
 
  514               	VsRegRead:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  568 0394 80E0      		ldi r24,lo8(0)
  569 0396 0E94 0000 		call VsPlayerInterrupts
  570 039a F82E      		mov r15,r24
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 11
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 11
 
 
  571 039c 8BE0      		ldi r24,lo8(11)
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  625 03f0 3807      		cpc r19,r24
  626 03f2 01F0      		breq .L56
  627 03f4 8DE4      		ldi r24,hi8(19797)
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 12
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 12
 
 
  628 03f6 2535      		cpi r18,lo8(19797)
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  682               	.L56:
  683 045c C901      		movw r24,r18
  684 045e 0895      		ret
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 13
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 13
 
 
  685               	/* epilogue: frame size=0 */
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  739 04ba 9695      	1:	lsr r25
  740 04bc 8795      		ror r24
  741 04be EA95      		dec r30
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 14
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 14
 
 
  742 04c0 01F4      		brne 1b
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  796 053a 0895      		ret
  797               	/* epilogue end (size=1) */
  798               	/* function VsPlayerInit size 90 (89) */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 15
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 15
 
 
  799               		.size	VsPlayerInit, .-VsPlayerInit
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  853 059c C816      		cp r12,r24
  854 059e D906      		cpc r13,r25
  855 05a0 00F0      		brlo .L79
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 16
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 16
 
 
  856 05a2 C114      		cp r12,__zero_reg__
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  910 060c DEBF      		out __SP_H__,r29
  911 060e 0FBE      		out __SREG__,__tmp_reg__
  912 0610 CDBF      		out __SP_L__,r28
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 17
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 17
 
 
  913 0612 DF91      		pop r29
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  967 0660 F801      		movw r30,r16
  968 0662 E050      		subi r30,lo8(-(atab))
  969 0664 F040      		sbci r31,hi8(-(atab))
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 18
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 18
 
 
  970               	/* #APP */
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1024 06c2 0E94 0000 		call VsPlayerSetMode
  1025 06c6 80E0      		ldi r24,lo8(0)
  1026 06c8 0E94 0000 		call VsPlayerInterrupts
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 19
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 19
 
 
  1027 06cc 182F      		mov r17,r24
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1081 0020 0099      		.word	-26368
  1082 0022 0000      		.word	0
  1083 0024 4D00      		.word	77
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 20
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 20
 
 
  1084 0026 8040      		.word	16512
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1138 0092 CEFF      		.word	-50
  1139 0094 0100      		.word	1
  1140 0096 0A00      		.word	10
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 21
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 21
 
 
  1141 0098 0024      		.word	9216
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1195 0104 D524      		.word	9429
  1196 0106 0000      		.word	0
  1197 0108 2400      		.word	36
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 22
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 22
 
 
  1198 010a 88B8      		.word	-18296
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1252 0176 2443      		.word	17188
  1253 0178 2400      		.word	36
  1254 017a 8442      		.word	17028
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 23
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 23
 
 
  1255 017c 022C      		.word	11266
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1309 01e8 1490      		.word	-28652
  1310 01ea F336      		.word	14067
  1311 01ec 2400      		.word	36
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 24
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 24
 
 
  1312 01ee F236      		.word	14066
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1366 025a 5537      		.word	14165
  1367 025c 0600      		.word	6
  1368 025e D055      		.word	21968
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 25
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 25
 
 
  1369 0260 0000      		.word	0
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1423 02cc 0600      		.word	6
  1424 02ce D055      		.word	21968
  1425 02d0 84B8      		.word	-18300
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 26
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 26
 
 
  1426 02d2 4C18      		.word	6220
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1480 033e 2440      		.word	16420
  1481 0340 80B8      		.word	-18304
  1482 0342 D31B      		.word	7123
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 27
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 27
 
 
  1483 0344 F436      		.word	14068
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1537 0381 53        		.byte	83
  1538 0382 EF        		.byte	-17
  1539 0383 6E        		.byte	110
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 28
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 28
 
 
  1540               		.type	mtcmd.2489, @object
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1594 03b3 06        		.byte	6
  1595 03b4 06        		.byte	6
  1596 03b5 06        		.byte	6
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 29
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 29
 
 
  1597 03b6 06        		.byte	6
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1651 03ec 06        		.byte	6
  1652 03ed 06        		.byte	6
  1653 03ee 06        		.byte	6
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 30
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 30
 
 
  1654 03ef 06        		.byte	6
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1708 0425 06        		.byte	6
  1709 0426 06        		.byte	6
  1710 0427 06        		.byte	6
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 31
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 31
 
 
  1711 0428 06        		.byte	6
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1765 045e 06        		.byte	6
  1766 045f 06        		.byte	6
  1767 0460 06        		.byte	6
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 32
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 32
 
 
  1768 0461 06        		.byte	6
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1822 0497 06        		.byte	6
  1823 0498 06        		.byte	6
  1824 0499 06        		.byte	6
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 33
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 33
 
 
  1825 049a 06        		.byte	6
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1879 04d0 06        		.byte	6
  1880 04d1 06        		.byte	6
  1881 04d2 06        		.byte	6
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 34
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 34
 
 
  1882 04d3 06        		.byte	6
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1936 0509 06        		.byte	6
  1937 050a 06        		.byte	6
  1938 050b 06        		.byte	6
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 35
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 35
 
 
  1939 050c 06        		.byte	6
@@ -2096,52 +2096,52 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 1
  1991 0540 06        		.byte	6
  1992               		.lcomm g_vs_type,2
  1993               	/* File "source/vs10xx.c": code  935 = 0x03a7 ( 746), prologues  86, epilogues 103 */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 36
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 36
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 vs10xx.c
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:3      *ABS*:0000003f __SREG__
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:13     .text:00000000 VsPlayerInterrupts
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:51     .text:0000002a VsPlayerStop
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:3      *ABS*:0000003f __SREG__
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:13     .text:00000000 VsPlayerInterrupts
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:51     .text:0000002a VsPlayerStop
                              .bss:00000000 vs_status
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:73     .text:0000004a VsGetStatus
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:85     .text:00000052 VsGetType
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1551   .bss:00000001 g_vs_type
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:97     .text:0000005c VsGetTypeHex
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:108    .text:00000066 VsSdiWrite_P
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:148    .text:000000a0 VsBeepStop
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1508   .progmem.data:0000036e off.2560
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1504   .progmem.data:0000036a end.2561
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:176    .text:000000d0 VsSdiWrite
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:212    .text:00000108 VsRegWrite
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:253    .text:0000015a VsSetVolume
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:291    .text:0000019a VsPlayerSetMode
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:319    .text:000001c6 VsBeepStartRaw
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1519   .progmem.data:00000376 on.2553
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1515   .progmem.data:00000372 end.2554
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:375    .text:00000230 VsBeepStart
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:399    .text:00000250 VsBeep
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1536   .progmem.data:00000381 on.2529
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1525   .progmem.data:00000379 end.2531
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1529   .progmem.data:0000037d off.2530
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:485    .text:000002fc SoundA
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:514    .text:0000032e VsRegRead
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:562    .text:0000038e VsGetVolume
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:587    .text:000003b4 VsRegInfo
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:613    .text:000003dc VsStreamValid
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:692    .text:00000460 VsPlayerReset
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:719    .text:0000048c VsPlayerInit
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:801    .text:0000053c VsPlayerFeed
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:928    .text:00000626 VsPlayerKick
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1064   .progmem.data:00000000 dtab
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1554   .progmem.data:0000038c atab
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1013   .text:000006b0 VsMemoryTest
-C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s:1542   .progmem.data:00000384 mtcmd.2489
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:73     .text:0000004a VsGetStatus
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:85     .text:00000052 VsGetType
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1551   .bss:00000001 g_vs_type
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:97     .text:0000005c VsGetTypeHex
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:108    .text:00000066 VsSdiWrite_P
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:148    .text:000000a0 VsBeepStop
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1508   .progmem.data:0000036e off.2560
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1504   .progmem.data:0000036a end.2561
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:176    .text:000000d0 VsSdiWrite
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:212    .text:00000108 VsRegWrite
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:253    .text:0000015a VsSetVolume
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:291    .text:0000019a VsPlayerSetMode
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:319    .text:000001c6 VsBeepStartRaw
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1519   .progmem.data:00000376 on.2553
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1515   .progmem.data:00000372 end.2554
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:375    .text:00000230 VsBeepStart
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:399    .text:00000250 VsBeep
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1536   .progmem.data:00000381 on.2529
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1525   .progmem.data:00000379 end.2531
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1529   .progmem.data:0000037d off.2530
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:485    .text:000002fc SoundA
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:514    .text:0000032e VsRegRead
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:562    .text:0000038e VsGetVolume
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:587    .text:000003b4 VsRegInfo
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:613    .text:000003dc VsStreamValid
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:692    .text:00000460 VsPlayerReset
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:719    .text:0000048c VsPlayerInit
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:801    .text:0000053c VsPlayerFeed
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:928    .text:00000626 VsPlayerKick
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1064   .progmem.data:00000000 dtab
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1554   .progmem.data:0000038c atab
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1013   .text:000006b0 VsMemoryTest
+C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s:1542   .progmem.data:00000384 mtcmd.2489
 
 UNDEFINED SYMBOLS
 __do_copy_data
@@ -2156,7 +2156,7 @@ SPIgetByte
 NutDelay
 sig_INTERRUPT6
 NutRegisterIrqHandler
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccyfawK9.s 			page 37
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccKQbIx1.s 			page 37
 
 
 NutIrqSetMode

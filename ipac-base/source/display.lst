@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 1
 
 
    1               		.file	"display.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
   55               	/* #NOAPP */
   56 0032 7298      		cbi 46-0x20,2
   57 0034 8A98      		cbi 49-0x20,2
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 2
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 2
 
 
   58 0036 8AB1      		in r24,42-0x20
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  112 007e 682F      		mov r22,r24
  113 0080 83E0      		ldi r24,lo8(3)
  114 0082 0E94 0000 		call LcdWriteByte
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 3
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 3
 
 
  115               	/* epilogue: frame size=0 */
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  169 00d0 0895      		ret
  170               	/* epilogue end (size=5) */
  171               	/* function LcdWriteShortTitle size 25 (16) */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 4
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 4
 
 
  172               		.size	LcdWriteShortTitle, .-LcdWriteShortTitle
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  225 011e 81E0      		ldi r24,lo8(1)
  226 0120 0E94 0000 		call NutThreadSetPriority
  227 0124 20E0      		ldi r18,lo8(1024)
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 5
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 5
 
 
  228 0126 34E0      		ldi r19,hi8(1024)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  277 015c EC01      		movw r28,r24
  278 015e 9093 0000 		sts (title)+1,r25
  279 0162 8093 0000 		sts title,r24
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 6
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 6
 
 
  280 0166 8091 0000 		lds r24,titlebool
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  333 01b4 0895      		ret
  334               	/* epilogue end (size=1) */
  335               	/* function LcdClearTitleLine size 5 (4) */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 7
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 7
 
 
  336               		.size	LcdClearTitleLine, .-LcdClearTitleLine
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  388               		.text
  389               	.global	LcdClearAll
  390               		.type	LcdClearAll, @function
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 8
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 8
 
 
  391               	LcdClearAll:
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  445 0272 82E0      		ldi r24,lo8(2)
  446 0274 0E94 0000 		call LcdWriteByte
  447               	/* epilogue: frame size=0 */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 9
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 9
 
 
  448 0278 1F91      		pop r17
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  502 02dc 80E0      		ldi r24,hlo8(2000)
  503 02de 90E0      		ldi r25,hhi8(2000)
  504 02e0 0E94 0000 		call NutSleep
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 10
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 10
 
 
  505               	.L68:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  559 0356 73E0      		ldi r23,hi8(900)
  560 0358 80E0      		ldi r24,hlo8(900)
  561 035a 90E0      		ldi r25,hhi8(900)
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 11
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 11
 
 
  562 035c 0E94 0000 		call NutSleep
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  616 03be 0E94 0000 		call LcdWriteShortTitle
  617 03c2 00C0      		rjmp .L82
  618               	.L80:
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 12
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 12
 
 
  619 03c4 0130      		cpi r16,1
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  673 0438 0E94 0000 		call NutSleep
  674 043c 00E0      		ldi r16,lo8(0)
  675 043e 10E0      		ldi r17,hi8(0)
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 13
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 13
 
 
  676 0440 0F90      		pop __tmp_reg__
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  726      6E65 2064 
  727               		.type	__c.2217, @object
  728               		.size	__c.2217, 22
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 14
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 14
 
 
  729               	__c.2217:
@@ -788,39 +788,39 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 1
  730      2064 6574 
  730      6563 7465 
  731               	/* File "source/display.c": code  568 = 0x0238 ( 490), prologues  42, epilogues  36 */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s 			page 15
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 display.c
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:3      *ABS*:0000003f __SREG__
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:13     .text:00000000 LcdBackLight
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:32     .text:00000010 LcdWriteNibble
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:71     .text:00000046 LcdWriteByte
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:109    .text:0000007e LcdChar
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:122    .text:00000088 WriteByteToLocation
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:141    .text:000000a0 LcdWriteShortTitle
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:175    .text:000000d2 LcdWriteShortSecondLine
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:213    .text:00000104 LcdWriteSecondLine
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:708    .bss:00000002 secondline
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:720    .bss:00000006 secondlinebool
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:455    .text:0000027c SecondLineThread
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:255    .text:0000014e LcdClearLine
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:272    .text:00000158 LcdWriteTitle
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:702    .bss:00000000 title
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:714    .bss:00000004 titlebool
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:577    .text:0000036e TitleThread
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:314    .text:000001a2 LcdClearTitle
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:327    .text:000001ac LcdClearTitleLine
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:339    .text:000001b6 LcdTimeDisplay
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:391    .text:00000204 LcdClearAll
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:405    .text:00000212 LcdLowLevelInit
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:725    .progmem.data:00000000 __c.2246
-C:\Users\Farhad1\AppData\Local\Temp/ccBQQ0yy.s:729    .progmem.data:0000001c __c.2217
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:3      *ABS*:0000003f __SREG__
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:13     .text:00000000 LcdBackLight
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:32     .text:00000010 LcdWriteNibble
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:71     .text:00000046 LcdWriteByte
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:109    .text:0000007e LcdChar
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:122    .text:00000088 WriteByteToLocation
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:141    .text:000000a0 LcdWriteShortTitle
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:175    .text:000000d2 LcdWriteShortSecondLine
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:213    .text:00000104 LcdWriteSecondLine
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:708    .bss:00000002 secondline
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:720    .bss:00000006 secondlinebool
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:455    .text:0000027c SecondLineThread
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:255    .text:0000014e LcdClearLine
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:272    .text:00000158 LcdWriteTitle
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:702    .bss:00000000 title
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:714    .bss:00000004 titlebool
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:577    .text:0000036e TitleThread
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:314    .text:000001a2 LcdClearTitle
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:327    .text:000001ac LcdClearTitleLine
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:339    .text:000001b6 LcdTimeDisplay
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:391    .text:00000204 LcdClearAll
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:405    .text:00000212 LcdLowLevelInit
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:725    .progmem.data:00000000 __c.2246
+C:\Users\Farhad1\AppData\Local\Temp/ccElqgGL.s:729    .progmem.data:0000001c __c.2217
 
 UNDEFINED SYMBOLS
 __do_copy_data

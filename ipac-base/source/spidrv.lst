@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 1
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s 			page 1
 
 
    1               		.file	"spidrv.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 1
   55 001a 07FE      		sbrs __tmp_reg__,7
   56 001c 00C0      		rjmp .L8
   57               	/* epilogue: frame size=0 */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 2
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s 			page 2
 
 
   58 001e 0895      		ret
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 1
  112               	SPIselect:
  113               	/* prologue: frame size=0 */
  114               	/* prologue end (size=0) */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 3
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s 			page 3
 
 
  115 0046 9C01      		movw r18,r24
@@ -147,8 +147,8 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 1
  138 006e 8DBD      		out 77-0x20,r24
  139 0070 00C0      		rjmp .L44
  140               	.L35:
- 141 0072 80E0      		ldi r24,lo8(__c.2038)
- 142 0074 90E0      		ldi r25,hi8(__c.2038)
+ 141 0072 80E0      		ldi r24,lo8(__c.2040)
+ 142 0074 90E0      		ldi r25,hi8(__c.2040)
  143 0076 9F93      		push r25
  144 0078 8F93      		push r24
  145 007a 8BE7      		ldi r24,lo8(123)
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 1
  169 00a8 00F0      		brlo .L32
  170 00aa 2230      		cpi r18,2
  171 00ac 3105      		cpc r19,__zero_reg__
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 4
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s 			page 4
 
 
  172 00ae 01F4      		brne .L42
@@ -200,35 +200,35 @@ GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 1
  188               	/* function SPIselect size 63 (63) */
  189               		.size	SPIselect, .-SPIselect
  190               		.section	.progmem.data,"a",@progbits
- 191               		.type	__c.2038, @object
- 192               		.size	__c.2038, 14
- 193               	__c.2038:
+ 191               		.type	__c.2040, @object
+ 192               		.size	__c.2040, 14
+ 193               	__c.2040:
  194 0000 696E 7661 		.string	"invalid Speed"
  194      6C69 6420 
  194      5370 6565 
  194      6400 
  195               		.lcomm g_Speedmode,1
  196               	/* File "source/spidrv.c": code   98 = 0x0062 (  91), prologues   0, epilogues   7 */
-GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s 			page 5
+GAS LISTING C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 spidrv.c
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:3      *ABS*:0000003f __SREG__
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:13     .text:00000000 SPIdeselect
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:26     .text:00000008 SPImode
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:3      *ABS*:0000003f __SREG__
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:13     .text:00000000 SPIdeselect
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:26     .text:00000008 SPImode
                              .bss:00000000 g_Speedmode
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:37     .text:0000000e SPIgetmode
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:49     .text:00000016 SPIputByte
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:64     .text:00000020 SPIgetByte
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:82     .text:00000030 SPItransferByte
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:99     .text:0000003e SPIinit
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:112    .text:00000046 SPIselect
-C:\Users\Farhad1\AppData\Local\Temp/ccuq7HEc.s:193    .progmem.data:00000000 __c.2038
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:37     .text:0000000e SPIgetmode
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:49     .text:00000016 SPIputByte
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:64     .text:00000020 SPIgetByte
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:82     .text:00000030 SPItransferByte
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:99     .text:0000003e SPIinit
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:112    .text:00000046 SPIselect
+C:\Users\Farhad1\AppData\Local\Temp/ccLqWU7y.s:193    .progmem.data:00000000 __c.2040
 
 UNDEFINED SYMBOLS
 __do_copy_data
