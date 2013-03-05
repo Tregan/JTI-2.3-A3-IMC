@@ -379,12 +379,19 @@ void InitializeTimeZone(void)
     At45dbPageRead(0, &firstStartup, sizeof(int));
     
     //If debugging is enabled, erase the firstStartup page (pgn 0)
-    if(DEBUG == 1)
-    {
+    if(DEBUG)
         firstStartup = 1;
-        LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
-    }
+    
+    LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
 
+    At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
+    
+    if(DEBUG)
+	LogMsg_P(LOG_INFO, PSTR("Value of timeZone: %d"), timeZone);
+    
+    if(timeZone < -12 || timeZone > 14)
+        timeZone = 0;
+    
     //First startup or called from menu, set the timezone!
     if(firstStartup || setTimezoneFromMenu)
     {
@@ -394,10 +401,6 @@ void InitializeTimeZone(void)
         LcdBackLight(LCD_BACKLIGHT_ON);
         LcdWriteTitle("Set Timezone");
         timeZoneSet = 0;
-        if(firstStartup)
-            timeZone = 0;
-        else
-            timeZone = -(_timezone /60) / 60;
         
         //Create the Keyboard Thread for setting the timeZone
         NutThreadCreate("KBThreadTimeZone", KBThreadTimeZone, NULL, 1024);
@@ -439,15 +442,10 @@ void InitializeTimeZone(void)
         
         At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
     }
-    else if(!firstStartup)
-    {
-        //Start at page sizeof(int), because that's the bytesize of firstStartup, which starts at page 0
-        //Put the address of timeZone as a parameter, and the bytesize is the size of a float
-        At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
-        if(DEBUG)
-            LogMsg_P(LOG_INFO, PSTR("timeZone written to SRAM with value %d"), timeZone);
-    }
     
+    LogMsg_P(LOG_INFO, PSTR("Value of timeZone: %d"), timeZone);
+        
+    //TODO use the timeZone value on startup, not working atm
     //Clear the display
     LcdClearAll();
 
