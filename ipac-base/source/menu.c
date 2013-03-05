@@ -54,10 +54,10 @@ char* menuitems[3] = {
     "Settings"
 };
 
-struct menuSubItem menusubitems[3][4] = {
-    {{"Radio", &ShowSetting}, {"SD", &ShowSetting}},
-    {{"Alarm 2", &ShowSetting}, {"Alarm 2", &ShowSetting}},
-    {{"Timezone", &InitializeTimeZone}, {"Time", &setTimeManually}, {"Date", &ShowSetting}, {"IP Adress", &ShowSetting}}
+struct menuSubItem menusubitems[3][3] = {
+    {{"Radio", &ShowSetting}},
+    {{"Alarm A", &ShowSetting}, {"Alarm B", &ShowSetting}},
+    {{"Timezone", &setTimezone}, {"Time", &setTimeManually}, {"Date", &ShowSetting}}
 };
 
 /*
@@ -73,6 +73,7 @@ THREAD(MenuThread, args)
         u_char key = KbGetKey();
         if(key != KEY_UNDEFINED)
         {
+            resetBacklightCounter();
             LcdBackLight(LCD_BACKLIGHT_ON);
             
             //Menu Controlls

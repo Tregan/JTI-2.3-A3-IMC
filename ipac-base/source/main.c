@@ -20,11 +20,11 @@
 /*--------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <string.h>
-
 #include <sys/thread.h>
 #include <sys/timer.h>
 #include <sys/version.h>
 #include <dev/irqreg.h>
+#include <time.h>
 
 #include "system.h"
 #include "portio.h"
@@ -39,11 +39,9 @@
 #include "flash.h"
 #include "spidrv.h"
 #include "network.h"
-
-#include <time.h>
 #include "rtc.h"
 #include "menu.h"
-
+#include "main.h"
 
 /*-------------------------------------------------------------------------*/
 /* global variable definitions                                             */
@@ -55,14 +53,20 @@
 //Enable or disable debugging messages and functionality (1 = on, 0 = off)
 const int DEBUG = 0;
 
-int pauseCurrentTime;
-int timeZone;
-int timeZoneSet;
-int timeSetManually;
-int setTimezoneFromMenu;
-int selectedTimeUnit;
-//Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
+//General
 tm datetime;
+//backlightCounter
+int backlightCounter;
+int backlightStayOn;
+//Timezone
+int timezone;
+int newTimezone;
+int timeZoneSet;
+int setTimezoneFromMenu;
+//Time
+int timeSetManually;
+int pauseCurrentTime;
+int selectedTimeUnit;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -216,10 +220,16 @@ THREAD(KBThreadTimeZone, args)
         if(KbWaitForKeyEvent(500) != KB_ERROR)
         {
             u_char key = KbGetKey();
-            if(key == KEY_UP && timeZone <= 13)
-                timeZone++;
-            else if(key == KEY_DOWN && timeZone >= -11)
-                timeZone--;
+            if(key == KEY_UP)
+                if(newTimezone <= 13)
+                    newTimezone++;
+                else
+                    newTimezone = -12;
+            else if(key == KEY_DOWN)
+                if(newTimezone >= -11)
+                    newTimezone--;
+                else
+                    newTimezone = 14;
             else if(key == KEY_OK)
             {
                 timeZoneSet = 1;
@@ -325,22 +335,23 @@ THREAD(KBThreadManualTime, args)
 }
 
 //ThreadA for turning on LED
-THREAD(ThreadA, args)
+THREAD(BacklightThread, args)
 {
+    backlightCounter = 0;
     for(;;)
     {
-        NutSleep(500);
-        LedControl(LED_POWER_ON);
-    }
-}
-
-//ThreadB for turning off LED
-THREAD(ThreadB, args)
-{
-    for(;;)
-    {
-        NutSleep(500);
-        LedControl(LED_POWER_OFF);
+        NutSleep(200);
+        u_char key = KbGetKey();
+        if(key != KEY_UNDEFINED)
+        {
+            backlightCounter = 0;
+            LcdBackLight(LCD_BACKLIGHT_ON);
+        }
+        
+        backlightCounter++;
+        
+        if(backlightCounter >= 25 && !backlightStayOn)
+            LcdBackLight(LCD_BACKLIGHT_OFF);
     }
 }
 
@@ -350,12 +361,12 @@ THREAD(ThreadB, args)
  * \author Niels & Bas
  */
 /* ����������������������������������������������������������������������� */
-void setTimeZone(int* timeZone)
+void setTimezone_timeh(int* timezone)
 {
-    if((-12 <= *timeZone) && (*timeZone <= 14))
+    if((-12 <= *timezone) && (*timezone <= 14))
     {
-        printf("\ntimezone = %d", *timeZone);
-        _timezone = -*timeZone * 60 * 60;
+        printf("\ntimezone = %d", *timezone);
+        _timezone = -*timezone * 60 * 60;
     }
     else
     {
@@ -365,92 +376,24 @@ void setTimeZone(int* timeZone)
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \brief Starts the check for firstStartup, and if so: waits for timeZone input
+ * \brief reset the backlight counter
  * \author Bas
  */
 /* ����������������������������������������������������������������������� */
-void InitializeTimeZone(void)
+void resetBacklightCounter(void)
 {
-    //Clear display
-    LcdClearAll();
-    
-    int firstStartup;
-    //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
-    At45dbPageRead(0, &firstStartup, sizeof(int));
-    
-    //If debugging is enabled, erase the firstStartup page (pgn 0)
-    if(DEBUG)
-        firstStartup = 1;
-    
-    LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+    backlightCounter = 0;
+}
 
-    At45dbPageRead(0 + sizeof(int), &timeZone, sizeof(int));
-    
-    if(DEBUG)
-	LogMsg_P(LOG_INFO, PSTR("Value of timeZone: %d"), timeZone);
-    
-    if(timeZone < -12 || timeZone > 14)
-        timeZone = 0;
-    
-    //First startup or called from menu, set the timezone!
-    if(firstStartup || setTimezoneFromMenu)
-    {
-        if(DEBUG)
-            LogMsg_P(LOG_INFO, PSTR("Waiting for timeZone input"));
-
-        LcdBackLight(LCD_BACKLIGHT_ON);
-        LcdWriteTitle("Set Timezone");
-        timeZoneSet = 0;
-        
-        //Create the Keyboard Thread for setting the timeZone
-        NutThreadCreate("KBThreadTimeZone", KBThreadTimeZone, NULL, 1024);
-
-        while(timeZoneSet != 1)
-        {
-            NutSleep(100);
-
-            //array of 20 chars should be enough for "UTC +(or -)14"
-            char output[20];
-            if(timeZone > -1)
-                sprintf(output, "UTC +%d ", timeZone);
-            else
-                sprintf(output, "UTC %d ", timeZone);
-            LcdWriteSecondLine(output);
-
-            WatchDogRestart();
-        }
-
-        LcdBackLight(LCD_BACKLIGHT_OFF);
-        
-        if(firstStartup)
-        {
-            firstStartup = 0;
-            At45dbPageWrite(0, &firstStartup, sizeof(int));
-            if(DEBUG)
-                LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
-        }
-        
-        //Time changed, because timezone changed
-        if(setTimezoneFromMenu)
-        {
-            int test = timeZone - (-(_timezone / 60) / 60);
-            datetime.tm_hour += test;
-            
-            //Write the gmt struct to RTC
-            X12RtcSetClock(&datetime);
-        }
-        
-        At45dbPageWrite(0 + sizeof(int), &timeZone, sizeof(int));
-    }
-    
-    LogMsg_P(LOG_INFO, PSTR("Value of timeZone: %d"), timeZone);
-        
-    //TODO use the timeZone value on startup, not working atm
-    //Clear the display
-    LcdClearAll();
-
-    //Set timezone of time.h to our timezone
-    setTimeZone(&timeZone);
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief set backlight to stay on or not, no matter the backlightCounter
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
+void setBacklightStayOn(int stayOn)
+{
+    backlightStayOn = stayOn;
 }
 
 /* ����������������������������������������������������������������������� */
@@ -478,6 +421,109 @@ void ShowCurrentTime(void)
 
 /* ����������������������������������������������������������������������� */
 /*!
+ * \brief Starts the check for firstStartup, and if so: waits for timeZone input
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
+void setTimezone(void)
+{
+    //Clear display
+    LcdClearAll();
+    
+    int firstStartup;
+    //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
+    At45dbPageRead(0, &firstStartup, sizeof(int));
+    
+    //If debugging is enabled, erase the firstStartup page (pgn 0)
+    if(DEBUG)
+        firstStartup = 1;
+    
+    LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+
+    At45dbPageRead(0 + sizeof(int), &timezone, sizeof(int));
+    
+    if(DEBUG)
+	LogMsg_P(LOG_INFO, PSTR("Value of timeZone: %d"), timezone);
+    
+    if(timezone < -12 || timezone > 14)
+        timezone = 0;
+    
+    //First startup or called from menu, set the timezone!
+    if(firstStartup || setTimezoneFromMenu)
+    {
+        newTimezone = timezone;
+        
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("Waiting for timeZone input"));
+
+        //Backlight should stay on during setting
+        setBacklightStayOn(BACKLIGHT_ON);
+        LcdWriteTitle("Set Timezone");
+        timeZoneSet = 0;
+        
+        //Create the Keyboard Thread for setting the timeZone
+        NutThreadCreate("KBThreadTimeZone", KBThreadTimeZone, NULL, 1024);
+
+        while(timeZoneSet != 1)
+        {
+            NutSleep(100);
+
+            //array of 20 chars should be enough for "UTC +(or -)14"
+            char output[20];
+            if(newTimezone > -1)
+                sprintf(output, "UTC +%d ", newTimezone);
+            else
+                sprintf(output, "UTC %d ", newTimezone);
+            LcdWriteSecondLine(output);
+
+            WatchDogRestart();
+        }
+
+        //Backlight can go out again
+        setBacklightStayOn(BACKLIGHT_OFF);
+        
+        if(firstStartup)
+        {
+            firstStartup = 0;
+            At45dbPageWrite(0, &firstStartup, sizeof(int));
+            if(DEBUG)
+                LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+        }
+        
+        //Time changed, because timezone changed
+        if(setTimezoneFromMenu)
+        {
+            int timezoneDifference = newTimezone - timezone;
+            
+            datetime.tm_hour += timezoneDifference;
+            //Hours can ofcourse never be more than 23...
+            if(datetime.tm_hour > 23)
+                datetime.tm_hour -= 24;
+            //...Or less than 0
+            else if(datetime.tm_hour < 0)
+                datetime.tm_hour = 24 + datetime.tm_hour;
+            //Set the timezone to the newly set timezone
+            timezone = newTimezone;
+            
+            //Write the gmt struct to RTC
+            X12RtcSetClock(&datetime);
+        }
+        
+        At45dbPageWrite(0 + sizeof(int), &timezone, sizeof(int));
+    }
+    
+    LogMsg_P(LOG_INFO, PSTR("Value of timeZone: %d"), timezone);
+        
+    //TODO use the timeZone value on startup, not working atm
+    //Clear the display
+    LcdClearAll();
+
+    //Set timezone of time.h to our timezone
+    setTimezone_timeh(&timezone);
+}
+
+/* ����������������������������������������������������������������������� */
+/*!
  * \brief Manually set the time
  * \author Bas
  */
@@ -495,8 +541,8 @@ void setTimeManually(void)
     //Create the Keyboard Thread for setting the timeZone
     NutThreadCreate("KBThreadManualTime", KBThreadManualTime, NULL, 1024);
     
-    //Backlight on during setting
-    LcdBackLight(LCD_BACKLIGHT_ON);
+    //Backlight should stay on during setting
+    setBacklightStayOn(BACKLIGHT_ON);
     //Clear the title
     LcdClearAll();
     LcdWriteTitle("Set Time Manually");
@@ -533,8 +579,8 @@ void setTimeManually(void)
     }
     //Clear display
     LcdClearAll();
-    //Backlight no longer needed, turn off
-    LcdBackLight(LCD_BACKLIGHT_OFF);
+    //Backlight no longer needed to stay on
+    setBacklightStayOn(BACKLIGHT_OFF);
     //Write the gmt struct to RTC
     X12RtcSetClock(&datetime);
     //Done, start updating the current time again
@@ -555,21 +601,17 @@ void setTimeManually(void)
 /* ����������������������������������������������������������������������� */
 int main(void)
 {
-    /*
-     *  First disable the watchdog
-     */
+    backlightStayOn = 0;
+    
     WatchDogDisable();
 
     NutDelay(100);
 
-    SysInitIO();
-	
+    SysInitIO();	
     SPIinit();
-    
     Uart0DriverInit();
     Uart0DriverStart();
     LogInit();
-
     //Initialize SDCard
     CardInit();
     //Initialize remote control
@@ -590,14 +632,13 @@ int main(void)
     if (At45dbInit()==AT45DB041B)
     {      
         //timeZone check
-        InitializeTimeZone();
+        setTimezone();
         //From now on, set the timezone from the menu
         setTimezoneFromMenu = 1;
     }
     
     //Initialize RTC
-    X12Init();
-    
+    X12Init(); 
     //Initialize network
     NetworkInit();
     
@@ -621,24 +662,11 @@ int main(void)
      */
     NutThreadSetPriority(1);
     
-    NutThreadCreate("MainA", ThreadA, NULL, 1024);
-    NutThreadCreate("MainB", ThreadB, NULL, 1024);
+    NutThreadCreate("BacklightThread", BacklightThread, NULL, 1024);
 
-    int count = 0;
     for (;;)
     {
         NutSleep(500);
-        u_char key = KbGetKey();
-        if(key != KEY_UNDEFINED)
-        {
-            count = 0;
-            LcdBackLight(LCD_BACKLIGHT_ON);
-        }
-        
-        count++;
-        
-        if(count >= 20)
-            LcdBackLight(LCD_BACKLIGHT_OFF);
         
         if(!pauseCurrentTime)
         {

@@ -8,12 +8,17 @@
 #ifndef MAIN_H
 #define	MAIN_H
 
+#define BACKLIGHT_OFF 0
+#define BACKLIGHT_ON 1
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
-void InitializeTimeZone(void);
+    
+void setTimezone(void);
 void setTimeManually(void);
+void resetBacklightCounter(void);
+void setBacklightStayOn(int);
     
 #ifdef	__cplusplus
 }
