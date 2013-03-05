@@ -11,12 +11,21 @@
 #define BACKLIGHT_OFF 0
 #define BACKLIGHT_ON 1
 
+#define DATETIME_HOURS 0
+#define DATETIME_MINUTES 1
+#define DATETIME_SECONDS 2
+
+#define DATETIME_DAYS 0
+#define DATETIME_MONTHS 1
+#define DATETIME_YEARS 2
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
     
 void setTimezone(void);
 void setTimeManually(void);
+void setDateManually(void);
 void resetBacklightCounter(void);
 void setBacklightStayOn(int);
     

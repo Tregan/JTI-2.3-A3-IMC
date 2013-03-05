@@ -63,10 +63,11 @@ int timezone;
 int newTimezone;
 int timeZoneSet;
 int setTimezoneFromMenu;
-//Time
-int timeSetManually;
-int pauseCurrentTime;
-int selectedTimeUnit;
+//Time and Date
+int selectedDatetimeUnit;
+int pauseCurrentDatetime;
+int datetimeSetManually;
+int datetimeExit;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -243,7 +244,7 @@ THREAD(KBThreadTimeZone, args)
 THREAD(KBThreadManualTime, args)
 {
     //Time units: 0 = hours, 1 = minutes, 2 = seconds
-    selectedTimeUnit = 0;
+    selectedDatetimeUnit = DATETIME_HOURS;
     
     for(;;)
     {
@@ -254,21 +255,21 @@ THREAD(KBThreadManualTime, args)
             u_char key = KbGetKey();
             if(key == KEY_UP)
             {
-                switch(selectedTimeUnit)
+                switch(selectedDatetimeUnit)
                 {
-                    case 0:
+                    case DATETIME_HOURS:
                         if(datetime.tm_hour >= 23)
                             datetime.tm_hour = 0;
                         else
                             datetime.tm_hour++;
                         break;
-                    case 1:
+                    case DATETIME_MINUTES:
                         if(datetime.tm_min >= 59)
                             datetime.tm_min = 0;
                         else
                             datetime.tm_min++;
                         break;
-                    case 2:
+                    case DATETIME_SECONDS:
                         if(datetime.tm_sec >= 59)
                             datetime.tm_sec = 0;
                         else
@@ -280,21 +281,21 @@ THREAD(KBThreadManualTime, args)
             }
             else if(key == KEY_DOWN)
             {
-                switch(selectedTimeUnit)
+                switch(selectedDatetimeUnit)
                 {
-                    case 0:
+                    case DATETIME_HOURS:
                         if(datetime.tm_hour <= 0)
                             datetime.tm_hour = 23;
                         else
                             datetime.tm_hour--;
                         break;
-                    case 1:
+                    case DATETIME_MINUTES:
                         if(datetime.tm_min <= 0)
                             datetime.tm_min = 59;
                         else
                             datetime.tm_min--;
                         break;
-                    case 2:
+                    case DATETIME_SECONDS:
                         if(datetime.tm_sec <= 0)
                             datetime.tm_sec = 59;
                         else
@@ -307,26 +308,127 @@ THREAD(KBThreadManualTime, args)
             else if(key == KEY_LEFT)
             {
                 //Set to seconds if it already is at hours
-                if(selectedTimeUnit <= 0)
+                if(selectedDatetimeUnit <= DATETIME_HOURS)
                 {
-                    selectedTimeUnit = 2;
+                    selectedDatetimeUnit = DATETIME_SECONDS;
                 }
                 else
-                    selectedTimeUnit--;
+                    selectedDatetimeUnit--;
             }
             else if(key == KEY_RIGHT)
             {
                 //Set to hours if it already is at seconds
-                if(selectedTimeUnit >= 2)
+                if(selectedDatetimeUnit >= DATETIME_SECONDS)
                 {
-                    selectedTimeUnit = 0;
+                    selectedDatetimeUnit = DATETIME_HOURS;
                 }
                 else
-                    selectedTimeUnit++;
+                    selectedDatetimeUnit++;
             }
             else if(key == KEY_OK)
             {
-                timeSetManually = 1;
+                datetimeSetManually = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
+            else if(key == KEY_ESC)
+            {
+                datetimeExit = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
+        }
+    }
+}
+
+THREAD(KBThreadManualDate, args)
+{
+    //Time units: 0 = days, 1 = months, 2 = years
+    selectedDatetimeUnit = DATETIME_DAYS;
+    
+    for(;;)
+    {
+        NutSleep(300);
+        //Wait for keyboard event
+        if(KbWaitForKeyEvent(500) != KB_ERROR)
+        {
+            u_char key = KbGetKey();
+            if(key == KEY_UP)
+            {
+                switch(selectedDatetimeUnit)
+                {
+                    case DATETIME_DAYS:
+                        if(datetime.tm_mday >= 30)
+                            datetime.tm_mday = 1;
+                        else
+                            datetime.tm_mday++;
+                        break;
+                    case DATETIME_MONTHS:
+                        if(datetime.tm_mon >= 11)
+                            datetime.tm_mon = 0;
+                        else
+                            datetime.tm_mon++;
+                        break;
+                    case DATETIME_YEARS:
+                            datetime.tm_year++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_DOWN)
+            {
+                switch(selectedDatetimeUnit)
+                {
+                    case DATETIME_DAYS:
+                        if(datetime.tm_mday <= 1)
+                            datetime.tm_mday = 31;
+                        else
+                            datetime.tm_mday--;
+                        break;
+                    case DATETIME_MONTHS:
+                        if(datetime.tm_mon <= 0)
+                            datetime.tm_mon = 11;
+                        else
+                            datetime.tm_mon--;
+                        break;
+                    case DATETIME_YEARS:
+                        if(datetime.tm_year > 0)
+                            datetime.tm_year--;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_LEFT)
+            {
+                //Set to seconds if it already is at days
+                if(selectedDatetimeUnit <= DATETIME_DAYS)
+                {
+                    selectedDatetimeUnit = DATETIME_YEARS;
+                }
+                else
+                    selectedDatetimeUnit--;
+            }
+            else if(key == KEY_RIGHT)
+            {
+                //Set to hours if it already is at seconds
+                if(selectedDatetimeUnit >= DATETIME_YEARS)
+                {
+                    selectedDatetimeUnit = DATETIME_DAYS;
+                }
+                else
+                    selectedDatetimeUnit++;
+            }
+            else if(key == KEY_OK)
+            {
+                datetimeSetManually = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
+            else if(key == KEY_ESC)
+            {
+                datetimeExit = 1;
                 //Thread no longer needed, exit please
                 NutThreadExit();
             }
@@ -530,13 +632,16 @@ void setTimezone(void)
 /* ����������������������������������������������������������������������� */
 void setTimeManually(void)
 {
+    //Create a backup of the current datetime
+    tm datetimeBackup = datetime;
+    
     //While setting the time, we do not want to see it updated, undoing our changes
-    pauseCurrentTime = 1;
+    pauseCurrentDatetime = 1;
     
     //Get the current time from RTC and store it in gmt struct
     X12RtcGetClock(&datetime);
             
-    timeSetManually = 0;
+    datetimeSetManually = 0;
     
     //Create the Keyboard Thread for setting the timeZone
     NutThreadCreate("KBThreadManualTime", KBThreadManualTime, NULL, 1024);
@@ -552,14 +657,24 @@ void setTimeManually(void)
     
     char output[20];
     
-    while(timeSetManually != 1)
+    while(datetimeSetManually != 1)
     {
         NutSleep(100);
+        
+        //If the user wants to quit, return
+        if(datetimeExit)
+        {
+            //Clear display
+            LcdClearAll();
+            
+            datetimeExit = 0;
+            return;
+        }
         
         //Clear the second line
         LcdClearLine();
         
-        switch(selectedTimeUnit)
+        switch(selectedDatetimeUnit)
         {
             case 0:
                 sprintf(output, "Set Hours: %02d", datetime.tm_hour);
@@ -581,10 +696,95 @@ void setTimeManually(void)
     LcdClearAll();
     //Backlight no longer needed to stay on
     setBacklightStayOn(BACKLIGHT_OFF);
-    //Write the gmt struct to RTC
-    X12RtcSetClock(&datetime);
+    //Write the datetime struct to RTC. In case of an error, set the backup to datetime
+    if(X12RtcSetClock(&datetime) != 0)
+        datetime = datetimeBackup;
     //Done, start updating the current time again
-    pauseCurrentTime = 0;
+    pauseCurrentDatetime = 0;
+}
+
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief Manually set the time
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
+void setDateManually(void)
+{
+    //Create a backup of the current datetime
+    tm datetimeBackup = datetime;
+    
+    //While setting the time, we do not want to see it updated, undoing our changes
+    pauseCurrentDatetime = 1;
+    
+    //Get the current time from RTC and store it in gmt struct
+    X12RtcGetClock(&datetime);
+            
+    datetimeSetManually = 0;
+    
+    //Create the Keyboard Thread for setting the timeZone
+    NutThreadCreate("KBThreadManualTime", KBThreadManualDate, NULL, 1024);
+    
+    //Backlight should stay on during setting
+    setBacklightStayOn(BACKLIGHT_ON);
+    //Clear the title
+    LcdClearAll();
+    LcdWriteTitle("Set Date Manually");
+    
+    //TODO, if time left. Not really important and needs the displaying of time changed...
+    //Show the current time, but do NOT update it! We're setting a time, updating while setting would be very silly
+    //showCurrentDate();
+    
+    char output[20];
+    
+    while(datetimeSetManually != 1)
+    {
+        NutSleep(100);
+        
+        //If the user wants to quit, return
+        if(datetimeExit)
+        {
+            //Clear display
+            LcdClearAll();
+            
+            datetimeExit = 0;
+            return;
+        }
+        
+        //Clear the second line
+        LcdClearLine();
+        
+        switch(selectedDatetimeUnit)
+        {
+            case 0:
+                sprintf(output, "Set Days: %02d", datetime.tm_mday);
+                LcdWriteSecondLine(output);
+                break;
+            case 1:
+                sprintf(output, "Set Months: %02d", datetime.tm_mon + 1);
+                LcdWriteSecondLine(output);
+                break;
+            case 2:
+                sprintf(output, "Set Years: %02d", datetime.tm_year + 1900);
+                LcdWriteSecondLine(output);
+                break;
+            default:
+                break;
+        }
+    }
+    //Clear display
+    LcdClearAll();
+    //Backlight no longer needed to stay on
+    setBacklightStayOn(BACKLIGHT_OFF);
+    //Write the datetime struct to RTC. In case of an error, set the backup to datetime
+    //TODO if there's time left, make a calendar that checks if the date is valid
+    if(X12RtcSetClock(&datetime) != 0)
+        datetime = datetimeBackup;
+    
+    printf("\nSuccess. NTP time is: %02d:%02d:%02d %d-%d-%d", datetime.tm_hour, datetime.tm_min, datetime.tm_sec, datetime.tm_mday, datetime.tm_mon + 1, datetime.tm_year + 1900);
+
+    //Done, start updating the current time again
+    pauseCurrentDatetime = 0;
 }
 
 /* ����������������������������������������������������������������������� */
@@ -649,13 +849,14 @@ int main(void)
         LcdWriteSecondLine("No time obtained");
         NutSleep(2000);
         setTimeManually();
+        setDateManually();
     }
     
     //Initialize Menu
     MenuInit();
     
     //Do not pause the updating of the current time;
-    pauseCurrentTime = 0;
+    pauseCurrentDatetime = 0;
     
     /*
      * Increase our priority so we can feed the watchdog.
@@ -668,7 +869,7 @@ int main(void)
     {
         NutSleep(500);
         
-        if(!pauseCurrentTime)
+        if(!pauseCurrentDatetime)
         {
             //Show the current time
             ShowCurrentTime();
