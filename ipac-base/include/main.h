@@ -23,11 +23,12 @@
 extern "C" {
 #endif
     
-void setTimezone(void);
-void setTimeManually(void);
-void setDateManually(void);
-void resetBacklightCounter(void);
-void setBacklightStayOn(int);
+void SetTimezone(void);
+void SyncDatetime(void);
+void SetTimeManually(void);
+void SetDateManually(void);
+void ResetBacklightCounter(void);
+void SetBacklightStayOn(int);
     
 #ifdef	__cplusplus
 }

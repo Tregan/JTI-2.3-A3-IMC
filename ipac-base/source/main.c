@@ -463,7 +463,7 @@ THREAD(BacklightThread, args)
  * \author Niels & Bas
  */
 /* ����������������������������������������������������������������������� */
-void setTimezone_timeh(int* timezone)
+void SetTimezone_timeh(int* timezone)
 {
     if((-12 <= *timezone) && (*timezone <= 14))
     {
@@ -482,7 +482,7 @@ void setTimezone_timeh(int* timezone)
  * \author Bas
  */
 /* ����������������������������������������������������������������������� */
-void resetBacklightCounter(void)
+void ResetBacklightCounter(void)
 {
     backlightCounter = 0;
 }
@@ -493,7 +493,7 @@ void resetBacklightCounter(void)
  * \author Bas
  */
 /* ����������������������������������������������������������������������� */
-void setBacklightStayOn(int stayOn)
+void SetBacklightStayOn(int stayOn)
 {
     backlightStayOn = stayOn;
 }
@@ -523,11 +523,30 @@ void ShowCurrentTime(void)
 
 /* ����������������������������������������������������������������������� */
 /*!
+ * \brief Try to syns the time and date with an NTP server
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
+void SyncDatetime(void)
+{
+    //Query NTP server and set time. If no time was set, set it manually.
+    if(!NTP(&datetime))
+    {
+        LcdWriteTitle("Failed.");
+        LcdWriteSecondLine("No time obtained");
+        NutSleep(2000);
+        SetTimeManually();
+        SetDateManually();
+    }
+}
+
+/* ����������������������������������������������������������������������� */
+/*!
  * \brief Starts the check for firstStartup, and if so: waits for timeZone input
  * \author Bas
  */
 /* ����������������������������������������������������������������������� */
-void setTimezone(void)
+void SetTimezone(void)
 {
     //Clear display
     LcdClearAll();
@@ -559,7 +578,7 @@ void setTimezone(void)
             LogMsg_P(LOG_INFO, PSTR("Waiting for timeZone input"));
 
         //Backlight should stay on during setting
-        setBacklightStayOn(BACKLIGHT_ON);
+        SetBacklightStayOn(BACKLIGHT_ON);
         LcdWriteTitle("Set Timezone");
         timeZoneSet = 0;
         
@@ -582,7 +601,7 @@ void setTimezone(void)
         }
 
         //Backlight can go out again
-        setBacklightStayOn(BACKLIGHT_OFF);
+        SetBacklightStayOn(BACKLIGHT_OFF);
         
         if(firstStartup)
         {
@@ -621,7 +640,7 @@ void setTimezone(void)
     LcdClearAll();
 
     //Set timezone of time.h to our timezone
-    setTimezone_timeh(&timezone);
+    SetTimezone_timeh(&timezone);
 }
 
 /* ����������������������������������������������������������������������� */
@@ -630,7 +649,7 @@ void setTimezone(void)
  * \author Bas
  */
 /* ����������������������������������������������������������������������� */
-void setTimeManually(void)
+void SetTimeManually(void)
 {
     //Create a backup of the current datetime
     tm datetimeBackup = datetime;
@@ -647,7 +666,7 @@ void setTimeManually(void)
     NutThreadCreate("KBThreadManualTime", KBThreadManualTime, NULL, 1024);
     
     //Backlight should stay on during setting
-    setBacklightStayOn(BACKLIGHT_ON);
+    SetBacklightStayOn(BACKLIGHT_ON);
     //Clear the title
     LcdClearAll();
     LcdWriteTitle("Set Time Manually");
@@ -695,7 +714,7 @@ void setTimeManually(void)
     //Clear display
     LcdClearAll();
     //Backlight no longer needed to stay on
-    setBacklightStayOn(BACKLIGHT_OFF);
+    SetBacklightStayOn(BACKLIGHT_OFF);
     //Write the datetime struct to RTC. In case of an error, set the backup to datetime
     if(X12RtcSetClock(&datetime) != 0)
         datetime = datetimeBackup;
@@ -709,7 +728,7 @@ void setTimeManually(void)
  * \author Bas
  */
 /* ����������������������������������������������������������������������� */
-void setDateManually(void)
+void SetDateManually(void)
 {
     //Create a backup of the current datetime
     tm datetimeBackup = datetime;
@@ -726,7 +745,7 @@ void setDateManually(void)
     NutThreadCreate("KBThreadManualTime", KBThreadManualDate, NULL, 1024);
     
     //Backlight should stay on during setting
-    setBacklightStayOn(BACKLIGHT_ON);
+    SetBacklightStayOn(BACKLIGHT_ON);
     //Clear the title
     LcdClearAll();
     LcdWriteTitle("Set Date Manually");
@@ -775,7 +794,7 @@ void setDateManually(void)
     //Clear display
     LcdClearAll();
     //Backlight no longer needed to stay on
-    setBacklightStayOn(BACKLIGHT_OFF);
+    SetBacklightStayOn(BACKLIGHT_OFF);
     //Write the datetime struct to RTC. In case of an error, set the backup to datetime
     //TODO if there's time left, make a calendar that checks if the date is valid
     if(X12RtcSetClock(&datetime) != 0)
@@ -832,7 +851,7 @@ int main(void)
     if (At45dbInit()==AT45DB041B)
     {      
         //timeZone check
-        setTimezone();
+        SetTimezone();
         //From now on, set the timezone from the menu
         setTimezoneFromMenu = 1;
     }
@@ -842,15 +861,8 @@ int main(void)
     //Initialize network
     NetworkInit();
     
-    //Query NTP server and set time. If no time was set, set it manually.
-    if(!NTP(&datetime))
-    {
-        LcdWriteTitle("Failed.");
-        LcdWriteSecondLine("No time obtained");
-        NutSleep(2000);
-        setTimeManually();
-        setDateManually();
-    }
+    //Try to sync the time and date with an NTP server
+    SyncDatetime();
     
     //Initialize Menu
     MenuInit();
