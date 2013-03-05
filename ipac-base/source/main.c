@@ -61,12 +61,8 @@ int timeZoneSet;
 int timeSetManually;
 int setTimezoneFromMenu;
 int selectedTimeUnit;
-int alarmAset;
-int alarmBset;
 //Kroeske: time struct uit nut/os time.h (http://www.ethernut.de/api/time_8h-source.html)
 tm datetime;
-tm alarmA;
-tm alarmB;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -328,228 +324,6 @@ THREAD(KBThreadManualTime, args)
     }
 }
 
-/*!
- * \brief setting Alarm A thread
- * 
- * even kijken of dit zo blijft of dat het makkelijker kan, (dit is eigenlijk precies het zelfde als de set time)
- * 
- * \author Bas, Matthijs
- */
-THREAD(SetAlarmAThread, args)
-{
-    selectedTimeUnit = 0;
-    
-    for(;;)
-    {
-        NutSleep(300);
-        //Wait for keyboard event
-        if(KbWaitForKeyEvent(500) != KB_ERROR)
-        {
-            u_char key = KbGetKey();
-            if(key == KEY_UP)
-            {
-                switch(selectedTimeUnit)
-                {
-                    case 0:
-                        if(alarmA.tm_hour >= 23)
-                            alarmA.tm_hour = 0;
-                        else
-                            alarmA.tm_hour++;
-                        break;
-                    case 1:
-                        if(alarmA.tm_min >= 59)
-                            alarmA.tm_min = 0;
-                        else
-                            alarmA.tm_min++;
-                        break;
-                    case 2:
-                        if(alarmA.tm_sec >= 59)
-                            alarmA.tm_sec = 0;
-                        else
-                            alarmA.tm_sec++;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if(key == KEY_DOWN)
-            {
-                switch(selectedTimeUnit)
-                {
-                    case 0:
-                        if(alarmA.tm_hour <= 0)
-                            alarmA.tm_hour = 23;
-                        else
-                            alarmA.tm_hour--;
-                        break;
-                    case 1:
-                        if(alarmA.tm_min <= 0)
-                            alarmA.tm_min = 59;
-                        else
-                            alarmA.tm_min--;
-                        break;
-                    case 2:
-                        if(alarmA.tm_sec <= 0)
-                            alarmA.tm_sec = 59;
-                        else
-                            alarmA.tm_sec--;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if(key == KEY_LEFT)
-            {
-                //Set to seconds if it already is at hours
-                if(selectedTimeUnit <= 0)
-                {
-                    selectedTimeUnit = 2;
-                }
-                else
-                    selectedTimeUnit--;
-            }
-            else if(key == KEY_RIGHT)
-            {
-                //Set to hours if it already is at seconds
-                if(selectedTimeUnit >= 2)
-                {
-                    selectedTimeUnit = 0;
-                }
-                else
-                    selectedTimeUnit++;
-            }
-            else if(key == KEY_OK)
-            {
-                alarmAset = 1;
-                //Thread no longer needed, exit please
-                NutThreadExit();
-            }
-        }
-    }
-}
-
-/*!
- * \brief setting Alarm B thread
- * 
- * aangevuld met de datum door Matthijs
- * 
- * \author Bas, Matthijs
- */
-THREAD(SetAlarmBThread, args)
-{
-    selectedTimeUnit = 0;
-    
-    for(;;)
-    {
-        NutSleep(300);
-        //Wait for keyboard event
-        if(KbWaitForKeyEvent(500) != KB_ERROR)
-        {
-            u_char key = KbGetKey();
-            if(key == KEY_UP)
-            {
-                switch(selectedTimeUnit)
-                {
-                    case 0:
-                        if(alarmB.tm_mon >= 11)
-                            alarmB.tm_mon = 0;
-                        else
-                            alarmB.tm_mon++;
-                        break;
-                    case 1:
-                        if(alarmB.tm_mday >= 31)
-                            alarmB.tm_mday = 1;
-                        else
-                            alarmB.tm_mday++;
-                        break;
-                    case 2:
-                        if(alarmB.tm_hour >= 23)
-                            alarmB.tm_hour = 0;
-                        else
-                            alarmB.tm_hour++;
-                        break;
-                    case 3:
-                        if(alarmB.tm_min >= 59)
-                            alarmB.tm_min = 0;
-                        else
-                            alarmB.tm_min++;
-                        break;
-                    case 4:
-                        if(alarmB.tm_sec >= 59)
-                            alarmB.tm_sec = 0;
-                        else
-                            alarmB.tm_sec++;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if(key == KEY_DOWN)
-            {
-                switch(selectedTimeUnit)
-                {
-                    case 0:
-                        if(alarmB.tm_mon <= 0)
-                            alarmB.tm_mon = 11;
-                        else
-                            alarmB.tm_mon--;
-                        break;
-                    case 1:
-                        if(alarmB.tm_mday <= 1)
-                            alarmB.tm_mday = 31;
-                        else
-                            alarmB.tm_mday--;
-                        break;
-                    case 2:
-                        if(alarmB.tm_hour <= 0)
-                            alarmB.tm_hour = 23;
-                        else
-                            alarmB.tm_hour--;
-                        break;
-                    case 3:
-                        if(alarmB.tm_min <= 0)
-                            alarmB.tm_min = 59;
-                        else
-                            alarmB.tm_min--;
-                        break;
-                    case 4:
-                        if(alarmB.tm_sec <= 0)
-                            alarmB.tm_sec = 59;
-                        else
-                            alarmB.tm_sec--;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if(key == KEY_LEFT)
-            {
-                if(selectedTimeUnit <= 0)
-                {
-                    selectedTimeUnit = 4;
-                }
-                else
-                    selectedTimeUnit--;
-            }
-            else if(key == KEY_RIGHT)
-            {
-                if(selectedTimeUnit >= 4)
-                {
-                    selectedTimeUnit = 0;
-                }
-                else
-                    selectedTimeUnit++;
-            }
-            else if(key == KEY_OK)
-            {
-                alarmBset = 1;
-                //Thread no longer needed, exit please
-                NutThreadExit();
-            }
-        }
-    }
-}
-
 //ThreadA for turning on LED
 THREAD(ThreadA, args)
 {
@@ -769,126 +543,6 @@ void setTimeManually(void)
     pauseCurrentTime = 0;
 }
 
-/*!
- * \brief set Alarm A
- * \author Matthijs, Bas
- */
-void AlarmAMenu(void)
-{
-    int flags;
-    //alarm ophalen
-    X12RtcGetAlarm(0,&alarmA, &flags);  
-    alarmAset = 0;
-    
-    //key listener starten
-    NutThreadCreate("SetAlarmAThread", SetAlarmAThread, NULL, 1024);
-    
-    char output[20];
-    //Backlight on during setting
-    LcdBackLight(LCD_BACKLIGHT_ON);
-    //Clear the title
-    LcdClearAll();
-    LcdWriteTitle("Set Alarm A");
-    
-    ShowCurrentTime();
-    
-    while(alarmAset != 1)
-    {
-        NutSleep(100);
-        
-        //Clear the second line
-        LcdClearLine();
-        
-        switch(selectedTimeUnit)
-        {
-            case 0:
-                sprintf(output, "Set Hours: %02d", alarmA.tm_hour);
-                LcdWriteSecondLine(output);
-                break;
-            case 1:
-                sprintf(output, "Set Minutes: %02d", alarmA.tm_min);
-                LcdWriteSecondLine(output);
-                break;
-            case 2:
-                sprintf(output, "Set Seconds: %02d", alarmA.tm_sec);
-                LcdWriteSecondLine(output);
-                break;
-            default:
-                break;
-        }
-    }
-    
-    LcdClearAll();
-    //Backlight no longer needed, turn off
-    LcdBackLight(LCD_BACKLIGHT_OFF);
-    //set Alarm A
-    X12RtcSetAlarm(0,&alarmA,7);
-}
-
-/*!
- * \brief set Alarm B
- * \author Matthijs, Bas
- */
-void AlarmBMenu(void)
-{
-    int flags;
-    //alarm ophalen
-    X12RtcGetAlarm(1,&alarmB, &flags);  
-    alarmBset = 0;
-    
-    //key listener starten
-    NutThreadCreate("SetAlarmBThread", SetAlarmBThread, NULL, 1024);
-    
-    char output[20];
-    //Backlight on during setting
-    LcdBackLight(LCD_BACKLIGHT_ON);
-    //Clear the title
-    LcdClearAll();
-    LcdWriteTitle("Set Alarm B");
-    
-    ShowCurrentTime();
-    
-    while(alarmBset != 1)
-    {
-        NutSleep(100);
-        
-        //Clear the second line
-        LcdClearLine();
-        
-        switch(selectedTimeUnit)
-        {
-            case 0:
-                sprintf(output, "Set Month: %02d", alarmB.tm_mon);
-                LcdWriteSecondLine(output);
-                break;
-            case 1:
-                sprintf(output, "Set Day: %02d", alarmB.tm_mday);
-                LcdWriteSecondLine(output);
-                break;
-            case 2:
-                sprintf(output, "Set Hour: %02d", alarmB.tm_hour);
-                LcdWriteSecondLine(output);
-                break;
-            case 3:
-                sprintf(output, "Set Minutes: %02d", alarmB.tm_min);
-                LcdWriteSecondLine(output);
-                break;
-             case 4:
-                sprintf(output, "Set Seconds: %02d", alarmB.tm_sec);
-                LcdWriteSecondLine(output);
-                break;
-            default:
-                break;
-        }
-    }
-    
-    LcdClearAll();
-    //Backlight no longer needed, turn off
-    LcdBackLight(LCD_BACKLIGHT_OFF);
-    //set Alarm B
-    X12RtcSetAlarm(1,&alarmB,31);
-}
-
 /* ����������������������������������������������������������������������� */
 /*!
  * \brief Main entry of the SIR firmware
@@ -938,9 +592,9 @@ int main(void)
     if (At45dbInit()==AT45DB041B)
     {      
         //timeZone check
-        //InitializeTimeZone();
+        InitializeTimeZone();
         //From now on, set the timezone from the menu
-        //setTimezoneFromMenu = 1;
+        setTimezoneFromMenu = 1;
     }
     
     //Initialize RTC
@@ -971,7 +625,7 @@ int main(void)
     
     NutThreadCreate("MainA", ThreadA, NULL, 1024);
     NutThreadCreate("MainB", ThreadB, NULL, 1024);
-    
+
     int count = 0;
     for (;;)
     {
@@ -996,7 +650,7 @@ int main(void)
         
         WatchDogRestart();
     }
-    
+
     return(0);      // never reached, but 'main()' returns a non-void, so.....
 }
 /* ---------- end of module ------------------------------------------------ */

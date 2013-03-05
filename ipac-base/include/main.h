@@ -14,8 +14,6 @@ extern "C" {
 
 void InitializeTimeZone(void);
 void setTimeManually(void);
-void AlarmAMenu(void);
-void AlarmBMenu(void);
     
 #ifdef	__cplusplus
 }

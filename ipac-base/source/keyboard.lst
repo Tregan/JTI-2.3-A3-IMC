@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 1
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s 			page 1
 
 
    1               		.file	"keyboard.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 1
   55 003e 991F      		rol r25
   56 0040 3A95      		dec r19
   57 0042 01F4      		brne 1b
-GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 2
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s 			page 2
 
 
   58 0044 682B      		or r22,r24
@@ -96,326 +96,314 @@ GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 1
   90 0088 00C0      		rjmp .L3
   91 008a 6F5F      		subi r22,lo8(-2049)
   92 008c 774F      		sbci r23,hi8(-2049)
-  93 008e 01F0      		breq .+2
-  94 0090 00C0      		rjmp .L2
-  95 0092 00C0      		rjmp .L4
-  96               	.L18:
-  97 0094 8EEF      		ldi r24,hi8(-257)
-  98 0096 6F3F      		cpi r22,lo8(-257)
-  99 0098 7807      		cpc r23,r24
- 100 009a 01F4      		brne .+2
- 101 009c 00C0      		rjmp .L7
- 102 009e 8FEF      		ldi r24,hi8(-129)
- 103 00a0 6F37      		cpi r22,lo8(-129)
- 104 00a2 7807      		cpc r23,r24
- 105 00a4 01F0      		breq .L8
- 106 00a6 6F5F      		subi r22,lo8(-513)
- 107 00a8 7D4F      		sbci r23,hi8(-513)
- 108 00aa 01F0      		breq .+2
- 109 00ac 00C0      		rjmp .L2
- 110 00ae 00C0      		rjmp .L6
- 111               	.L17:
- 112 00b0 8FEF      		ldi r24,hi8(-9)
- 113 00b2 673F      		cpi r22,lo8(-9)
- 114 00b4 7807      		cpc r23,r24
-GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 3
+  93 008e 01F4      		brne .L2
+  94 0090 00C0      		rjmp .L4
+  95               	.L18:
+  96 0092 8EEF      		ldi r24,hi8(-257)
+  97 0094 6F3F      		cpi r22,lo8(-257)
+  98 0096 7807      		cpc r23,r24
+  99 0098 01F4      		brne .+2
+ 100 009a 00C0      		rjmp .L7
+ 101 009c 8FEF      		ldi r24,hi8(-129)
+ 102 009e 6F37      		cpi r22,lo8(-129)
+ 103 00a0 7807      		cpc r23,r24
+ 104 00a2 01F0      		breq .L8
+ 105 00a4 6F5F      		subi r22,lo8(-513)
+ 106 00a6 7D4F      		sbci r23,hi8(-513)
+ 107 00a8 01F4      		brne .L2
+ 108 00aa 00C0      		rjmp .L6
+ 109               	.L17:
+ 110 00ac 8FEF      		ldi r24,hi8(-9)
+ 111 00ae 673F      		cpi r22,lo8(-9)
+ 112 00b0 7807      		cpc r23,r24
+ 113 00b2 01F0      		breq .L13
+ 114 00b4 8FEF      		ldi r24,hi8(-8)
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s 			page 3
 
 
- 115 00b6 01F0      		breq .L13
- 116 00b8 8FEF      		ldi r24,hi8(-8)
- 117 00ba 683F      		cpi r22,lo8(-8)
- 118 00bc 7807      		cpc r23,r24
- 119 00be 00F4      		brsh .L19
- 120 00c0 8FEF      		ldi r24,hi8(-33)
- 121 00c2 6F3D      		cpi r22,lo8(-33)
- 122 00c4 7807      		cpc r23,r24
- 123 00c6 01F0      		breq .L11
- 124 00c8 8FEF      		ldi r24,hi8(-17)
- 125 00ca 6F3E      		cpi r22,lo8(-17)
- 126 00cc 7807      		cpc r23,r24
- 127 00ce 01F0      		breq .L12
- 128 00d0 6F5C      		subi r22,lo8(-49)
- 129 00d2 7F4F      		sbci r23,hi8(-49)
- 130 00d4 01F4      		brne .L2
- 131 00d6 00C0      		rjmp .L10
- 132               	.L19:
- 133 00d8 8FEF      		ldi r24,hi8(-3)
- 134 00da 6D3F      		cpi r22,lo8(-3)
- 135 00dc 7807      		cpc r23,r24
- 136 00de 01F0      		breq .L15
- 137 00e0 8FEF      		ldi r24,hi8(-2)
- 138 00e2 6E3F      		cpi r22,lo8(-2)
- 139 00e4 7807      		cpc r23,r24
- 140 00e6 01F0      		breq .L16
- 141 00e8 6B5F      		subi r22,lo8(-5)
- 142 00ea 7F4F      		sbci r23,hi8(-5)
- 143 00ec 01F4      		brne .L2
- 144 00ee 81E0      		ldi r24,lo8(1)
- 145 00f0 90E0      		ldi r25,hi8(1)
- 146 00f2 00C0      		rjmp .L20
- 147               	.L15:
- 148 00f4 82E0      		ldi r24,lo8(2)
- 149 00f6 90E0      		ldi r25,hi8(2)
- 150 00f8 00C0      		rjmp .L20
- 151               	.L8:
- 152 00fa 83E0      		ldi r24,lo8(3)
- 153 00fc 90E0      		ldi r25,hi8(3)
- 154 00fe 00C0      		rjmp .L20
- 155               	.L13:
- 156 0100 84E0      		ldi r24,lo8(4)
- 157 0102 90E0      		ldi r25,hi8(4)
- 158 0104 00C0      		rjmp .L20
- 159               	.L16:
- 160 0106 85E0      		ldi r24,lo8(5)
- 161 0108 90E0      		ldi r25,hi8(5)
- 162 010a 00C0      		rjmp .L20
- 163               	.L9:
- 164 010c 86E0      		ldi r24,lo8(6)
- 165 010e 90E0      		ldi r25,hi8(6)
- 166 0110 00C0      		rjmp .L20
- 167               	.L12:
- 168 0112 87E0      		ldi r24,lo8(7)
- 169 0114 90E0      		ldi r25,hi8(7)
- 170 0116 00C0      		rjmp .L20
- 171               	.L4:
-GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 4
+ 115 00b6 683F      		cpi r22,lo8(-8)
+ 116 00b8 7807      		cpc r23,r24
+ 117 00ba 00F4      		brsh .L19
+ 118 00bc 8FEF      		ldi r24,hi8(-33)
+ 119 00be 6F3D      		cpi r22,lo8(-33)
+ 120 00c0 7807      		cpc r23,r24
+ 121 00c2 01F0      		breq .L11
+ 122 00c4 8FEF      		ldi r24,hi8(-17)
+ 123 00c6 6F3E      		cpi r22,lo8(-17)
+ 124 00c8 7807      		cpc r23,r24
+ 125 00ca 01F0      		breq .L12
+ 126 00cc 6F5C      		subi r22,lo8(-49)
+ 127 00ce 7F4F      		sbci r23,hi8(-49)
+ 128 00d0 01F4      		brne .L2
+ 129 00d2 00C0      		rjmp .L10
+ 130               	.L19:
+ 131 00d4 8FEF      		ldi r24,hi8(-3)
+ 132 00d6 6D3F      		cpi r22,lo8(-3)
+ 133 00d8 7807      		cpc r23,r24
+ 134 00da 01F0      		breq .L15
+ 135 00dc 8FEF      		ldi r24,hi8(-2)
+ 136 00de 6E3F      		cpi r22,lo8(-2)
+ 137 00e0 7807      		cpc r23,r24
+ 138 00e2 01F0      		breq .L16
+ 139 00e4 6B5F      		subi r22,lo8(-5)
+ 140 00e6 7F4F      		sbci r23,hi8(-5)
+ 141 00e8 01F4      		brne .L2
+ 142 00ea 00C0      		rjmp .L14
+ 143               	.L10:
+ 144 00ec 8EE0      		ldi r24,lo8(14)
+ 145 00ee 90E0      		ldi r25,hi8(14)
+ 146 00f0 00C0      		rjmp .L20
+ 147               	.L2:
+ 148 00f2 88E8      		ldi r24,lo8(136)
+ 149 00f4 90E0      		ldi r25,hi8(136)
+ 150 00f6 00C0      		rjmp .L20
+ 151               	.L14:
+ 152 00f8 81E0      		ldi r24,lo8(1)
+ 153 00fa 90E0      		ldi r25,hi8(1)
+ 154 00fc 00C0      		rjmp .L20
+ 155               	.L15:
+ 156 00fe 82E0      		ldi r24,lo8(2)
+ 157 0100 90E0      		ldi r25,hi8(2)
+ 158 0102 00C0      		rjmp .L20
+ 159               	.L8:
+ 160 0104 83E0      		ldi r24,lo8(3)
+ 161 0106 90E0      		ldi r25,hi8(3)
+ 162 0108 00C0      		rjmp .L20
+ 163               	.L13:
+ 164 010a 84E0      		ldi r24,lo8(4)
+ 165 010c 90E0      		ldi r25,hi8(4)
+ 166 010e 00C0      		rjmp .L20
+ 167               	.L16:
+ 168 0110 85E0      		ldi r24,lo8(5)
+ 169 0112 90E0      		ldi r25,hi8(5)
+ 170 0114 00C0      		rjmp .L20
+ 171               	.L9:
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s 			page 4
 
 
- 172 0118 88E0      		ldi r24,lo8(8)
- 173 011a 90E0      		ldi r25,hi8(8)
- 174 011c 00C0      		rjmp .L20
- 175               	.L11:
- 176 011e 89E0      		ldi r24,lo8(9)
- 177 0120 90E0      		ldi r25,hi8(9)
- 178 0122 00C0      		rjmp .L20
- 179               	.L7:
- 180 0124 8AE0      		ldi r24,lo8(10)
- 181 0126 90E0      		ldi r25,hi8(10)
- 182 0128 00C0      		rjmp .L20
- 183               	.L5:
- 184 012a 8BE0      		ldi r24,lo8(11)
- 185 012c 90E0      		ldi r25,hi8(11)
- 186 012e 00C0      		rjmp .L20
- 187               	.L6:
- 188 0130 8CE0      		ldi r24,lo8(12)
- 189 0132 90E0      		ldi r25,hi8(12)
- 190 0134 00C0      		rjmp .L20
- 191               	.L3:
- 192 0136 8DE0      		ldi r24,lo8(13)
- 193 0138 90E0      		ldi r25,hi8(13)
- 194 013a 00C0      		rjmp .L20
- 195               	.L2:
- 196 013c 88E8      		ldi r24,lo8(-120)
- 197 013e 8093 0000 		sts KeyBuffer,r24
- 198 0142 0895      		ret
- 199               	.L22:
- 200 0144 8FEF      		ldi r24,lo8(-1)
- 201 0146 9FEF      		ldi r25,hi8(-1)
- 202 0148 9093 0000 		sts (hKBEvent)+1,r25
- 203 014c 8093 0000 		sts hKBEvent,r24
- 204 0150 0895      		ret
- 205               	.L26:
- 206 0152 8FEF      		ldi r24,hi8(-1)
- 207 0154 EF3F      		cpi r30,lo8(-1)
- 208 0156 F807      		cpc r31,r24
- 209 0158 01F0      		breq .L25
- 210 015a 8481      		ldd r24,Z+4
- 211 015c 9581      		ldd r25,Z+5
- 212 015e 0196      		adiw r24,1
- 213 0160 9583      		std Z+5,r25
- 214 0162 8483      		std Z+4,r24
- 215 0164 0895      		ret
- 216               	.L10:
- 217 0166 8EE0      		ldi r24,lo8(14)
- 218 0168 90E0      		ldi r25,hi8(14)
- 219               	.L20:
- 220 016a 8093 0000 		sts KeyBuffer,r24
- 221 016e E091 0000 		lds r30,hKBEvent
- 222 0172 F091 0000 		lds r31,(hKBEvent)+1
- 223 0176 3097      		sbiw r30,0
- 224 0178 01F4      		brne .L26
- 225 017a 00C0      		rjmp .L22
- 226               	.L25:
- 227 017c 0895      		ret
- 228               	/* epilogue: frame size=0 */
-GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 5
+ 172 0116 86E0      		ldi r24,lo8(6)
+ 173 0118 90E0      		ldi r25,hi8(6)
+ 174 011a 00C0      		rjmp .L20
+ 175               	.L12:
+ 176 011c 87E0      		ldi r24,lo8(7)
+ 177 011e 90E0      		ldi r25,hi8(7)
+ 178 0120 00C0      		rjmp .L20
+ 179               	.L4:
+ 180 0122 88E0      		ldi r24,lo8(8)
+ 181 0124 90E0      		ldi r25,hi8(8)
+ 182 0126 00C0      		rjmp .L20
+ 183               	.L11:
+ 184 0128 89E0      		ldi r24,lo8(9)
+ 185 012a 90E0      		ldi r25,hi8(9)
+ 186 012c 00C0      		rjmp .L20
+ 187               	.L7:
+ 188 012e 8AE0      		ldi r24,lo8(10)
+ 189 0130 90E0      		ldi r25,hi8(10)
+ 190 0132 00C0      		rjmp .L20
+ 191               	.L5:
+ 192 0134 8BE0      		ldi r24,lo8(11)
+ 193 0136 90E0      		ldi r25,hi8(11)
+ 194 0138 00C0      		rjmp .L20
+ 195               	.L6:
+ 196 013a 8CE0      		ldi r24,lo8(12)
+ 197 013c 90E0      		ldi r25,hi8(12)
+ 198 013e 00C0      		rjmp .L20
+ 199               	.L3:
+ 200 0140 8DE0      		ldi r24,lo8(13)
+ 201 0142 90E0      		ldi r25,hi8(13)
+ 202               	.L20:
+ 203 0144 8093 0000 		sts KeyBuffer,r24
+ 204               	/* epilogue: frame size=0 */
+ 205 0148 0895      		ret
+ 206               	/* epilogue end (size=1) */
+ 207               	/* function KbScan size 177 (176) */
+ 208               		.size	KbScan, .-KbScan
+ 209               	.global	KbSetKeyRepeating
+ 210               		.type	KbSetKeyRepeating, @function
+ 211               	KbSetKeyRepeating:
+ 212               	/* prologue: frame size=0 */
+ 213               	/* prologue end (size=0) */
+ 214 014a E82F      		mov r30,r24
+ 215 014c 862F      		mov r24,r22
+ 216 014e 8150      		subi r24,lo8(-(-1))
+ 217 0150 8230      		cpi r24,lo8(2)
+ 218 0152 00F4      		brsh .L26
+ 219 0154 E031      		cpi r30,lo8(16)
+ 220 0156 00F4      		brsh .L26
+ 221 0158 FF27      		clr r31
+ 222 015a E050      		subi r30,lo8(-(KeyRepeatArray))
+ 223 015c F040      		sbci r31,hi8(-(KeyRepeatArray))
+ 224 015e 6083      		st Z,r22
+ 225               	.L26:
+ 226 0160 0895      		ret
+ 227               	/* epilogue: frame size=0 */
+ 228               	/* epilogue: noreturn */
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s 			page 5
 
 
- 229               	/* epilogue: noreturn */
- 230               	/* epilogue end (size=0) */
- 231               	/* function KbScan size 203 (203) */
- 232               		.size	KbScan, .-KbScan
- 233               	.global	KbSetKeyRepeating
- 234               		.type	KbSetKeyRepeating, @function
- 235               	KbSetKeyRepeating:
- 236               	/* prologue: frame size=0 */
- 237               	/* prologue end (size=0) */
- 238 017e E82F      		mov r30,r24
- 239 0180 862F      		mov r24,r22
- 240 0182 8150      		subi r24,lo8(-(-1))
- 241 0184 8230      		cpi r24,lo8(2)
- 242 0186 00F4      		brsh .L31
- 243 0188 E031      		cpi r30,lo8(16)
- 244 018a 00F4      		brsh .L31
- 245 018c FF27      		clr r31
- 246 018e E050      		subi r30,lo8(-(KeyRepeatArray))
- 247 0190 F040      		sbci r31,hi8(-(KeyRepeatArray))
- 248 0192 6083      		st Z,r22
- 249               	.L31:
- 250 0194 0895      		ret
- 251               	/* epilogue: frame size=0 */
- 252               	/* epilogue: noreturn */
- 253               	/* epilogue end (size=0) */
- 254               	/* function KbSetKeyRepeating size 12 (12) */
- 255               		.size	KbSetKeyRepeating, .-KbSetKeyRepeating
- 256               	.global	KbGetKey
- 257               		.type	KbGetKey, @function
- 258               	KbGetKey:
- 259               	/* prologue: frame size=0 */
- 260               	/* prologue end (size=0) */
- 261 0196 8091 0000 		lds r24,KeyBuffer
- 262 019a 9927      		clr r25
- 263               	/* epilogue: frame size=0 */
- 264 019c 0895      		ret
- 265               	/* epilogue end (size=1) */
- 266               	/* function KbGetKey size 4 (3) */
- 267               		.size	KbGetKey, .-KbGetKey
- 268               	.global	KbInjectKey
- 269               		.type	KbInjectKey, @function
- 270               	KbInjectKey:
- 271               	/* prologue: frame size=0 */
- 272               	/* prologue end (size=0) */
- 273 019e 8093 0000 		sts KeyBuffer,r24
- 274 01a2 E091 0000 		lds r30,hKBEvent
- 275 01a6 F091 0000 		lds r31,(hKBEvent)+1
- 276 01aa 3097      		sbiw r30,0
- 277 01ac 01F4      		brne .L35
- 278 01ae 8FEF      		ldi r24,lo8(-1)
- 279 01b0 9FEF      		ldi r25,hi8(-1)
- 280 01b2 9093 0000 		sts (hKBEvent)+1,r25
- 281 01b6 8093 0000 		sts hKBEvent,r24
- 282 01ba 0895      		ret
- 283               	.L35:
- 284 01bc 8FEF      		ldi r24,hi8(-1)
- 285 01be EF3F      		cpi r30,lo8(-1)
-GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 6
+ 229               	/* epilogue end (size=0) */
+ 230               	/* function KbSetKeyRepeating size 12 (12) */
+ 231               		.size	KbSetKeyRepeating, .-KbSetKeyRepeating
+ 232               	.global	KbGetKey
+ 233               		.type	KbGetKey, @function
+ 234               	KbGetKey:
+ 235               	/* prologue: frame size=0 */
+ 236               	/* prologue end (size=0) */
+ 237 0162 8091 0000 		lds r24,KeyBuffer
+ 238 0166 9927      		clr r25
+ 239               	/* epilogue: frame size=0 */
+ 240 0168 0895      		ret
+ 241               	/* epilogue end (size=1) */
+ 242               	/* function KbGetKey size 4 (3) */
+ 243               		.size	KbGetKey, .-KbGetKey
+ 244               	.global	KbInjectKey
+ 245               		.type	KbInjectKey, @function
+ 246               	KbInjectKey:
+ 247               	/* prologue: frame size=0 */
+ 248               	/* prologue end (size=0) */
+ 249 016a 8093 0000 		sts KeyBuffer,r24
+ 250 016e E091 0000 		lds r30,hKBEvent
+ 251 0172 F091 0000 		lds r31,(hKBEvent)+1
+ 252 0176 3097      		sbiw r30,0
+ 253 0178 01F4      		brne .L30
+ 254 017a 8FEF      		ldi r24,lo8(-1)
+ 255 017c 9FEF      		ldi r25,hi8(-1)
+ 256 017e 9093 0000 		sts (hKBEvent)+1,r25
+ 257 0182 8093 0000 		sts hKBEvent,r24
+ 258 0186 0895      		ret
+ 259               	.L30:
+ 260 0188 8FEF      		ldi r24,hi8(-1)
+ 261 018a EF3F      		cpi r30,lo8(-1)
+ 262 018c F807      		cpc r31,r24
+ 263 018e 01F0      		breq .L34
+ 264 0190 8481      		ldd r24,Z+4
+ 265 0192 9581      		ldd r25,Z+5
+ 266 0194 0196      		adiw r24,1
+ 267 0196 9583      		std Z+5,r25
+ 268 0198 8483      		std Z+4,r24
+ 269               	.L34:
+ 270 019a 0895      		ret
+ 271               	/* epilogue: frame size=0 */
+ 272               	/* epilogue: noreturn */
+ 273               	/* epilogue end (size=0) */
+ 274               	/* function KbInjectKey size 25 (25) */
+ 275               		.size	KbInjectKey, .-KbInjectKey
+ 276               	.global	KbInit
+ 277               		.type	KbInit, @function
+ 278               	KbInit:
+ 279               	/* prologue: frame size=0 */
+ 280               	/* prologue end (size=0) */
+ 281 019c A39A      		sbi 52-0x20,3
+ 282 019e A49A      		sbi 52-0x20,4
+ 283 01a0 5B9A      		sbi 43-0x20,3
+ 284 01a2 5A9A      		sbi 43-0x20,2
+ 285 01a4 1092 0000 		sts KbState,__zero_reg__
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s 			page 6
 
 
- 286 01c0 F807      		cpc r31,r24
- 287 01c2 01F0      		breq .L39
- 288 01c4 8481      		ldd r24,Z+4
- 289 01c6 9581      		ldd r25,Z+5
- 290 01c8 0196      		adiw r24,1
- 291 01ca 9583      		std Z+5,r25
- 292 01cc 8483      		std Z+4,r24
- 293               	.L39:
- 294 01ce 0895      		ret
- 295               	/* epilogue: frame size=0 */
- 296               	/* epilogue: noreturn */
- 297               	/* epilogue end (size=0) */
- 298               	/* function KbInjectKey size 25 (25) */
- 299               		.size	KbInjectKey, .-KbInjectKey
- 300               	.global	KbInit
- 301               		.type	KbInit, @function
- 302               	KbInit:
- 303               	/* prologue: frame size=0 */
- 304               	/* prologue end (size=0) */
- 305 01d0 A39A      		sbi 52-0x20,3
- 306 01d2 A49A      		sbi 52-0x20,4
- 307 01d4 5B9A      		sbi 43-0x20,3
- 308 01d6 5A9A      		sbi 43-0x20,2
- 309 01d8 1092 0000 		sts KbState,__zero_reg__
- 310 01dc 8FEF      		ldi r24,lo8(-1)
- 311 01de 9FEF      		ldi r25,hi8(-1)
- 312 01e0 9093 0000 		sts (KeyFound)+1,r25
- 313 01e4 8093 0000 		sts KeyFound,r24
- 314               	/* #APP */
- 315 01e8 0FB6      		in  __tmp_reg__, __SREG__
- 316 01ea F894      		cli
- 317 01ec 0F92      		push __tmp_reg__
- 318               		
- 319               	/* #NOAPP */
- 320 01ee 1092 0000 		sts (hKBEvent)+1,__zero_reg__
- 321 01f2 1092 0000 		sts hKBEvent,__zero_reg__
- 322               	/* #APP */
- 323 01f6 0F90      		pop __tmp_reg__
- 324 01f8 0FBE      		out __SREG__, __tmp_reg__
- 325               		
- 326               	/* #NOAPP */
- 327 01fa 8FEF      		ldi r24,lo8(-1)
- 328 01fc 8093 0000 		sts KeyBuffer,r24
- 329 0200 E0E0      		ldi r30,lo8(KeyRepeatArray)
- 330 0202 F0E0      		ldi r31,hi8(KeyRepeatArray)
- 331 0204 82E0      		ldi r24,lo8(2)
- 332               	.L41:
- 333 0206 8193      		st Z+,r24
- 334 0208 90E0      		ldi r25,hi8(KeyRepeatArray+16)
- 335 020a E030      		cpi r30,lo8(KeyRepeatArray+16)
- 336 020c F907      		cpc r31,r25
- 337 020e 01F4      		brne .L41
- 338 0210 1092 0000 		sts (HoldCounter)+1,__zero_reg__
- 339 0214 1092 0000 		sts HoldCounter,__zero_reg__
- 340               	/* epilogue: frame size=0 */
- 341 0218 0895      		ret
- 342               	/* epilogue end (size=1) */
-GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 7
+ 286 01a8 8FEF      		ldi r24,lo8(-1)
+ 287 01aa 9FEF      		ldi r25,hi8(-1)
+ 288 01ac 9093 0000 		sts (KeyFound)+1,r25
+ 289 01b0 8093 0000 		sts KeyFound,r24
+ 290               	/* #APP */
+ 291 01b4 0FB6      		in  __tmp_reg__, __SREG__
+ 292 01b6 F894      		cli
+ 293 01b8 0F92      		push __tmp_reg__
+ 294               		
+ 295               	/* #NOAPP */
+ 296 01ba 1092 0000 		sts (hKBEvent)+1,__zero_reg__
+ 297 01be 1092 0000 		sts hKBEvent,__zero_reg__
+ 298               	/* #APP */
+ 299 01c2 0F90      		pop __tmp_reg__
+ 300 01c4 0FBE      		out __SREG__, __tmp_reg__
+ 301               		
+ 302               	/* #NOAPP */
+ 303 01c6 8FEF      		ldi r24,lo8(-1)
+ 304 01c8 8093 0000 		sts KeyBuffer,r24
+ 305 01cc E0E0      		ldi r30,lo8(KeyRepeatArray)
+ 306 01ce F0E0      		ldi r31,hi8(KeyRepeatArray)
+ 307 01d0 82E0      		ldi r24,lo8(2)
+ 308               	.L36:
+ 309 01d2 8193      		st Z+,r24
+ 310 01d4 90E0      		ldi r25,hi8(KeyRepeatArray+16)
+ 311 01d6 E030      		cpi r30,lo8(KeyRepeatArray+16)
+ 312 01d8 F907      		cpc r31,r25
+ 313 01da 01F4      		brne .L36
+ 314 01dc 1092 0000 		sts (HoldCounter)+1,__zero_reg__
+ 315 01e0 1092 0000 		sts HoldCounter,__zero_reg__
+ 316 01e4 61E0      		ldi r22,lo8(1)
+ 317 01e6 88E0      		ldi r24,lo8(8)
+ 318 01e8 0E94 0000 		call KbSetKeyRepeating
+ 319 01ec 61E0      		ldi r22,lo8(1)
+ 320 01ee 8BE0      		ldi r24,lo8(11)
+ 321 01f0 0E94 0000 		call KbSetKeyRepeating
+ 322 01f4 61E0      		ldi r22,lo8(1)
+ 323 01f6 8AE0      		ldi r24,lo8(10)
+ 324 01f8 0E94 0000 		call KbSetKeyRepeating
+ 325 01fc 61E0      		ldi r22,lo8(1)
+ 326 01fe 8CE0      		ldi r24,lo8(12)
+ 327 0200 0E94 0000 		call KbSetKeyRepeating
+ 328               	/* epilogue: frame size=0 */
+ 329 0204 0895      		ret
+ 330               	/* epilogue end (size=1) */
+ 331               	/* function KbInit size 62 (61) */
+ 332               		.size	KbInit, .-KbInit
+ 333               	.global	KbWaitForKeyEvent
+ 334               		.type	KbWaitForKeyEvent, @function
+ 335               	KbWaitForKeyEvent:
+ 336               	/* prologue: frame size=0 */
+ 337               	/* prologue end (size=0) */
+ 338 0206 AB01      		movw r20,r22
+ 339 0208 BC01      		movw r22,r24
+ 340 020a 80E0      		ldi r24,lo8(hKBEvent)
+ 341 020c 90E0      		ldi r25,hi8(hKBEvent)
+ 342 020e 0E94 0000 		call NutEventWait
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s 			page 7
 
 
- 343               	/* function KbInit size 46 (45) */
- 344               		.size	KbInit, .-KbInit
- 345               	.global	KbWaitForKeyEvent
- 346               		.type	KbWaitForKeyEvent, @function
- 347               	KbWaitForKeyEvent:
- 348               	/* prologue: frame size=0 */
- 349               	/* prologue end (size=0) */
- 350 021a AB01      		movw r20,r22
- 351 021c BC01      		movw r22,r24
- 352 021e 80E0      		ldi r24,lo8(hKBEvent)
- 353 0220 90E0      		ldi r25,hi8(hKBEvent)
- 354 0222 0E94 0000 		call NutEventWait
- 355 0226 20E0      		ldi r18,lo8(0)
- 356 0228 30E0      		ldi r19,hi8(0)
- 357 022a 8F5F      		subi r24,lo8(-1)
- 358 022c 9F4F      		sbci r25,hi8(-1)
- 359 022e 01F4      		brne .L47
- 360 0230 21E0      		ldi r18,lo8(1)
- 361 0232 30E0      		ldi r19,hi8(1)
- 362               	.L47:
- 363 0234 C901      		movw r24,r18
- 364               	/* epilogue: frame size=0 */
- 365 0236 0895      		ret
- 366               	/* epilogue end (size=1) */
- 367               	/* function KbWaitForKeyEvent size 16 (15) */
- 368               		.size	KbWaitForKeyEvent, .-KbWaitForKeyEvent
- 369               		.lcomm hKBEvent,2
- 370               		.lcomm KeyFound,2
- 371               		.lcomm KeyBuffer,1
- 372               		.lcomm HoldCounter,2
- 373               		.lcomm KbState,1
- 374               		.lcomm KeyRepeatArray,16
- 375               	/* File "source/keyboard.c": code  306 = 0x0132 ( 303), prologues   0, epilogues   3 */
-GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s 			page 8
+ 343 0212 20E0      		ldi r18,lo8(0)
+ 344 0214 30E0      		ldi r19,hi8(0)
+ 345 0216 8F5F      		subi r24,lo8(-1)
+ 346 0218 9F4F      		sbci r25,hi8(-1)
+ 347 021a 01F4      		brne .L42
+ 348 021c 21E0      		ldi r18,lo8(1)
+ 349 021e 30E0      		ldi r19,hi8(1)
+ 350               	.L42:
+ 351 0220 C901      		movw r24,r18
+ 352               	/* epilogue: frame size=0 */
+ 353 0222 0895      		ret
+ 354               	/* epilogue end (size=1) */
+ 355               	/* function KbWaitForKeyEvent size 16 (15) */
+ 356               		.size	KbWaitForKeyEvent, .-KbWaitForKeyEvent
+ 357               		.lcomm hKBEvent,2
+ 358               		.lcomm KeyFound,2
+ 359               		.lcomm KeyBuffer,1
+ 360               		.lcomm HoldCounter,2
+ 361               		.lcomm KbState,1
+ 362               		.lcomm KeyRepeatArray,16
+ 363               	/* File "source/keyboard.c": code  296 = 0x0128 ( 292), prologues   0, epilogues   4 */
+GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 keyboard.c
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:3      *ABS*:0000003f __SREG__
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:13     .text:00000000 KbScan
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:369    .bss:00000002 KeyFound
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:370    .bss:00000004 KeyBuffer
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:3      *ABS*:0000003f __SREG__
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:13     .text:00000000 KbScan
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:357    .bss:00000002 KeyFound
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:358    .bss:00000004 KeyBuffer
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:211    .text:0000014a KbSetKeyRepeating
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:361    .bss:00000008 KeyRepeatArray
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:234    .text:00000162 KbGetKey
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:246    .text:0000016a KbInjectKey
                              .bss:00000000 hKBEvent
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:235    .text:0000017e KbSetKeyRepeating
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:373    .bss:00000008 KeyRepeatArray
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:258    .text:00000196 KbGetKey
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:270    .text:0000019e KbInjectKey
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:302    .text:000001d0 KbInit
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:372    .bss:00000007 KbState
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:371    .bss:00000005 HoldCounter
-C:\Users\Matthijs\AppData\Local\Temp/cce1ta0D.s:347    .text:0000021a KbWaitForKeyEvent
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:278    .text:0000019c KbInit
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:360    .bss:00000007 KbState
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:359    .bss:00000005 HoldCounter
+C:\Users\Blommers\AppData\Local\Temp/ccrOPn4d.s:335    .text:00000206 KbWaitForKeyEvent
 
 UNDEFINED SYMBOLS
 __do_copy_data

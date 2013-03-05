@@ -508,7 +508,7 @@ void setAlarmA(int hours, int minutes, int seconds)
  * 
  * \param month     : 0 - 11 month of the year
  * 
- * \param dayMonth     : 1 - 31 days
+ * \param dayMonth     : 1 - 31 seconds in minutes
  * 
  * \param hours        : 0 - 23 hours from midnight
  * 
