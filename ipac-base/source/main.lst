@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 1
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 1
 
 
    1               		.file	"main.c"
@@ -49,254 +49,1879 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 1
   46               	/* epilogue end (size=1) */
   47               	/* function SysInitIO size 29 (28) */
   48               		.size	SysInitIO, .-SysInitIO
-  49               		.data
-  50               	.LC0:
-  51 0000 4D61 696E 		.string	"MainA"
-  51      4100 
-  52               	.LC1:
-  53 0006 4D61 696E 		.string	"MainB"
-  53      4200 
-  54               	.LC2:
-  55 000c 3133 3A33 		.string	"13:35:15"
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 2
+  49               		.type	SysMainBeatInterrupt, @function
+  50               	SysMainBeatInterrupt:
+  51               	/* prologue: frame size=0 */
+  52               	/* prologue end (size=0) */
+  53 003a 0E94 0000 		call KbScan
+  54 003e 0E94 0000 		call CardCheckCard
+  55               	/* epilogue: frame size=0 */
+  56 0042 0895      		ret
+  57               	/* epilogue end (size=1) */
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 2
 
 
-  55      353A 3135 
-  55      00
-  56               		.text
-  57               	.global	NutAppMain
-  58               		.type	NutAppMain, @function
-  59               	NutAppMain:
-  60               	/* prologue: frame size=18 */
-  61 003a 1F93      		push r17
-  62 003c CF93      		push r28
-  63 003e DF93      		push r29
-  64 0040 CDB7      		in r28,__SP_L__
-  65 0042 DEB7      		in r29,__SP_H__
-  66 0044 6297      		sbiw r28,18
-  67 0046 0FB6      		in __tmp_reg__,__SREG__
-  68 0048 F894      		cli
-  69 004a DEBF      		out __SP_H__,r29
-  70 004c 0FBE      		out __SREG__,__tmp_reg__
-  71 004e CDBF      		out __SP_L__,r28
-  72               	/* prologue end (size=11) */
-  73 0050 0E94 0000 		call WatchDogDisable
-  74 0054 84E6      		ldi r24,lo8(100)
-  75 0056 0E94 0000 		call NutDelay
-  76 005a 0E94 0000 		call SysInitIO
-  77 005e 0E94 0000 		call SPIinit
-  78 0062 0E94 0000 		call Uart0DriverInit
-  79 0066 0E94 0000 		call Uart0DriverStart
-  80 006a 0E94 0000 		call LogInit
-  81 006e 80E0      		ldi r24,lo8(__c.2565)
-  82 0070 90E0      		ldi r25,hi8(__c.2565)
-  83 0072 9F93      		push r25
-  84 0074 8F93      		push r24
-  85 0076 16EC      		ldi r17,lo8(-58)
-  86 0078 1F93      		push r17
-  87 007a 0E94 0000 		call LogMsg_P
-  88 007e 0E94 0000 		call X12Init
-  89 0082 CE01      		movw r24,r28
-  90 0084 0196      		adiw r24,1
-  91 0086 0E94 0000 		call X12RtcGetClock
-  92 008a 0F90      		pop __tmp_reg__
-  93 008c 0F90      		pop __tmp_reg__
-  94 008e 0F90      	 	pop __tmp_reg__
-  95 0090 892B      		or r24,r25
-  96 0092 01F4      		brne .L4
-  97 0094 8981      		ldd r24,Y+1
-  98 0096 9A81      		ldd r25,Y+2
-  99 0098 9F93      		push r25
- 100 009a 8F93      		push r24
- 101 009c 8B81      		ldd r24,Y+3
- 102 009e 9C81      		ldd r25,Y+4
- 103 00a0 9F93      		push r25
- 104 00a2 8F93      		push r24
- 105 00a4 8D81      		ldd r24,Y+5
- 106 00a6 9E81      		ldd r25,Y+6
- 107 00a8 9F93      		push r25
- 108 00aa 8F93      		push r24
- 109 00ac 80E0      		ldi r24,lo8(__c.2567)
- 110 00ae 90E0      		ldi r25,hi8(__c.2567)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 3
+  58               	/* function SysMainBeatInterrupt size 5 (4) */
+  59               		.size	SysMainBeatInterrupt, .-SysMainBeatInterrupt
+  60               		.data
+  61               	.LC0:
+  62 0000 2530 3264 		.string	"%02d:%02d:%02d"
+  62      3A25 3032 
+  62      643A 2530 
+  62      3264 00
+  63               		.text
+  64               	.global	ShowCurrentTime
+  65               		.type	ShowCurrentTime, @function
+  66               	ShowCurrentTime:
+  67               	/* prologue: frame size=20 */
+  68 0044 0F93      		push r16
+  69 0046 1F93      		push r17
+  70 0048 CF93      		push r28
+  71 004a DF93      		push r29
+  72 004c CDB7      		in r28,__SP_L__
+  73 004e DEB7      		in r29,__SP_H__
+  74 0050 6497      		sbiw r28,20
+  75 0052 0FB6      		in __tmp_reg__,__SREG__
+  76 0054 F894      		cli
+  77 0056 DEBF      		out __SP_H__,r29
+  78 0058 0FBE      		out __SREG__,__tmp_reg__
+  79 005a CDBF      		out __SP_L__,r28
+  80               	/* prologue end (size=12) */
+  81 005c 80E0      		ldi r24,lo8(datetime)
+  82 005e 90E0      		ldi r25,hi8(datetime)
+  83 0060 0E94 0000 		call X12RtcGetClock
+  84 0064 892B      		or r24,r25
+  85 0066 01F4      		brne .L8
+  86 0068 8091 0000 		lds r24,datetime
+  87 006c 9091 0000 		lds r25,(datetime)+1
+  88 0070 9F93      		push r25
+  89 0072 8F93      		push r24
+  90 0074 8091 0000 		lds r24,datetime+2
+  91 0078 9091 0000 		lds r25,(datetime+2)+1
+  92 007c 9F93      		push r25
+  93 007e 8F93      		push r24
+  94 0080 8091 0000 		lds r24,datetime+4
+  95 0084 9091 0000 		lds r25,(datetime+4)+1
+  96 0088 9F93      		push r25
+  97 008a 8F93      		push r24
+  98 008c 80E0      		ldi r24,lo8(.LC0)
+  99 008e 90E0      		ldi r25,hi8(.LC0)
+ 100 0090 9F93      		push r25
+ 101 0092 8F93      		push r24
+ 102 0094 8E01      		movw r16,r28
+ 103 0096 0F5F      		subi r16,lo8(-(1))
+ 104 0098 1F4F      		sbci r17,hi8(-(1))
+ 105 009a 1F93      		push r17
+ 106 009c 0F93      		push r16
+ 107 009e 0E94 0000 		call sprintf
+ 108 00a2 C801      		movw r24,r16
+ 109 00a4 0E94 0000 		call LcdTimeDisplay
+ 110 00a8 8DB7      		in r24,__SP_L__
+ 111 00aa 9EB7      		in r25,__SP_H__
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 3
 
 
- 111 00b0 9F93      		push r25
- 112 00b2 8F93      		push r24
- 113 00b4 1F93      		push r17
- 114 00b6 0E94 0000 		call LogMsg_P
- 115 00ba 8DB7      		in r24,__SP_L__
- 116 00bc 9EB7      		in r25,__SP_H__
- 117 00be 0996      		adiw r24,9
- 118 00c0 0FB6      		in __tmp_reg__,__SREG__
- 119 00c2 F894      		cli
- 120 00c4 9EBF      		out __SP_H__,r25
- 121 00c6 0FBE      		out __SREG__,__tmp_reg__
- 122 00c8 8DBF      		out __SP_L__,r24
- 123               	.L4:
- 124 00ca 0E94 0000 		call At45dbInit
- 125 00ce 0E94 0000 		call CardInit
- 126 00d2 0E94 0000 		call RcInit
- 127 00d6 0E94 0000 		call KbInit
- 128 00da 0E94 0000 		call LedInit
- 129 00de 0E94 0000 		call LcdLowLevelInit
- 130 00e2 40E0      		ldi r20,lo8(0)
- 131 00e4 50E0      		ldi r21,hi8(0)
- 132 00e6 60E0      		ldi r22,lo8(gs(SysMainBeatInterrupt))
- 133 00e8 70E0      		ldi r23,hi8(gs(SysMainBeatInterrupt))
- 134 00ea 80E0      		ldi r24,lo8(sig_OVERFLOW0)
- 135 00ec 90E0      		ldi r25,hi8(sig_OVERFLOW0)
- 136 00ee 0E94 0000 		call NutRegisterIrqHandler
- 137 00f2 892B      		or r24,r25
- 138 00f4 01F4      		brne .L6
- 139 00f6 85B5      		in r24,69-0x20
- 140 00f8 8460      		ori r24,lo8(4)
- 141 00fa 85BD      		out 69-0x20,r24
- 142 00fc A89A      		sbi 53-0x20,0
- 143 00fe 8091 6E00 		lds r24,110
- 144 0102 8160      		ori r24,lo8(1)
- 145 0104 8093 6E00 		sts 110,r24
- 146               	.L6:
- 147 0108 81E0      		ldi r24,lo8(1)
- 148 010a 0E94 0000 		call NutThreadSetPriority
- 149 010e 20E0      		ldi r18,lo8(1024)
- 150 0110 34E0      		ldi r19,hi8(1024)
- 151 0112 40E0      		ldi r20,lo8(0)
- 152 0114 50E0      		ldi r21,hi8(0)
- 153 0116 60E0      		ldi r22,lo8(gs(ThreadA))
- 154 0118 70E0      		ldi r23,hi8(gs(ThreadA))
- 155 011a 80E0      		ldi r24,lo8(.LC0)
- 156 011c 90E0      		ldi r25,hi8(.LC0)
- 157 011e 0E94 0000 		call NutThreadCreate
- 158 0122 20E0      		ldi r18,lo8(1024)
- 159 0124 34E0      		ldi r19,hi8(1024)
- 160 0126 40E0      		ldi r20,lo8(0)
- 161 0128 50E0      		ldi r21,hi8(0)
- 162 012a 60E0      		ldi r22,lo8(gs(ThreadB))
- 163 012c 70E0      		ldi r23,hi8(gs(ThreadB))
- 164 012e 80E0      		ldi r24,lo8(.LC1)
- 165 0130 90E0      		ldi r25,hi8(.LC1)
- 166 0132 0E94 0000 		call NutThreadCreate
- 167               	/* #APP */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 4
+ 112 00ac 0A96      		adiw r24,10
+ 113 00ae 0FB6      		in __tmp_reg__,__SREG__
+ 114 00b0 F894      		cli
+ 115 00b2 9EBF      		out __SP_H__,r25
+ 116 00b4 0FBE      		out __SREG__,__tmp_reg__
+ 117 00b6 8DBF      		out __SP_L__,r24
+ 118               	.L8:
+ 119               	/* epilogue: frame size=20 */
+ 120 00b8 6496      		adiw r28,20
+ 121 00ba 0FB6      		in __tmp_reg__,__SREG__
+ 122 00bc F894      		cli
+ 123 00be DEBF      		out __SP_H__,r29
+ 124 00c0 0FBE      		out __SREG__,__tmp_reg__
+ 125 00c2 CDBF      		out __SP_L__,r28
+ 126 00c4 DF91      		pop r29
+ 127 00c6 CF91      		pop r28
+ 128 00c8 1F91      		pop r17
+ 129 00ca 0F91      		pop r16
+ 130 00cc 0895      		ret
+ 131               	/* epilogue end (size=11) */
+ 132               	/* function ShowCurrentTime size 69 (46) */
+ 133               		.size	ShowCurrentTime, .-ShowCurrentTime
+ 134               		.data
+ 135               	.LC1:
+ 136 000f 5365 7441 		.string	"SetAlarmBThread"
+ 136      6C61 726D 
+ 136      4254 6872 
+ 136      6561 6400 
+ 137               	.LC2:
+ 138 001f 5365 7420 		.string	"Set Alarm B"
+ 138      416C 6172 
+ 138      6D20 4200 
+ 139               	.LC3:
+ 140 002b 5365 7420 		.string	"Set Month: %02d"
+ 140      4D6F 6E74 
+ 140      683A 2025 
+ 140      3032 6400 
+ 141               	.LC4:
+ 142 003b 5365 7420 		.string	"Set Day: %02d"
+ 142      4461 793A 
+ 142      2025 3032 
+ 142      6400 
+ 143               	.LC5:
+ 144 0049 5365 7420 		.string	"Set Hour: %02d"
+ 144      486F 7572 
+ 144      3A20 2530 
+ 144      3264 00
+ 145               	.LC6:
+ 146 0058 5365 7420 		.string	"Set Minutes: %02d"
+ 146      4D69 6E75 
+ 146      7465 733A 
+ 146      2025 3032 
+ 146      6400 
+ 147               	.LC7:
+ 148 006a 5365 7420 		.string	"Set Seconds: %02d"
+ 148      5365 636F 
+ 148      6E64 733A 
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 4
 
 
- 168 0136 7894      		sei
- 169               	/* #NOAPP */
- 170               	.L8:
- 171 0138 64EF      		ldi r22,lo8(500)
- 172 013a 71E0      		ldi r23,hi8(500)
- 173 013c 80E0      		ldi r24,hlo8(500)
- 174 013e 90E0      		ldi r25,hhi8(500)
- 175 0140 0E94 0000 		call NutSleep
- 176 0144 80E0      		ldi r24,lo8(.LC2)
- 177 0146 90E0      		ldi r25,hi8(.LC2)
- 178 0148 0E94 0000 		call LcdTimeDisplay
- 179 014c 00C0      		rjmp .L8
- 180               	/* epilogue: frame size=18 */
- 181               	/* epilogue: noreturn */
- 182               	/* epilogue end (size=0) */
- 183               	/* function NutAppMain size 139 (128) */
- 184               		.size	NutAppMain, .-NutAppMain
- 185               		.type	SysMainBeatInterrupt, @function
- 186               	SysMainBeatInterrupt:
- 187               	/* prologue: frame size=0 */
- 188               	/* prologue end (size=0) */
- 189 014e 0E94 0000 		call KbScan
- 190 0152 0E94 0000 		call CardCheckCard
- 191               	/* epilogue: frame size=0 */
- 192 0156 0895      		ret
- 193               	/* epilogue end (size=1) */
- 194               	/* function SysMainBeatInterrupt size 5 (4) */
- 195               		.size	SysMainBeatInterrupt, .-SysMainBeatInterrupt
- 196               	.global	ThreadB
- 197               		.type	ThreadB, @function
- 198               	ThreadB:
- 199               	/* prologue: frame size=0 */
- 200               	/* prologue end (size=0) */
- 201               	.L14:
- 202 0158 64EF      		ldi r22,lo8(500)
- 203 015a 71E0      		ldi r23,hi8(500)
- 204 015c 80E0      		ldi r24,hlo8(500)
- 205 015e 90E0      		ldi r25,hhi8(500)
- 206 0160 0E94 0000 		call NutSleep
- 207 0164 83E0      		ldi r24,lo8(3)
- 208 0166 0E94 0000 		call LedControl
- 209 016a 00C0      		rjmp .L14
- 210               	/* epilogue: frame size=0 */
- 211               	/* epilogue: noreturn */
- 212               	/* epilogue end (size=0) */
- 213               	/* function ThreadB size 10 (10) */
- 214               		.size	ThreadB, .-ThreadB
- 215               	.global	ThreadA
- 216               		.type	ThreadA, @function
- 217               	ThreadA:
- 218               	/* prologue: frame size=0 */
- 219               	/* prologue end (size=0) */
- 220               	.L18:
- 221 016c 64EF      		ldi r22,lo8(500)
- 222 016e 71E0      		ldi r23,hi8(500)
- 223 0170 80E0      		ldi r24,hlo8(500)
- 224 0172 90E0      		ldi r25,hhi8(500)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 5
+ 148      2025 3032 
+ 148      6400 
+ 149               		.text
+ 150               	.global	AlarmBMenu
+ 151               		.type	AlarmBMenu, @function
+ 152               	AlarmBMenu:
+ 153               	/* prologue: frame size=22 */
+ 154 00ce 0F93      		push r16
+ 155 00d0 1F93      		push r17
+ 156 00d2 CF93      		push r28
+ 157 00d4 DF93      		push r29
+ 158 00d6 CDB7      		in r28,__SP_L__
+ 159 00d8 DEB7      		in r29,__SP_H__
+ 160 00da 6697      		sbiw r28,22
+ 161 00dc 0FB6      		in __tmp_reg__,__SREG__
+ 162 00de F894      		cli
+ 163 00e0 DEBF      		out __SP_H__,r29
+ 164 00e2 0FBE      		out __SREG__,__tmp_reg__
+ 165 00e4 CDBF      		out __SP_L__,r28
+ 166               	/* prologue end (size=12) */
+ 167 00e6 AE01      		movw r20,r28
+ 168 00e8 4F5F      		subi r20,lo8(-(1))
+ 169 00ea 5F4F      		sbci r21,hi8(-(1))
+ 170 00ec 60E0      		ldi r22,lo8(alarmB)
+ 171 00ee 70E0      		ldi r23,hi8(alarmB)
+ 172 00f0 81E0      		ldi r24,lo8(1)
+ 173 00f2 90E0      		ldi r25,hi8(1)
+ 174 00f4 0E94 0000 		call X12RtcGetAlarm
+ 175 00f8 1092 0000 		sts (alarmBset)+1,__zero_reg__
+ 176 00fc 1092 0000 		sts alarmBset,__zero_reg__
+ 177 0100 20E0      		ldi r18,lo8(1024)
+ 178 0102 34E0      		ldi r19,hi8(1024)
+ 179 0104 40E0      		ldi r20,lo8(0)
+ 180 0106 50E0      		ldi r21,hi8(0)
+ 181 0108 60E0      		ldi r22,lo8(gs(SetAlarmBThread))
+ 182 010a 70E0      		ldi r23,hi8(gs(SetAlarmBThread))
+ 183 010c 80E0      		ldi r24,lo8(.LC1)
+ 184 010e 90E0      		ldi r25,hi8(.LC1)
+ 185 0110 0E94 0000 		call NutThreadCreate
+ 186 0114 81E0      		ldi r24,lo8(1)
+ 187 0116 0E94 0000 		call LcdBackLight
+ 188 011a 0E94 0000 		call LcdClearAll
+ 189 011e 80E0      		ldi r24,lo8(.LC2)
+ 190 0120 90E0      		ldi r25,hi8(.LC2)
+ 191 0122 0E94 0000 		call LcdWriteTitle
+ 192 0126 0E94 0000 		call ShowCurrentTime
+ 193 012a 00C0      		rjmp .L26
+ 194               	.L11:
+ 195 012c 64E6      		ldi r22,lo8(100)
+ 196 012e 70E0      		ldi r23,hi8(100)
+ 197 0130 80E0      		ldi r24,hlo8(100)
+ 198 0132 90E0      		ldi r25,hhi8(100)
+ 199 0134 0E94 0000 		call NutSleep
+ 200 0138 0E94 0000 		call LcdClearLine
+ 201 013c 8091 0000 		lds r24,selectedTimeUnit
+ 202 0140 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 203 0144 8230      		cpi r24,2
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 5
 
 
- 225 0174 0E94 0000 		call NutSleep
- 226 0178 82E0      		ldi r24,lo8(2)
- 227 017a 0E94 0000 		call LedControl
- 228 017e 00C0      		rjmp .L18
- 229               	/* epilogue: frame size=0 */
- 230               	/* epilogue: noreturn */
- 231               	/* epilogue end (size=0) */
- 232               	/* function ThreadA size 10 (10) */
- 233               		.size	ThreadA, .-ThreadA
- 234               		.section	.progmem.data,"a",@progbits
- 235               		.type	__c.2567, @object
- 236               		.size	__c.2567, 26
- 237               	__c.2567:
- 238 0000 5254 4320 		.string	"RTC time [%02d:%02d:%02d]"
- 238      7469 6D65 
- 238      205B 2530 
- 238      3264 3A25 
- 238      3032 643A 
- 239               		.type	__c.2565, @object
- 240               		.size	__c.2565, 12
- 241               	__c.2565:
- 242 001a 4865 6C6C 		.string	"Hello World"
- 242      6F20 576F 
- 242      726C 6400 
- 243               	/* File "source/main.c": code  193 = 0x00c1 ( 180), prologues  11, epilogues   2 */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 6
+ 204 0146 9105      		cpc r25,__zero_reg__
+ 205 0148 01F0      		breq .L14
+ 206 014a 8330      		cpi r24,3
+ 207 014c 9105      		cpc r25,__zero_reg__
+ 208 014e 04F4      		brge .L17
+ 209 0150 0097      		sbiw r24,0
+ 210 0152 01F0      		breq .L12
+ 211 0154 0197      		sbiw r24,1
+ 212 0156 01F0      		breq .+2
+ 213 0158 00C0      		rjmp .L26
+ 214 015a 00C0      		rjmp .L13
+ 215               	.L17:
+ 216 015c 8330      		cpi r24,3
+ 217 015e 9105      		cpc r25,__zero_reg__
+ 218 0160 01F0      		breq .L15
+ 219 0162 0497      		sbiw r24,4
+ 220 0164 01F0      		breq .+2
+ 221 0166 00C0      		rjmp .L26
+ 222 0168 00C0      		rjmp .L16
+ 223               	.L12:
+ 224 016a 8091 0000 		lds r24,alarmB+8
+ 225 016e 9091 0000 		lds r25,(alarmB+8)+1
+ 226 0172 9F93      		push r25
+ 227 0174 8F93      		push r24
+ 228 0176 80E0      		ldi r24,lo8(.LC3)
+ 229 0178 90E0      		ldi r25,hi8(.LC3)
+ 230 017a 00C0      		rjmp .L25
+ 231               	.L13:
+ 232 017c 8091 0000 		lds r24,alarmB+6
+ 233 0180 9091 0000 		lds r25,(alarmB+6)+1
+ 234 0184 9F93      		push r25
+ 235 0186 8F93      		push r24
+ 236 0188 80E0      		ldi r24,lo8(.LC4)
+ 237 018a 90E0      		ldi r25,hi8(.LC4)
+ 238 018c 00C0      		rjmp .L25
+ 239               	.L14:
+ 240 018e 8091 0000 		lds r24,alarmB+4
+ 241 0192 9091 0000 		lds r25,(alarmB+4)+1
+ 242 0196 9F93      		push r25
+ 243 0198 8F93      		push r24
+ 244 019a 80E0      		ldi r24,lo8(.LC5)
+ 245 019c 90E0      		ldi r25,hi8(.LC5)
+ 246 019e 00C0      		rjmp .L25
+ 247               	.L15:
+ 248 01a0 8091 0000 		lds r24,alarmB+2
+ 249 01a4 9091 0000 		lds r25,(alarmB+2)+1
+ 250 01a8 9F93      		push r25
+ 251 01aa 8F93      		push r24
+ 252 01ac 80E0      		ldi r24,lo8(.LC6)
+ 253 01ae 90E0      		ldi r25,hi8(.LC6)
+ 254 01b0 00C0      		rjmp .L25
+ 255               	.L16:
+ 256 01b2 8091 0000 		lds r24,alarmB
+ 257 01b6 9091 0000 		lds r25,(alarmB)+1
+ 258 01ba 9F93      		push r25
+ 259 01bc 8F93      		push r24
+ 260 01be 80E0      		ldi r24,lo8(.LC7)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 6
+
+
+ 261 01c0 90E0      		ldi r25,hi8(.LC7)
+ 262               	.L25:
+ 263 01c2 9F93      		push r25
+ 264 01c4 8F93      		push r24
+ 265 01c6 8E01      		movw r16,r28
+ 266 01c8 0D5F      		subi r16,lo8(-(3))
+ 267 01ca 1F4F      		sbci r17,hi8(-(3))
+ 268 01cc 1F93      		push r17
+ 269 01ce 0F93      		push r16
+ 270 01d0 0E94 0000 		call sprintf
+ 271 01d4 C801      		movw r24,r16
+ 272 01d6 0E94 0000 		call LcdWriteSecondLine
+ 273 01da 8DB7      		in r24,__SP_L__
+ 274 01dc 9EB7      		in r25,__SP_H__
+ 275 01de 0696      		adiw r24,6
+ 276 01e0 0FB6      		in __tmp_reg__,__SREG__
+ 277 01e2 F894      		cli
+ 278 01e4 9EBF      		out __SP_H__,r25
+ 279 01e6 0FBE      		out __SREG__,__tmp_reg__
+ 280 01e8 8DBF      		out __SP_L__,r24
+ 281               	.L26:
+ 282 01ea 8091 0000 		lds r24,alarmBset
+ 283 01ee 9091 0000 		lds r25,(alarmBset)+1
+ 284 01f2 0197      		sbiw r24,1
+ 285 01f4 01F0      		breq .+2
+ 286 01f6 00C0      		rjmp .L11
+ 287 01f8 0E94 0000 		call LcdClearAll
+ 288 01fc 80E0      		ldi r24,lo8(0)
+ 289 01fe 0E94 0000 		call LcdBackLight
+ 290 0202 4FE1      		ldi r20,lo8(31)
+ 291 0204 50E0      		ldi r21,hi8(31)
+ 292 0206 60E0      		ldi r22,lo8(alarmB)
+ 293 0208 70E0      		ldi r23,hi8(alarmB)
+ 294 020a 81E0      		ldi r24,lo8(1)
+ 295 020c 90E0      		ldi r25,hi8(1)
+ 296 020e 0E94 0000 		call X12RtcSetAlarm
+ 297               	/* epilogue: frame size=22 */
+ 298 0212 6696      		adiw r28,22
+ 299 0214 0FB6      		in __tmp_reg__,__SREG__
+ 300 0216 F894      		cli
+ 301 0218 DEBF      		out __SP_H__,r29
+ 302 021a 0FBE      		out __SREG__,__tmp_reg__
+ 303 021c CDBF      		out __SP_L__,r28
+ 304 021e DF91      		pop r29
+ 305 0220 CF91      		pop r28
+ 306 0222 1F91      		pop r17
+ 307 0224 0F91      		pop r16
+ 308 0226 0895      		ret
+ 309               	/* epilogue end (size=11) */
+ 310               	/* function AlarmBMenu size 176 (153) */
+ 311               		.size	AlarmBMenu, .-AlarmBMenu
+ 312               		.data
+ 313               	.LC8:
+ 314 007c 5365 7441 		.string	"SetAlarmAThread"
+ 314      6C61 726D 
+ 314      4154 6872 
+ 314      6561 6400 
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 7
+
+
+ 315               	.LC9:
+ 316 008c 5365 7420 		.string	"Set Alarm A"
+ 316      416C 6172 
+ 316      6D20 4100 
+ 317               	.LC10:
+ 318 0098 5365 7420 		.string	"Set Hours: %02d"
+ 318      486F 7572 
+ 318      733A 2025 
+ 318      3032 6400 
+ 319               		.text
+ 320               	.global	AlarmAMenu
+ 321               		.type	AlarmAMenu, @function
+ 322               	AlarmAMenu:
+ 323               	/* prologue: frame size=22 */
+ 324 0228 0F93      		push r16
+ 325 022a 1F93      		push r17
+ 326 022c CF93      		push r28
+ 327 022e DF93      		push r29
+ 328 0230 CDB7      		in r28,__SP_L__
+ 329 0232 DEB7      		in r29,__SP_H__
+ 330 0234 6697      		sbiw r28,22
+ 331 0236 0FB6      		in __tmp_reg__,__SREG__
+ 332 0238 F894      		cli
+ 333 023a DEBF      		out __SP_H__,r29
+ 334 023c 0FBE      		out __SREG__,__tmp_reg__
+ 335 023e CDBF      		out __SP_L__,r28
+ 336               	/* prologue end (size=12) */
+ 337 0240 AE01      		movw r20,r28
+ 338 0242 4F5F      		subi r20,lo8(-(1))
+ 339 0244 5F4F      		sbci r21,hi8(-(1))
+ 340 0246 60E0      		ldi r22,lo8(alarmA)
+ 341 0248 70E0      		ldi r23,hi8(alarmA)
+ 342 024a 80E0      		ldi r24,lo8(0)
+ 343 024c 90E0      		ldi r25,hi8(0)
+ 344 024e 0E94 0000 		call X12RtcGetAlarm
+ 345 0252 1092 0000 		sts (alarmAset)+1,__zero_reg__
+ 346 0256 1092 0000 		sts alarmAset,__zero_reg__
+ 347 025a 20E0      		ldi r18,lo8(1024)
+ 348 025c 34E0      		ldi r19,hi8(1024)
+ 349 025e 40E0      		ldi r20,lo8(0)
+ 350 0260 50E0      		ldi r21,hi8(0)
+ 351 0262 60E0      		ldi r22,lo8(gs(SetAlarmAThread))
+ 352 0264 70E0      		ldi r23,hi8(gs(SetAlarmAThread))
+ 353 0266 80E0      		ldi r24,lo8(.LC8)
+ 354 0268 90E0      		ldi r25,hi8(.LC8)
+ 355 026a 0E94 0000 		call NutThreadCreate
+ 356 026e 81E0      		ldi r24,lo8(1)
+ 357 0270 0E94 0000 		call LcdBackLight
+ 358 0274 0E94 0000 		call LcdClearAll
+ 359 0278 80E0      		ldi r24,lo8(.LC9)
+ 360 027a 90E0      		ldi r25,hi8(.LC9)
+ 361 027c 0E94 0000 		call LcdWriteTitle
+ 362 0280 0E94 0000 		call ShowCurrentTime
+ 363 0284 00C0      		rjmp .L41
+ 364               	.L29:
+ 365 0286 64E6      		ldi r22,lo8(100)
+ 366 0288 70E0      		ldi r23,hi8(100)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 8
+
+
+ 367 028a 80E0      		ldi r24,hlo8(100)
+ 368 028c 90E0      		ldi r25,hhi8(100)
+ 369 028e 0E94 0000 		call NutSleep
+ 370 0292 0E94 0000 		call LcdClearLine
+ 371 0296 8091 0000 		lds r24,selectedTimeUnit
+ 372 029a 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 373 029e 8130      		cpi r24,1
+ 374 02a0 9105      		cpc r25,__zero_reg__
+ 375 02a2 01F0      		breq .L31
+ 376 02a4 8230      		cpi r24,2
+ 377 02a6 9105      		cpc r25,__zero_reg__
+ 378 02a8 01F0      		breq .L32
+ 379 02aa 892B      		or r24,r25
+ 380 02ac 01F4      		brne .L41
+ 381 02ae 8091 0000 		lds r24,alarmA+4
+ 382 02b2 9091 0000 		lds r25,(alarmA+4)+1
+ 383 02b6 9F93      		push r25
+ 384 02b8 8F93      		push r24
+ 385 02ba 80E0      		ldi r24,lo8(.LC10)
+ 386 02bc 90E0      		ldi r25,hi8(.LC10)
+ 387 02be 00C0      		rjmp .L40
+ 388               	.L31:
+ 389 02c0 8091 0000 		lds r24,alarmA+2
+ 390 02c4 9091 0000 		lds r25,(alarmA+2)+1
+ 391 02c8 9F93      		push r25
+ 392 02ca 8F93      		push r24
+ 393 02cc 80E0      		ldi r24,lo8(.LC6)
+ 394 02ce 90E0      		ldi r25,hi8(.LC6)
+ 395 02d0 00C0      		rjmp .L40
+ 396               	.L32:
+ 397 02d2 8091 0000 		lds r24,alarmA
+ 398 02d6 9091 0000 		lds r25,(alarmA)+1
+ 399 02da 9F93      		push r25
+ 400 02dc 8F93      		push r24
+ 401 02de 80E0      		ldi r24,lo8(.LC7)
+ 402 02e0 90E0      		ldi r25,hi8(.LC7)
+ 403               	.L40:
+ 404 02e2 9F93      		push r25
+ 405 02e4 8F93      		push r24
+ 406 02e6 8E01      		movw r16,r28
+ 407 02e8 0D5F      		subi r16,lo8(-(3))
+ 408 02ea 1F4F      		sbci r17,hi8(-(3))
+ 409 02ec 1F93      		push r17
+ 410 02ee 0F93      		push r16
+ 411 02f0 0E94 0000 		call sprintf
+ 412 02f4 C801      		movw r24,r16
+ 413 02f6 0E94 0000 		call LcdWriteSecondLine
+ 414 02fa 8DB7      		in r24,__SP_L__
+ 415 02fc 9EB7      		in r25,__SP_H__
+ 416 02fe 0696      		adiw r24,6
+ 417 0300 0FB6      		in __tmp_reg__,__SREG__
+ 418 0302 F894      		cli
+ 419 0304 9EBF      		out __SP_H__,r25
+ 420 0306 0FBE      		out __SREG__,__tmp_reg__
+ 421 0308 8DBF      		out __SP_L__,r24
+ 422               	.L41:
+ 423 030a 8091 0000 		lds r24,alarmAset
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 9
+
+
+ 424 030e 9091 0000 		lds r25,(alarmAset)+1
+ 425 0312 0197      		sbiw r24,1
+ 426 0314 01F0      		breq .+2
+ 427 0316 00C0      		rjmp .L29
+ 428 0318 0E94 0000 		call LcdClearAll
+ 429 031c 80E0      		ldi r24,lo8(0)
+ 430 031e 0E94 0000 		call LcdBackLight
+ 431 0322 47E0      		ldi r20,lo8(7)
+ 432 0324 50E0      		ldi r21,hi8(7)
+ 433 0326 60E0      		ldi r22,lo8(alarmA)
+ 434 0328 70E0      		ldi r23,hi8(alarmA)
+ 435 032a 80E0      		ldi r24,lo8(0)
+ 436 032c 90E0      		ldi r25,hi8(0)
+ 437 032e 0E94 0000 		call X12RtcSetAlarm
+ 438               	/* epilogue: frame size=22 */
+ 439 0332 6696      		adiw r28,22
+ 440 0334 0FB6      		in __tmp_reg__,__SREG__
+ 441 0336 F894      		cli
+ 442 0338 DEBF      		out __SP_H__,r29
+ 443 033a 0FBE      		out __SREG__,__tmp_reg__
+ 444 033c CDBF      		out __SP_L__,r28
+ 445 033e DF91      		pop r29
+ 446 0340 CF91      		pop r28
+ 447 0342 1F91      		pop r17
+ 448 0344 0F91      		pop r16
+ 449 0346 0895      		ret
+ 450               	/* epilogue end (size=11) */
+ 451               	/* function AlarmAMenu size 145 (122) */
+ 452               		.size	AlarmAMenu, .-AlarmAMenu
+ 453               		.data
+ 454               	.LC11:
+ 455 00a8 4B42 5468 		.string	"KBThreadManualTime"
+ 455      7265 6164 
+ 455      4D61 6E75 
+ 455      616C 5469 
+ 455      6D65 00
+ 456               	.LC12:
+ 457 00bb 5365 7420 		.string	"Set Time Manually"
+ 457      5469 6D65 
+ 457      204D 616E 
+ 457      7561 6C6C 
+ 457      7900 
+ 458               		.text
+ 459               	.global	setTimeManually
+ 460               		.type	setTimeManually, @function
+ 461               	setTimeManually:
+ 462               	/* prologue: frame size=20 */
+ 463 0348 0F93      		push r16
+ 464 034a 1F93      		push r17
+ 465 034c CF93      		push r28
+ 466 034e DF93      		push r29
+ 467 0350 CDB7      		in r28,__SP_L__
+ 468 0352 DEB7      		in r29,__SP_H__
+ 469 0354 6497      		sbiw r28,20
+ 470 0356 0FB6      		in __tmp_reg__,__SREG__
+ 471 0358 F894      		cli
+ 472 035a DEBF      		out __SP_H__,r29
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 10
+
+
+ 473 035c 0FBE      		out __SREG__,__tmp_reg__
+ 474 035e CDBF      		out __SP_L__,r28
+ 475               	/* prologue end (size=12) */
+ 476 0360 81E0      		ldi r24,lo8(1)
+ 477 0362 90E0      		ldi r25,hi8(1)
+ 478 0364 9093 0000 		sts (pauseCurrentTime)+1,r25
+ 479 0368 8093 0000 		sts pauseCurrentTime,r24
+ 480 036c 80E0      		ldi r24,lo8(datetime)
+ 481 036e 90E0      		ldi r25,hi8(datetime)
+ 482 0370 0E94 0000 		call X12RtcGetClock
+ 483 0374 1092 0000 		sts (timeSetManually)+1,__zero_reg__
+ 484 0378 1092 0000 		sts timeSetManually,__zero_reg__
+ 485 037c 20E0      		ldi r18,lo8(1024)
+ 486 037e 34E0      		ldi r19,hi8(1024)
+ 487 0380 40E0      		ldi r20,lo8(0)
+ 488 0382 50E0      		ldi r21,hi8(0)
+ 489 0384 60E0      		ldi r22,lo8(gs(KBThreadManualTime))
+ 490 0386 70E0      		ldi r23,hi8(gs(KBThreadManualTime))
+ 491 0388 80E0      		ldi r24,lo8(.LC11)
+ 492 038a 90E0      		ldi r25,hi8(.LC11)
+ 493 038c 0E94 0000 		call NutThreadCreate
+ 494 0390 81E0      		ldi r24,lo8(1)
+ 495 0392 0E94 0000 		call LcdBackLight
+ 496 0396 0E94 0000 		call LcdClearAll
+ 497 039a 80E0      		ldi r24,lo8(.LC12)
+ 498 039c 90E0      		ldi r25,hi8(.LC12)
+ 499 039e 0E94 0000 		call LcdWriteTitle
+ 500 03a2 0E94 0000 		call ShowCurrentTime
+ 501 03a6 00C0      		rjmp .L56
+ 502               	.L44:
+ 503 03a8 64E6      		ldi r22,lo8(100)
+ 504 03aa 70E0      		ldi r23,hi8(100)
+ 505 03ac 80E0      		ldi r24,hlo8(100)
+ 506 03ae 90E0      		ldi r25,hhi8(100)
+ 507 03b0 0E94 0000 		call NutSleep
+ 508 03b4 0E94 0000 		call LcdClearLine
+ 509 03b8 8091 0000 		lds r24,selectedTimeUnit
+ 510 03bc 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 511 03c0 8130      		cpi r24,1
+ 512 03c2 9105      		cpc r25,__zero_reg__
+ 513 03c4 01F0      		breq .L46
+ 514 03c6 8230      		cpi r24,2
+ 515 03c8 9105      		cpc r25,__zero_reg__
+ 516 03ca 01F0      		breq .L47
+ 517 03cc 892B      		or r24,r25
+ 518 03ce 01F4      		brne .L56
+ 519 03d0 8091 0000 		lds r24,datetime+4
+ 520 03d4 9091 0000 		lds r25,(datetime+4)+1
+ 521 03d8 9F93      		push r25
+ 522 03da 8F93      		push r24
+ 523 03dc 80E0      		ldi r24,lo8(.LC10)
+ 524 03de 90E0      		ldi r25,hi8(.LC10)
+ 525 03e0 00C0      		rjmp .L55
+ 526               	.L46:
+ 527 03e2 8091 0000 		lds r24,datetime+2
+ 528 03e6 9091 0000 		lds r25,(datetime+2)+1
+ 529 03ea 9F93      		push r25
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 11
+
+
+ 530 03ec 8F93      		push r24
+ 531 03ee 80E0      		ldi r24,lo8(.LC6)
+ 532 03f0 90E0      		ldi r25,hi8(.LC6)
+ 533 03f2 00C0      		rjmp .L55
+ 534               	.L47:
+ 535 03f4 8091 0000 		lds r24,datetime
+ 536 03f8 9091 0000 		lds r25,(datetime)+1
+ 537 03fc 9F93      		push r25
+ 538 03fe 8F93      		push r24
+ 539 0400 80E0      		ldi r24,lo8(.LC7)
+ 540 0402 90E0      		ldi r25,hi8(.LC7)
+ 541               	.L55:
+ 542 0404 9F93      		push r25
+ 543 0406 8F93      		push r24
+ 544 0408 8E01      		movw r16,r28
+ 545 040a 0F5F      		subi r16,lo8(-(1))
+ 546 040c 1F4F      		sbci r17,hi8(-(1))
+ 547 040e 1F93      		push r17
+ 548 0410 0F93      		push r16
+ 549 0412 0E94 0000 		call sprintf
+ 550 0416 C801      		movw r24,r16
+ 551 0418 0E94 0000 		call LcdWriteSecondLine
+ 552 041c 8DB7      		in r24,__SP_L__
+ 553 041e 9EB7      		in r25,__SP_H__
+ 554 0420 0696      		adiw r24,6
+ 555 0422 0FB6      		in __tmp_reg__,__SREG__
+ 556 0424 F894      		cli
+ 557 0426 9EBF      		out __SP_H__,r25
+ 558 0428 0FBE      		out __SREG__,__tmp_reg__
+ 559 042a 8DBF      		out __SP_L__,r24
+ 560               	.L56:
+ 561 042c 8091 0000 		lds r24,timeSetManually
+ 562 0430 9091 0000 		lds r25,(timeSetManually)+1
+ 563 0434 0197      		sbiw r24,1
+ 564 0436 01F0      		breq .+2
+ 565 0438 00C0      		rjmp .L44
+ 566 043a 0E94 0000 		call LcdClearAll
+ 567 043e 80E0      		ldi r24,lo8(0)
+ 568 0440 0E94 0000 		call LcdBackLight
+ 569 0444 80E0      		ldi r24,lo8(datetime)
+ 570 0446 90E0      		ldi r25,hi8(datetime)
+ 571 0448 0E94 0000 		call X12RtcSetClock
+ 572 044c 1092 0000 		sts (pauseCurrentTime)+1,__zero_reg__
+ 573 0450 1092 0000 		sts pauseCurrentTime,__zero_reg__
+ 574               	/* epilogue: frame size=20 */
+ 575 0454 6496      		adiw r28,20
+ 576 0456 0FB6      		in __tmp_reg__,__SREG__
+ 577 0458 F894      		cli
+ 578 045a DEBF      		out __SP_H__,r29
+ 579 045c 0FBE      		out __SREG__,__tmp_reg__
+ 580 045e CDBF      		out __SP_L__,r28
+ 581 0460 DF91      		pop r29
+ 582 0462 CF91      		pop r28
+ 583 0464 1F91      		pop r17
+ 584 0466 0F91      		pop r16
+ 585 0468 0895      		ret
+ 586               	/* epilogue end (size=11) */
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 12
+
+
+ 587               	/* function setTimeManually size 146 (123) */
+ 588               		.size	setTimeManually, .-setTimeManually
+ 589               		.data
+ 590               	.LC13:
+ 591 00cd 4661 696C 		.string	"Failed."
+ 591      6564 2E00 
+ 592               	.LC14:
+ 593 00d5 4E6F 2074 		.string	"No time obtained"
+ 593      696D 6520 
+ 593      6F62 7461 
+ 593      696E 6564 
+ 593      00
+ 594               	.LC15:
+ 595 00e6 4D61 696E 		.string	"MainA"
+ 595      4100 
+ 596               	.LC16:
+ 597 00ec 4D61 696E 		.string	"MainB"
+ 597      4200 
+ 598               		.text
+ 599               	.global	NutAppMain
+ 600               		.type	NutAppMain, @function
+ 601               	NutAppMain:
+ 602               	/* prologue: frame size=0 */
+ 603 046a CF93      		push r28
+ 604 046c DF93      		push r29
+ 605               	/* prologue end (size=2) */
+ 606 046e 0E94 0000 		call WatchDogDisable
+ 607 0472 84E6      		ldi r24,lo8(100)
+ 608 0474 0E94 0000 		call NutDelay
+ 609 0478 0E94 0000 		call SysInitIO
+ 610 047c 0E94 0000 		call SPIinit
+ 611 0480 0E94 0000 		call Uart0DriverInit
+ 612 0484 0E94 0000 		call Uart0DriverStart
+ 613 0488 0E94 0000 		call LogInit
+ 614 048c 0E94 0000 		call CardInit
+ 615 0490 0E94 0000 		call RcInit
+ 616 0494 0E94 0000 		call KbInit
+ 617 0498 0E94 0000 		call LedInit
+ 618 049c 0E94 0000 		call LcdLowLevelInit
+ 619 04a0 40E0      		ldi r20,lo8(0)
+ 620 04a2 50E0      		ldi r21,hi8(0)
+ 621 04a4 60E0      		ldi r22,lo8(gs(SysMainBeatInterrupt))
+ 622 04a6 70E0      		ldi r23,hi8(gs(SysMainBeatInterrupt))
+ 623 04a8 80E0      		ldi r24,lo8(sig_OVERFLOW0)
+ 624 04aa 90E0      		ldi r25,hi8(sig_OVERFLOW0)
+ 625 04ac 0E94 0000 		call NutRegisterIrqHandler
+ 626 04b0 892B      		or r24,r25
+ 627 04b2 01F4      		brne .L58
+ 628 04b4 85B5      		in r24,69-0x20
+ 629 04b6 8460      		ori r24,lo8(4)
+ 630 04b8 85BD      		out 69-0x20,r24
+ 631 04ba A89A      		sbi 53-0x20,0
+ 632 04bc 8091 6E00 		lds r24,110
+ 633 04c0 8160      		ori r24,lo8(1)
+ 634 04c2 8093 6E00 		sts 110,r24
+ 635               	.L58:
+ 636               	/* #APP */
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 13
+
+
+ 637 04c6 7894      		sei
+ 638               	/* #NOAPP */
+ 639 04c8 0E94 0000 		call At45dbInit
+ 640 04cc 0E94 0000 		call X12Init
+ 641 04d0 0E94 0000 		call NetworkInit
+ 642 04d4 80E0      		ldi r24,lo8(datetime)
+ 643 04d6 90E0      		ldi r25,hi8(datetime)
+ 644 04d8 0E94 0000 		call NTP
+ 645 04dc 892B      		or r24,r25
+ 646 04de 01F4      		brne .L60
+ 647 04e0 80E0      		ldi r24,lo8(.LC13)
+ 648 04e2 90E0      		ldi r25,hi8(.LC13)
+ 649 04e4 0E94 0000 		call LcdWriteTitle
+ 650 04e8 80E0      		ldi r24,lo8(.LC14)
+ 651 04ea 90E0      		ldi r25,hi8(.LC14)
+ 652 04ec 0E94 0000 		call LcdWriteSecondLine
+ 653 04f0 60ED      		ldi r22,lo8(2000)
+ 654 04f2 77E0      		ldi r23,hi8(2000)
+ 655 04f4 80E0      		ldi r24,hlo8(2000)
+ 656 04f6 90E0      		ldi r25,hhi8(2000)
+ 657 04f8 0E94 0000 		call NutSleep
+ 658 04fc 0E94 0000 		call setTimeManually
+ 659               	.L60:
+ 660 0500 0E94 0000 		call MenuInit
+ 661 0504 1092 0000 		sts (pauseCurrentTime)+1,__zero_reg__
+ 662 0508 1092 0000 		sts pauseCurrentTime,__zero_reg__
+ 663 050c 81E0      		ldi r24,lo8(1)
+ 664 050e 0E94 0000 		call NutThreadSetPriority
+ 665 0512 20E0      		ldi r18,lo8(1024)
+ 666 0514 34E0      		ldi r19,hi8(1024)
+ 667 0516 40E0      		ldi r20,lo8(0)
+ 668 0518 50E0      		ldi r21,hi8(0)
+ 669 051a 60E0      		ldi r22,lo8(gs(ThreadA))
+ 670 051c 70E0      		ldi r23,hi8(gs(ThreadA))
+ 671 051e 80E0      		ldi r24,lo8(.LC15)
+ 672 0520 90E0      		ldi r25,hi8(.LC15)
+ 673 0522 0E94 0000 		call NutThreadCreate
+ 674 0526 20E0      		ldi r18,lo8(1024)
+ 675 0528 34E0      		ldi r19,hi8(1024)
+ 676 052a 40E0      		ldi r20,lo8(0)
+ 677 052c 50E0      		ldi r21,hi8(0)
+ 678 052e 60E0      		ldi r22,lo8(gs(ThreadB))
+ 679 0530 70E0      		ldi r23,hi8(gs(ThreadB))
+ 680 0532 80E0      		ldi r24,lo8(.LC16)
+ 681 0534 90E0      		ldi r25,hi8(.LC16)
+ 682 0536 0E94 0000 		call NutThreadCreate
+ 683 053a C0E0      		ldi r28,lo8(0)
+ 684 053c D0E0      		ldi r29,hi8(0)
+ 685               	.L62:
+ 686 053e 64EF      		ldi r22,lo8(500)
+ 687 0540 71E0      		ldi r23,hi8(500)
+ 688 0542 80E0      		ldi r24,hlo8(500)
+ 689 0544 90E0      		ldi r25,hhi8(500)
+ 690 0546 0E94 0000 		call NutSleep
+ 691 054a 0E94 0000 		call KbGetKey
+ 692 054e 8838      		cpi r24,lo8(-120)
+ 693 0550 01F0      		breq .L63
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 14
+
+
+ 694 0552 81E0      		ldi r24,lo8(1)
+ 695 0554 0E94 0000 		call LcdBackLight
+ 696 0558 C1E0      		ldi r28,lo8(1)
+ 697 055a D0E0      		ldi r29,hi8(1)
+ 698 055c 00C0      		rjmp .L65
+ 699               	.L63:
+ 700 055e 2196      		adiw r28,1
+ 701 0560 C431      		cpi r28,20
+ 702 0562 D105      		cpc r29,__zero_reg__
+ 703 0564 04F0      		brlt .L65
+ 704 0566 80E0      		ldi r24,lo8(0)
+ 705 0568 0E94 0000 		call LcdBackLight
+ 706               	.L65:
+ 707 056c 8091 0000 		lds r24,pauseCurrentTime
+ 708 0570 9091 0000 		lds r25,(pauseCurrentTime)+1
+ 709 0574 892B      		or r24,r25
+ 710 0576 01F4      		brne .L67
+ 711 0578 0E94 0000 		call ShowCurrentTime
+ 712               	.L67:
+ 713 057c 0E94 0000 		call WatchDogRestart
+ 714 0580 00C0      		rjmp .L62
+ 715               	/* epilogue: frame size=0 */
+ 716               	/* epilogue: noreturn */
+ 717               	/* epilogue end (size=0) */
+ 718               	/* function NutAppMain size 141 (139) */
+ 719               		.size	NutAppMain, .-NutAppMain
+ 720               		.data
+ 721               	.LC17:
+ 722 00f2 0A74 696D 		.string	"\ntimezone = %d"
+ 722      657A 6F6E 
+ 722      6520 3D20 
+ 722      2564 00
+ 723               		.text
+ 724               	.global	setTimeZone
+ 725               		.type	setTimeZone, @function
+ 726               	setTimeZone:
+ 727               	/* prologue: frame size=0 */
+ 728 0582 CF93      		push r28
+ 729 0584 DF93      		push r29
+ 730               	/* prologue end (size=2) */
+ 731 0586 EC01      		movw r28,r24
+ 732 0588 2881      		ld r18,Y
+ 733 058a 3981      		ldd r19,Y+1
+ 734 058c C901      		movw r24,r18
+ 735 058e 0C96      		adiw r24,12
+ 736 0590 4B97      		sbiw r24,27
+ 737 0592 00F4      		brsh .L71
+ 738 0594 3F93      		push r19
+ 739 0596 2F93      		push r18
+ 740 0598 80E0      		ldi r24,lo8(.LC17)
+ 741 059a 90E0      		ldi r25,hi8(.LC17)
+ 742 059c 9F93      		push r25
+ 743 059e 8F93      		push r24
+ 744 05a0 0E94 0000 		call printf
+ 745 05a4 2881      		ld r18,Y
+ 746 05a6 3981      		ldd r19,Y+1
+ 747 05a8 80EF      		ldi r24,lo8(-3600)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 15
+
+
+ 748 05aa 91EF      		ldi r25,hi8(-3600)
+ 749 05ac AC01      		movw r20,r24
+ 750 05ae 249F      		mul r18,r20
+ 751 05b0 C001      		movw r24,r0
+ 752 05b2 259F      		mul r18,r21
+ 753 05b4 900D      		add r25,r0
+ 754 05b6 349F      		mul r19,r20
+ 755 05b8 900D      		add r25,r0
+ 756 05ba 1124      		clr r1
+ 757 05bc AA27      		clr r26
+ 758 05be 97FD      		sbrc r25,7
+ 759 05c0 A095      		com r26
+ 760 05c2 BA2F      		mov r27,r26
+ 761 05c4 8093 0000 		sts _timezone,r24
+ 762 05c8 9093 0000 		sts (_timezone)+1,r25
+ 763 05cc A093 0000 		sts (_timezone)+2,r26
+ 764 05d0 B093 0000 		sts (_timezone)+3,r27
+ 765 05d4 0F90      		pop __tmp_reg__
+ 766 05d6 0F90      		pop __tmp_reg__
+ 767 05d8 0F90      		pop __tmp_reg__
+ 768 05da 0F90      		pop __tmp_reg__
+ 769 05dc 00C0      		rjmp .L74
+ 770               	.L71:
+ 771 05de 1092 0000 		sts _timezone,__zero_reg__
+ 772 05e2 1092 0000 		sts (_timezone)+1,__zero_reg__
+ 773 05e6 1092 0000 		sts (_timezone)+2,__zero_reg__
+ 774 05ea 1092 0000 		sts (_timezone)+3,__zero_reg__
+ 775               	.L74:
+ 776               	/* epilogue: frame size=0 */
+ 777 05ee DF91      		pop r29
+ 778 05f0 CF91      		pop r28
+ 779 05f2 0895      		ret
+ 780               	/* epilogue end (size=3) */
+ 781               	/* function setTimeZone size 58 (53) */
+ 782               		.size	setTimeZone, .-setTimeZone
+ 783               		.data
+ 784               	.LC18:
+ 785 0101 5365 7420 		.string	"Set Timezone"
+ 785      5469 6D65 
+ 785      7A6F 6E65 
+ 785      00
+ 786               	.LC19:
+ 787 010e 4B42 5468 		.string	"KBThreadTimeZone"
+ 787      7265 6164 
+ 787      5469 6D65 
+ 787      5A6F 6E65 
+ 787      00
+ 788               	.LC20:
+ 789 011f 5554 4320 		.string	"UTC +%d "
+ 789      2B25 6420 
+ 789      00
+ 790               	.LC21:
+ 791 0128 5554 4320 		.string	"UTC %d "
+ 791      2564 2000 
+ 792               		.text
+ 793               	.global	InitializeTimeZone
+ 794               		.type	InitializeTimeZone, @function
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 16
+
+
+ 795               	InitializeTimeZone:
+ 796               	/* prologue: frame size=22 */
+ 797 05f4 CF93      		push r28
+ 798 05f6 DF93      		push r29
+ 799 05f8 CDB7      		in r28,__SP_L__
+ 800 05fa DEB7      		in r29,__SP_H__
+ 801 05fc 6697      		sbiw r28,22
+ 802 05fe 0FB6      		in __tmp_reg__,__SREG__
+ 803 0600 F894      		cli
+ 804 0602 DEBF      		out __SP_H__,r29
+ 805 0604 0FBE      		out __SREG__,__tmp_reg__
+ 806 0606 CDBF      		out __SP_L__,r28
+ 807               	/* prologue end (size=10) */
+ 808 0608 0E94 0000 		call LcdClearAll
+ 809 060c 22E0      		ldi r18,lo8(2)
+ 810 060e 30E0      		ldi r19,hi8(2)
+ 811 0610 AE01      		movw r20,r28
+ 812 0612 4F5F      		subi r20,lo8(-(1))
+ 813 0614 5F4F      		sbci r21,hi8(-(1))
+ 814 0616 60E0      		ldi r22,lo8(0)
+ 815 0618 70E0      		ldi r23,hi8(0)
+ 816 061a 80E0      		ldi r24,hlo8(0)
+ 817 061c 90E0      		ldi r25,hhi8(0)
+ 818 061e 0E94 0000 		call At45dbPageRead
+ 819 0622 8981      		ldd r24,Y+1
+ 820 0624 9A81      		ldd r25,Y+2
+ 821 0626 892B      		or r24,r25
+ 822 0628 01F4      		brne .L76
+ 823 062a 8091 0000 		lds r24,setTimezoneFromMenu
+ 824 062e 9091 0000 		lds r25,(setTimezoneFromMenu)+1
+ 825 0632 892B      		or r24,r25
+ 826 0634 01F4      		brne .+2
+ 827 0636 00C0      		rjmp .L78
+ 828               	.L76:
+ 829 0638 81E0      		ldi r24,lo8(1)
+ 830 063a 0E94 0000 		call LcdBackLight
+ 831 063e 80E0      		ldi r24,lo8(.LC18)
+ 832 0640 90E0      		ldi r25,hi8(.LC18)
+ 833 0642 0E94 0000 		call LcdWriteTitle
+ 834 0646 1092 0000 		sts (timeZoneSet)+1,__zero_reg__
+ 835 064a 1092 0000 		sts timeZoneSet,__zero_reg__
+ 836 064e 8981      		ldd r24,Y+1
+ 837 0650 9A81      		ldd r25,Y+2
+ 838 0652 892B      		or r24,r25
+ 839 0654 01F0      		breq .L79
+ 840 0656 1092 0000 		sts (timeZone)+1,__zero_reg__
+ 841 065a 1092 0000 		sts timeZone,__zero_reg__
+ 842 065e 00C0      		rjmp .L81
+ 843               	.L79:
+ 844 0660 6091 0000 		lds r22,_timezone
+ 845 0664 7091 0000 		lds r23,(_timezone)+1
+ 846 0668 8091 0000 		lds r24,(_timezone)+2
+ 847 066c 9091 0000 		lds r25,(_timezone)+3
+ 848 0670 20E1      		ldi r18,lo8(3600)
+ 849 0672 3EE0      		ldi r19,hi8(3600)
+ 850 0674 40E0      		ldi r20,hlo8(3600)
+ 851 0676 50E0      		ldi r21,hhi8(3600)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 17
+
+
+ 852 0678 0E94 0000 		call __divmodsi4
+ 853 067c 3095      		com r19
+ 854 067e 2195      		neg r18
+ 855 0680 3F4F      		sbci r19,lo8(-1)
+ 856 0682 3093 0000 		sts (timeZone)+1,r19
+ 857 0686 2093 0000 		sts timeZone,r18
+ 858               	.L81:
+ 859 068a 20E0      		ldi r18,lo8(1024)
+ 860 068c 34E0      		ldi r19,hi8(1024)
+ 861 068e 40E0      		ldi r20,lo8(0)
+ 862 0690 50E0      		ldi r21,hi8(0)
+ 863 0692 60E0      		ldi r22,lo8(gs(KBThreadTimeZone))
+ 864 0694 70E0      		ldi r23,hi8(gs(KBThreadTimeZone))
+ 865 0696 80E0      		ldi r24,lo8(.LC19)
+ 866 0698 90E0      		ldi r25,hi8(.LC19)
+ 867 069a 0E94 0000 		call NutThreadCreate
+ 868 069e 00C0      		rjmp .L82
+ 869               	.L83:
+ 870 06a0 64E6      		ldi r22,lo8(100)
+ 871 06a2 70E0      		ldi r23,hi8(100)
+ 872 06a4 80E0      		ldi r24,hlo8(100)
+ 873 06a6 90E0      		ldi r25,hhi8(100)
+ 874 06a8 0E94 0000 		call NutSleep
+ 875 06ac 8091 0000 		lds r24,timeZone
+ 876 06b0 9091 0000 		lds r25,(timeZone)+1
+ 877 06b4 9E01      		movw r18,r28
+ 878 06b6 2D5F      		subi r18,lo8(-(3))
+ 879 06b8 3F4F      		sbci r19,hi8(-(3))
+ 880 06ba 4FEF      		ldi r20,hi8(-1)
+ 881 06bc 8F3F      		cpi r24,lo8(-1)
+ 882 06be 9407      		cpc r25,r20
+ 883 06c0 01F0      		breq .L84
+ 884 06c2 04F0      		brlt .L84
+ 885 06c4 9F93      		push r25
+ 886 06c6 8F93      		push r24
+ 887 06c8 80E0      		ldi r24,lo8(.LC20)
+ 888 06ca 90E0      		ldi r25,hi8(.LC20)
+ 889 06cc 00C0      		rjmp .L94
+ 890               	.L84:
+ 891 06ce 9F93      		push r25
+ 892 06d0 8F93      		push r24
+ 893 06d2 80E0      		ldi r24,lo8(.LC21)
+ 894 06d4 90E0      		ldi r25,hi8(.LC21)
+ 895               	.L94:
+ 896 06d6 9F93      		push r25
+ 897 06d8 8F93      		push r24
+ 898 06da 3F93      		push r19
+ 899 06dc 2F93      		push r18
+ 900 06de 0E94 0000 		call sprintf
+ 901 06e2 8DB7      		in r24,__SP_L__
+ 902 06e4 9EB7      		in r25,__SP_H__
+ 903 06e6 0696      		adiw r24,6
+ 904 06e8 0FB6      		in __tmp_reg__,__SREG__
+ 905 06ea F894      		cli
+ 906 06ec 9EBF      		out __SP_H__,r25
+ 907 06ee 0FBE      		out __SREG__,__tmp_reg__
+ 908 06f0 8DBF      		out __SP_L__,r24
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 18
+
+
+ 909 06f2 CE01      		movw r24,r28
+ 910 06f4 0396      		adiw r24,3
+ 911 06f6 0E94 0000 		call LcdWriteSecondLine
+ 912 06fa 0E94 0000 		call WatchDogRestart
+ 913               	.L82:
+ 914 06fe 8091 0000 		lds r24,timeZoneSet
+ 915 0702 9091 0000 		lds r25,(timeZoneSet)+1
+ 916 0706 0197      		sbiw r24,1
+ 917 0708 01F4      		brne .L83
+ 918 070a 80E0      		ldi r24,lo8(0)
+ 919 070c 0E94 0000 		call LcdBackLight
+ 920 0710 8981      		ldd r24,Y+1
+ 921 0712 9A81      		ldd r25,Y+2
+ 922 0714 892B      		or r24,r25
+ 923 0716 01F0      		breq .L88
+ 924 0718 1A82      		std Y+2,__zero_reg__
+ 925 071a 1982      		std Y+1,__zero_reg__
+ 926 071c 22E0      		ldi r18,lo8(2)
+ 927 071e 30E0      		ldi r19,hi8(2)
+ 928 0720 AE01      		movw r20,r28
+ 929 0722 4F5F      		subi r20,lo8(-(1))
+ 930 0724 5F4F      		sbci r21,hi8(-(1))
+ 931 0726 60E0      		ldi r22,lo8(0)
+ 932 0728 70E0      		ldi r23,hi8(0)
+ 933 072a 80E0      		ldi r24,hlo8(0)
+ 934 072c 90E0      		ldi r25,hhi8(0)
+ 935 072e 0E94 0000 		call At45dbPageWrite
+ 936               	.L88:
+ 937 0732 8091 0000 		lds r24,setTimezoneFromMenu
+ 938 0736 9091 0000 		lds r25,(setTimezoneFromMenu)+1
+ 939 073a 892B      		or r24,r25
+ 940 073c 01F0      		breq .L90
+ 941 073e 6091 0000 		lds r22,_timezone
+ 942 0742 7091 0000 		lds r23,(_timezone)+1
+ 943 0746 8091 0000 		lds r24,(_timezone)+2
+ 944 074a 9091 0000 		lds r25,(_timezone)+3
+ 945 074e 20E1      		ldi r18,lo8(3600)
+ 946 0750 3EE0      		ldi r19,hi8(3600)
+ 947 0752 40E0      		ldi r20,hlo8(3600)
+ 948 0754 50E0      		ldi r21,hhi8(3600)
+ 949 0756 0E94 0000 		call __divmodsi4
+ 950 075a 6091 0000 		lds r22,timeZone
+ 951 075e 7091 0000 		lds r23,(timeZone)+1
+ 952 0762 620F      		add r22,r18
+ 953 0764 731F      		adc r23,r19
+ 954 0766 8091 0000 		lds r24,datetime+4
+ 955 076a 9091 0000 		lds r25,(datetime+4)+1
+ 956 076e 860F      		add r24,r22
+ 957 0770 971F      		adc r25,r23
+ 958 0772 9093 0000 		sts (datetime+4)+1,r25
+ 959 0776 8093 0000 		sts datetime+4,r24
+ 960 077a 80E0      		ldi r24,lo8(datetime)
+ 961 077c 90E0      		ldi r25,hi8(datetime)
+ 962 077e 0E94 0000 		call X12RtcSetClock
+ 963               	.L90:
+ 964 0782 22E0      		ldi r18,lo8(2)
+ 965 0784 30E0      		ldi r19,hi8(2)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 19
+
+
+ 966 0786 40E0      		ldi r20,lo8(timeZone)
+ 967 0788 50E0      		ldi r21,hi8(timeZone)
+ 968 078a 62E0      		ldi r22,lo8(2)
+ 969 078c 70E0      		ldi r23,hi8(2)
+ 970 078e 80E0      		ldi r24,hlo8(2)
+ 971 0790 90E0      		ldi r25,hhi8(2)
+ 972 0792 0E94 0000 		call At45dbPageWrite
+ 973 0796 00C0      		rjmp .L92
+ 974               	.L78:
+ 975 0798 22E0      		ldi r18,lo8(2)
+ 976 079a 30E0      		ldi r19,hi8(2)
+ 977 079c 40E0      		ldi r20,lo8(timeZone)
+ 978 079e 50E0      		ldi r21,hi8(timeZone)
+ 979 07a0 62E0      		ldi r22,lo8(2)
+ 980 07a2 70E0      		ldi r23,hi8(2)
+ 981 07a4 80E0      		ldi r24,hlo8(2)
+ 982 07a6 90E0      		ldi r25,hhi8(2)
+ 983 07a8 0E94 0000 		call At45dbPageRead
+ 984               	.L92:
+ 985 07ac 0E94 0000 		call LcdClearAll
+ 986 07b0 80E0      		ldi r24,lo8(timeZone)
+ 987 07b2 90E0      		ldi r25,hi8(timeZone)
+ 988 07b4 0E94 0000 		call setTimeZone
+ 989               	/* epilogue: frame size=22 */
+ 990 07b8 6696      		adiw r28,22
+ 991 07ba 0FB6      		in __tmp_reg__,__SREG__
+ 992 07bc F894      		cli
+ 993 07be DEBF      		out __SP_H__,r29
+ 994 07c0 0FBE      		out __SREG__,__tmp_reg__
+ 995 07c2 CDBF      		out __SP_L__,r28
+ 996 07c4 DF91      		pop r29
+ 997 07c6 CF91      		pop r28
+ 998 07c8 0895      		ret
+ 999               	/* epilogue end (size=9) */
+ 1000               	/* function InitializeTimeZone size 236 (217) */
+ 1001               		.size	InitializeTimeZone, .-InitializeTimeZone
+ 1002               	.global	ThreadB
+ 1003               		.type	ThreadB, @function
+ 1004               	ThreadB:
+ 1005               	/* prologue: frame size=0 */
+ 1006               	/* prologue end (size=0) */
+ 1007               	.L97:
+ 1008 07ca 64EF      		ldi r22,lo8(500)
+ 1009 07cc 71E0      		ldi r23,hi8(500)
+ 1010 07ce 80E0      		ldi r24,hlo8(500)
+ 1011 07d0 90E0      		ldi r25,hhi8(500)
+ 1012 07d2 0E94 0000 		call NutSleep
+ 1013 07d6 83E0      		ldi r24,lo8(3)
+ 1014 07d8 0E94 0000 		call LedControl
+ 1015 07dc 00C0      		rjmp .L97
+ 1016               	/* epilogue: frame size=0 */
+ 1017               	/* epilogue: noreturn */
+ 1018               	/* epilogue end (size=0) */
+ 1019               	/* function ThreadB size 10 (10) */
+ 1020               		.size	ThreadB, .-ThreadB
+ 1021               	.global	ThreadA
+ 1022               		.type	ThreadA, @function
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 20
+
+
+ 1023               	ThreadA:
+ 1024               	/* prologue: frame size=0 */
+ 1025               	/* prologue end (size=0) */
+ 1026               	.L101:
+ 1027 07de 64EF      		ldi r22,lo8(500)
+ 1028 07e0 71E0      		ldi r23,hi8(500)
+ 1029 07e2 80E0      		ldi r24,hlo8(500)
+ 1030 07e4 90E0      		ldi r25,hhi8(500)
+ 1031 07e6 0E94 0000 		call NutSleep
+ 1032 07ea 82E0      		ldi r24,lo8(2)
+ 1033 07ec 0E94 0000 		call LedControl
+ 1034 07f0 00C0      		rjmp .L101
+ 1035               	/* epilogue: frame size=0 */
+ 1036               	/* epilogue: noreturn */
+ 1037               	/* epilogue end (size=0) */
+ 1038               	/* function ThreadA size 10 (10) */
+ 1039               		.size	ThreadA, .-ThreadA
+ 1040               	.global	SetAlarmBThread
+ 1041               		.type	SetAlarmBThread, @function
+ 1042               	SetAlarmBThread:
+ 1043               	/* prologue: frame size=0 */
+ 1044               	/* prologue end (size=0) */
+ 1045               	.L160:
+ 1046 07f2 1092 0000 		sts (selectedTimeUnit)+1,__zero_reg__
+ 1047 07f6 1092 0000 		sts selectedTimeUnit,__zero_reg__
+ 1048               	.L164:
+ 1049 07fa 6CE2      		ldi r22,lo8(300)
+ 1050 07fc 71E0      		ldi r23,hi8(300)
+ 1051 07fe 80E0      		ldi r24,hlo8(300)
+ 1052 0800 90E0      		ldi r25,hhi8(300)
+ 1053 0802 0E94 0000 		call NutSleep
+ 1054 0806 64EF      		ldi r22,lo8(500)
+ 1055 0808 71E0      		ldi r23,hi8(500)
+ 1056 080a 80E0      		ldi r24,hlo8(500)
+ 1057 080c 90E0      		ldi r25,hhi8(500)
+ 1058 080e 0E94 0000 		call KbWaitForKeyEvent
+ 1059 0812 0197      		sbiw r24,1
+ 1060 0814 01F0      		breq .L164
+ 1061 0816 0E94 0000 		call KbGetKey
+ 1062 081a 8830      		cpi r24,lo8(8)
+ 1063 081c 01F0      		breq .+2
+ 1064 081e 00C0      		rjmp .L106
+ 1065 0820 2091 0000 		lds r18,selectedTimeUnit
+ 1066 0824 3091 0000 		lds r19,(selectedTimeUnit)+1
+ 1067 0828 2230      		cpi r18,2
+ 1068 082a 3105      		cpc r19,__zero_reg__
+ 1069 082c 01F0      		breq .L110
+ 1070 082e 2330      		cpi r18,3
+ 1071 0830 3105      		cpc r19,__zero_reg__
+ 1072 0832 04F4      		brge .L113
+ 1073 0834 2115      		cp r18,__zero_reg__
+ 1074 0836 3105      		cpc r19,__zero_reg__
+ 1075 0838 01F0      		breq .L108
+ 1076 083a 2130      		cpi r18,1
+ 1077 083c 3105      		cpc r19,__zero_reg__
+ 1078 083e 01F4      		brne .L164
+ 1079 0840 00C0      		rjmp .L109
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 21
+
+
+ 1080               	.L113:
+ 1081 0842 2330      		cpi r18,3
+ 1082 0844 3105      		cpc r19,__zero_reg__
+ 1083 0846 01F0      		breq .L111
+ 1084 0848 2430      		cpi r18,4
+ 1085 084a 3105      		cpc r19,__zero_reg__
+ 1086 084c 01F4      		brne .L164
+ 1087 084e 00C0      		rjmp .L112
+ 1088               	.L108:
+ 1089 0850 8091 0000 		lds r24,alarmB+8
+ 1090 0854 9091 0000 		lds r25,(alarmB+8)+1
+ 1091 0858 8B30      		cpi r24,11
+ 1092 085a 9105      		cpc r25,__zero_reg__
+ 1093 085c 04F0      		brlt .L114
+ 1094 085e 1092 0000 		sts (alarmB+8)+1,__zero_reg__
+ 1095 0862 1092 0000 		sts alarmB+8,__zero_reg__
+ 1096 0866 00C0      		rjmp .L164
+ 1097               	.L114:
+ 1098 0868 0196      		adiw r24,1
+ 1099 086a 00C0      		rjmp .L157
+ 1100               	.L109:
+ 1101 086c 8091 0000 		lds r24,alarmB+6
+ 1102 0870 9091 0000 		lds r25,(alarmB+6)+1
+ 1103 0874 8F31      		cpi r24,31
+ 1104 0876 9105      		cpc r25,__zero_reg__
+ 1105 0878 04F0      		brlt .L116
+ 1106 087a 3093 0000 		sts (alarmB+6)+1,r19
+ 1107 087e 2093 0000 		sts alarmB+6,r18
+ 1108 0882 00C0      		rjmp .L164
+ 1109               	.L116:
+ 1110 0884 0196      		adiw r24,1
+ 1111 0886 00C0      		rjmp .L158
+ 1112               	.L110:
+ 1113 0888 8091 0000 		lds r24,alarmB+4
+ 1114 088c 9091 0000 		lds r25,(alarmB+4)+1
+ 1115 0890 8731      		cpi r24,23
+ 1116 0892 9105      		cpc r25,__zero_reg__
+ 1117 0894 04F0      		brlt .L118
+ 1118 0896 1092 0000 		sts (alarmB+4)+1,__zero_reg__
+ 1119 089a 1092 0000 		sts alarmB+4,__zero_reg__
+ 1120 089e 00C0      		rjmp .L164
+ 1121               	.L118:
+ 1122 08a0 0196      		adiw r24,1
+ 1123 08a2 00C0      		rjmp .L159
+ 1124               	.L111:
+ 1125 08a4 8091 0000 		lds r24,alarmB+2
+ 1126 08a8 9091 0000 		lds r25,(alarmB+2)+1
+ 1127 08ac 8B33      		cpi r24,59
+ 1128 08ae 9105      		cpc r25,__zero_reg__
+ 1129 08b0 04F0      		brlt .L120
+ 1130 08b2 1092 0000 		sts (alarmB+2)+1,__zero_reg__
+ 1131 08b6 1092 0000 		sts alarmB+2,__zero_reg__
+ 1132 08ba 00C0      		rjmp .L164
+ 1133               	.L120:
+ 1134 08bc 0196      		adiw r24,1
+ 1135 08be 00C0      		rjmp .L162
+ 1136               	.L112:
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 22
+
+
+ 1137 08c0 8091 0000 		lds r24,alarmB
+ 1138 08c4 9091 0000 		lds r25,(alarmB)+1
+ 1139 08c8 8B33      		cpi r24,59
+ 1140 08ca 9105      		cpc r25,__zero_reg__
+ 1141 08cc 04F0      		brlt .L122
+ 1142 08ce 1092 0000 		sts (alarmB)+1,__zero_reg__
+ 1143 08d2 1092 0000 		sts alarmB,__zero_reg__
+ 1144 08d6 00C0      		rjmp .L164
+ 1145               	.L122:
+ 1146 08d8 0196      		adiw r24,1
+ 1147 08da 00C0      		rjmp .L163
+ 1148               	.L106:
+ 1149 08dc 8B30      		cpi r24,lo8(11)
+ 1150 08de 01F0      		breq .+2
+ 1151 08e0 00C0      		rjmp .L124
+ 1152 08e2 8091 0000 		lds r24,selectedTimeUnit
+ 1153 08e6 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1154 08ea 8230      		cpi r24,2
+ 1155 08ec 9105      		cpc r25,__zero_reg__
+ 1156 08ee 01F0      		breq .L128
+ 1157 08f0 8330      		cpi r24,3
+ 1158 08f2 9105      		cpc r25,__zero_reg__
+ 1159 08f4 04F4      		brge .L131
+ 1160 08f6 0097      		sbiw r24,0
+ 1161 08f8 01F0      		breq .L126
+ 1162 08fa 0197      		sbiw r24,1
+ 1163 08fc 01F0      		breq .+2
+ 1164 08fe 00C0      		rjmp .L164
+ 1165 0900 00C0      		rjmp .L127
+ 1166               	.L131:
+ 1167 0902 8330      		cpi r24,3
+ 1168 0904 9105      		cpc r25,__zero_reg__
+ 1169 0906 01F0      		breq .L129
+ 1170 0908 0497      		sbiw r24,4
+ 1171 090a 01F0      		breq .+2
+ 1172 090c 00C0      		rjmp .L164
+ 1173 090e 00C0      		rjmp .L130
+ 1174               	.L126:
+ 1175 0910 8091 0000 		lds r24,alarmB+8
+ 1176 0914 9091 0000 		lds r25,(alarmB+8)+1
+ 1177 0918 1816      		cp __zero_reg__,r24
+ 1178 091a 1906      		cpc __zero_reg__,r25
+ 1179 091c 04F0      		brlt .L132
+ 1180 091e 8BE0      		ldi r24,lo8(11)
+ 1181 0920 90E0      		ldi r25,hi8(11)
+ 1182               	.L157:
+ 1183 0922 9093 0000 		sts (alarmB+8)+1,r25
+ 1184 0926 8093 0000 		sts alarmB+8,r24
+ 1185 092a 00C0      		rjmp .L164
+ 1186               	.L132:
+ 1187 092c 0197      		sbiw r24,1
+ 1188 092e 00C0      		rjmp .L157
+ 1189               	.L127:
+ 1190 0930 8091 0000 		lds r24,alarmB+6
+ 1191 0934 9091 0000 		lds r25,(alarmB+6)+1
+ 1192 0938 8230      		cpi r24,2
+ 1193 093a 9105      		cpc r25,__zero_reg__
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 23
+
+
+ 1194 093c 04F4      		brge .L134
+ 1195 093e 8FE1      		ldi r24,lo8(31)
+ 1196 0940 90E0      		ldi r25,hi8(31)
+ 1197               	.L158:
+ 1198 0942 9093 0000 		sts (alarmB+6)+1,r25
+ 1199 0946 8093 0000 		sts alarmB+6,r24
+ 1200 094a 00C0      		rjmp .L164
+ 1201               	.L134:
+ 1202 094c 0197      		sbiw r24,1
+ 1203 094e 00C0      		rjmp .L158
+ 1204               	.L128:
+ 1205 0950 8091 0000 		lds r24,alarmB+4
+ 1206 0954 9091 0000 		lds r25,(alarmB+4)+1
+ 1207 0958 1816      		cp __zero_reg__,r24
+ 1208 095a 1906      		cpc __zero_reg__,r25
+ 1209 095c 04F0      		brlt .L136
+ 1210 095e 87E1      		ldi r24,lo8(23)
+ 1211 0960 90E0      		ldi r25,hi8(23)
+ 1212               	.L159:
+ 1213 0962 9093 0000 		sts (alarmB+4)+1,r25
+ 1214 0966 8093 0000 		sts alarmB+4,r24
+ 1215 096a 00C0      		rjmp .L164
+ 1216               	.L136:
+ 1217 096c 0197      		sbiw r24,1
+ 1218 096e 00C0      		rjmp .L159
+ 1219               	.L129:
+ 1220 0970 8091 0000 		lds r24,alarmB+2
+ 1221 0974 9091 0000 		lds r25,(alarmB+2)+1
+ 1222 0978 1816      		cp __zero_reg__,r24
+ 1223 097a 1906      		cpc __zero_reg__,r25
+ 1224 097c 04F0      		brlt .L138
+ 1225 097e 8BE3      		ldi r24,lo8(59)
+ 1226 0980 90E0      		ldi r25,hi8(59)
+ 1227               	.L162:
+ 1228 0982 9093 0000 		sts (alarmB+2)+1,r25
+ 1229 0986 8093 0000 		sts alarmB+2,r24
+ 1230 098a 00C0      		rjmp .L164
+ 1231               	.L138:
+ 1232 098c 0197      		sbiw r24,1
+ 1233 098e 00C0      		rjmp .L162
+ 1234               	.L130:
+ 1235 0990 8091 0000 		lds r24,alarmB
+ 1236 0994 9091 0000 		lds r25,(alarmB)+1
+ 1237 0998 1816      		cp __zero_reg__,r24
+ 1238 099a 1906      		cpc __zero_reg__,r25
+ 1239 099c 04F0      		brlt .L140
+ 1240 099e 8BE3      		ldi r24,lo8(59)
+ 1241 09a0 90E0      		ldi r25,hi8(59)
+ 1242 09a2 00C0      		rjmp .L163
+ 1243               	.L140:
+ 1244 09a4 0197      		sbiw r24,1
+ 1245               	.L163:
+ 1246 09a6 9093 0000 		sts (alarmB)+1,r25
+ 1247 09aa 8093 0000 		sts alarmB,r24
+ 1248 09ae 00C0      		rjmp .L164
+ 1249               	.L124:
+ 1250 09b0 8A30      		cpi r24,lo8(10)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 24
+
+
+ 1251 09b2 01F4      		brne .L142
+ 1252 09b4 8091 0000 		lds r24,selectedTimeUnit
+ 1253 09b8 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1254 09bc 1816      		cp __zero_reg__,r24
+ 1255 09be 1906      		cpc __zero_reg__,r25
+ 1256 09c0 04F0      		brlt .L144
+ 1257 09c2 84E0      		ldi r24,lo8(4)
+ 1258 09c4 90E0      		ldi r25,hi8(4)
+ 1259 09c6 00C0      		rjmp .L161
+ 1260               	.L144:
+ 1261 09c8 0197      		sbiw r24,1
+ 1262 09ca 00C0      		rjmp .L161
+ 1263               	.L142:
+ 1264 09cc 8C30      		cpi r24,lo8(12)
+ 1265 09ce 01F4      		brne .L146
+ 1266 09d0 8091 0000 		lds r24,selectedTimeUnit
+ 1267 09d4 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1268 09d8 8430      		cpi r24,4
+ 1269 09da 9105      		cpc r25,__zero_reg__
+ 1270 09dc 04F0      		brlt .+2
+ 1271 09de 00C0      		rjmp .L160
+ 1272 09e0 0196      		adiw r24,1
+ 1273               	.L161:
+ 1274 09e2 9093 0000 		sts (selectedTimeUnit)+1,r25
+ 1275 09e6 8093 0000 		sts selectedTimeUnit,r24
+ 1276 09ea 00C0      		rjmp .L164
+ 1277               	.L146:
+ 1278 09ec 8930      		cpi r24,lo8(9)
+ 1279 09ee 01F0      		breq .+2
+ 1280 09f0 00C0      		rjmp .L164
+ 1281 09f2 81E0      		ldi r24,lo8(1)
+ 1282 09f4 90E0      		ldi r25,hi8(1)
+ 1283 09f6 9093 0000 		sts (alarmBset)+1,r25
+ 1284 09fa 8093 0000 		sts alarmBset,r24
+ 1285 09fe 0E94 0000 		call NutThreadExit
+ 1286 0a02 00C0      		rjmp .L164
+ 1287               	/* epilogue: frame size=0 */
+ 1288               	/* epilogue: noreturn */
+ 1289               	/* epilogue end (size=0) */
+ 1290               	/* function SetAlarmBThread size 268 (268) */
+ 1291               		.size	SetAlarmBThread, .-SetAlarmBThread
+ 1292               	.global	SetAlarmAThread
+ 1293               		.type	SetAlarmAThread, @function
+ 1294               	SetAlarmAThread:
+ 1295               	/* prologue: frame size=0 */
+ 1296               	/* prologue end (size=0) */
+ 1297               	.L208:
+ 1298 0a04 1092 0000 		sts (selectedTimeUnit)+1,__zero_reg__
+ 1299 0a08 1092 0000 		sts selectedTimeUnit,__zero_reg__
+ 1300               	.L210:
+ 1301 0a0c 6CE2      		ldi r22,lo8(300)
+ 1302 0a0e 71E0      		ldi r23,hi8(300)
+ 1303 0a10 80E0      		ldi r24,hlo8(300)
+ 1304 0a12 90E0      		ldi r25,hhi8(300)
+ 1305 0a14 0E94 0000 		call NutSleep
+ 1306 0a18 64EF      		ldi r22,lo8(500)
+ 1307 0a1a 71E0      		ldi r23,hi8(500)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 25
+
+
+ 1308 0a1c 80E0      		ldi r24,hlo8(500)
+ 1309 0a1e 90E0      		ldi r25,hhi8(500)
+ 1310 0a20 0E94 0000 		call KbWaitForKeyEvent
+ 1311 0a24 0197      		sbiw r24,1
+ 1312 0a26 01F0      		breq .L210
+ 1313 0a28 0E94 0000 		call KbGetKey
+ 1314 0a2c 8830      		cpi r24,lo8(8)
+ 1315 0a2e 01F4      		brne .L168
+ 1316 0a30 8091 0000 		lds r24,selectedTimeUnit
+ 1317 0a34 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1318 0a38 8130      		cpi r24,1
+ 1319 0a3a 9105      		cpc r25,__zero_reg__
+ 1320 0a3c 01F0      		breq .L171
+ 1321 0a3e 8230      		cpi r24,2
+ 1322 0a40 9105      		cpc r25,__zero_reg__
+ 1323 0a42 01F0      		breq .L172
+ 1324 0a44 892B      		or r24,r25
+ 1325 0a46 01F4      		brne .L210
+ 1326 0a48 8091 0000 		lds r24,alarmA+4
+ 1327 0a4c 9091 0000 		lds r25,(alarmA+4)+1
+ 1328 0a50 8731      		cpi r24,23
+ 1329 0a52 9105      		cpc r25,__zero_reg__
+ 1330 0a54 04F0      		brlt .L173
+ 1331 0a56 1092 0000 		sts (alarmA+4)+1,__zero_reg__
+ 1332 0a5a 1092 0000 		sts alarmA+4,__zero_reg__
+ 1333 0a5e 00C0      		rjmp .L210
+ 1334               	.L173:
+ 1335 0a60 0196      		adiw r24,1
+ 1336 0a62 00C0      		rjmp .L205
+ 1337               	.L171:
+ 1338 0a64 8091 0000 		lds r24,alarmA+2
+ 1339 0a68 9091 0000 		lds r25,(alarmA+2)+1
+ 1340 0a6c 8B33      		cpi r24,59
+ 1341 0a6e 9105      		cpc r25,__zero_reg__
+ 1342 0a70 04F0      		brlt .L175
+ 1343 0a72 1092 0000 		sts (alarmA+2)+1,__zero_reg__
+ 1344 0a76 1092 0000 		sts alarmA+2,__zero_reg__
+ 1345 0a7a 00C0      		rjmp .L210
+ 1346               	.L175:
+ 1347 0a7c 0196      		adiw r24,1
+ 1348 0a7e 00C0      		rjmp .L206
+ 1349               	.L172:
+ 1350 0a80 8091 0000 		lds r24,alarmA
+ 1351 0a84 9091 0000 		lds r25,(alarmA)+1
+ 1352 0a88 8B33      		cpi r24,59
+ 1353 0a8a 9105      		cpc r25,__zero_reg__
+ 1354 0a8c 04F0      		brlt .L177
+ 1355 0a8e 1092 0000 		sts (alarmA)+1,__zero_reg__
+ 1356 0a92 1092 0000 		sts alarmA,__zero_reg__
+ 1357 0a96 00C0      		rjmp .L210
+ 1358               	.L177:
+ 1359 0a98 0196      		adiw r24,1
+ 1360 0a9a 00C0      		rjmp .L207
+ 1361               	.L168:
+ 1362 0a9c 8B30      		cpi r24,lo8(11)
+ 1363 0a9e 01F4      		brne .L179
+ 1364 0aa0 8091 0000 		lds r24,selectedTimeUnit
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 26
+
+
+ 1365 0aa4 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1366 0aa8 8130      		cpi r24,1
+ 1367 0aaa 9105      		cpc r25,__zero_reg__
+ 1368 0aac 01F0      		breq .L182
+ 1369 0aae 8230      		cpi r24,2
+ 1370 0ab0 9105      		cpc r25,__zero_reg__
+ 1371 0ab2 01F0      		breq .L183
+ 1372 0ab4 892B      		or r24,r25
+ 1373 0ab6 01F0      		breq .+2
+ 1374 0ab8 00C0      		rjmp .L210
+ 1375 0aba 8091 0000 		lds r24,alarmA+4
+ 1376 0abe 9091 0000 		lds r25,(alarmA+4)+1
+ 1377 0ac2 1816      		cp __zero_reg__,r24
+ 1378 0ac4 1906      		cpc __zero_reg__,r25
+ 1379 0ac6 04F0      		brlt .L184
+ 1380 0ac8 87E1      		ldi r24,lo8(23)
+ 1381 0aca 90E0      		ldi r25,hi8(23)
+ 1382               	.L205:
+ 1383 0acc 9093 0000 		sts (alarmA+4)+1,r25
+ 1384 0ad0 8093 0000 		sts alarmA+4,r24
+ 1385 0ad4 00C0      		rjmp .L210
+ 1386               	.L184:
+ 1387 0ad6 0197      		sbiw r24,1
+ 1388 0ad8 00C0      		rjmp .L205
+ 1389               	.L182:
+ 1390 0ada 8091 0000 		lds r24,alarmA+2
+ 1391 0ade 9091 0000 		lds r25,(alarmA+2)+1
+ 1392 0ae2 1816      		cp __zero_reg__,r24
+ 1393 0ae4 1906      		cpc __zero_reg__,r25
+ 1394 0ae6 04F0      		brlt .L186
+ 1395 0ae8 8BE3      		ldi r24,lo8(59)
+ 1396 0aea 90E0      		ldi r25,hi8(59)
+ 1397               	.L206:
+ 1398 0aec 9093 0000 		sts (alarmA+2)+1,r25
+ 1399 0af0 8093 0000 		sts alarmA+2,r24
+ 1400 0af4 00C0      		rjmp .L210
+ 1401               	.L186:
+ 1402 0af6 0197      		sbiw r24,1
+ 1403 0af8 00C0      		rjmp .L206
+ 1404               	.L183:
+ 1405 0afa 8091 0000 		lds r24,alarmA
+ 1406 0afe 9091 0000 		lds r25,(alarmA)+1
+ 1407 0b02 1816      		cp __zero_reg__,r24
+ 1408 0b04 1906      		cpc __zero_reg__,r25
+ 1409 0b06 04F0      		brlt .L188
+ 1410 0b08 8BE3      		ldi r24,lo8(59)
+ 1411 0b0a 90E0      		ldi r25,hi8(59)
+ 1412               	.L207:
+ 1413 0b0c 9093 0000 		sts (alarmA)+1,r25
+ 1414 0b10 8093 0000 		sts alarmA,r24
+ 1415 0b14 00C0      		rjmp .L210
+ 1416               	.L188:
+ 1417 0b16 0197      		sbiw r24,1
+ 1418 0b18 00C0      		rjmp .L207
+ 1419               	.L179:
+ 1420 0b1a 8A30      		cpi r24,lo8(10)
+ 1421 0b1c 01F4      		brne .L190
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 27
+
+
+ 1422 0b1e 8091 0000 		lds r24,selectedTimeUnit
+ 1423 0b22 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1424 0b26 1816      		cp __zero_reg__,r24
+ 1425 0b28 1906      		cpc __zero_reg__,r25
+ 1426 0b2a 04F0      		brlt .L192
+ 1427 0b2c 82E0      		ldi r24,lo8(2)
+ 1428 0b2e 90E0      		ldi r25,hi8(2)
+ 1429 0b30 00C0      		rjmp .L209
+ 1430               	.L192:
+ 1431 0b32 0197      		sbiw r24,1
+ 1432 0b34 00C0      		rjmp .L209
+ 1433               	.L190:
+ 1434 0b36 8C30      		cpi r24,lo8(12)
+ 1435 0b38 01F4      		brne .L194
+ 1436 0b3a 8091 0000 		lds r24,selectedTimeUnit
+ 1437 0b3e 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1438 0b42 8230      		cpi r24,2
+ 1439 0b44 9105      		cpc r25,__zero_reg__
+ 1440 0b46 04F0      		brlt .+2
+ 1441 0b48 00C0      		rjmp .L208
+ 1442 0b4a 0196      		adiw r24,1
+ 1443               	.L209:
+ 1444 0b4c 9093 0000 		sts (selectedTimeUnit)+1,r25
+ 1445 0b50 8093 0000 		sts selectedTimeUnit,r24
+ 1446 0b54 00C0      		rjmp .L210
+ 1447               	.L194:
+ 1448 0b56 8930      		cpi r24,lo8(9)
+ 1449 0b58 01F0      		breq .+2
+ 1450 0b5a 00C0      		rjmp .L210
+ 1451 0b5c 81E0      		ldi r24,lo8(1)
+ 1452 0b5e 90E0      		ldi r25,hi8(1)
+ 1453 0b60 9093 0000 		sts (alarmAset)+1,r25
+ 1454 0b64 8093 0000 		sts alarmAset,r24
+ 1455 0b68 0E94 0000 		call NutThreadExit
+ 1456 0b6c 00C0      		rjmp .L210
+ 1457               	/* epilogue: frame size=0 */
+ 1458               	/* epilogue: noreturn */
+ 1459               	/* epilogue end (size=0) */
+ 1460               	/* function SetAlarmAThread size 182 (182) */
+ 1461               		.size	SetAlarmAThread, .-SetAlarmAThread
+ 1462               	.global	KBThreadManualTime
+ 1463               		.type	KBThreadManualTime, @function
+ 1464               	KBThreadManualTime:
+ 1465               	/* prologue: frame size=0 */
+ 1466               	/* prologue end (size=0) */
+ 1467               	.L254:
+ 1468 0b6e 1092 0000 		sts (selectedTimeUnit)+1,__zero_reg__
+ 1469 0b72 1092 0000 		sts selectedTimeUnit,__zero_reg__
+ 1470               	.L256:
+ 1471 0b76 6CE2      		ldi r22,lo8(300)
+ 1472 0b78 71E0      		ldi r23,hi8(300)
+ 1473 0b7a 80E0      		ldi r24,hlo8(300)
+ 1474 0b7c 90E0      		ldi r25,hhi8(300)
+ 1475 0b7e 0E94 0000 		call NutSleep
+ 1476 0b82 64EF      		ldi r22,lo8(500)
+ 1477 0b84 71E0      		ldi r23,hi8(500)
+ 1478 0b86 80E0      		ldi r24,hlo8(500)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 28
+
+
+ 1479 0b88 90E0      		ldi r25,hhi8(500)
+ 1480 0b8a 0E94 0000 		call KbWaitForKeyEvent
+ 1481 0b8e 0197      		sbiw r24,1
+ 1482 0b90 01F0      		breq .L256
+ 1483 0b92 0E94 0000 		call KbGetKey
+ 1484 0b96 8830      		cpi r24,lo8(8)
+ 1485 0b98 01F4      		brne .L214
+ 1486 0b9a 8091 0000 		lds r24,selectedTimeUnit
+ 1487 0b9e 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1488 0ba2 8130      		cpi r24,1
+ 1489 0ba4 9105      		cpc r25,__zero_reg__
+ 1490 0ba6 01F0      		breq .L217
+ 1491 0ba8 8230      		cpi r24,2
+ 1492 0baa 9105      		cpc r25,__zero_reg__
+ 1493 0bac 01F0      		breq .L218
+ 1494 0bae 892B      		or r24,r25
+ 1495 0bb0 01F4      		brne .L256
+ 1496 0bb2 8091 0000 		lds r24,datetime+4
+ 1497 0bb6 9091 0000 		lds r25,(datetime+4)+1
+ 1498 0bba 8731      		cpi r24,23
+ 1499 0bbc 9105      		cpc r25,__zero_reg__
+ 1500 0bbe 04F0      		brlt .L219
+ 1501 0bc0 1092 0000 		sts (datetime+4)+1,__zero_reg__
+ 1502 0bc4 1092 0000 		sts datetime+4,__zero_reg__
+ 1503 0bc8 00C0      		rjmp .L256
+ 1504               	.L219:
+ 1505 0bca 0196      		adiw r24,1
+ 1506 0bcc 00C0      		rjmp .L251
+ 1507               	.L217:
+ 1508 0bce 8091 0000 		lds r24,datetime+2
+ 1509 0bd2 9091 0000 		lds r25,(datetime+2)+1
+ 1510 0bd6 8B33      		cpi r24,59
+ 1511 0bd8 9105      		cpc r25,__zero_reg__
+ 1512 0bda 04F0      		brlt .L221
+ 1513 0bdc 1092 0000 		sts (datetime+2)+1,__zero_reg__
+ 1514 0be0 1092 0000 		sts datetime+2,__zero_reg__
+ 1515 0be4 00C0      		rjmp .L256
+ 1516               	.L221:
+ 1517 0be6 0196      		adiw r24,1
+ 1518 0be8 00C0      		rjmp .L252
+ 1519               	.L218:
+ 1520 0bea 8091 0000 		lds r24,datetime
+ 1521 0bee 9091 0000 		lds r25,(datetime)+1
+ 1522 0bf2 8B33      		cpi r24,59
+ 1523 0bf4 9105      		cpc r25,__zero_reg__
+ 1524 0bf6 04F0      		brlt .L223
+ 1525 0bf8 1092 0000 		sts (datetime)+1,__zero_reg__
+ 1526 0bfc 1092 0000 		sts datetime,__zero_reg__
+ 1527 0c00 00C0      		rjmp .L256
+ 1528               	.L223:
+ 1529 0c02 0196      		adiw r24,1
+ 1530 0c04 00C0      		rjmp .L253
+ 1531               	.L214:
+ 1532 0c06 8B30      		cpi r24,lo8(11)
+ 1533 0c08 01F4      		brne .L225
+ 1534 0c0a 8091 0000 		lds r24,selectedTimeUnit
+ 1535 0c0e 9091 0000 		lds r25,(selectedTimeUnit)+1
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 29
+
+
+ 1536 0c12 8130      		cpi r24,1
+ 1537 0c14 9105      		cpc r25,__zero_reg__
+ 1538 0c16 01F0      		breq .L228
+ 1539 0c18 8230      		cpi r24,2
+ 1540 0c1a 9105      		cpc r25,__zero_reg__
+ 1541 0c1c 01F0      		breq .L229
+ 1542 0c1e 892B      		or r24,r25
+ 1543 0c20 01F0      		breq .+2
+ 1544 0c22 00C0      		rjmp .L256
+ 1545 0c24 8091 0000 		lds r24,datetime+4
+ 1546 0c28 9091 0000 		lds r25,(datetime+4)+1
+ 1547 0c2c 1816      		cp __zero_reg__,r24
+ 1548 0c2e 1906      		cpc __zero_reg__,r25
+ 1549 0c30 04F0      		brlt .L230
+ 1550 0c32 87E1      		ldi r24,lo8(23)
+ 1551 0c34 90E0      		ldi r25,hi8(23)
+ 1552               	.L251:
+ 1553 0c36 9093 0000 		sts (datetime+4)+1,r25
+ 1554 0c3a 8093 0000 		sts datetime+4,r24
+ 1555 0c3e 00C0      		rjmp .L256
+ 1556               	.L230:
+ 1557 0c40 0197      		sbiw r24,1
+ 1558 0c42 00C0      		rjmp .L251
+ 1559               	.L228:
+ 1560 0c44 8091 0000 		lds r24,datetime+2
+ 1561 0c48 9091 0000 		lds r25,(datetime+2)+1
+ 1562 0c4c 1816      		cp __zero_reg__,r24
+ 1563 0c4e 1906      		cpc __zero_reg__,r25
+ 1564 0c50 04F0      		brlt .L232
+ 1565 0c52 8BE3      		ldi r24,lo8(59)
+ 1566 0c54 90E0      		ldi r25,hi8(59)
+ 1567               	.L252:
+ 1568 0c56 9093 0000 		sts (datetime+2)+1,r25
+ 1569 0c5a 8093 0000 		sts datetime+2,r24
+ 1570 0c5e 00C0      		rjmp .L256
+ 1571               	.L232:
+ 1572 0c60 0197      		sbiw r24,1
+ 1573 0c62 00C0      		rjmp .L252
+ 1574               	.L229:
+ 1575 0c64 8091 0000 		lds r24,datetime
+ 1576 0c68 9091 0000 		lds r25,(datetime)+1
+ 1577 0c6c 1816      		cp __zero_reg__,r24
+ 1578 0c6e 1906      		cpc __zero_reg__,r25
+ 1579 0c70 04F0      		brlt .L234
+ 1580 0c72 8BE3      		ldi r24,lo8(59)
+ 1581 0c74 90E0      		ldi r25,hi8(59)
+ 1582               	.L253:
+ 1583 0c76 9093 0000 		sts (datetime)+1,r25
+ 1584 0c7a 8093 0000 		sts datetime,r24
+ 1585 0c7e 00C0      		rjmp .L256
+ 1586               	.L234:
+ 1587 0c80 0197      		sbiw r24,1
+ 1588 0c82 00C0      		rjmp .L253
+ 1589               	.L225:
+ 1590 0c84 8A30      		cpi r24,lo8(10)
+ 1591 0c86 01F4      		brne .L236
+ 1592 0c88 8091 0000 		lds r24,selectedTimeUnit
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 30
+
+
+ 1593 0c8c 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1594 0c90 1816      		cp __zero_reg__,r24
+ 1595 0c92 1906      		cpc __zero_reg__,r25
+ 1596 0c94 04F0      		brlt .L238
+ 1597 0c96 82E0      		ldi r24,lo8(2)
+ 1598 0c98 90E0      		ldi r25,hi8(2)
+ 1599 0c9a 00C0      		rjmp .L255
+ 1600               	.L238:
+ 1601 0c9c 0197      		sbiw r24,1
+ 1602 0c9e 00C0      		rjmp .L255
+ 1603               	.L236:
+ 1604 0ca0 8C30      		cpi r24,lo8(12)
+ 1605 0ca2 01F4      		brne .L240
+ 1606 0ca4 8091 0000 		lds r24,selectedTimeUnit
+ 1607 0ca8 9091 0000 		lds r25,(selectedTimeUnit)+1
+ 1608 0cac 8230      		cpi r24,2
+ 1609 0cae 9105      		cpc r25,__zero_reg__
+ 1610 0cb0 04F0      		brlt .+2
+ 1611 0cb2 00C0      		rjmp .L254
+ 1612 0cb4 0196      		adiw r24,1
+ 1613               	.L255:
+ 1614 0cb6 9093 0000 		sts (selectedTimeUnit)+1,r25
+ 1615 0cba 8093 0000 		sts selectedTimeUnit,r24
+ 1616 0cbe 00C0      		rjmp .L256
+ 1617               	.L240:
+ 1618 0cc0 8930      		cpi r24,lo8(9)
+ 1619 0cc2 01F0      		breq .+2
+ 1620 0cc4 00C0      		rjmp .L256
+ 1621 0cc6 81E0      		ldi r24,lo8(1)
+ 1622 0cc8 90E0      		ldi r25,hi8(1)
+ 1623 0cca 9093 0000 		sts (timeSetManually)+1,r25
+ 1624 0cce 8093 0000 		sts timeSetManually,r24
+ 1625 0cd2 0E94 0000 		call NutThreadExit
+ 1626 0cd6 00C0      		rjmp .L256
+ 1627               	/* epilogue: frame size=0 */
+ 1628               	/* epilogue: noreturn */
+ 1629               	/* epilogue end (size=0) */
+ 1630               	/* function KBThreadManualTime size 182 (182) */
+ 1631               		.size	KBThreadManualTime, .-KBThreadManualTime
+ 1632               	.global	KBThreadTimeZone
+ 1633               		.type	KBThreadTimeZone, @function
+ 1634               	KBThreadTimeZone:
+ 1635               	/* prologue: frame size=0 */
+ 1636               	/* prologue end (size=0) */
+ 1637               	.L275:
+ 1638 0cd8 68EC      		ldi r22,lo8(200)
+ 1639 0cda 70E0      		ldi r23,hi8(200)
+ 1640 0cdc 80E0      		ldi r24,hlo8(200)
+ 1641 0cde 90E0      		ldi r25,hhi8(200)
+ 1642 0ce0 0E94 0000 		call NutSleep
+ 1643 0ce4 64EF      		ldi r22,lo8(500)
+ 1644 0ce6 71E0      		ldi r23,hi8(500)
+ 1645 0ce8 80E0      		ldi r24,hlo8(500)
+ 1646 0cea 90E0      		ldi r25,hhi8(500)
+ 1647 0cec 0E94 0000 		call KbWaitForKeyEvent
+ 1648 0cf0 0197      		sbiw r24,1
+ 1649 0cf2 01F0      		breq .L275
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 31
+
+
+ 1650 0cf4 0E94 0000 		call KbGetKey
+ 1651 0cf8 8830      		cpi r24,lo8(8)
+ 1652 0cfa 01F4      		brne .L261
+ 1653 0cfc 8091 0000 		lds r24,timeZone
+ 1654 0d00 9091 0000 		lds r25,(timeZone)+1
+ 1655 0d04 8E30      		cpi r24,14
+ 1656 0d06 9105      		cpc r25,__zero_reg__
+ 1657 0d08 04F4      		brge .L275
+ 1658 0d0a 0196      		adiw r24,1
+ 1659 0d0c 00C0      		rjmp .L274
+ 1660               	.L261:
+ 1661 0d0e 8B30      		cpi r24,lo8(11)
+ 1662 0d10 01F4      		brne .L264
+ 1663 0d12 8091 0000 		lds r24,timeZone
+ 1664 0d16 9091 0000 		lds r25,(timeZone)+1
+ 1665 0d1a 2FEF      		ldi r18,hi8(-11)
+ 1666 0d1c 853F      		cpi r24,lo8(-11)
+ 1667 0d1e 9207      		cpc r25,r18
+ 1668 0d20 04F0      		brlt .L275
+ 1669 0d22 0197      		sbiw r24,1
+ 1670               	.L274:
+ 1671 0d24 9093 0000 		sts (timeZone)+1,r25
+ 1672 0d28 8093 0000 		sts timeZone,r24
+ 1673 0d2c 00C0      		rjmp .L275
+ 1674               	.L264:
+ 1675 0d2e 8930      		cpi r24,lo8(9)
+ 1676 0d30 01F4      		brne .L275
+ 1677 0d32 81E0      		ldi r24,lo8(1)
+ 1678 0d34 90E0      		ldi r25,hi8(1)
+ 1679 0d36 9093 0000 		sts (timeZoneSet)+1,r25
+ 1680 0d3a 8093 0000 		sts timeZoneSet,r24
+ 1681 0d3e 0E94 0000 		call NutThreadExit
+ 1682 0d42 00C0      		rjmp .L275
+ 1683               	/* epilogue: frame size=0 */
+ 1684               	/* epilogue: noreturn */
+ 1685               	/* epilogue end (size=0) */
+ 1686               	/* function KBThreadTimeZone size 55 (55) */
+ 1687               		.size	KBThreadTimeZone, .-KBThreadTimeZone
+ 1688               	.global	DEBUG
+ 1689               		.data
+ 1690               		.type	DEBUG, @object
+ 1691               		.size	DEBUG, 2
+ 1692               	DEBUG:
+ 1693 0130 0000      		.skip 2,0
+ 1694               		.comm pauseCurrentTime,2,1
+ 1695               		.comm timeZone,2,1
+ 1696               		.comm timeZoneSet,2,1
+ 1697               		.comm timeSetManually,2,1
+ 1698               		.comm setTimezoneFromMenu,2,1
+ 1699               		.comm selectedTimeUnit,2,1
+ 1700               		.comm alarmAset,2,1
+ 1701               		.comm alarmBset,2,1
+ 1702               		.comm datetime,18,1
+ 1703               		.comm alarmA,18,1
+ 1704               		.comm alarmB,18,1
+ 1705               	/* File "source/main.c": code 1712 = 0x06b0 (1592), prologues  62, epilogues  58 */
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:3      *ABS*:0000003f __SREG__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:13     .text:00000000 SysInitIO
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:59     .text:0000003a NutAppMain
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:241    .progmem.data:0000001a __c.2565
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:237    .progmem.data:00000000 __c.2567
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:186    .text:0000014e SysMainBeatInterrupt
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:217    .text:0000016c ThreadA
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:198    .text:00000158 ThreadB
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:3      *ABS*:0000003f __SREG__
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:13     .text:00000000 SysInitIO
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:50     .text:0000003a SysMainBeatInterrupt
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:66     .text:00000044 ShowCurrentTime
+                            *COM*:00000012 datetime
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:152    .text:000000ce AlarmBMenu
+                            *COM*:00000012 alarmB
+                            *COM*:00000002 alarmBset
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:1042   .text:000007f2 SetAlarmBThread
+                            *COM*:00000002 selectedTimeUnit
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:322    .text:00000228 AlarmAMenu
+                            *COM*:00000012 alarmA
+                            *COM*:00000002 alarmAset
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:1294   .text:00000a04 SetAlarmAThread
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:461    .text:00000348 setTimeManually
+                            *COM*:00000002 pauseCurrentTime
+                            *COM*:00000002 timeSetManually
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:1464   .text:00000b6e KBThreadManualTime
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:601    .text:0000046a NutAppMain
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:1023   .text:000007de ThreadA
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:1004   .text:000007ca ThreadB
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:726    .text:00000582 setTimeZone
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:795    .text:000005f4 InitializeTimeZone
+                            *COM*:00000002 setTimezoneFromMenu
+                            *COM*:00000002 timeZoneSet
+                            *COM*:00000002 timeZone
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:1634   .text:00000cd8 KBThreadTimeZone
+C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s:1692   .data:00000130 DEBUG
 
 UNDEFINED SYMBOLS
 __do_copy_data
 __do_clear_bss
+KbScan
+CardCheckCard
+X12RtcGetClock
+sprintf
+LcdTimeDisplay
+X12RtcGetAlarm
+NutThreadCreate
+LcdBackLight
+LcdClearAll
+LcdWriteTitle
+NutSleep
+LcdClearLine
+LcdWriteSecondLine
+X12RtcSetAlarm
+X12RtcSetClock
 WatchDogDisable
 NutDelay
 SPIinit
 Uart0DriverInit
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccjF0iyf.s 			page 33
+
+
 Uart0DriverStart
 LogInit
-LogMsg_P
-X12Init
-X12RtcGetClock
-At45dbInit
 CardInit
 RcInit
 KbInit
@@ -304,10 +1929,19 @@ LedInit
 LcdLowLevelInit
 sig_OVERFLOW0
 NutRegisterIrqHandler
+At45dbInit
+X12Init
+NetworkInit
+NTP
+MenuInit
 NutThreadSetPriority
-NutThreadCreate
-NutSleep
-LcdTimeDisplay
-KbScan
-CardCheckCard
+KbGetKey
+WatchDogRestart
+printf
+_timezone
+At45dbPageRead
+__divmodsi4
+At45dbPageWrite
 LedControl
+KbWaitForKeyEvent
+NutThreadExit

@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 1
 
 
    1               		.file	"vs10xx.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
   55 002c 0E94 0000 		call VsPlayerInterrupts
   56 0030 982F      		mov r25,r24
   57 0032 8091 0000 		lds r24,vs_status
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 2
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 2
 
 
   58 0036 8130      		cpi r24,lo8(1)
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
  112 006a CF93      		push r28
  113 006c DF93      		push r29
  114               	/* prologue end (size=4) */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 3
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 3
 
 
  115 006e EC01      		movw r28,r24
@@ -163,13 +163,13 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
  154 00a8 182F      		mov r17,r24
  155 00aa 64E0      		ldi r22,lo8(4)
  156 00ac 70E0      		ldi r23,hi8(4)
- 157 00ae 80E0      		ldi r24,lo8(off.2559)
- 158 00b0 90E0      		ldi r25,hi8(off.2559)
+ 157 00ae 80E0      		ldi r24,lo8(off.2560)
+ 158 00b0 90E0      		ldi r25,hi8(off.2560)
  159 00b2 0E94 0000 		call VsSdiWrite_P
  160 00b6 64E0      		ldi r22,lo8(4)
  161 00b8 70E0      		ldi r23,hi8(4)
- 162 00ba 80E0      		ldi r24,lo8(end.2560)
- 163 00bc 90E0      		ldi r25,hi8(end.2560)
+ 162 00ba 80E0      		ldi r24,lo8(end.2561)
+ 163 00bc 90E0      		ldi r25,hi8(end.2561)
  164 00be 0E94 0000 		call VsSdiWrite_P
  165 00c2 812F      		mov r24,r17
  166 00c4 0E94 0000 		call VsPlayerInterrupts
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
  169               	/* epilogue: frame size=0 */
  170 00cc 1F91      		pop r17
  171 00ce 0895      		ret
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 4
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 4
 
 
  172               	/* epilogue end (size=2) */
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
  226 0122 90E0      		ldi r25,hi8(0)
  227 0124 0E94 0000 		call SPIselect
  228 0128 2C98      		cbi 37-0x20,4
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 5
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 5
 
 
  229 012a 82E0      		ldi r24,lo8(2)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
  283 0194 EF90      		pop r14
  284 0196 DF90      		pop r13
  285 0198 0895      		ret
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 6
 
 
  286               	/* epilogue end (size=6) */
@@ -357,11 +357,11 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
  339 01ea 0E94 0000 		call VsPlayerSetMode
  340 01ee 63E0      		ldi r22,lo8(3)
  341 01f0 70E0      		ldi r23,hi8(3)
- 342 01f2 80E0      		ldi r24,lo8(on.2552)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 7
+ 342 01f2 80E0      		ldi r24,lo8(on.2553)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 7
 
 
- 343 01f4 90E0      		ldi r25,hi8(on.2552)
+ 343 01f4 90E0      		ldi r25,hi8(on.2553)
  344 01f6 0E94 0000 		call VsSdiWrite_P
  345 01fa 61E0      		ldi r22,lo8(1)
  346 01fc 70E0      		ldi r23,hi8(1)
@@ -370,8 +370,8 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
  349 0202 0E94 0000 		call VsSdiWrite
  350 0206 64E0      		ldi r22,lo8(4)
  351 0208 70E0      		ldi r23,hi8(4)
- 352 020a 80E0      		ldi r24,lo8(end.2553)
- 353 020c 90E0      		ldi r25,hi8(end.2553)
+ 352 020a 80E0      		ldi r24,lo8(end.2554)
+ 353 020c 90E0      		ldi r25,hi8(end.2554)
  354 020e 0E94 0000 		call VsSdiWrite_P
  355 0212 812F      		mov r24,r17
  356 0214 0E94 0000 		call VsPlayerInterrupts
@@ -418,1695 +418,1755 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 1
  397               	.global	VsBeep
  398               		.type	VsBeep, @function
  399               	VsBeep:
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 8
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 8
 
 
  400               	/* prologue: frame size=1 */
- 401 0250 DF92      		push r13
- 402 0252 EF92      		push r14
- 403 0254 FF92      		push r15
- 404 0256 0F93      		push r16
- 405 0258 1F93      		push r17
- 406 025a CF93      		push r28
- 407 025c DF93      		push r29
- 408 025e CDB7      		in r28,__SP_L__
- 409 0260 DEB7      		in r29,__SP_H__
- 410 0262 2197      		sbiw r28,1
- 411 0264 0FB6      		in __tmp_reg__,__SREG__
- 412 0266 F894      		cli
- 413 0268 DEBF      		out __SP_H__,r29
- 414 026a 0FBE      		out __SREG__,__tmp_reg__
- 415 026c CDBF      		out __SP_L__,r28
- 416               	/* prologue end (size=15) */
- 417 026e 8983      		std Y+1,r24
- 418 0270 7B01      		movw r14,r22
- 419 0272 80E0      		ldi r24,lo8(0)
- 420 0274 0E94 0000 		call VsPlayerInterrupts
- 421 0278 D82E      		mov r13,r24
- 422 027a 80E2      		ldi r24,lo8(32)
- 423 027c 90E0      		ldi r25,hi8(32)
- 424 027e 0E94 0000 		call VsPlayerSetMode
- 425 0282 8981      		ldd r24,Y+1
- 426 0284 8295      		swap r24
- 427 0286 807F      		andi r24,0xf0
- 428 0288 885C      		subi r24,lo8(-(56))
- 429 028a 8983      		std Y+1,r24
- 430 028c 63E0      		ldi r22,lo8(3)
- 431 028e 70E0      		ldi r23,hi8(3)
- 432 0290 80E0      		ldi r24,lo8(on.2527)
- 433 0292 90E0      		ldi r25,hi8(on.2527)
- 434 0294 0E94 0000 		call VsSdiWrite_P
- 435 0298 61E0      		ldi r22,lo8(1)
- 436 029a 70E0      		ldi r23,hi8(1)
- 437 029c CE01      		movw r24,r28
- 438 029e 0196      		adiw r24,1
- 439 02a0 0E94 0000 		call VsSdiWrite
- 440 02a4 00E0      		ldi r16,lo8(end.2529)
- 441 02a6 10E0      		ldi r17,hi8(end.2529)
- 442 02a8 64E0      		ldi r22,lo8(4)
- 443 02aa 70E0      		ldi r23,hi8(4)
- 444 02ac C801      		movw r24,r16
- 445 02ae 0E94 0000 		call VsSdiWrite_P
- 446 02b2 8E2D      		mov r24,r14
- 447 02b4 0E94 0000 		call NutDelay
- 448 02b8 64E0      		ldi r22,lo8(4)
- 449 02ba 70E0      		ldi r23,hi8(4)
- 450 02bc 80E0      		ldi r24,lo8(off.2528)
- 451 02be 90E0      		ldi r25,hi8(off.2528)
- 452 02c0 0E94 0000 		call VsSdiWrite_P
- 453 02c4 64E0      		ldi r22,lo8(4)
- 454 02c6 70E0      		ldi r23,hi8(4)
- 455 02c8 C801      		movw r24,r16
- 456 02ca 0E94 0000 		call VsSdiWrite_P
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 9
+ 401 0250 BF92      		push r11
+ 402 0252 CF92      		push r12
+ 403 0254 DF92      		push r13
+ 404 0256 EF92      		push r14
+ 405 0258 FF92      		push r15
+ 406 025a 0F93      		push r16
+ 407 025c 1F93      		push r17
+ 408 025e CF93      		push r28
+ 409 0260 DF93      		push r29
+ 410 0262 CDB7      		in r28,__SP_L__
+ 411 0264 DEB7      		in r29,__SP_H__
+ 412 0266 2197      		sbiw r28,1
+ 413 0268 0FB6      		in __tmp_reg__,__SREG__
+ 414 026a F894      		cli
+ 415 026c DEBF      		out __SP_H__,r29
+ 416 026e 0FBE      		out __SREG__,__tmp_reg__
+ 417 0270 CDBF      		out __SP_L__,r28
+ 418               	/* prologue end (size=17) */
+ 419 0272 8983      		std Y+1,r24
+ 420 0274 7B01      		movw r14,r22
+ 421 0276 80E0      		ldi r24,lo8(0)
+ 422 0278 0E94 0000 		call VsPlayerInterrupts
+ 423 027c B82E      		mov r11,r24
+ 424 027e 80E2      		ldi r24,lo8(32)
+ 425 0280 90E0      		ldi r25,hi8(32)
+ 426 0282 0E94 0000 		call VsPlayerSetMode
+ 427 0286 63E0      		ldi r22,lo8(3)
+ 428 0288 70E0      		ldi r23,hi8(3)
+ 429 028a 80E0      		ldi r24,lo8(on.2527)
+ 430 028c 90E0      		ldi r25,hi8(on.2527)
+ 431 028e 0E94 0000 		call VsSdiWrite_P
+ 432 0292 61E0      		ldi r22,lo8(1)
+ 433 0294 70E0      		ldi r23,hi8(1)
+ 434 0296 CE01      		movw r24,r28
+ 435 0298 0196      		adiw r24,1
+ 436 029a 0E94 0000 		call VsSdiWrite
+ 437 029e 60E0      		ldi r22,lo8(end.2529)
+ 438 02a0 C62E      		mov r12,r22
+ 439 02a2 60E0      		ldi r22,hi8(end.2529)
+ 440 02a4 D62E      		mov r13,r22
+ 441 02a6 64E0      		ldi r22,lo8(4)
+ 442 02a8 70E0      		ldi r23,hi8(4)
+ 443 02aa C601      		movw r24,r12
+ 444 02ac 0E94 0000 		call VsSdiWrite_P
+ 445 02b0 0027      		clr r16
+ 446 02b2 1127      		clr r17
+ 447 02b4 C801      		movw r24,r16
+ 448 02b6 B701      		movw r22,r14
+ 449 02b8 0E94 0000 		call NutSleep
+ 450 02bc 64E0      		ldi r22,lo8(4)
+ 451 02be 70E0      		ldi r23,hi8(4)
+ 452 02c0 80E0      		ldi r24,lo8(off.2528)
+ 453 02c2 90E0      		ldi r25,hi8(off.2528)
+ 454 02c4 0E94 0000 		call VsSdiWrite_P
+ 455 02c8 64E0      		ldi r22,lo8(4)
+ 456 02ca 70E0      		ldi r23,hi8(4)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 9
 
 
- 457 02ce 8D2D      		mov r24,r13
- 458 02d0 0E94 0000 		call VsPlayerInterrupts
- 459 02d4 80E0      		ldi r24,lo8(0)
- 460 02d6 90E0      		ldi r25,hi8(0)
- 461               	/* epilogue: frame size=1 */
- 462 02d8 2196      		adiw r28,1
- 463 02da 0FB6      		in __tmp_reg__,__SREG__
- 464 02dc F894      		cli
- 465 02de DEBF      		out __SP_H__,r29
- 466 02e0 0FBE      		out __SREG__,__tmp_reg__
- 467 02e2 CDBF      		out __SP_L__,r28
- 468 02e4 DF91      		pop r29
- 469 02e6 CF91      		pop r28
- 470 02e8 1F91      		pop r17
- 471 02ea 0F91      		pop r16
- 472 02ec FF90      		pop r15
- 473 02ee EF90      		pop r14
- 474 02f0 DF90      		pop r13
- 475 02f2 0895      		ret
- 476               	/* epilogue end (size=14) */
- 477               	/* function VsBeep size 82 (53) */
- 478               		.size	VsBeep, .-VsBeep
- 479               	.global	VsPlayerReset
- 480               		.type	VsPlayerReset, @function
- 481               	VsPlayerReset:
- 482               	/* prologue: frame size=0 */
- 483 02f4 0F93      		push r16
- 484 02f6 1F93      		push r17
- 485               	/* prologue end (size=2) */
- 486 02f8 8C01      		movw r16,r24
- 487 02fa 80E0      		ldi r24,lo8(0)
- 488 02fc 0E94 0000 		call VsPlayerInterrupts
- 489 0300 1092 0000 		sts vs_status,__zero_reg__
- 490 0304 C801      		movw r24,r16
- 491 0306 8460      		ori r24,lo8(4)
- 492 0308 0E94 0000 		call VsPlayerSetMode
- 493 030c 8AE0      		ldi r24,lo8(10)
- 494 030e 0E94 0000 		call NutDelay
- 495 0312 80E4      		ldi r24,lo8(64)
- 496 0314 8CBB      		out 60-0x20,r24
- 497 0316 80E0      		ldi r24,lo8(0)
- 498 0318 90E0      		ldi r25,hi8(0)
+ 457 02cc C601      		movw r24,r12
+ 458 02ce 0E94 0000 		call VsSdiWrite_P
+ 459 02d2 8B2D      		mov r24,r11
+ 460 02d4 0E94 0000 		call VsPlayerInterrupts
+ 461 02d8 80E0      		ldi r24,lo8(0)
+ 462 02da 90E0      		ldi r25,hi8(0)
+ 463               	/* epilogue: frame size=1 */
+ 464 02dc 2196      		adiw r28,1
+ 465 02de 0FB6      		in __tmp_reg__,__SREG__
+ 466 02e0 F894      		cli
+ 467 02e2 DEBF      		out __SP_H__,r29
+ 468 02e4 0FBE      		out __SREG__,__tmp_reg__
+ 469 02e6 CDBF      		out __SP_L__,r28
+ 470 02e8 DF91      		pop r29
+ 471 02ea CF91      		pop r28
+ 472 02ec 1F91      		pop r17
+ 473 02ee 0F91      		pop r16
+ 474 02f0 FF90      		pop r15
+ 475 02f2 EF90      		pop r14
+ 476 02f4 DF90      		pop r13
+ 477 02f6 CF90      		pop r12
+ 478 02f8 BF90      		pop r11
+ 479 02fa 0895      		ret
+ 480               	/* epilogue end (size=16) */
+ 481               	/* function VsBeep size 86 (53) */
+ 482               		.size	VsBeep, .-VsBeep
+ 483               	.global	SoundB
+ 484               		.type	SoundB, @function
+ 485               	SoundB:
+ 486               	/* prologue: frame size=0 */
+ 487               	/* prologue end (size=0) */
+ 488 02fc 64EF      		ldi r22,lo8(500)
+ 489 02fe 71E0      		ldi r23,hi8(500)
+ 490 0300 80E5      		ldi r24,lo8(80)
+ 491 0302 0E94 0000 		call VsBeep
+ 492 0306 64EF      		ldi r22,lo8(500)
+ 493 0308 71E0      		ldi r23,hi8(500)
+ 494 030a 80E0      		ldi r24,hlo8(500)
+ 495 030c 90E0      		ldi r25,hhi8(500)
+ 496 030e 0E94 0000 		call NutSleep
+ 497 0312 80E0      		ldi r24,lo8(0)
+ 498 0314 90E0      		ldi r25,hi8(0)
  499               	/* epilogue: frame size=0 */
- 500 031a 1F91      		pop r17
- 501 031c 0F91      		pop r16
- 502 031e 0895      		ret
- 503               	/* epilogue end (size=3) */
- 504               	/* function VsPlayerReset size 22 (17) */
- 505               		.size	VsPlayerReset, .-VsPlayerReset
- 506               		.type	VsRegRead, @function
- 507               	VsRegRead:
- 508               	/* prologue: frame size=0 */
- 509 0320 DF92      		push r13
- 510 0322 EF92      		push r14
- 511 0324 FF92      		push r15
- 512 0326 0F93      		push r16
- 513 0328 1F93      		push r17
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 10
+ 500 0316 0895      		ret
+ 501               	/* epilogue end (size=1) */
+ 502               	/* function SoundB size 14 (13) */
+ 503               		.size	SoundB, .-SoundB
+ 504               	.global	SoundA
+ 505               		.type	SoundA, @function
+ 506               	SoundA:
+ 507               	/* prologue: frame size=0 */
+ 508               	/* prologue end (size=0) */
+ 509 0318 68EC      		ldi r22,lo8(200)
+ 510 031a 70E0      		ldi r23,hi8(200)
+ 511 031c 84E6      		ldi r24,lo8(100)
+ 512 031e 0E94 0000 		call VsBeep
+ 513 0322 64E6      		ldi r22,lo8(100)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 10
 
 
- 514               	/* prologue end (size=5) */
- 515 032a 182F      		mov r17,r24
- 516 032c 0E94 0000 		call SPIgetmode
- 517 0330 D82E      		mov r13,r24
- 518 0332 80E0      		ldi r24,lo8(0)
- 519 0334 0E94 0000 		call SPImode
- 520 0338 80E0      		ldi r24,lo8(0)
- 521 033a 90E0      		ldi r25,hi8(0)
- 522 033c 0E94 0000 		call SPIselect
- 523 0340 2C98      		cbi 37-0x20,4
- 524 0342 83E0      		ldi r24,lo8(3)
- 525 0344 0E94 0000 		call SPIputByte
- 526 0348 812F      		mov r24,r17
- 527 034a 0E94 0000 		call SPIputByte
- 528 034e 0E94 0000 		call SPIgetByte
- 529 0352 E82E      		mov r14,r24
- 530 0354 FF24      		clr r15
- 531 0356 FE2C      		mov r15,r14
- 532 0358 EE24      		clr r14
- 533 035a 0E94 0000 		call SPIgetByte
- 534 035e 082F      		mov r16,r24
- 535 0360 2C9A      		sbi 37-0x20,4
- 536 0362 0E94 0000 		call SPIdeselect
- 537 0366 8D2D      		mov r24,r13
- 538 0368 0E94 0000 		call SPImode
- 539 036c 1127      		clr r17
- 540 036e C701      		movw r24,r14
- 541 0370 802B      		or r24,r16
- 542 0372 912B      		or r25,r17
- 543               	/* epilogue: frame size=0 */
- 544 0374 1F91      		pop r17
- 545 0376 0F91      		pop r16
- 546 0378 FF90      		pop r15
- 547 037a EF90      		pop r14
- 548 037c DF90      		pop r13
- 549 037e 0895      		ret
- 550               	/* epilogue end (size=6) */
- 551               	/* function VsRegRead size 48 (37) */
- 552               		.size	VsRegRead, .-VsRegRead
- 553               	.global	VsGetVolume
- 554               		.type	VsGetVolume, @function
- 555               	VsGetVolume:
- 556               	/* prologue: frame size=0 */
- 557 0380 FF92      		push r15
- 558 0382 0F93      		push r16
- 559 0384 1F93      		push r17
- 560               	/* prologue end (size=3) */
- 561 0386 80E0      		ldi r24,lo8(0)
- 562 0388 0E94 0000 		call VsPlayerInterrupts
- 563 038c F82E      		mov r15,r24
- 564 038e 8BE0      		ldi r24,lo8(11)
- 565 0390 0E94 0000 		call VsRegRead
- 566 0394 8C01      		movw r16,r24
- 567 0396 8F2D      		mov r24,r15
- 568 0398 0E94 0000 		call VsPlayerInterrupts
- 569 039c C801      		movw r24,r16
- 570               	/* epilogue: frame size=0 */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 11
+ 514 0324 70E0      		ldi r23,hi8(100)
+ 515 0326 80E0      		ldi r24,hlo8(100)
+ 516 0328 90E0      		ldi r25,hhi8(100)
+ 517 032a 0E94 0000 		call NutSleep
+ 518 032e 68EC      		ldi r22,lo8(200)
+ 519 0330 70E0      		ldi r23,hi8(200)
+ 520 0332 84E6      		ldi r24,lo8(100)
+ 521 0334 0E94 0000 		call VsBeep
+ 522 0338 64EF      		ldi r22,lo8(500)
+ 523 033a 71E0      		ldi r23,hi8(500)
+ 524 033c 80E0      		ldi r24,hlo8(500)
+ 525 033e 90E0      		ldi r25,hhi8(500)
+ 526 0340 0E94 0000 		call NutSleep
+ 527 0344 80E0      		ldi r24,lo8(0)
+ 528 0346 90E0      		ldi r25,hi8(0)
+ 529               	/* epilogue: frame size=0 */
+ 530 0348 0895      		ret
+ 531               	/* epilogue end (size=1) */
+ 532               	/* function SoundA size 25 (24) */
+ 533               		.size	SoundA, .-SoundA
+ 534               		.type	VsRegRead, @function
+ 535               	VsRegRead:
+ 536               	/* prologue: frame size=0 */
+ 537 034a DF92      		push r13
+ 538 034c EF92      		push r14
+ 539 034e FF92      		push r15
+ 540 0350 0F93      		push r16
+ 541 0352 1F93      		push r17
+ 542               	/* prologue end (size=5) */
+ 543 0354 182F      		mov r17,r24
+ 544 0356 0E94 0000 		call SPIgetmode
+ 545 035a D82E      		mov r13,r24
+ 546 035c 80E0      		ldi r24,lo8(0)
+ 547 035e 0E94 0000 		call SPImode
+ 548 0362 80E0      		ldi r24,lo8(0)
+ 549 0364 90E0      		ldi r25,hi8(0)
+ 550 0366 0E94 0000 		call SPIselect
+ 551 036a 2C98      		cbi 37-0x20,4
+ 552 036c 83E0      		ldi r24,lo8(3)
+ 553 036e 0E94 0000 		call SPIputByte
+ 554 0372 812F      		mov r24,r17
+ 555 0374 0E94 0000 		call SPIputByte
+ 556 0378 0E94 0000 		call SPIgetByte
+ 557 037c E82E      		mov r14,r24
+ 558 037e FF24      		clr r15
+ 559 0380 FE2C      		mov r15,r14
+ 560 0382 EE24      		clr r14
+ 561 0384 0E94 0000 		call SPIgetByte
+ 562 0388 082F      		mov r16,r24
+ 563 038a 2C9A      		sbi 37-0x20,4
+ 564 038c 0E94 0000 		call SPIdeselect
+ 565 0390 8D2D      		mov r24,r13
+ 566 0392 0E94 0000 		call SPImode
+ 567 0396 1127      		clr r17
+ 568 0398 C701      		movw r24,r14
+ 569 039a 802B      		or r24,r16
+ 570 039c 912B      		or r25,r17
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 11
 
 
- 571 039e 1F91      		pop r17
- 572 03a0 0F91      		pop r16
- 573 03a2 FF90      		pop r15
- 574 03a4 0895      		ret
- 575               	/* epilogue end (size=4) */
- 576               	/* function VsGetVolume size 19 (12) */
- 577               		.size	VsGetVolume, .-VsGetVolume
- 578               	.global	VsRegInfo
- 579               		.type	VsRegInfo, @function
- 580               	VsRegInfo:
- 581               	/* prologue: frame size=0 */
- 582 03a6 FF92      		push r15
- 583 03a8 0F93      		push r16
- 584 03aa 1F93      		push r17
- 585               	/* prologue end (size=3) */
- 586 03ac 182F      		mov r17,r24
- 587 03ae 80E0      		ldi r24,lo8(0)
- 588 03b0 0E94 0000 		call VsPlayerInterrupts
- 589 03b4 F82E      		mov r15,r24
- 590 03b6 812F      		mov r24,r17
- 591 03b8 0E94 0000 		call VsRegRead
- 592 03bc 8C01      		movw r16,r24
- 593 03be 8F2D      		mov r24,r15
- 594 03c0 0E94 0000 		call VsPlayerInterrupts
- 595 03c4 C801      		movw r24,r16
- 596               	/* epilogue: frame size=0 */
- 597 03c6 1F91      		pop r17
- 598 03c8 0F91      		pop r16
- 599 03ca FF90      		pop r15
- 600 03cc 0895      		ret
- 601               	/* epilogue end (size=4) */
- 602               	/* function VsRegInfo size 20 (13) */
- 603               		.size	VsRegInfo, .-VsRegInfo
- 604               	.global	VsStreamValid
- 605               		.type	VsStreamValid, @function
- 606               	VsStreamValid:
- 607               	/* prologue: frame size=0 */
- 608               	/* prologue end (size=0) */
- 609 03ce 89E0      		ldi r24,lo8(9)
- 610 03d0 0E94 0000 		call VsRegInfo
- 611 03d4 9C01      		movw r18,r24
- 612 03d6 8FEF      		ldi r24,hi8(-31)
- 613 03d8 213E      		cpi r18,lo8(-31)
- 614 03da 3807      		cpc r19,r24
- 615 03dc 00F4      		brsh .L52
- 616 03de 8DE4      		ldi r24,hi8(19796)
- 617 03e0 2435      		cpi r18,lo8(19796)
- 618 03e2 3807      		cpc r19,r24
- 619 03e4 01F0      		breq .L56
- 620 03e6 8DE4      		ldi r24,hi8(19797)
- 621 03e8 2535      		cpi r18,lo8(19797)
- 622 03ea 3807      		cpc r19,r24
- 623 03ec 00F4      		brsh .L57
- 624 03ee 81E4      		ldi r24,hi8(16724)
- 625 03f0 2435      		cpi r18,lo8(16724)
- 626 03f2 3807      		cpc r19,r24
- 627 03f4 01F0      		breq .L55
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 12
+ 571               	/* epilogue: frame size=0 */
+ 572 039e 1F91      		pop r17
+ 573 03a0 0F91      		pop r16
+ 574 03a2 FF90      		pop r15
+ 575 03a4 EF90      		pop r14
+ 576 03a6 DF90      		pop r13
+ 577 03a8 0895      		ret
+ 578               	/* epilogue end (size=6) */
+ 579               	/* function VsRegRead size 48 (37) */
+ 580               		.size	VsRegRead, .-VsRegRead
+ 581               	.global	VsGetVolume
+ 582               		.type	VsGetVolume, @function
+ 583               	VsGetVolume:
+ 584               	/* prologue: frame size=0 */
+ 585 03aa FF92      		push r15
+ 586 03ac 0F93      		push r16
+ 587 03ae 1F93      		push r17
+ 588               	/* prologue end (size=3) */
+ 589 03b0 80E0      		ldi r24,lo8(0)
+ 590 03b2 0E94 0000 		call VsPlayerInterrupts
+ 591 03b6 F82E      		mov r15,r24
+ 592 03b8 8BE0      		ldi r24,lo8(11)
+ 593 03ba 0E94 0000 		call VsRegRead
+ 594 03be 8C01      		movw r16,r24
+ 595 03c0 8F2D      		mov r24,r15
+ 596 03c2 0E94 0000 		call VsPlayerInterrupts
+ 597 03c6 C801      		movw r24,r16
+ 598               	/* epilogue: frame size=0 */
+ 599 03c8 1F91      		pop r17
+ 600 03ca 0F91      		pop r16
+ 601 03cc FF90      		pop r15
+ 602 03ce 0895      		ret
+ 603               	/* epilogue end (size=4) */
+ 604               	/* function VsGetVolume size 19 (12) */
+ 605               		.size	VsGetVolume, .-VsGetVolume
+ 606               	.global	VsRegInfo
+ 607               		.type	VsRegInfo, @function
+ 608               	VsRegInfo:
+ 609               	/* prologue: frame size=0 */
+ 610 03d0 FF92      		push r15
+ 611 03d2 0F93      		push r16
+ 612 03d4 1F93      		push r17
+ 613               	/* prologue end (size=3) */
+ 614 03d6 182F      		mov r17,r24
+ 615 03d8 80E0      		ldi r24,lo8(0)
+ 616 03da 0E94 0000 		call VsPlayerInterrupts
+ 617 03de F82E      		mov r15,r24
+ 618 03e0 812F      		mov r24,r17
+ 619 03e2 0E94 0000 		call VsRegRead
+ 620 03e6 8C01      		movw r16,r24
+ 621 03e8 8F2D      		mov r24,r15
+ 622 03ea 0E94 0000 		call VsPlayerInterrupts
+ 623 03ee C801      		movw r24,r16
+ 624               	/* epilogue: frame size=0 */
+ 625 03f0 1F91      		pop r17
+ 626 03f2 0F91      		pop r16
+ 627 03f4 FF90      		pop r15
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 12
 
 
- 628 03f6 8DE4      		ldi r24,hi8(19764)
- 629 03f8 2433      		cpi r18,lo8(19764)
- 630 03fa 3807      		cpc r19,r24
- 631 03fc 01F0      		breq .L55
- 632 03fe 81E4      		ldi r24,hi8(16708)
- 633 0400 2434      		cpi r18,lo8(16708)
- 634 0402 3807      		cpc r19,r24
- 635 0404 01F4      		brne .L54
- 636 0406 00C0      		rjmp .L55
- 637               	.L57:
- 638 0408 87E5      		ldi r24,hi8(22381)
- 639 040a 2D36      		cpi r18,lo8(22381)
- 640 040c 3807      		cpc r19,r24
- 641 040e 01F0      		breq .L56
- 642 0410 87E5      		ldi r24,hi8(22382)
- 643 0412 2E36      		cpi r18,lo8(22382)
- 644 0414 3807      		cpc r19,r24
- 645 0416 00F4      		brsh .L58
- 646 0418 87E5      		ldi r24,hi8(22349)
- 647 041a 2D34      		cpi r18,lo8(22349)
- 648 041c 3807      		cpc r19,r24
- 649 041e 01F4      		brne .L54
- 650 0420 00C0      		rjmp .L55
- 651               	.L58:
- 652 0422 86E7      		ldi r24,hi8(30309)
- 653 0424 2536      		cpi r18,lo8(30309)
- 654 0426 3807      		cpc r19,r24
- 655 0428 01F0      		breq .L55
- 656 042a 8FEF      		ldi r24,hi8(-32)
- 657 042c 203E      		cpi r18,lo8(-32)
- 658 042e 3807      		cpc r19,r24
- 659 0430 01F4      		brne .L54
- 660 0432 00C0      		rjmp .L56
- 661               	.L55:
- 662 0434 8091 0000 		lds r24,g_vs_type
- 663 0438 9091 0000 		lds r25,(g_vs_type)+1
- 664 043c 0397      		sbiw r24,3
- 665 043e 01F4      		brne .L56
- 666 0440 00C0      		rjmp .L54
- 667               	.L52:
- 668 0442 20EE      		ldi r18,lo8(-32)
- 669 0444 3FEF      		ldi r19,hi8(-32)
- 670 0446 00C0      		rjmp .L56
- 671               	.L54:
- 672 0448 80E0      		ldi r24,lo8(0)
- 673 044a 90E0      		ldi r25,hi8(0)
- 674 044c 0895      		ret
- 675               	.L56:
- 676 044e C901      		movw r24,r18
- 677 0450 0895      		ret
- 678               	/* epilogue: frame size=0 */
- 679               	/* epilogue: noreturn */
- 680               	/* epilogue end (size=0) */
- 681               	/* function VsStreamValid size 67 (67) */
- 682               		.size	VsStreamValid, .-VsStreamValid
- 683               	.global	VsPlayerInit
- 684               		.type	VsPlayerInit, @function
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 13
+ 628 03f6 0895      		ret
+ 629               	/* epilogue end (size=4) */
+ 630               	/* function VsRegInfo size 20 (13) */
+ 631               		.size	VsRegInfo, .-VsRegInfo
+ 632               	.global	VsStreamValid
+ 633               		.type	VsStreamValid, @function
+ 634               	VsStreamValid:
+ 635               	/* prologue: frame size=0 */
+ 636               	/* prologue end (size=0) */
+ 637 03f8 89E0      		ldi r24,lo8(9)
+ 638 03fa 0E94 0000 		call VsRegInfo
+ 639 03fe 9C01      		movw r18,r24
+ 640 0400 8FEF      		ldi r24,hi8(-31)
+ 641 0402 213E      		cpi r18,lo8(-31)
+ 642 0404 3807      		cpc r19,r24
+ 643 0406 00F4      		brsh .L54
+ 644 0408 8DE4      		ldi r24,hi8(19796)
+ 645 040a 2435      		cpi r18,lo8(19796)
+ 646 040c 3807      		cpc r19,r24
+ 647 040e 01F0      		breq .L58
+ 648 0410 8DE4      		ldi r24,hi8(19797)
+ 649 0412 2535      		cpi r18,lo8(19797)
+ 650 0414 3807      		cpc r19,r24
+ 651 0416 00F4      		brsh .L59
+ 652 0418 81E4      		ldi r24,hi8(16724)
+ 653 041a 2435      		cpi r18,lo8(16724)
+ 654 041c 3807      		cpc r19,r24
+ 655 041e 01F0      		breq .L57
+ 656 0420 8DE4      		ldi r24,hi8(19764)
+ 657 0422 2433      		cpi r18,lo8(19764)
+ 658 0424 3807      		cpc r19,r24
+ 659 0426 01F0      		breq .L57
+ 660 0428 81E4      		ldi r24,hi8(16708)
+ 661 042a 2434      		cpi r18,lo8(16708)
+ 662 042c 3807      		cpc r19,r24
+ 663 042e 01F4      		brne .L56
+ 664 0430 00C0      		rjmp .L57
+ 665               	.L59:
+ 666 0432 87E5      		ldi r24,hi8(22381)
+ 667 0434 2D36      		cpi r18,lo8(22381)
+ 668 0436 3807      		cpc r19,r24
+ 669 0438 01F0      		breq .L58
+ 670 043a 87E5      		ldi r24,hi8(22382)
+ 671 043c 2E36      		cpi r18,lo8(22382)
+ 672 043e 3807      		cpc r19,r24
+ 673 0440 00F4      		brsh .L60
+ 674 0442 87E5      		ldi r24,hi8(22349)
+ 675 0444 2D34      		cpi r18,lo8(22349)
+ 676 0446 3807      		cpc r19,r24
+ 677 0448 01F4      		brne .L56
+ 678 044a 00C0      		rjmp .L57
+ 679               	.L60:
+ 680 044c 86E7      		ldi r24,hi8(30309)
+ 681 044e 2536      		cpi r18,lo8(30309)
+ 682 0450 3807      		cpc r19,r24
+ 683 0452 01F0      		breq .L57
+ 684 0454 8FEF      		ldi r24,hi8(-32)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 13
 
 
- 685               	VsPlayerInit:
- 686               	/* prologue: frame size=0 */
- 687               	/* prologue end (size=0) */
- 688 0452 80E0      		ldi r24,lo8(0)
- 689 0454 0E94 0000 		call VsPlayerInterrupts
- 690 0458 2F98      		cbi 37-0x20,7
- 691 045a 2C9A      		sbi 37-0x20,4
- 692 045c 2898      		cbi 37-0x20,0
- 693 045e 209A      		sbi 36-0x20,0
- 694 0460 84E0      		ldi r24,lo8(4)
- 695 0462 0E94 0000 		call NutDelay
- 696 0466 80E0      		ldi r24,lo8(0)
- 697 0468 0E94 0000 		call SPImode
- 698 046c 1092 0000 		sts vs_status,__zero_reg__
- 699 0470 2F9A      		sbi 37-0x20,7
- 700 0472 84E0      		ldi r24,lo8(4)
- 701 0474 0E94 0000 		call NutDelay
- 702 0478 81E0      		ldi r24,lo8(1)
- 703 047a 0E94 0000 		call VsRegRead
- 704 047e 74E0      		ldi r23,4
- 705 0480 9695      	1:	lsr r25
- 706 0482 8795      		ror r24
- 707 0484 7A95      		dec r23
- 708 0486 01F4      		brne 1b
- 709 0488 8770      		andi r24,lo8(7)
- 710 048a 9070      		andi r25,hi8(7)
- 711 048c 9093 0000 		sts (g_vs_type)+1,r25
- 712 0490 8093 0000 		sts g_vs_type,r24
- 713 0494 0397      		sbiw r24,3
- 714 0496 01F4      		brne .L62
- 715 0498 60E0      		ldi r22,lo8(-8192)
- 716 049a 70EE      		ldi r23,hi8(-8192)
- 717 049c 00C0      		rjmp .L69
- 718               	.L62:
- 719 049e 60E0      		ldi r22,lo8(-26624)
- 720 04a0 78E9      		ldi r23,hi8(-26624)
- 721               	.L69:
- 722 04a2 83E0      		ldi r24,lo8(3)
- 723 04a4 0E94 0000 		call VsRegWrite
- 724 04a8 82E3      		ldi r24,lo8(50)
- 725 04aa 0E94 0000 		call NutDelay
- 726 04ae 80E0      		ldi r24,lo8(0)
- 727 04b0 90E0      		ldi r25,hi8(0)
- 728 04b2 0E94 0000 		call VsPlayerSetMode
- 729 04b6 60E0      		ldi r22,lo8(0)
- 730 04b8 80E0      		ldi r24,lo8(0)
- 731 04ba 0E94 0000 		call VsSetVolume
- 732 04be 82E3      		ldi r24,lo8(50)
- 733 04c0 0E94 0000 		call NutDelay
- 734 04c4 8091 0000 		lds r24,g_vs_type
- 735 04c8 9091 0000 		lds r25,(g_vs_type)+1
- 736 04cc 0397      		sbiw r24,3
- 737 04ce 0297      		sbiw r24,2
- 738 04d0 00F4      		brsh .L65
- 739 04d2 82E0      		ldi r24,lo8(2)
- 740 04d4 00C0      		rjmp .L70
- 741               	.L65:
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 14
+ 685 0456 203E      		cpi r18,lo8(-32)
+ 686 0458 3807      		cpc r19,r24
+ 687 045a 01F4      		brne .L56
+ 688 045c 00C0      		rjmp .L58
+ 689               	.L57:
+ 690 045e 8091 0000 		lds r24,g_vs_type
+ 691 0462 9091 0000 		lds r25,(g_vs_type)+1
+ 692 0466 0397      		sbiw r24,3
+ 693 0468 01F4      		brne .L58
+ 694 046a 00C0      		rjmp .L56
+ 695               	.L54:
+ 696 046c 20EE      		ldi r18,lo8(-32)
+ 697 046e 3FEF      		ldi r19,hi8(-32)
+ 698 0470 00C0      		rjmp .L58
+ 699               	.L56:
+ 700 0472 80E0      		ldi r24,lo8(0)
+ 701 0474 90E0      		ldi r25,hi8(0)
+ 702 0476 0895      		ret
+ 703               	.L58:
+ 704 0478 C901      		movw r24,r18
+ 705 047a 0895      		ret
+ 706               	/* epilogue: frame size=0 */
+ 707               	/* epilogue: noreturn */
+ 708               	/* epilogue end (size=0) */
+ 709               	/* function VsStreamValid size 67 (67) */
+ 710               		.size	VsStreamValid, .-VsStreamValid
+ 711               	.global	VsPlayerReset
+ 712               		.type	VsPlayerReset, @function
+ 713               	VsPlayerReset:
+ 714               	/* prologue: frame size=0 */
+ 715 047c 0F93      		push r16
+ 716 047e 1F93      		push r17
+ 717               	/* prologue end (size=2) */
+ 718 0480 8C01      		movw r16,r24
+ 719 0482 80E0      		ldi r24,lo8(0)
+ 720 0484 0E94 0000 		call VsPlayerInterrupts
+ 721 0488 1092 0000 		sts vs_status,__zero_reg__
+ 722 048c C801      		movw r24,r16
+ 723 048e 8460      		ori r24,lo8(4)
+ 724 0490 0E94 0000 		call VsPlayerSetMode
+ 725 0494 8AE0      		ldi r24,lo8(10)
+ 726 0496 0E94 0000 		call NutDelay
+ 727 049a 80E4      		ldi r24,lo8(64)
+ 728 049c 8CBB      		out 60-0x20,r24
+ 729 049e 80E0      		ldi r24,lo8(0)
+ 730 04a0 90E0      		ldi r25,hi8(0)
+ 731               	/* epilogue: frame size=0 */
+ 732 04a2 1F91      		pop r17
+ 733 04a4 0F91      		pop r16
+ 734 04a6 0895      		ret
+ 735               	/* epilogue end (size=3) */
+ 736               	/* function VsPlayerReset size 22 (17) */
+ 737               		.size	VsPlayerReset, .-VsPlayerReset
+ 738               	.global	VsPlayerInit
+ 739               		.type	VsPlayerInit, @function
+ 740               	VsPlayerInit:
+ 741               	/* prologue: frame size=0 */
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 14
 
 
- 742 04d6 81E0      		ldi r24,lo8(1)
- 743               	.L70:
- 744 04d8 0E94 0000 		call SPImode
- 745 04dc 40E0      		ldi r20,lo8(0)
- 746 04de 50E0      		ldi r21,hi8(0)
- 747 04e0 60E0      		ldi r22,lo8(gs(VsPlayerFeed))
- 748 04e2 70E0      		ldi r23,hi8(gs(VsPlayerFeed))
- 749 04e4 80E0      		ldi r24,lo8(sig_INTERRUPT6)
- 750 04e6 90E0      		ldi r25,hi8(sig_INTERRUPT6)
- 751 04e8 0E94 0000 		call NutRegisterIrqHandler
- 752 04ec 66E0      		ldi r22,lo8(6)
- 753 04ee 70E0      		ldi r23,hi8(6)
- 754 04f0 80E0      		ldi r24,lo8(sig_INTERRUPT6)
- 755 04f2 90E0      		ldi r25,hi8(sig_INTERRUPT6)
- 756 04f4 0E94 0000 		call NutIrqSetMode
- 757 04f8 80E4      		ldi r24,lo8(64)
- 758 04fa 8CBB      		out 60-0x20,r24
- 759 04fc 80E0      		ldi r24,lo8(0)
- 760 04fe 90E0      		ldi r25,hi8(0)
- 761               	/* epilogue: frame size=0 */
- 762 0500 0895      		ret
- 763               	/* epilogue end (size=1) */
- 764               	/* function VsPlayerInit size 90 (89) */
- 765               		.size	VsPlayerInit, .-VsPlayerInit
- 766               		.type	VsPlayerFeed, @function
- 767               	VsPlayerFeed:
- 768               	/* prologue: frame size=2 */
- 769 0502 BF92      		push r11
- 770 0504 CF92      		push r12
- 771 0506 DF92      		push r13
- 772 0508 EF92      		push r14
- 773 050a FF92      		push r15
- 774 050c 0F93      		push r16
- 775 050e 1F93      		push r17
- 776 0510 CF93      		push r28
- 777 0512 DF93      		push r29
- 778 0514 CDB7      		in r28,__SP_L__
- 779 0516 DEB7      		in r29,__SP_H__
- 780 0518 2297      		sbiw r28,2
- 781 051a 0FB6      		in __tmp_reg__,__SREG__
- 782 051c F894      		cli
- 783 051e DEBF      		out __SP_H__,r29
- 784 0520 0FBE      		out __SREG__,__tmp_reg__
- 785 0522 CDBF      		out __SP_L__,r28
- 786               	/* prologue end (size=17) */
- 787 0524 8091 0000 		lds r24,vs_status
- 788 0528 8130      		cpi r24,lo8(1)
- 789 052a 01F0      		breq .+2
- 790 052c 00C0      		rjmp .L87
- 791 052e 669B      		sbis 44-0x20,6
- 792 0530 00C0      		rjmp .L87
- 793 0532 80E0      		ldi r24,lo8(0)
- 794 0534 0E94 0000 		call VsPlayerInterrupts
- 795 0538 B82E      		mov r11,r24
- 796               	/* #APP */
- 797 053a 7894      		sei
- 798               	/* #NOAPP */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 15
+ 742               	/* prologue end (size=0) */
+ 743 04a8 80E0      		ldi r24,lo8(0)
+ 744 04aa 0E94 0000 		call VsPlayerInterrupts
+ 745 04ae 2F98      		cbi 37-0x20,7
+ 746 04b0 2C9A      		sbi 37-0x20,4
+ 747 04b2 2898      		cbi 37-0x20,0
+ 748 04b4 209A      		sbi 36-0x20,0
+ 749 04b6 84E0      		ldi r24,lo8(4)
+ 750 04b8 0E94 0000 		call NutDelay
+ 751 04bc 80E0      		ldi r24,lo8(0)
+ 752 04be 0E94 0000 		call SPImode
+ 753 04c2 1092 0000 		sts vs_status,__zero_reg__
+ 754 04c6 2F9A      		sbi 37-0x20,7
+ 755 04c8 84E0      		ldi r24,lo8(4)
+ 756 04ca 0E94 0000 		call NutDelay
+ 757 04ce 81E0      		ldi r24,lo8(1)
+ 758 04d0 0E94 0000 		call VsRegRead
+ 759 04d4 E4E0      		ldi r30,4
+ 760 04d6 9695      	1:	lsr r25
+ 761 04d8 8795      		ror r24
+ 762 04da EA95      		dec r30
+ 763 04dc 01F4      		brne 1b
+ 764 04de 8770      		andi r24,lo8(7)
+ 765 04e0 9070      		andi r25,hi8(7)
+ 766 04e2 9093 0000 		sts (g_vs_type)+1,r25
+ 767 04e6 8093 0000 		sts g_vs_type,r24
+ 768 04ea 0397      		sbiw r24,3
+ 769 04ec 01F4      		brne .L66
+ 770 04ee 60E0      		ldi r22,lo8(-8192)
+ 771 04f0 70EE      		ldi r23,hi8(-8192)
+ 772 04f2 00C0      		rjmp .L73
+ 773               	.L66:
+ 774 04f4 60E0      		ldi r22,lo8(-26624)
+ 775 04f6 78E9      		ldi r23,hi8(-26624)
+ 776               	.L73:
+ 777 04f8 83E0      		ldi r24,lo8(3)
+ 778 04fa 0E94 0000 		call VsRegWrite
+ 779 04fe 82E3      		ldi r24,lo8(50)
+ 780 0500 0E94 0000 		call NutDelay
+ 781 0504 80E0      		ldi r24,lo8(0)
+ 782 0506 90E0      		ldi r25,hi8(0)
+ 783 0508 0E94 0000 		call VsPlayerSetMode
+ 784 050c 60E0      		ldi r22,lo8(0)
+ 785 050e 80E0      		ldi r24,lo8(0)
+ 786 0510 0E94 0000 		call VsSetVolume
+ 787 0514 82E3      		ldi r24,lo8(50)
+ 788 0516 0E94 0000 		call NutDelay
+ 789 051a 8091 0000 		lds r24,g_vs_type
+ 790 051e 9091 0000 		lds r25,(g_vs_type)+1
+ 791 0522 0397      		sbiw r24,3
+ 792 0524 0297      		sbiw r24,2
+ 793 0526 00F4      		brsh .L69
+ 794 0528 82E0      		ldi r24,lo8(2)
+ 795 052a 00C0      		rjmp .L74
+ 796               	.L69:
+ 797 052c 81E0      		ldi r24,lo8(1)
+ 798               	.L74:
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 15
 
 
- 799 053c 1A82      		std Y+2,__zero_reg__
- 800 053e 1982      		std Y+1,__zero_reg__
- 801 0540 80E0      		ldi r24,lo8(0)
- 802 0542 90E0      		ldi r25,hi8(0)
- 803 0544 0E94 0000 		call SPIselect
- 804 0548 F0E2      		ldi r31,lo8(32)
- 805 054a EF2E      		mov r14,r31
- 806 054c F12C      		mov r15,__zero_reg__
- 807 054e 00E0      		ldi r16,lo8(0)
- 808 0550 10E0      		ldi r17,hi8(0)
- 809 0552 CC24      		clr r12
- 810 0554 DD24      		clr r13
- 811 0556 00C0      		rjmp .L93
- 812               	.L76:
- 813 0558 EFE1      		ldi r30,lo8(31)
- 814 055a EE2E      		mov r14,r30
- 815 055c F12C      		mov r15,__zero_reg__
- 816               	.L93:
- 817 055e 8981      		ldd r24,Y+1
- 818 0560 9A81      		ldd r25,Y+2
- 819 0562 C816      		cp r12,r24
- 820 0564 D906      		cpc r13,r25
- 821 0566 00F0      		brlo .L77
- 822 0568 C114      		cp r12,__zero_reg__
- 823 056a D104      		cpc r13,__zero_reg__
- 824 056c 01F0      		breq .L79
- 825 056e C601      		movw r24,r12
- 826 0570 0E94 0000 		call NutSegBufReadCommit
- 827               	.L79:
- 828 0574 CE01      		movw r24,r28
- 829 0576 0196      		adiw r24,1
- 830 0578 0E94 0000 		call NutSegBufReadRequest
- 831 057c 8C01      		movw r16,r24
- 832 057e 8981      		ldd r24,Y+1
- 833 0580 9A81      		ldd r25,Y+2
- 834 0582 892B      		or r24,r25
- 835 0584 01F0      		breq .L81
- 836 0586 CC24      		clr r12
- 837 0588 DD24      		clr r13
- 838 058a 00C0      		rjmp .L83
- 839               	.L81:
- 840 058c 82E0      		ldi r24,lo8(2)
- 841 058e 8093 0000 		sts vs_status,r24
- 842 0592 CC24      		clr r12
- 843 0594 DD24      		clr r13
- 844 0596 00C0      		rjmp .L84
- 845               	.L77:
- 846 0598 892B      		or r24,r25
- 847 059a 01F0      		breq .L85
- 848               	.L83:
- 849 059c F801      		movw r30,r16
- 850 059e 8191      		ld r24,Z+
- 851 05a0 8F01      		movw r16,r30
- 852 05a2 0E94 0000 		call SPIputByte
- 853 05a6 0894      		sec
- 854 05a8 C11C      		adc r12,__zero_reg__
- 855 05aa D11C      		adc r13,__zero_reg__
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 16
+ 799 052e 0E94 0000 		call SPImode
+ 800 0532 40E0      		ldi r20,lo8(0)
+ 801 0534 50E0      		ldi r21,hi8(0)
+ 802 0536 60E0      		ldi r22,lo8(gs(VsPlayerFeed))
+ 803 0538 70E0      		ldi r23,hi8(gs(VsPlayerFeed))
+ 804 053a 80E0      		ldi r24,lo8(sig_INTERRUPT6)
+ 805 053c 90E0      		ldi r25,hi8(sig_INTERRUPT6)
+ 806 053e 0E94 0000 		call NutRegisterIrqHandler
+ 807 0542 66E0      		ldi r22,lo8(6)
+ 808 0544 70E0      		ldi r23,hi8(6)
+ 809 0546 80E0      		ldi r24,lo8(sig_INTERRUPT6)
+ 810 0548 90E0      		ldi r25,hi8(sig_INTERRUPT6)
+ 811 054a 0E94 0000 		call NutIrqSetMode
+ 812 054e 80E4      		ldi r24,lo8(64)
+ 813 0550 8CBB      		out 60-0x20,r24
+ 814 0552 80E0      		ldi r24,lo8(0)
+ 815 0554 90E0      		ldi r25,hi8(0)
+ 816               	/* epilogue: frame size=0 */
+ 817 0556 0895      		ret
+ 818               	/* epilogue end (size=1) */
+ 819               	/* function VsPlayerInit size 90 (89) */
+ 820               		.size	VsPlayerInit, .-VsPlayerInit
+ 821               		.type	VsPlayerFeed, @function
+ 822               	VsPlayerFeed:
+ 823               	/* prologue: frame size=2 */
+ 824 0558 BF92      		push r11
+ 825 055a CF92      		push r12
+ 826 055c DF92      		push r13
+ 827 055e EF92      		push r14
+ 828 0560 FF92      		push r15
+ 829 0562 0F93      		push r16
+ 830 0564 1F93      		push r17
+ 831 0566 CF93      		push r28
+ 832 0568 DF93      		push r29
+ 833 056a CDB7      		in r28,__SP_L__
+ 834 056c DEB7      		in r29,__SP_H__
+ 835 056e 2297      		sbiw r28,2
+ 836 0570 0FB6      		in __tmp_reg__,__SREG__
+ 837 0572 F894      		cli
+ 838 0574 DEBF      		out __SP_H__,r29
+ 839 0576 0FBE      		out __SREG__,__tmp_reg__
+ 840 0578 CDBF      		out __SP_L__,r28
+ 841               	/* prologue end (size=17) */
+ 842 057a 8091 0000 		lds r24,vs_status
+ 843 057e 8130      		cpi r24,lo8(1)
+ 844 0580 01F0      		breq .+2
+ 845 0582 00C0      		rjmp .L91
+ 846 0584 669B      		sbis 44-0x20,6
+ 847 0586 00C0      		rjmp .L91
+ 848 0588 80E0      		ldi r24,lo8(0)
+ 849 058a 0E94 0000 		call VsPlayerInterrupts
+ 850 058e B82E      		mov r11,r24
+ 851               	/* #APP */
+ 852 0590 7894      		sei
+ 853               	/* #NOAPP */
+ 854 0592 1A82      		std Y+2,__zero_reg__
+ 855 0594 1982      		std Y+1,__zero_reg__
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 16
 
 
- 856               	.L85:
- 857 05ac 6699      		sbic 44-0x20,6
- 858 05ae 00C0      		rjmp .L76
- 859 05b0 0894      		sec
- 860 05b2 E108      		sbc r14,__zero_reg__
- 861 05b4 F108      		sbc r15,__zero_reg__
- 862 05b6 E114      		cp r14,__zero_reg__
- 863 05b8 F104      		cpc r15,__zero_reg__
- 864 05ba 01F4      		brne .L93
- 865               	.L84:
- 866 05bc 0E94 0000 		call SPIdeselect
- 867 05c0 C601      		movw r24,r12
- 868 05c2 0E94 0000 		call NutSegBufReadLast
- 869 05c6 8B2D      		mov r24,r11
- 870 05c8 0E94 0000 		call VsPlayerInterrupts
- 871               	.L87:
- 872               	/* epilogue: frame size=2 */
- 873 05cc 2296      		adiw r28,2
- 874 05ce 0FB6      		in __tmp_reg__,__SREG__
- 875 05d0 F894      		cli
- 876 05d2 DEBF      		out __SP_H__,r29
- 877 05d4 0FBE      		out __SREG__,__tmp_reg__
- 878 05d6 CDBF      		out __SP_L__,r28
- 879 05d8 DF91      		pop r29
- 880 05da CF91      		pop r28
- 881 05dc 1F91      		pop r17
- 882 05de 0F91      		pop r16
- 883 05e0 FF90      		pop r15
- 884 05e2 EF90      		pop r14
- 885 05e4 DF90      		pop r13
- 886 05e6 CF90      		pop r12
- 887 05e8 BF90      		pop r11
- 888 05ea 0895      		ret
- 889               	/* epilogue end (size=16) */
- 890               	/* function VsPlayerFeed size 118 (85) */
- 891               		.size	VsPlayerFeed, .-VsPlayerFeed
- 892               	.global	VsPlayerKick
- 893               		.type	VsPlayerKick, @function
- 894               	VsPlayerKick:
- 895               	/* prologue: frame size=0 */
- 896 05ec 0F93      		push r16
- 897 05ee 1F93      		push r17
- 898 05f0 CF93      		push r28
- 899 05f2 DF93      		push r29
- 900               	/* prologue end (size=4) */
- 901 05f4 8091 0000 		lds r24,vs_status
- 902 05f8 8130      		cpi r24,lo8(1)
- 903 05fa 01F4      		brne .+2
- 904 05fc 00C0      		rjmp .L95
- 905 05fe 80E0      		ldi r24,lo8(0)
- 906 0600 0E94 0000 		call VsPlayerInterrupts
- 907 0604 C0E0      		ldi r28,lo8(dtab)
- 908 0606 D0E0      		ldi r29,hi8(dtab)
- 909 0608 FE01      		movw r30,r28
- 910               	/* #APP */
- 911 060a 6591      		lpm r22, Z+
- 912 060c 7491      		lpm r23, Z
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 17
+ 856 0596 80E0      		ldi r24,lo8(0)
+ 857 0598 90E0      		ldi r25,hi8(0)
+ 858 059a 0E94 0000 		call SPIselect
+ 859 059e A0E2      		ldi r26,lo8(32)
+ 860 05a0 EA2E      		mov r14,r26
+ 861 05a2 F12C      		mov r15,__zero_reg__
+ 862 05a4 00E0      		ldi r16,lo8(0)
+ 863 05a6 10E0      		ldi r17,hi8(0)
+ 864 05a8 CC24      		clr r12
+ 865 05aa DD24      		clr r13
+ 866 05ac 00C0      		rjmp .L97
+ 867               	.L80:
+ 868 05ae FFE1      		ldi r31,lo8(31)
+ 869 05b0 EF2E      		mov r14,r31
+ 870 05b2 F12C      		mov r15,__zero_reg__
+ 871               	.L97:
+ 872 05b4 8981      		ldd r24,Y+1
+ 873 05b6 9A81      		ldd r25,Y+2
+ 874 05b8 C816      		cp r12,r24
+ 875 05ba D906      		cpc r13,r25
+ 876 05bc 00F0      		brlo .L81
+ 877 05be C114      		cp r12,__zero_reg__
+ 878 05c0 D104      		cpc r13,__zero_reg__
+ 879 05c2 01F0      		breq .L83
+ 880 05c4 C601      		movw r24,r12
+ 881 05c6 0E94 0000 		call NutSegBufReadCommit
+ 882               	.L83:
+ 883 05ca CE01      		movw r24,r28
+ 884 05cc 0196      		adiw r24,1
+ 885 05ce 0E94 0000 		call NutSegBufReadRequest
+ 886 05d2 8C01      		movw r16,r24
+ 887 05d4 8981      		ldd r24,Y+1
+ 888 05d6 9A81      		ldd r25,Y+2
+ 889 05d8 892B      		or r24,r25
+ 890 05da 01F0      		breq .L85
+ 891 05dc CC24      		clr r12
+ 892 05de DD24      		clr r13
+ 893 05e0 00C0      		rjmp .L87
+ 894               	.L85:
+ 895 05e2 82E0      		ldi r24,lo8(2)
+ 896 05e4 8093 0000 		sts vs_status,r24
+ 897 05e8 CC24      		clr r12
+ 898 05ea DD24      		clr r13
+ 899 05ec 00C0      		rjmp .L88
+ 900               	.L81:
+ 901 05ee 892B      		or r24,r25
+ 902 05f0 01F0      		breq .L89
+ 903               	.L87:
+ 904 05f2 F801      		movw r30,r16
+ 905 05f4 8191      		ld r24,Z+
+ 906 05f6 8F01      		movw r16,r30
+ 907 05f8 0E94 0000 		call SPIputByte
+ 908 05fc 0894      		sec
+ 909 05fe C11C      		adc r12,__zero_reg__
+ 910 0600 D11C      		adc r13,__zero_reg__
+ 911               	.L89:
+ 912 0602 6699      		sbic 44-0x20,6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 17
 
 
- 913               		
- 914               	/* #NOAPP */
- 915 060e E0E0      		ldi r30,lo8(atab)
- 916 0610 F0E0      		ldi r31,hi8(atab)
- 917               	/* #APP */
- 918 0612 E491      		lpm r30, Z
- 919               		
- 920               	/* #NOAPP */
- 921 0614 8E2F      		mov r24,r30
- 922 0616 0E94 0000 		call VsRegWrite
- 923 061a 00E0      		ldi r16,lo8(0)
- 924 061c 10E0      		ldi r17,hi8(0)
- 925 061e 00C0      		rjmp .L97
- 926               	.L98:
- 927 0620 FE01      		movw r30,r28
- 928               	/* #APP */
- 929 0622 6591      		lpm r22, Z+
- 930 0624 7491      		lpm r23, Z
- 931               		
- 932               	/* #NOAPP */
- 933 0626 F801      		movw r30,r16
- 934 0628 E050      		subi r30,lo8(-(atab))
- 935 062a F040      		sbci r31,hi8(-(atab))
- 936               	/* #APP */
- 937 062c E491      		lpm r30, Z
- 938               		
- 939               	/* #NOAPP */
- 940 062e 8E2F      		mov r24,r30
- 941 0630 0E94 0000 		call VsRegWrite
- 942 0634 C801      		movw r24,r16
- 943 0636 64EF      		ldi r22,lo8(500)
- 944 0638 71E0      		ldi r23,hi8(500)
- 945 063a 0E94 0000 		call __divmodhi4
- 946 063e 892B      		or r24,r25
- 947 0640 01F4      		brne .L99
- 948               	.L97:
- 949 0642 0E94 0000 		call WatchDogRestart
- 950               	.L99:
- 951 0646 0F5F      		subi r16,lo8(-(1))
- 952 0648 1F4F      		sbci r17,hi8(-(1))
- 953 064a 2296      		adiw r28,2
- 954 064c 81E0      		ldi r24,hi8(437)
- 955 064e 053B      		cpi r16,lo8(437)
- 956 0650 1807      		cpc r17,r24
- 957 0652 01F4      		brne .L98
- 958 0654 81E0      		ldi r24,lo8(1)
- 959 0656 8093 0000 		sts vs_status,r24
- 960 065a 80E0      		ldi r24,lo8(0)
- 961 065c 90E0      		ldi r25,hi8(0)
- 962 065e 0E94 0000 		call VsPlayerFeed
- 963 0662 81E0      		ldi r24,lo8(1)
- 964 0664 0E94 0000 		call VsPlayerInterrupts
- 965               	.L95:
- 966 0668 80E0      		ldi r24,lo8(0)
- 967 066a 90E0      		ldi r25,hi8(0)
- 968               	/* epilogue: frame size=0 */
- 969 066c DF91      		pop r29
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 18
+ 913 0604 00C0      		rjmp .L80
+ 914 0606 0894      		sec
+ 915 0608 E108      		sbc r14,__zero_reg__
+ 916 060a F108      		sbc r15,__zero_reg__
+ 917 060c E114      		cp r14,__zero_reg__
+ 918 060e F104      		cpc r15,__zero_reg__
+ 919 0610 01F4      		brne .L97
+ 920               	.L88:
+ 921 0612 0E94 0000 		call SPIdeselect
+ 922 0616 C601      		movw r24,r12
+ 923 0618 0E94 0000 		call NutSegBufReadLast
+ 924 061c 8B2D      		mov r24,r11
+ 925 061e 0E94 0000 		call VsPlayerInterrupts
+ 926               	.L91:
+ 927               	/* epilogue: frame size=2 */
+ 928 0622 2296      		adiw r28,2
+ 929 0624 0FB6      		in __tmp_reg__,__SREG__
+ 930 0626 F894      		cli
+ 931 0628 DEBF      		out __SP_H__,r29
+ 932 062a 0FBE      		out __SREG__,__tmp_reg__
+ 933 062c CDBF      		out __SP_L__,r28
+ 934 062e DF91      		pop r29
+ 935 0630 CF91      		pop r28
+ 936 0632 1F91      		pop r17
+ 937 0634 0F91      		pop r16
+ 938 0636 FF90      		pop r15
+ 939 0638 EF90      		pop r14
+ 940 063a DF90      		pop r13
+ 941 063c CF90      		pop r12
+ 942 063e BF90      		pop r11
+ 943 0640 0895      		ret
+ 944               	/* epilogue end (size=16) */
+ 945               	/* function VsPlayerFeed size 118 (85) */
+ 946               		.size	VsPlayerFeed, .-VsPlayerFeed
+ 947               	.global	VsPlayerKick
+ 948               		.type	VsPlayerKick, @function
+ 949               	VsPlayerKick:
+ 950               	/* prologue: frame size=0 */
+ 951 0642 0F93      		push r16
+ 952 0644 1F93      		push r17
+ 953 0646 CF93      		push r28
+ 954 0648 DF93      		push r29
+ 955               	/* prologue end (size=4) */
+ 956 064a 8091 0000 		lds r24,vs_status
+ 957 064e 8130      		cpi r24,lo8(1)
+ 958 0650 01F4      		brne .+2
+ 959 0652 00C0      		rjmp .L99
+ 960 0654 80E0      		ldi r24,lo8(0)
+ 961 0656 0E94 0000 		call VsPlayerInterrupts
+ 962 065a C0E0      		ldi r28,lo8(dtab)
+ 963 065c D0E0      		ldi r29,hi8(dtab)
+ 964 065e FE01      		movw r30,r28
+ 965               	/* #APP */
+ 966 0660 6591      		lpm r22, Z+
+ 967 0662 7491      		lpm r23, Z
+ 968               		
+ 969               	/* #NOAPP */
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 18
 
 
- 970 066e CF91      		pop r28
- 971 0670 1F91      		pop r17
- 972 0672 0F91      		pop r16
- 973 0674 0895      		ret
- 974               	/* epilogue end (size=5) */
- 975               	/* function VsPlayerKick size 83 (74) */
- 976               		.size	VsPlayerKick, .-VsPlayerKick
- 977               	.global	VsMemoryTest
- 978               		.type	VsMemoryTest, @function
- 979               	VsMemoryTest:
- 980               	/* prologue: frame size=0 */
- 981 0676 1F93      		push r17
- 982 0678 CF93      		push r28
- 983 067a DF93      		push r29
- 984               	/* prologue end (size=3) */
- 985 067c 80E0      		ldi r24,lo8(0)
- 986 067e 90E0      		ldi r25,hi8(0)
- 987 0680 0E94 0000 		call VsPlayerReset
- 988 0684 80E2      		ldi r24,lo8(32)
- 989 0686 90E0      		ldi r25,hi8(32)
- 990 0688 0E94 0000 		call VsPlayerSetMode
- 991 068c 80E0      		ldi r24,lo8(0)
- 992 068e 0E94 0000 		call VsPlayerInterrupts
- 993 0692 182F      		mov r17,r24
- 994 0694 68E0      		ldi r22,lo8(8)
- 995 0696 70E0      		ldi r23,hi8(8)
- 996 0698 80E0      		ldi r24,lo8(mtcmd.2487)
- 997 069a 90E0      		ldi r25,hi8(mtcmd.2487)
- 998 069c 0E94 0000 		call VsSdiWrite_P
- 999 06a0 88E2      		ldi r24,lo8(40)
- 1000 06a2 0E94 0000 		call NutDelay
- 1001 06a6 88E0      		ldi r24,lo8(8)
- 1002 06a8 0E94 0000 		call VsRegRead
- 1003 06ac EC01      		movw r28,r24
- 1004 06ae 812F      		mov r24,r17
- 1005 06b0 0E94 0000 		call VsPlayerInterrupts
- 1006 06b4 8091 0000 		lds r24,g_vs_type
- 1007 06b8 9091 0000 		lds r25,(g_vs_type)+1
- 1008 06bc 0397      		sbiw r24,3
- 1009 06be 01F4      		brne .L105
- 1010 06c0 80E8      		ldi r24,hi8(-32641)
- 1011 06c2 CF37      		cpi r28,lo8(-32641)
- 1012 06c4 D807      		cpc r29,r24
- 1013 06c6 01F4      		brne .L105
- 1014 06c8 C0E0      		ldi r28,lo8(0)
- 1015 06ca D0E0      		ldi r29,hi8(0)
- 1016               	.L105:
- 1017 06cc CE01      		movw r24,r28
- 1018               	/* epilogue: frame size=0 */
- 1019 06ce DF91      		pop r29
- 1020 06d0 CF91      		pop r28
- 1021 06d2 1F91      		pop r17
- 1022 06d4 0895      		ret
- 1023               	/* epilogue end (size=4) */
- 1024               	/* function VsMemoryTest size 49 (42) */
- 1025               		.size	VsMemoryTest, .-VsMemoryTest
- 1026               	.global	dtab
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 19
+ 970 0664 E0E0      		ldi r30,lo8(atab)
+ 971 0666 F0E0      		ldi r31,hi8(atab)
+ 972               	/* #APP */
+ 973 0668 E491      		lpm r30, Z
+ 974               		
+ 975               	/* #NOAPP */
+ 976 066a 8E2F      		mov r24,r30
+ 977 066c 0E94 0000 		call VsRegWrite
+ 978 0670 00E0      		ldi r16,lo8(0)
+ 979 0672 10E0      		ldi r17,hi8(0)
+ 980 0674 00C0      		rjmp .L101
+ 981               	.L102:
+ 982 0676 FE01      		movw r30,r28
+ 983               	/* #APP */
+ 984 0678 6591      		lpm r22, Z+
+ 985 067a 7491      		lpm r23, Z
+ 986               		
+ 987               	/* #NOAPP */
+ 988 067c F801      		movw r30,r16
+ 989 067e E050      		subi r30,lo8(-(atab))
+ 990 0680 F040      		sbci r31,hi8(-(atab))
+ 991               	/* #APP */
+ 992 0682 E491      		lpm r30, Z
+ 993               		
+ 994               	/* #NOAPP */
+ 995 0684 8E2F      		mov r24,r30
+ 996 0686 0E94 0000 		call VsRegWrite
+ 997 068a C801      		movw r24,r16
+ 998 068c 64EF      		ldi r22,lo8(500)
+ 999 068e 71E0      		ldi r23,hi8(500)
+ 1000 0690 0E94 0000 		call __divmodhi4
+ 1001 0694 892B      		or r24,r25
+ 1002 0696 01F4      		brne .L103
+ 1003               	.L101:
+ 1004 0698 0E94 0000 		call WatchDogRestart
+ 1005               	.L103:
+ 1006 069c 0F5F      		subi r16,lo8(-(1))
+ 1007 069e 1F4F      		sbci r17,hi8(-(1))
+ 1008 06a0 2296      		adiw r28,2
+ 1009 06a2 81E0      		ldi r24,hi8(437)
+ 1010 06a4 053B      		cpi r16,lo8(437)
+ 1011 06a6 1807      		cpc r17,r24
+ 1012 06a8 01F4      		brne .L102
+ 1013 06aa 81E0      		ldi r24,lo8(1)
+ 1014 06ac 8093 0000 		sts vs_status,r24
+ 1015 06b0 80E0      		ldi r24,lo8(0)
+ 1016 06b2 90E0      		ldi r25,hi8(0)
+ 1017 06b4 0E94 0000 		call VsPlayerFeed
+ 1018 06b8 81E0      		ldi r24,lo8(1)
+ 1019 06ba 0E94 0000 		call VsPlayerInterrupts
+ 1020               	.L99:
+ 1021 06be 80E0      		ldi r24,lo8(0)
+ 1022 06c0 90E0      		ldi r25,hi8(0)
+ 1023               	/* epilogue: frame size=0 */
+ 1024 06c2 DF91      		pop r29
+ 1025 06c4 CF91      		pop r28
+ 1026 06c6 1F91      		pop r17
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 19
 
 
- 1027               		.section	.progmem.data,"a",@progbits
- 1028               		.type	dtab, @object
- 1029               		.size	dtab, 874
- 1030               	dtab:
- 1031 0000 3080      		.word	-32720
- 1032 0002 3000      		.word	48
- 1033 0004 1707      		.word	1815
- 1034 0006 80B0      		.word	-20352
- 1035 0008 173C      		.word	15383
- 1036 000a 0600      		.word	6
- 1037 000c 1750      		.word	20503
- 1038 000e 003F      		.word	16128
- 1039 0010 2400      		.word	36
- 1040 0012 0600      		.word	6
- 1041 0014 1620      		.word	8214
- 1042 0016 1200      		.word	18
- 1043 0018 8F57      		.word	22415
- 1044 001a 0000      		.word	0
- 1045 001c CE10      		.word	4302
- 1046 001e 1229      		.word	10514
- 1047 0020 0099      		.word	-26368
- 1048 0022 0000      		.word	0
- 1049 0024 4D00      		.word	77
- 1050 0026 8040      		.word	16512
- 1051 0028 4C18      		.word	6220
- 1052 002a 0600      		.word	6
- 1053 002c D796      		.word	-26921
- 1054 002e 0028      		.word	10240
- 1055 0030 550D      		.word	3413
- 1056 0032 0000      		.word	0
- 1057 0034 480D      		.word	3400
- 1058 0036 0600      		.word	6
- 1059 0038 505B      		.word	23376
- 1060 003a 0930      		.word	12297
- 1061 003c 4200      		.word	66
- 1062 003e 80B0      		.word	-20352
- 1063 0040 0180      		.word	-32767
- 1064 0042 1442      		.word	16916
- 1065 0044 40BC      		.word	-17344
- 1066 0046 1828      		.word	10264
- 1067 0048 40C7      		.word	-14528
- 1068 004a 1336      		.word	13843
- 1069 004c 423C      		.word	15426
- 1070 004e 003E      		.word	15872
- 1071 0050 03B8      		.word	-18429
- 1072 0052 1400      		.word	20
- 1073 0054 031B      		.word	6915
- 1074 0056 1500      		.word	21
- 1075 0058 C259      		.word	22978
- 1076 005a D66F      		.word	28630
- 1077 005c 2400      		.word	36
- 1078 005e 0036      		.word	13824
- 1079 0060 0398      		.word	-26621
- 1080 0062 1228      		.word	10258
- 1081 0064 D557      		.word	22485
- 1082 0066 0000      		.word	0
- 1083 0068 4D00      		.word	77
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 20
+ 1027 06c8 0F91      		pop r16
+ 1028 06ca 0895      		ret
+ 1029               	/* epilogue end (size=5) */
+ 1030               	/* function VsPlayerKick size 83 (74) */
+ 1031               		.size	VsPlayerKick, .-VsPlayerKick
+ 1032               	.global	VsMemoryTest
+ 1033               		.type	VsMemoryTest, @function
+ 1034               	VsMemoryTest:
+ 1035               	/* prologue: frame size=0 */
+ 1036 06cc 1F93      		push r17
+ 1037 06ce CF93      		push r28
+ 1038 06d0 DF93      		push r29
+ 1039               	/* prologue end (size=3) */
+ 1040 06d2 80E0      		ldi r24,lo8(0)
+ 1041 06d4 90E0      		ldi r25,hi8(0)
+ 1042 06d6 0E94 0000 		call VsPlayerReset
+ 1043 06da 80E2      		ldi r24,lo8(32)
+ 1044 06dc 90E0      		ldi r25,hi8(32)
+ 1045 06de 0E94 0000 		call VsPlayerSetMode
+ 1046 06e2 80E0      		ldi r24,lo8(0)
+ 1047 06e4 0E94 0000 		call VsPlayerInterrupts
+ 1048 06e8 182F      		mov r17,r24
+ 1049 06ea 68E0      		ldi r22,lo8(8)
+ 1050 06ec 70E0      		ldi r23,hi8(8)
+ 1051 06ee 80E0      		ldi r24,lo8(mtcmd.2487)
+ 1052 06f0 90E0      		ldi r25,hi8(mtcmd.2487)
+ 1053 06f2 0E94 0000 		call VsSdiWrite_P
+ 1054 06f6 88E2      		ldi r24,lo8(40)
+ 1055 06f8 0E94 0000 		call NutDelay
+ 1056 06fc 88E0      		ldi r24,lo8(8)
+ 1057 06fe 0E94 0000 		call VsRegRead
+ 1058 0702 EC01      		movw r28,r24
+ 1059 0704 812F      		mov r24,r17
+ 1060 0706 0E94 0000 		call VsPlayerInterrupts
+ 1061 070a 8091 0000 		lds r24,g_vs_type
+ 1062 070e 9091 0000 		lds r25,(g_vs_type)+1
+ 1063 0712 0397      		sbiw r24,3
+ 1064 0714 01F4      		brne .L109
+ 1065 0716 80E8      		ldi r24,hi8(-32641)
+ 1066 0718 CF37      		cpi r28,lo8(-32641)
+ 1067 071a D807      		cpc r29,r24
+ 1068 071c 01F4      		brne .L109
+ 1069 071e C0E0      		ldi r28,lo8(0)
+ 1070 0720 D0E0      		ldi r29,hi8(0)
+ 1071               	.L109:
+ 1072 0722 CE01      		movw r24,r28
+ 1073               	/* epilogue: frame size=0 */
+ 1074 0724 DF91      		pop r29
+ 1075 0726 CF91      		pop r28
+ 1076 0728 1F91      		pop r17
+ 1077 072a 0895      		ret
+ 1078               	/* epilogue end (size=4) */
+ 1079               	/* function VsMemoryTest size 49 (42) */
+ 1080               		.size	VsMemoryTest, .-VsMemoryTest
+ 1081               	.global	dtab
+ 1082               		.section	.progmem.data,"a",@progbits
+ 1083               		.type	dtab, @object
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 20
 
 
- 1084 006a 0028      		.word	10240
- 1085 006c 402B      		.word	11072
- 1086 006e F336      		.word	14067
- 1087 0070 2400      		.word	36
- 1088 0072 4C80      		.word	-32692
- 1089 0074 103E      		.word	15888
- 1090 0076 1438      		.word	14356
- 1091 0078 103E      		.word	15888
- 1092 007a 0A78      		.word	30730
- 1093 007c 133E      		.word	15891
- 1094 007e 0DB8      		.word	-18419
- 1095 0080 033E      		.word	15875
- 1096 0082 05F8      		.word	-2043
- 1097 0084 0600      		.word	6
- 1098 0086 9555      		.word	21909
- 1099 0088 0930      		.word	12297
- 1100 008a 1514      		.word	5141
- 1101 008c 1B00      		.word	27
- 1102 008e D4FF      		.word	-44
- 1103 0090 0300      		.word	3
- 1104 0092 CEFF      		.word	-50
- 1105 0094 0100      		.word	1
- 1106 0096 0A00      		.word	10
- 1107 0098 0024      		.word	9216
- 1108 009a CE16      		.word	5838
- 1109 009c 8AB5      		.word	-19062
- 1110 009e 2400      		.word	36
- 1111 00a0 92F2      		.word	-3438
- 1112 00a2 0094      		.word	-27648
- 1113 00a4 5261      		.word	24914
- 1114 00a6 2400      		.word	36
- 1115 00a8 02FE      		.word	-510
- 1116 00aa 2400      		.word	36
- 1117 00ac B248      		.word	18610
- 1118 00ae 2400      		.word	36
- 1119 00b0 4A45      		.word	17738
- 1120 00b2 01B6      		.word	-18943
- 1121 00b4 F336      		.word	14067
- 1122 00b6 05D8      		.word	-10235
- 1123 00b8 F336      		.word	14067
- 1124 00ba 0D98      		.word	-26611
- 1125 00bc F036      		.word	14064
- 1126 00be 0A58      		.word	22538
- 1127 00c0 0020      		.word	8192
- 1128 00c2 0000      		.word	0
- 1129 00c4 F036      		.word	14064
- 1130 00c6 1418      		.word	6164
- 1131 00c8 6180      		.word	-32671
- 1132 00ca 1336      		.word	13843
- 1133 00cc 2400      		.word	36
- 1134 00ce 123E      		.word	15890
- 1135 00d0 17B8      		.word	-18409
- 1136 00d2 123E      		.word	15890
- 1137 00d4 1538      		.word	14357
- 1138 00d6 053E      		.word	15877
- 1139 00d8 14B8      		.word	-18412
- 1140 00da 2536      		.word	13861
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 21
+ 1084               		.size	dtab, 874
+ 1085               	dtab:
+ 1086 0000 3080      		.word	-32720
+ 1087 0002 3000      		.word	48
+ 1088 0004 1707      		.word	1815
+ 1089 0006 80B0      		.word	-20352
+ 1090 0008 173C      		.word	15383
+ 1091 000a 0600      		.word	6
+ 1092 000c 1750      		.word	20503
+ 1093 000e 003F      		.word	16128
+ 1094 0010 2400      		.word	36
+ 1095 0012 0600      		.word	6
+ 1096 0014 1620      		.word	8214
+ 1097 0016 1200      		.word	18
+ 1098 0018 8F57      		.word	22415
+ 1099 001a 0000      		.word	0
+ 1100 001c CE10      		.word	4302
+ 1101 001e 1229      		.word	10514
+ 1102 0020 0099      		.word	-26368
+ 1103 0022 0000      		.word	0
+ 1104 0024 4D00      		.word	77
+ 1105 0026 8040      		.word	16512
+ 1106 0028 4C18      		.word	6220
+ 1107 002a 0600      		.word	6
+ 1108 002c D796      		.word	-26921
+ 1109 002e 0028      		.word	10240
+ 1110 0030 550D      		.word	3413
+ 1111 0032 0000      		.word	0
+ 1112 0034 480D      		.word	3400
+ 1113 0036 0600      		.word	6
+ 1114 0038 505B      		.word	23376
+ 1115 003a 0930      		.word	12297
+ 1116 003c 4200      		.word	66
+ 1117 003e 80B0      		.word	-20352
+ 1118 0040 0180      		.word	-32767
+ 1119 0042 1442      		.word	16916
+ 1120 0044 40BC      		.word	-17344
+ 1121 0046 1828      		.word	10264
+ 1122 0048 40C7      		.word	-14528
+ 1123 004a 1336      		.word	13843
+ 1124 004c 423C      		.word	15426
+ 1125 004e 003E      		.word	15872
+ 1126 0050 03B8      		.word	-18429
+ 1127 0052 1400      		.word	20
+ 1128 0054 031B      		.word	6915
+ 1129 0056 1500      		.word	21
+ 1130 0058 C259      		.word	22978
+ 1131 005a D66F      		.word	28630
+ 1132 005c 2400      		.word	36
+ 1133 005e 0036      		.word	13824
+ 1134 0060 0398      		.word	-26621
+ 1135 0062 1228      		.word	10258
+ 1136 0064 D557      		.word	22485
+ 1137 0066 0000      		.word	0
+ 1138 0068 4D00      		.word	77
+ 1139 006a 0028      		.word	10240
+ 1140 006c 402B      		.word	11072
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 21
 
 
- 1141 00dc 2400      		.word	36
- 1142 00de 0000      		.word	0
- 1143 00e0 0A80      		.word	-32758
- 1144 00e2 103E      		.word	15888
- 1145 00e4 03B8      		.word	-18429
- 1146 00e6 9441      		.word	16788
- 1147 00e8 05B8      		.word	-18427
- 1148 00ea 113E      		.word	15889
- 1149 00ec 2400      		.word	36
- 1150 00ee 113E      		.word	15889
- 1151 00f0 07B8      		.word	-18425
- 1152 00f2 143E      		.word	15892
- 1153 00f4 1278      		.word	30738
- 1154 00f6 143E      		.word	15892
- 1155 00f8 0DF8      		.word	-2035
- 1156 00fa 033E      		.word	15875
- 1157 00fc 0EF8      		.word	-2034
- 1158 00fe 0600      		.word	6
- 1159 0100 5100      		.word	81
- 1160 0102 0028      		.word	10240
- 1161 0104 D524      		.word	9429
- 1162 0106 0000      		.word	0
- 1163 0108 2400      		.word	36
- 1164 010a 88B8      		.word	-18296
- 1165 010c 1200      		.word	18
- 1166 010e 0464      		.word	25604
- 1167 0110 0504      		.word	1029
- 1168 0112 0000      		.word	0
- 1169 0114 2400      		.word	36
- 1170 0116 0028      		.word	10240
- 1171 0118 5821      		.word	8536
- 1172 011a 9440      		.word	16532
- 1173 011c 2400      		.word	36
- 1174 011e 0024      		.word	9216
- 1175 0120 0221      		.word	8450
- 1176 0122 0000      		.word	0
- 1177 0124 2400      		.word	36
- 1178 0126 9864      		.word	25752
- 1179 0128 0308      		.word	2051
- 1180 012a 56FE      		.word	-426
- 1181 012c 2400      		.word	36
- 1182 012e B648      		.word	18614
- 1183 0130 2400      		.word	36
- 1184 0132 D64D      		.word	19926
- 1185 0134 2400      		.word	36
- 1186 0136 103A      		.word	14864
- 1187 0138 24C0      		.word	-16348
- 1188 013a F032      		.word	13040
- 1189 013c 24C0      		.word	-16348
- 1190 013e 56FE      		.word	-426
- 1191 0140 2400      		.word	36
- 1192 0142 B648      		.word	18614
- 1193 0144 2400      		.word	36
- 1194 0146 D64D      		.word	19926
- 1195 0148 2400      		.word	36
- 1196 014a 8443      		.word	17284
- 1197 014c 8344      		.word	17539
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 22
+ 1141 006e F336      		.word	14067
+ 1142 0070 2400      		.word	36
+ 1143 0072 4C80      		.word	-32692
+ 1144 0074 103E      		.word	15888
+ 1145 0076 1438      		.word	14356
+ 1146 0078 103E      		.word	15888
+ 1147 007a 0A78      		.word	30730
+ 1148 007c 133E      		.word	15891
+ 1149 007e 0DB8      		.word	-18419
+ 1150 0080 033E      		.word	15875
+ 1151 0082 05F8      		.word	-2043
+ 1152 0084 0600      		.word	6
+ 1153 0086 9555      		.word	21909
+ 1154 0088 0930      		.word	12297
+ 1155 008a 1514      		.word	5141
+ 1156 008c 1B00      		.word	27
+ 1157 008e D4FF      		.word	-44
+ 1158 0090 0300      		.word	3
+ 1159 0092 CEFF      		.word	-50
+ 1160 0094 0100      		.word	1
+ 1161 0096 0A00      		.word	10
+ 1162 0098 0024      		.word	9216
+ 1163 009a CE16      		.word	5838
+ 1164 009c 8AB5      		.word	-19062
+ 1165 009e 2400      		.word	36
+ 1166 00a0 92F2      		.word	-3438
+ 1167 00a2 0094      		.word	-27648
+ 1168 00a4 5261      		.word	24914
+ 1169 00a6 2400      		.word	36
+ 1170 00a8 02FE      		.word	-510
+ 1171 00aa 2400      		.word	36
+ 1172 00ac B248      		.word	18610
+ 1173 00ae 2400      		.word	36
+ 1174 00b0 4A45      		.word	17738
+ 1175 00b2 01B6      		.word	-18943
+ 1176 00b4 F336      		.word	14067
+ 1177 00b6 05D8      		.word	-10235
+ 1178 00b8 F336      		.word	14067
+ 1179 00ba 0D98      		.word	-26611
+ 1180 00bc F036      		.word	14064
+ 1181 00be 0A58      		.word	22538
+ 1182 00c0 0020      		.word	8192
+ 1183 00c2 0000      		.word	0
+ 1184 00c4 F036      		.word	14064
+ 1185 00c6 1418      		.word	6164
+ 1186 00c8 6180      		.word	-32671
+ 1187 00ca 1336      		.word	13843
+ 1188 00cc 2400      		.word	36
+ 1189 00ce 123E      		.word	15890
+ 1190 00d0 17B8      		.word	-18409
+ 1191 00d2 123E      		.word	15890
+ 1192 00d4 1538      		.word	14357
+ 1193 00d6 053E      		.word	15877
+ 1194 00d8 14B8      		.word	-18412
+ 1195 00da 2536      		.word	13861
+ 1196 00dc 2400      		.word	36
+ 1197 00de 0000      		.word	0
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 22
 
 
- 1198 014e 9663      		.word	25494
- 1199 0150 8C88      		.word	-30580
- 1200 0152 00F4      		.word	-3072
- 1201 0154 D540      		.word	16597
- 1202 0156 003D      		.word	15616
- 1203 0158 2480      		.word	-32732
- 1204 015a 0600      		.word	6
- 1205 015c 9100      		.word	145
- 1206 015e 3F00      		.word	63
- 1207 0160 C3FE      		.word	-317
- 1208 0162 0600      		.word	6
- 1209 0164 5300      		.word	83
- 1210 0166 0131      		.word	12545
- 1211 0168 2480      		.word	-32732
- 1212 016a 60FE      		.word	-416
- 1213 016c 2400      		.word	36
- 1214 016e BE48      		.word	18622
- 1215 0170 2400      		.word	36
- 1216 0172 34A6      		.word	-22988
- 1217 0174 030C      		.word	3075
- 1218 0176 2443      		.word	17188
- 1219 0178 2400      		.word	36
- 1220 017a 8442      		.word	17028
- 1221 017c 022C      		.word	11266
- 1222 017e 0600      		.word	6
- 1223 0180 1100      		.word	17
- 1224 0182 0028      		.word	10240
- 1225 0184 D824      		.word	9432
- 1226 0186 0031      		.word	12544
- 1227 0188 2480      		.word	-32732
- 1228 018a 0600      		.word	6
- 1229 018c 1150      		.word	20497
- 1230 018e 0039      		.word	14592
- 1231 0190 2480      		.word	-32732
- 1232 0192 0600      		.word	6
- 1233 0194 1100      		.word	17
- 1234 0196 0031      		.word	12544
- 1235 0198 4C98      		.word	-26548
- 1236 019a 8442      		.word	17028
- 1237 019c 4C90      		.word	-28596
- 1238 019e 00F4      		.word	-3072
- 1239 01a0 8840      		.word	16520
- 1240 01a2 0028      		.word	10240
- 1241 01a4 4528      		.word	10309
- 1242 01a6 0000      		.word	0
- 1243 01a8 2400      		.word	36
- 1244 01aa F03C      		.word	15600
- 1245 01ac 4038      		.word	14400
- 1246 01ae 0930      		.word	12297
- 1247 01b0 4138      		.word	14401
- 1248 01b2 0930      		.word	12297
- 1249 01b4 1038      		.word	14352
- 1250 01b6 0020      		.word	8192
- 1251 01b8 0000      		.word	0
- 1252 01ba 0000      		.word	0
- 1253 01bc 8827      		.word	10120
- 1254 01be 0930      		.word	12297
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 23
+ 1198 00e0 0A80      		.word	-32758
+ 1199 00e2 103E      		.word	15888
+ 1200 00e4 03B8      		.word	-18429
+ 1201 00e6 9441      		.word	16788
+ 1202 00e8 05B8      		.word	-18427
+ 1203 00ea 113E      		.word	15889
+ 1204 00ec 2400      		.word	36
+ 1205 00ee 113E      		.word	15889
+ 1206 00f0 07B8      		.word	-18425
+ 1207 00f2 143E      		.word	15892
+ 1208 00f4 1278      		.word	30738
+ 1209 00f6 143E      		.word	15892
+ 1210 00f8 0DF8      		.word	-2035
+ 1211 00fa 033E      		.word	15875
+ 1212 00fc 0EF8      		.word	-2034
+ 1213 00fe 0600      		.word	6
+ 1214 0100 5100      		.word	81
+ 1215 0102 0028      		.word	10240
+ 1216 0104 D524      		.word	9429
+ 1217 0106 0000      		.word	0
+ 1218 0108 2400      		.word	36
+ 1219 010a 88B8      		.word	-18296
+ 1220 010c 1200      		.word	18
+ 1221 010e 0464      		.word	25604
+ 1222 0110 0504      		.word	1029
+ 1223 0112 0000      		.word	0
+ 1224 0114 2400      		.word	36
+ 1225 0116 0028      		.word	10240
+ 1226 0118 5821      		.word	8536
+ 1227 011a 9440      		.word	16532
+ 1228 011c 2400      		.word	36
+ 1229 011e 0024      		.word	9216
+ 1230 0120 0221      		.word	8450
+ 1231 0122 0000      		.word	0
+ 1232 0124 2400      		.word	36
+ 1233 0126 9864      		.word	25752
+ 1234 0128 0308      		.word	2051
+ 1235 012a 56FE      		.word	-426
+ 1236 012c 2400      		.word	36
+ 1237 012e B648      		.word	18614
+ 1238 0130 2400      		.word	36
+ 1239 0132 D64D      		.word	19926
+ 1240 0134 2400      		.word	36
+ 1241 0136 103A      		.word	14864
+ 1242 0138 24C0      		.word	-16348
+ 1243 013a F032      		.word	13040
+ 1244 013c 24C0      		.word	-16348
+ 1245 013e 56FE      		.word	-426
+ 1246 0140 2400      		.word	36
+ 1247 0142 B648      		.word	18614
+ 1248 0144 2400      		.word	36
+ 1249 0146 D64D      		.word	19926
+ 1250 0148 2400      		.word	36
+ 1251 014a 8443      		.word	17284
+ 1252 014c 8344      		.word	17539
+ 1253 014e 9663      		.word	25494
+ 1254 0150 8C88      		.word	-30580
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 23
 
 
- 1255 01c0 D01B      		.word	7120
- 1256 01c2 0028      		.word	10240
- 1257 01c4 8028      		.word	10368
- 1258 01c6 0930      		.word	12297
- 1259 01c8 811B      		.word	7041
- 1260 01ca F334      		.word	13555
- 1261 01cc CC1B      		.word	7116
- 1262 01ce F336      		.word	14067
- 1263 01d0 0ED8      		.word	-10226
- 1264 01d2 F436      		.word	14068
- 1265 01d4 0DD8      		.word	-10227
- 1266 01d6 F436      		.word	14068
- 1267 01d8 1258      		.word	22546
- 1268 01da F136      		.word	14065
- 1269 01dc 0798      		.word	-26617
- 1270 01de F136      		.word	14065
- 1271 01e0 0518      		.word	6149
- 1272 01e2 F036      		.word	14064
- 1273 01e4 0398      		.word	-26621
- 1274 01e6 0534      		.word	13317
- 1275 01e8 1490      		.word	-28652
- 1276 01ea F336      		.word	14067
- 1277 01ec 2400      		.word	36
- 1278 01ee F236      		.word	14066
- 1279 01f0 1518      		.word	6165
- 1280 01f2 0020      		.word	8192
- 1281 01f4 0000      		.word	0
- 1282 01f6 F236      		.word	14066
- 1283 01f8 1798      		.word	-26601
- 1284 01fa AD80      		.word	-32595
- 1285 01fc 123E      		.word	15890
- 1286 01fe 17B8      		.word	-18409
- 1287 0200 123E      		.word	15890
- 1288 0202 1538      		.word	14357
- 1289 0204 053E      		.word	15877
- 1290 0206 14B8      		.word	-18412
- 1291 0208 1536      		.word	13845
- 1292 020a 2400      		.word	36
- 1293 020c 0000      		.word	0
- 1294 020e 0A80      		.word	-32758
- 1295 0210 103E      		.word	15888
- 1296 0212 0278      		.word	30722
- 1297 0214 103E      		.word	15888
- 1298 0216 04F8      		.word	-2044
- 1299 0218 113E      		.word	15889
- 1300 021a 1078      		.word	30736
- 1301 021c 143E      		.word	15892
- 1302 021e 1278      		.word	30738
- 1303 0220 1329      		.word	10515
- 1304 0222 80C9      		.word	-13952
- 1305 0224 143E      		.word	15892
- 1306 0226 24C0      		.word	-16348
- 1307 0228 1329      		.word	10515
- 1308 022a 80C9      		.word	-13952
- 1309 022c 8840      		.word	16520
- 1310 022e 4C18      		.word	6220
- 1311 0230 00F4      		.word	-3072
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 24
+ 1255 0152 00F4      		.word	-3072
+ 1256 0154 D540      		.word	16597
+ 1257 0156 003D      		.word	15616
+ 1258 0158 2480      		.word	-32732
+ 1259 015a 0600      		.word	6
+ 1260 015c 9100      		.word	145
+ 1261 015e 3F00      		.word	63
+ 1262 0160 C3FE      		.word	-317
+ 1263 0162 0600      		.word	6
+ 1264 0164 5300      		.word	83
+ 1265 0166 0131      		.word	12545
+ 1266 0168 2480      		.word	-32732
+ 1267 016a 60FE      		.word	-416
+ 1268 016c 2400      		.word	36
+ 1269 016e BE48      		.word	18622
+ 1270 0170 2400      		.word	36
+ 1271 0172 34A6      		.word	-22988
+ 1272 0174 030C      		.word	3075
+ 1273 0176 2443      		.word	17188
+ 1274 0178 2400      		.word	36
+ 1275 017a 8442      		.word	17028
+ 1276 017c 022C      		.word	11266
+ 1277 017e 0600      		.word	6
+ 1278 0180 1100      		.word	17
+ 1279 0182 0028      		.word	10240
+ 1280 0184 D824      		.word	9432
+ 1281 0186 0031      		.word	12544
+ 1282 0188 2480      		.word	-32732
+ 1283 018a 0600      		.word	6
+ 1284 018c 1150      		.word	20497
+ 1285 018e 0039      		.word	14592
+ 1286 0190 2480      		.word	-32732
+ 1287 0192 0600      		.word	6
+ 1288 0194 1100      		.word	17
+ 1289 0196 0031      		.word	12544
+ 1290 0198 4C98      		.word	-26548
+ 1291 019a 8442      		.word	17028
+ 1292 019c 4C90      		.word	-28596
+ 1293 019e 00F4      		.word	-3072
+ 1294 01a0 8840      		.word	16520
+ 1295 01a2 0028      		.word	10240
+ 1296 01a4 4528      		.word	10309
+ 1297 01a6 0000      		.word	0
+ 1298 01a8 2400      		.word	36
+ 1299 01aa F03C      		.word	15600
+ 1300 01ac 4038      		.word	14400
+ 1301 01ae 0930      		.word	12297
+ 1302 01b0 4138      		.word	14401
+ 1303 01b2 0930      		.word	12297
+ 1304 01b4 1038      		.word	14352
+ 1305 01b6 0020      		.word	8192
+ 1306 01b8 0000      		.word	0
+ 1307 01ba 0000      		.word	0
+ 1308 01bc 8827      		.word	10120
+ 1309 01be 0930      		.word	12297
+ 1310 01c0 D01B      		.word	7120
+ 1311 01c2 0028      		.word	10240
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 24
 
 
- 1312 0232 0540      		.word	16389
- 1313 0234 0000      		.word	0
- 1314 0236 C018      		.word	6336
- 1315 0238 0064      		.word	25600
- 1316 023a 2400      		.word	36
- 1317 023c 0000      		.word	0
- 1318 023e C01B      		.word	7104
- 1319 0240 0028      		.word	10240
- 1320 0242 9530      		.word	12437
- 1321 0244 3000      		.word	48
- 1322 0246 1003      		.word	784
- 1323 0248 0028      		.word	10240
- 1324 024a 803F      		.word	16256
- 1325 024c 0138      		.word	14337
- 1326 024e 2440      		.word	16420
- 1327 0250 0064      		.word	25600
- 1328 0252 2400      		.word	36
- 1329 0254 0000      		.word	0
- 1330 0256 401A      		.word	6720
- 1331 0258 0028      		.word	10240
- 1332 025a 5537      		.word	14165
- 1333 025c 0600      		.word	6
- 1334 025e D055      		.word	21968
- 1335 0260 0000      		.word	0
- 1336 0262 037D      		.word	32003
- 1337 0264 84B8      		.word	-18300
- 1338 0266 4C18      		.word	6220
- 1339 0268 0930      		.word	12297
- 1340 026a 0538      		.word	14341
- 1341 026c 0930      		.word	12297
- 1342 026e 0000      		.word	0
- 1343 0270 8AFF      		.word	-118
- 1344 0272 2400      		.word	36
- 1345 0274 1D29      		.word	10525
- 1346 0276 007B      		.word	31488
- 1347 0278 B248      		.word	18610
- 1348 027a 2400      		.word	36
- 1349 027c 0000      		.word	0
- 1350 027e 4118      		.word	6209
- 1351 0280 0600      		.word	6
- 1352 0282 1050      		.word	20496
- 1353 0284 8A40      		.word	16522
- 1354 0286 44B8      		.word	-18364
- 1355 0288 0029      		.word	10496
- 1356 028a 0013      		.word	4864
- 1357 028c 8840      		.word	16520
- 1358 028e 2400      		.word	36
- 1359 0290 0030      		.word	12288
- 1360 0292 CC1B      		.word	7116
- 1361 0294 1460      		.word	24596
- 1362 0296 2400      		.word	36
- 1363 0298 3000      		.word	48
- 1364 029a 5103      		.word	849
- 1365 029c 0028      		.word	10240
- 1366 029e D536      		.word	14037
- 1367 02a0 0000      		.word	0
- 1368 02a2 2400      		.word	36
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 25
+ 1312 01c4 8028      		.word	10368
+ 1313 01c6 0930      		.word	12297
+ 1314 01c8 811B      		.word	7041
+ 1315 01ca F334      		.word	13555
+ 1316 01cc CC1B      		.word	7116
+ 1317 01ce F336      		.word	14067
+ 1318 01d0 0ED8      		.word	-10226
+ 1319 01d2 F436      		.word	14068
+ 1320 01d4 0DD8      		.word	-10227
+ 1321 01d6 F436      		.word	14068
+ 1322 01d8 1258      		.word	22546
+ 1323 01da F136      		.word	14065
+ 1324 01dc 0798      		.word	-26617
+ 1325 01de F136      		.word	14065
+ 1326 01e0 0518      		.word	6149
+ 1327 01e2 F036      		.word	14064
+ 1328 01e4 0398      		.word	-26621
+ 1329 01e6 0534      		.word	13317
+ 1330 01e8 1490      		.word	-28652
+ 1331 01ea F336      		.word	14067
+ 1332 01ec 2400      		.word	36
+ 1333 01ee F236      		.word	14066
+ 1334 01f0 1518      		.word	6165
+ 1335 01f2 0020      		.word	8192
+ 1336 01f4 0000      		.word	0
+ 1337 01f6 F236      		.word	14066
+ 1338 01f8 1798      		.word	-26601
+ 1339 01fa AD80      		.word	-32595
+ 1340 01fc 123E      		.word	15890
+ 1341 01fe 17B8      		.word	-18409
+ 1342 0200 123E      		.word	15890
+ 1343 0202 1538      		.word	14357
+ 1344 0204 053E      		.word	15877
+ 1345 0206 14B8      		.word	-18412
+ 1346 0208 1536      		.word	13845
+ 1347 020a 2400      		.word	36
+ 1348 020c 0000      		.word	0
+ 1349 020e 0A80      		.word	-32758
+ 1350 0210 103E      		.word	15888
+ 1351 0212 0278      		.word	30722
+ 1352 0214 103E      		.word	15888
+ 1353 0216 04F8      		.word	-2044
+ 1354 0218 113E      		.word	15889
+ 1355 021a 1078      		.word	30736
+ 1356 021c 143E      		.word	15892
+ 1357 021e 1278      		.word	30738
+ 1358 0220 1329      		.word	10515
+ 1359 0222 80C9      		.word	-13952
+ 1360 0224 143E      		.word	15892
+ 1361 0226 24C0      		.word	-16348
+ 1362 0228 1329      		.word	10515
+ 1363 022a 80C9      		.word	-13952
+ 1364 022c 8840      		.word	16520
+ 1365 022e 4C18      		.word	6220
+ 1366 0230 00F4      		.word	-3072
+ 1367 0232 0540      		.word	16389
+ 1368 0234 0000      		.word	0
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 25
 
 
- 1369 02a4 0600      		.word	6
- 1370 02a6 1100      		.word	17
- 1371 02a8 0031      		.word	12544
- 1372 02aa 2400      		.word	36
- 1373 02ac 3000      		.word	48
- 1374 02ae 5103      		.word	849
- 1375 02b0 0038      		.word	14336
- 1376 02b2 2400      		.word	36
- 1377 02b4 0028      		.word	10240
- 1378 02b6 803F      		.word	16256
- 1379 02b8 0139      		.word	14593
- 1380 02ba 2440      		.word	16420
- 1381 02bc 0064      		.word	25600
- 1382 02be 2400      		.word	36
- 1383 02c0 3000      		.word	48
- 1384 02c2 D003      		.word	976
- 1385 02c4 0028      		.word	10240
- 1386 02c6 553F      		.word	16213
- 1387 02c8 0000      		.word	0
- 1388 02ca 037D      		.word	32003
- 1389 02cc 0600      		.word	6
- 1390 02ce D055      		.word	21968
- 1391 02d0 84B8      		.word	-18300
- 1392 02d2 4C18      		.word	6220
- 1393 02d4 0930      		.word	12297
- 1394 02d6 0538      		.word	14341
- 1395 02d8 0930      		.word	12297
- 1396 02da 0000      		.word	0
- 1397 02dc 8AFF      		.word	-118
- 1398 02de 2400      		.word	36
- 1399 02e0 1D29      		.word	10525
- 1400 02e2 007B      		.word	31488
- 1401 02e4 B248      		.word	18610
- 1402 02e6 2400      		.word	36
- 1403 02e8 8A40      		.word	16522
- 1404 02ea CC9B      		.word	-25652
- 1405 02ec 0000      		.word	0
- 1406 02ee 4118      		.word	6209
- 1407 02f0 0028      		.word	10240
- 1408 02f2 553B      		.word	15189
- 1409 02f4 0600      		.word	6
- 1410 02f6 1050      		.word	20496
- 1411 02f8 9A68      		.word	26778
- 1412 02fa 2400      		.word	36
- 1413 02fc 0030      		.word	12288
- 1414 02fe 2400      		.word	36
- 1415 0300 1460      		.word	24596
- 1416 0302 2400      		.word	36
- 1417 0304 3000      		.word	48
- 1418 0306 9203      		.word	914
- 1419 0308 0028      		.word	10240
- 1420 030a 853E      		.word	16005
- 1421 030c 0600      		.word	6
- 1422 030e 9100      		.word	145
- 1423 0310 0600      		.word	6
- 1424 0312 1100      		.word	17
- 1425 0314 0000      		.word	0
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 26
+ 1369 0236 C018      		.word	6336
+ 1370 0238 0064      		.word	25600
+ 1371 023a 2400      		.word	36
+ 1372 023c 0000      		.word	0
+ 1373 023e C01B      		.word	7104
+ 1374 0240 0028      		.word	10240
+ 1375 0242 9530      		.word	12437
+ 1376 0244 3000      		.word	48
+ 1377 0246 1003      		.word	784
+ 1378 0248 0028      		.word	10240
+ 1379 024a 803F      		.word	16256
+ 1380 024c 0138      		.word	14337
+ 1381 024e 2440      		.word	16420
+ 1382 0250 0064      		.word	25600
+ 1383 0252 2400      		.word	36
+ 1384 0254 0000      		.word	0
+ 1385 0256 401A      		.word	6720
+ 1386 0258 0028      		.word	10240
+ 1387 025a 5537      		.word	14165
+ 1388 025c 0600      		.word	6
+ 1389 025e D055      		.word	21968
+ 1390 0260 0000      		.word	0
+ 1391 0262 037D      		.word	32003
+ 1392 0264 84B8      		.word	-18300
+ 1393 0266 4C18      		.word	6220
+ 1394 0268 0930      		.word	12297
+ 1395 026a 0538      		.word	14341
+ 1396 026c 0930      		.word	12297
+ 1397 026e 0000      		.word	0
+ 1398 0270 8AFF      		.word	-118
+ 1399 0272 2400      		.word	36
+ 1400 0274 1D29      		.word	10525
+ 1401 0276 007B      		.word	31488
+ 1402 0278 B248      		.word	18610
+ 1403 027a 2400      		.word	36
+ 1404 027c 0000      		.word	0
+ 1405 027e 4118      		.word	6209
+ 1406 0280 0600      		.word	6
+ 1407 0282 1050      		.word	20496
+ 1408 0284 8A40      		.word	16522
+ 1409 0286 44B8      		.word	-18364
+ 1410 0288 0029      		.word	10496
+ 1411 028a 0013      		.word	4864
+ 1412 028c 8840      		.word	16520
+ 1413 028e 2400      		.word	36
+ 1414 0290 0030      		.word	12288
+ 1415 0292 CC1B      		.word	7116
+ 1416 0294 1460      		.word	24596
+ 1417 0296 2400      		.word	36
+ 1418 0298 3000      		.word	48
+ 1419 029a 5103      		.word	849
+ 1420 029c 0028      		.word	10240
+ 1421 029e D536      		.word	14037
+ 1422 02a0 0000      		.word	0
+ 1423 02a2 2400      		.word	36
+ 1424 02a4 0600      		.word	6
+ 1425 02a6 1100      		.word	17
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 26
 
 
- 1426 0316 5218      		.word	6226
- 1427 0318 0600      		.word	6
- 1428 031a 5300      		.word	83
- 1429 031c 80B8      		.word	-18304
- 1430 031e 0024      		.word	9216
- 1431 0320 0600      		.word	6
- 1432 0322 9100      		.word	145
- 1433 0324 0438      		.word	14340
- 1434 0326 2480      		.word	-32732
- 1435 0328 3000      		.word	48
- 1436 032a 9203      		.word	914
- 1437 032c 003B      		.word	15104
- 1438 032e 2400      		.word	36
- 1439 0330 0139      		.word	14593
- 1440 0332 2440      		.word	16420
- 1441 0334 0028      		.word	10240
- 1442 0336 803F      		.word	16256
- 1443 0338 013A      		.word	14849
- 1444 033a 2440      		.word	16420
- 1445 033c 0138      		.word	14337
- 1446 033e 2440      		.word	16420
- 1447 0340 80B8      		.word	-18304
- 1448 0342 D31B      		.word	7123
- 1449 0344 F436      		.word	14068
- 1450 0346 1258      		.word	22546
- 1451 0348 F136      		.word	14065
- 1452 034a 1058      		.word	22544
- 1453 034c F036      		.word	14064
- 1454 034e 04D8      		.word	-10236
- 1455 0350 F036      		.word	14064
- 1456 0352 0258      		.word	22530
- 1457 0354 0534      		.word	13317
- 1458 0356 1490      		.word	-28652
- 1459 0358 F336      		.word	14067
- 1460 035a 2400      		.word	36
- 1461 035c F236      		.word	14066
- 1462 035e 1518      		.word	6165
- 1463 0360 0020      		.word	8192
- 1464 0362 0000      		.word	0
- 1465 0364 F236      		.word	14066
- 1466 0366 1798      		.word	-26601
- 1467 0368 3000      		.word	48
- 1468               		.type	end.2560, @object
- 1469               		.size	end.2560, 4
- 1470               	end.2560:
- 1471 036a 0000 0000 		.skip 4,0
- 1472               		.type	off.2559, @object
- 1473               		.size	off.2559, 4
- 1474               	off.2559:
- 1475 036e 45        		.byte	69
- 1476 036f 78        		.byte	120
- 1477 0370 69        		.byte	105
- 1478 0371 74        		.byte	116
- 1479               		.type	end.2553, @object
- 1480               		.size	end.2553, 4
- 1481               	end.2553:
- 1482 0372 0000 0000 		.skip 4,0
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 27
+ 1426 02a8 0031      		.word	12544
+ 1427 02aa 2400      		.word	36
+ 1428 02ac 3000      		.word	48
+ 1429 02ae 5103      		.word	849
+ 1430 02b0 0038      		.word	14336
+ 1431 02b2 2400      		.word	36
+ 1432 02b4 0028      		.word	10240
+ 1433 02b6 803F      		.word	16256
+ 1434 02b8 0139      		.word	14593
+ 1435 02ba 2440      		.word	16420
+ 1436 02bc 0064      		.word	25600
+ 1437 02be 2400      		.word	36
+ 1438 02c0 3000      		.word	48
+ 1439 02c2 D003      		.word	976
+ 1440 02c4 0028      		.word	10240
+ 1441 02c6 553F      		.word	16213
+ 1442 02c8 0000      		.word	0
+ 1443 02ca 037D      		.word	32003
+ 1444 02cc 0600      		.word	6
+ 1445 02ce D055      		.word	21968
+ 1446 02d0 84B8      		.word	-18300
+ 1447 02d2 4C18      		.word	6220
+ 1448 02d4 0930      		.word	12297
+ 1449 02d6 0538      		.word	14341
+ 1450 02d8 0930      		.word	12297
+ 1451 02da 0000      		.word	0
+ 1452 02dc 8AFF      		.word	-118
+ 1453 02de 2400      		.word	36
+ 1454 02e0 1D29      		.word	10525
+ 1455 02e2 007B      		.word	31488
+ 1456 02e4 B248      		.word	18610
+ 1457 02e6 2400      		.word	36
+ 1458 02e8 8A40      		.word	16522
+ 1459 02ea CC9B      		.word	-25652
+ 1460 02ec 0000      		.word	0
+ 1461 02ee 4118      		.word	6209
+ 1462 02f0 0028      		.word	10240
+ 1463 02f2 553B      		.word	15189
+ 1464 02f4 0600      		.word	6
+ 1465 02f6 1050      		.word	20496
+ 1466 02f8 9A68      		.word	26778
+ 1467 02fa 2400      		.word	36
+ 1468 02fc 0030      		.word	12288
+ 1469 02fe 2400      		.word	36
+ 1470 0300 1460      		.word	24596
+ 1471 0302 2400      		.word	36
+ 1472 0304 3000      		.word	48
+ 1473 0306 9203      		.word	914
+ 1474 0308 0028      		.word	10240
+ 1475 030a 853E      		.word	16005
+ 1476 030c 0600      		.word	6
+ 1477 030e 9100      		.word	145
+ 1478 0310 0600      		.word	6
+ 1479 0312 1100      		.word	17
+ 1480 0314 0000      		.word	0
+ 1481 0316 5218      		.word	6226
+ 1482 0318 0600      		.word	6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 27
 
 
- 1483               		.type	on.2552, @object
- 1484               		.size	on.2552, 3
- 1485               	on.2552:
- 1486 0376 53        		.byte	83
- 1487 0377 EF        		.byte	-17
- 1488 0378 6E        		.byte	110
- 1489               		.type	end.2529, @object
- 1490               		.size	end.2529, 4
- 1491               	end.2529:
- 1492 0379 0000 0000 		.skip 4,0
- 1493               		.type	off.2528, @object
- 1494               		.size	off.2528, 4
- 1495               	off.2528:
- 1496 037d 45        		.byte	69
- 1497 037e 78        		.byte	120
- 1498 037f 69        		.byte	105
- 1499 0380 74        		.byte	116
- 1500               		.type	on.2527, @object
- 1501               		.size	on.2527, 3
- 1502               	on.2527:
- 1503 0381 53        		.byte	83
- 1504 0382 EF        		.byte	-17
- 1505 0383 6E        		.byte	110
- 1506               		.type	mtcmd.2487, @object
- 1507               		.size	mtcmd.2487, 8
- 1508               	mtcmd.2487:
- 1509 0384 4D        		.byte	77
- 1510 0385 EA        		.byte	-22
- 1511 0386 6D        		.byte	109
- 1512 0387 54        		.byte	84
- 1513 0388 00        		.byte	0
- 1514 0389 00        		.byte	0
- 1515 038a 00        		.byte	0
- 1516 038b 00        		.byte	0
- 1517               		.lcomm vs_status,1
- 1518               		.type	atab, @object
- 1519               		.size	atab, 437
- 1520               	atab:
- 1521 038c 07        		.byte	7
- 1522 038d 06        		.byte	6
- 1523 038e 06        		.byte	6
- 1524 038f 06        		.byte	6
- 1525 0390 06        		.byte	6
- 1526 0391 06        		.byte	6
- 1527 0392 06        		.byte	6
- 1528 0393 06        		.byte	6
- 1529 0394 06        		.byte	6
- 1530 0395 06        		.byte	6
- 1531 0396 06        		.byte	6
- 1532 0397 06        		.byte	6
- 1533 0398 06        		.byte	6
- 1534 0399 06        		.byte	6
- 1535 039a 06        		.byte	6
- 1536 039b 06        		.byte	6
- 1537 039c 06        		.byte	6
- 1538 039d 06        		.byte	6
- 1539 039e 06        		.byte	6
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 28
+ 1483 031a 5300      		.word	83
+ 1484 031c 80B8      		.word	-18304
+ 1485 031e 0024      		.word	9216
+ 1486 0320 0600      		.word	6
+ 1487 0322 9100      		.word	145
+ 1488 0324 0438      		.word	14340
+ 1489 0326 2480      		.word	-32732
+ 1490 0328 3000      		.word	48
+ 1491 032a 9203      		.word	914
+ 1492 032c 003B      		.word	15104
+ 1493 032e 2400      		.word	36
+ 1494 0330 0139      		.word	14593
+ 1495 0332 2440      		.word	16420
+ 1496 0334 0028      		.word	10240
+ 1497 0336 803F      		.word	16256
+ 1498 0338 013A      		.word	14849
+ 1499 033a 2440      		.word	16420
+ 1500 033c 0138      		.word	14337
+ 1501 033e 2440      		.word	16420
+ 1502 0340 80B8      		.word	-18304
+ 1503 0342 D31B      		.word	7123
+ 1504 0344 F436      		.word	14068
+ 1505 0346 1258      		.word	22546
+ 1506 0348 F136      		.word	14065
+ 1507 034a 1058      		.word	22544
+ 1508 034c F036      		.word	14064
+ 1509 034e 04D8      		.word	-10236
+ 1510 0350 F036      		.word	14064
+ 1511 0352 0258      		.word	22530
+ 1512 0354 0534      		.word	13317
+ 1513 0356 1490      		.word	-28652
+ 1514 0358 F336      		.word	14067
+ 1515 035a 2400      		.word	36
+ 1516 035c F236      		.word	14066
+ 1517 035e 1518      		.word	6165
+ 1518 0360 0020      		.word	8192
+ 1519 0362 0000      		.word	0
+ 1520 0364 F236      		.word	14066
+ 1521 0366 1798      		.word	-26601
+ 1522 0368 3000      		.word	48
+ 1523               		.type	end.2561, @object
+ 1524               		.size	end.2561, 4
+ 1525               	end.2561:
+ 1526 036a 0000 0000 		.skip 4,0
+ 1527               		.type	off.2560, @object
+ 1528               		.size	off.2560, 4
+ 1529               	off.2560:
+ 1530 036e 45        		.byte	69
+ 1531 036f 78        		.byte	120
+ 1532 0370 69        		.byte	105
+ 1533 0371 74        		.byte	116
+ 1534               		.type	end.2554, @object
+ 1535               		.size	end.2554, 4
+ 1536               	end.2554:
+ 1537 0372 0000 0000 		.skip 4,0
+ 1538               		.type	on.2553, @object
+ 1539               		.size	on.2553, 3
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 28
 
 
- 1540 039f 06        		.byte	6
- 1541 03a0 06        		.byte	6
- 1542 03a1 06        		.byte	6
- 1543 03a2 06        		.byte	6
- 1544 03a3 06        		.byte	6
- 1545 03a4 06        		.byte	6
- 1546 03a5 06        		.byte	6
- 1547 03a6 06        		.byte	6
- 1548 03a7 06        		.byte	6
- 1549 03a8 06        		.byte	6
- 1550 03a9 06        		.byte	6
- 1551 03aa 06        		.byte	6
- 1552 03ab 06        		.byte	6
- 1553 03ac 06        		.byte	6
- 1554 03ad 06        		.byte	6
- 1555 03ae 06        		.byte	6
- 1556 03af 06        		.byte	6
- 1557 03b0 06        		.byte	6
- 1558 03b1 06        		.byte	6
- 1559 03b2 06        		.byte	6
- 1560 03b3 06        		.byte	6
- 1561 03b4 06        		.byte	6
- 1562 03b5 06        		.byte	6
- 1563 03b6 06        		.byte	6
- 1564 03b7 06        		.byte	6
- 1565 03b8 06        		.byte	6
- 1566 03b9 06        		.byte	6
- 1567 03ba 06        		.byte	6
- 1568 03bb 06        		.byte	6
- 1569 03bc 06        		.byte	6
- 1570 03bd 06        		.byte	6
- 1571 03be 06        		.byte	6
- 1572 03bf 06        		.byte	6
- 1573 03c0 06        		.byte	6
- 1574 03c1 06        		.byte	6
- 1575 03c2 06        		.byte	6
- 1576 03c3 06        		.byte	6
- 1577 03c4 06        		.byte	6
- 1578 03c5 07        		.byte	7
- 1579 03c6 06        		.byte	6
- 1580 03c7 06        		.byte	6
- 1581 03c8 06        		.byte	6
- 1582 03c9 06        		.byte	6
- 1583 03ca 06        		.byte	6
- 1584 03cb 06        		.byte	6
- 1585 03cc 06        		.byte	6
- 1586 03cd 06        		.byte	6
- 1587 03ce 06        		.byte	6
- 1588 03cf 06        		.byte	6
- 1589 03d0 06        		.byte	6
- 1590 03d1 06        		.byte	6
- 1591 03d2 06        		.byte	6
- 1592 03d3 06        		.byte	6
- 1593 03d4 06        		.byte	6
- 1594 03d5 06        		.byte	6
- 1595 03d6 06        		.byte	6
- 1596 03d7 06        		.byte	6
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 29
+ 1540               	on.2553:
+ 1541 0376 53        		.byte	83
+ 1542 0377 EF        		.byte	-17
+ 1543 0378 6E        		.byte	110
+ 1544               		.type	end.2529, @object
+ 1545               		.size	end.2529, 4
+ 1546               	end.2529:
+ 1547 0379 0000 0000 		.skip 4,0
+ 1548               		.type	off.2528, @object
+ 1549               		.size	off.2528, 4
+ 1550               	off.2528:
+ 1551 037d 45        		.byte	69
+ 1552 037e 78        		.byte	120
+ 1553 037f 69        		.byte	105
+ 1554 0380 74        		.byte	116
+ 1555               		.type	on.2527, @object
+ 1556               		.size	on.2527, 3
+ 1557               	on.2527:
+ 1558 0381 53        		.byte	83
+ 1559 0382 EF        		.byte	-17
+ 1560 0383 6E        		.byte	110
+ 1561               		.type	mtcmd.2487, @object
+ 1562               		.size	mtcmd.2487, 8
+ 1563               	mtcmd.2487:
+ 1564 0384 4D        		.byte	77
+ 1565 0385 EA        		.byte	-22
+ 1566 0386 6D        		.byte	109
+ 1567 0387 54        		.byte	84
+ 1568 0388 00        		.byte	0
+ 1569 0389 00        		.byte	0
+ 1570 038a 00        		.byte	0
+ 1571 038b 00        		.byte	0
+ 1572               		.lcomm vs_status,1
+ 1573               		.type	atab, @object
+ 1574               		.size	atab, 437
+ 1575               	atab:
+ 1576 038c 07        		.byte	7
+ 1577 038d 06        		.byte	6
+ 1578 038e 06        		.byte	6
+ 1579 038f 06        		.byte	6
+ 1580 0390 06        		.byte	6
+ 1581 0391 06        		.byte	6
+ 1582 0392 06        		.byte	6
+ 1583 0393 06        		.byte	6
+ 1584 0394 06        		.byte	6
+ 1585 0395 06        		.byte	6
+ 1586 0396 06        		.byte	6
+ 1587 0397 06        		.byte	6
+ 1588 0398 06        		.byte	6
+ 1589 0399 06        		.byte	6
+ 1590 039a 06        		.byte	6
+ 1591 039b 06        		.byte	6
+ 1592 039c 06        		.byte	6
+ 1593 039d 06        		.byte	6
+ 1594 039e 06        		.byte	6
+ 1595 039f 06        		.byte	6
+ 1596 03a0 06        		.byte	6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 29
 
 
- 1597 03d8 06        		.byte	6
- 1598 03d9 06        		.byte	6
- 1599 03da 06        		.byte	6
- 1600 03db 06        		.byte	6
- 1601 03dc 06        		.byte	6
- 1602 03dd 06        		.byte	6
- 1603 03de 06        		.byte	6
- 1604 03df 06        		.byte	6
- 1605 03e0 06        		.byte	6
- 1606 03e1 06        		.byte	6
- 1607 03e2 06        		.byte	6
- 1608 03e3 06        		.byte	6
- 1609 03e4 06        		.byte	6
- 1610 03e5 06        		.byte	6
- 1611 03e6 06        		.byte	6
- 1612 03e7 06        		.byte	6
- 1613 03e8 06        		.byte	6
- 1614 03e9 06        		.byte	6
- 1615 03ea 06        		.byte	6
- 1616 03eb 06        		.byte	6
- 1617 03ec 06        		.byte	6
- 1618 03ed 06        		.byte	6
- 1619 03ee 06        		.byte	6
- 1620 03ef 06        		.byte	6
- 1621 03f0 07        		.byte	7
- 1622 03f1 06        		.byte	6
- 1623 03f2 06        		.byte	6
- 1624 03f3 06        		.byte	6
- 1625 03f4 06        		.byte	6
- 1626 03f5 06        		.byte	6
- 1627 03f6 06        		.byte	6
- 1628 03f7 06        		.byte	6
- 1629 03f8 06        		.byte	6
- 1630 03f9 06        		.byte	6
- 1631 03fa 06        		.byte	6
- 1632 03fb 06        		.byte	6
- 1633 03fc 06        		.byte	6
- 1634 03fd 06        		.byte	6
- 1635 03fe 06        		.byte	6
- 1636 03ff 06        		.byte	6
- 1637 0400 06        		.byte	6
- 1638 0401 06        		.byte	6
- 1639 0402 06        		.byte	6
- 1640 0403 06        		.byte	6
- 1641 0404 06        		.byte	6
- 1642 0405 06        		.byte	6
- 1643 0406 06        		.byte	6
- 1644 0407 06        		.byte	6
- 1645 0408 06        		.byte	6
- 1646 0409 06        		.byte	6
- 1647 040a 06        		.byte	6
- 1648 040b 06        		.byte	6
- 1649 040c 06        		.byte	6
- 1650 040d 06        		.byte	6
- 1651 040e 06        		.byte	6
- 1652 040f 06        		.byte	6
- 1653 0410 06        		.byte	6
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 30
+ 1597 03a1 06        		.byte	6
+ 1598 03a2 06        		.byte	6
+ 1599 03a3 06        		.byte	6
+ 1600 03a4 06        		.byte	6
+ 1601 03a5 06        		.byte	6
+ 1602 03a6 06        		.byte	6
+ 1603 03a7 06        		.byte	6
+ 1604 03a8 06        		.byte	6
+ 1605 03a9 06        		.byte	6
+ 1606 03aa 06        		.byte	6
+ 1607 03ab 06        		.byte	6
+ 1608 03ac 06        		.byte	6
+ 1609 03ad 06        		.byte	6
+ 1610 03ae 06        		.byte	6
+ 1611 03af 06        		.byte	6
+ 1612 03b0 06        		.byte	6
+ 1613 03b1 06        		.byte	6
+ 1614 03b2 06        		.byte	6
+ 1615 03b3 06        		.byte	6
+ 1616 03b4 06        		.byte	6
+ 1617 03b5 06        		.byte	6
+ 1618 03b6 06        		.byte	6
+ 1619 03b7 06        		.byte	6
+ 1620 03b8 06        		.byte	6
+ 1621 03b9 06        		.byte	6
+ 1622 03ba 06        		.byte	6
+ 1623 03bb 06        		.byte	6
+ 1624 03bc 06        		.byte	6
+ 1625 03bd 06        		.byte	6
+ 1626 03be 06        		.byte	6
+ 1627 03bf 06        		.byte	6
+ 1628 03c0 06        		.byte	6
+ 1629 03c1 06        		.byte	6
+ 1630 03c2 06        		.byte	6
+ 1631 03c3 06        		.byte	6
+ 1632 03c4 06        		.byte	6
+ 1633 03c5 07        		.byte	7
+ 1634 03c6 06        		.byte	6
+ 1635 03c7 06        		.byte	6
+ 1636 03c8 06        		.byte	6
+ 1637 03c9 06        		.byte	6
+ 1638 03ca 06        		.byte	6
+ 1639 03cb 06        		.byte	6
+ 1640 03cc 06        		.byte	6
+ 1641 03cd 06        		.byte	6
+ 1642 03ce 06        		.byte	6
+ 1643 03cf 06        		.byte	6
+ 1644 03d0 06        		.byte	6
+ 1645 03d1 06        		.byte	6
+ 1646 03d2 06        		.byte	6
+ 1647 03d3 06        		.byte	6
+ 1648 03d4 06        		.byte	6
+ 1649 03d5 06        		.byte	6
+ 1650 03d6 06        		.byte	6
+ 1651 03d7 06        		.byte	6
+ 1652 03d8 06        		.byte	6
+ 1653 03d9 06        		.byte	6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 30
 
 
- 1654 0411 06        		.byte	6
- 1655 0412 06        		.byte	6
- 1656 0413 06        		.byte	6
- 1657 0414 06        		.byte	6
- 1658 0415 06        		.byte	6
- 1659 0416 06        		.byte	6
- 1660 0417 06        		.byte	6
- 1661 0418 06        		.byte	6
- 1662 0419 06        		.byte	6
- 1663 041a 06        		.byte	6
- 1664 041b 06        		.byte	6
- 1665 041c 06        		.byte	6
- 1666 041d 06        		.byte	6
- 1667 041e 06        		.byte	6
- 1668 041f 06        		.byte	6
- 1669 0420 06        		.byte	6
- 1670 0421 06        		.byte	6
- 1671 0422 06        		.byte	6
- 1672 0423 06        		.byte	6
- 1673 0424 06        		.byte	6
- 1674 0425 06        		.byte	6
- 1675 0426 06        		.byte	6
- 1676 0427 06        		.byte	6
- 1677 0428 06        		.byte	6
- 1678 0429 06        		.byte	6
- 1679 042a 06        		.byte	6
- 1680 042b 06        		.byte	6
- 1681 042c 06        		.byte	6
- 1682 042d 06        		.byte	6
- 1683 042e 06        		.byte	6
- 1684 042f 06        		.byte	6
- 1685 0430 06        		.byte	6
- 1686 0431 06        		.byte	6
- 1687 0432 06        		.byte	6
- 1688 0433 06        		.byte	6
- 1689 0434 06        		.byte	6
- 1690 0435 06        		.byte	6
- 1691 0436 06        		.byte	6
- 1692 0437 06        		.byte	6
- 1693 0438 06        		.byte	6
- 1694 0439 06        		.byte	6
- 1695 043a 06        		.byte	6
- 1696 043b 06        		.byte	6
- 1697 043c 06        		.byte	6
- 1698 043d 06        		.byte	6
- 1699 043e 06        		.byte	6
- 1700 043f 06        		.byte	6
- 1701 0440 06        		.byte	6
- 1702 0441 06        		.byte	6
- 1703 0442 06        		.byte	6
- 1704 0443 06        		.byte	6
- 1705 0444 06        		.byte	6
- 1706 0445 06        		.byte	6
- 1707 0446 06        		.byte	6
- 1708 0447 06        		.byte	6
- 1709 0448 06        		.byte	6
- 1710 0449 06        		.byte	6
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 31
+ 1654 03da 06        		.byte	6
+ 1655 03db 06        		.byte	6
+ 1656 03dc 06        		.byte	6
+ 1657 03dd 06        		.byte	6
+ 1658 03de 06        		.byte	6
+ 1659 03df 06        		.byte	6
+ 1660 03e0 06        		.byte	6
+ 1661 03e1 06        		.byte	6
+ 1662 03e2 06        		.byte	6
+ 1663 03e3 06        		.byte	6
+ 1664 03e4 06        		.byte	6
+ 1665 03e5 06        		.byte	6
+ 1666 03e6 06        		.byte	6
+ 1667 03e7 06        		.byte	6
+ 1668 03e8 06        		.byte	6
+ 1669 03e9 06        		.byte	6
+ 1670 03ea 06        		.byte	6
+ 1671 03eb 06        		.byte	6
+ 1672 03ec 06        		.byte	6
+ 1673 03ed 06        		.byte	6
+ 1674 03ee 06        		.byte	6
+ 1675 03ef 06        		.byte	6
+ 1676 03f0 07        		.byte	7
+ 1677 03f1 06        		.byte	6
+ 1678 03f2 06        		.byte	6
+ 1679 03f3 06        		.byte	6
+ 1680 03f4 06        		.byte	6
+ 1681 03f5 06        		.byte	6
+ 1682 03f6 06        		.byte	6
+ 1683 03f7 06        		.byte	6
+ 1684 03f8 06        		.byte	6
+ 1685 03f9 06        		.byte	6
+ 1686 03fa 06        		.byte	6
+ 1687 03fb 06        		.byte	6
+ 1688 03fc 06        		.byte	6
+ 1689 03fd 06        		.byte	6
+ 1690 03fe 06        		.byte	6
+ 1691 03ff 06        		.byte	6
+ 1692 0400 06        		.byte	6
+ 1693 0401 06        		.byte	6
+ 1694 0402 06        		.byte	6
+ 1695 0403 06        		.byte	6
+ 1696 0404 06        		.byte	6
+ 1697 0405 06        		.byte	6
+ 1698 0406 06        		.byte	6
+ 1699 0407 06        		.byte	6
+ 1700 0408 06        		.byte	6
+ 1701 0409 06        		.byte	6
+ 1702 040a 06        		.byte	6
+ 1703 040b 06        		.byte	6
+ 1704 040c 06        		.byte	6
+ 1705 040d 06        		.byte	6
+ 1706 040e 06        		.byte	6
+ 1707 040f 06        		.byte	6
+ 1708 0410 06        		.byte	6
+ 1709 0411 06        		.byte	6
+ 1710 0412 06        		.byte	6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 31
 
 
- 1711 044a 06        		.byte	6
- 1712 044b 06        		.byte	6
- 1713 044c 06        		.byte	6
- 1714 044d 06        		.byte	6
- 1715 044e 06        		.byte	6
- 1716 044f 06        		.byte	6
- 1717 0450 06        		.byte	6
- 1718 0451 06        		.byte	6
- 1719 0452 06        		.byte	6
- 1720 0453 06        		.byte	6
- 1721 0454 06        		.byte	6
- 1722 0455 06        		.byte	6
- 1723 0456 06        		.byte	6
- 1724 0457 06        		.byte	6
- 1725 0458 06        		.byte	6
- 1726 0459 06        		.byte	6
- 1727 045a 06        		.byte	6
- 1728 045b 06        		.byte	6
- 1729 045c 06        		.byte	6
- 1730 045d 06        		.byte	6
- 1731 045e 06        		.byte	6
- 1732 045f 06        		.byte	6
- 1733 0460 06        		.byte	6
- 1734 0461 06        		.byte	6
- 1735 0462 06        		.byte	6
- 1736 0463 06        		.byte	6
- 1737 0464 06        		.byte	6
- 1738 0465 06        		.byte	6
- 1739 0466 06        		.byte	6
- 1740 0467 06        		.byte	6
- 1741 0468 06        		.byte	6
- 1742 0469 06        		.byte	6
- 1743 046a 06        		.byte	6
- 1744 046b 06        		.byte	6
- 1745 046c 06        		.byte	6
- 1746 046d 06        		.byte	6
- 1747 046e 06        		.byte	6
- 1748 046f 06        		.byte	6
- 1749 0470 06        		.byte	6
- 1750 0471 06        		.byte	6
- 1751 0472 06        		.byte	6
- 1752 0473 06        		.byte	6
- 1753 0474 06        		.byte	6
- 1754 0475 06        		.byte	6
- 1755 0476 06        		.byte	6
- 1756 0477 06        		.byte	6
- 1757 0478 06        		.byte	6
- 1758 0479 06        		.byte	6
- 1759 047a 06        		.byte	6
- 1760 047b 06        		.byte	6
- 1761 047c 06        		.byte	6
- 1762 047d 06        		.byte	6
- 1763 047e 06        		.byte	6
- 1764 047f 06        		.byte	6
- 1765 0480 06        		.byte	6
- 1766 0481 06        		.byte	6
- 1767 0482 06        		.byte	6
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 32
+ 1711 0413 06        		.byte	6
+ 1712 0414 06        		.byte	6
+ 1713 0415 06        		.byte	6
+ 1714 0416 06        		.byte	6
+ 1715 0417 06        		.byte	6
+ 1716 0418 06        		.byte	6
+ 1717 0419 06        		.byte	6
+ 1718 041a 06        		.byte	6
+ 1719 041b 06        		.byte	6
+ 1720 041c 06        		.byte	6
+ 1721 041d 06        		.byte	6
+ 1722 041e 06        		.byte	6
+ 1723 041f 06        		.byte	6
+ 1724 0420 06        		.byte	6
+ 1725 0421 06        		.byte	6
+ 1726 0422 06        		.byte	6
+ 1727 0423 06        		.byte	6
+ 1728 0424 06        		.byte	6
+ 1729 0425 06        		.byte	6
+ 1730 0426 06        		.byte	6
+ 1731 0427 06        		.byte	6
+ 1732 0428 06        		.byte	6
+ 1733 0429 06        		.byte	6
+ 1734 042a 06        		.byte	6
+ 1735 042b 06        		.byte	6
+ 1736 042c 06        		.byte	6
+ 1737 042d 06        		.byte	6
+ 1738 042e 06        		.byte	6
+ 1739 042f 06        		.byte	6
+ 1740 0430 06        		.byte	6
+ 1741 0431 06        		.byte	6
+ 1742 0432 06        		.byte	6
+ 1743 0433 06        		.byte	6
+ 1744 0434 06        		.byte	6
+ 1745 0435 06        		.byte	6
+ 1746 0436 06        		.byte	6
+ 1747 0437 06        		.byte	6
+ 1748 0438 06        		.byte	6
+ 1749 0439 06        		.byte	6
+ 1750 043a 06        		.byte	6
+ 1751 043b 06        		.byte	6
+ 1752 043c 06        		.byte	6
+ 1753 043d 06        		.byte	6
+ 1754 043e 06        		.byte	6
+ 1755 043f 06        		.byte	6
+ 1756 0440 06        		.byte	6
+ 1757 0441 06        		.byte	6
+ 1758 0442 06        		.byte	6
+ 1759 0443 06        		.byte	6
+ 1760 0444 06        		.byte	6
+ 1761 0445 06        		.byte	6
+ 1762 0446 06        		.byte	6
+ 1763 0447 06        		.byte	6
+ 1764 0448 06        		.byte	6
+ 1765 0449 06        		.byte	6
+ 1766 044a 06        		.byte	6
+ 1767 044b 06        		.byte	6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 32
 
 
- 1768 0483 06        		.byte	6
- 1769 0484 06        		.byte	6
- 1770 0485 06        		.byte	6
- 1771 0486 06        		.byte	6
- 1772 0487 06        		.byte	6
- 1773 0488 06        		.byte	6
- 1774 0489 07        		.byte	7
- 1775 048a 06        		.byte	6
- 1776 048b 06        		.byte	6
- 1777 048c 06        		.byte	6
- 1778 048d 06        		.byte	6
- 1779 048e 06        		.byte	6
- 1780 048f 06        		.byte	6
- 1781 0490 06        		.byte	6
- 1782 0491 06        		.byte	6
- 1783 0492 06        		.byte	6
- 1784 0493 06        		.byte	6
- 1785 0494 06        		.byte	6
- 1786 0495 06        		.byte	6
- 1787 0496 06        		.byte	6
- 1788 0497 06        		.byte	6
- 1789 0498 06        		.byte	6
- 1790 0499 06        		.byte	6
- 1791 049a 06        		.byte	6
- 1792 049b 06        		.byte	6
- 1793 049c 06        		.byte	6
- 1794 049d 06        		.byte	6
- 1795 049e 06        		.byte	6
- 1796 049f 06        		.byte	6
- 1797 04a0 06        		.byte	6
- 1798 04a1 06        		.byte	6
- 1799 04a2 06        		.byte	6
- 1800 04a3 06        		.byte	6
- 1801 04a4 06        		.byte	6
- 1802 04a5 06        		.byte	6
- 1803 04a6 06        		.byte	6
- 1804 04a7 06        		.byte	6
- 1805 04a8 06        		.byte	6
- 1806 04a9 06        		.byte	6
- 1807 04aa 06        		.byte	6
- 1808 04ab 06        		.byte	6
- 1809 04ac 06        		.byte	6
- 1810 04ad 06        		.byte	6
- 1811 04ae 06        		.byte	6
- 1812 04af 06        		.byte	6
- 1813 04b0 06        		.byte	6
- 1814 04b1 06        		.byte	6
- 1815 04b2 06        		.byte	6
- 1816 04b3 06        		.byte	6
- 1817 04b4 06        		.byte	6
- 1818 04b5 06        		.byte	6
- 1819 04b6 06        		.byte	6
- 1820 04b7 06        		.byte	6
- 1821 04b8 06        		.byte	6
- 1822 04b9 06        		.byte	6
- 1823 04ba 06        		.byte	6
- 1824 04bb 06        		.byte	6
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 33
+ 1768 044c 06        		.byte	6
+ 1769 044d 06        		.byte	6
+ 1770 044e 06        		.byte	6
+ 1771 044f 06        		.byte	6
+ 1772 0450 06        		.byte	6
+ 1773 0451 06        		.byte	6
+ 1774 0452 06        		.byte	6
+ 1775 0453 06        		.byte	6
+ 1776 0454 06        		.byte	6
+ 1777 0455 06        		.byte	6
+ 1778 0456 06        		.byte	6
+ 1779 0457 06        		.byte	6
+ 1780 0458 06        		.byte	6
+ 1781 0459 06        		.byte	6
+ 1782 045a 06        		.byte	6
+ 1783 045b 06        		.byte	6
+ 1784 045c 06        		.byte	6
+ 1785 045d 06        		.byte	6
+ 1786 045e 06        		.byte	6
+ 1787 045f 06        		.byte	6
+ 1788 0460 06        		.byte	6
+ 1789 0461 06        		.byte	6
+ 1790 0462 06        		.byte	6
+ 1791 0463 06        		.byte	6
+ 1792 0464 06        		.byte	6
+ 1793 0465 06        		.byte	6
+ 1794 0466 06        		.byte	6
+ 1795 0467 06        		.byte	6
+ 1796 0468 06        		.byte	6
+ 1797 0469 06        		.byte	6
+ 1798 046a 06        		.byte	6
+ 1799 046b 06        		.byte	6
+ 1800 046c 06        		.byte	6
+ 1801 046d 06        		.byte	6
+ 1802 046e 06        		.byte	6
+ 1803 046f 06        		.byte	6
+ 1804 0470 06        		.byte	6
+ 1805 0471 06        		.byte	6
+ 1806 0472 06        		.byte	6
+ 1807 0473 06        		.byte	6
+ 1808 0474 06        		.byte	6
+ 1809 0475 06        		.byte	6
+ 1810 0476 06        		.byte	6
+ 1811 0477 06        		.byte	6
+ 1812 0478 06        		.byte	6
+ 1813 0479 06        		.byte	6
+ 1814 047a 06        		.byte	6
+ 1815 047b 06        		.byte	6
+ 1816 047c 06        		.byte	6
+ 1817 047d 06        		.byte	6
+ 1818 047e 06        		.byte	6
+ 1819 047f 06        		.byte	6
+ 1820 0480 06        		.byte	6
+ 1821 0481 06        		.byte	6
+ 1822 0482 06        		.byte	6
+ 1823 0483 06        		.byte	6
+ 1824 0484 06        		.byte	6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 33
 
 
- 1825 04bc 06        		.byte	6
- 1826 04bd 06        		.byte	6
- 1827 04be 06        		.byte	6
- 1828 04bf 06        		.byte	6
- 1829 04c0 06        		.byte	6
- 1830 04c1 06        		.byte	6
- 1831 04c2 06        		.byte	6
- 1832 04c3 06        		.byte	6
- 1833 04c4 06        		.byte	6
- 1834 04c5 06        		.byte	6
- 1835 04c6 06        		.byte	6
- 1836 04c7 06        		.byte	6
- 1837 04c8 06        		.byte	6
- 1838 04c9 06        		.byte	6
- 1839 04ca 06        		.byte	6
- 1840 04cb 06        		.byte	6
- 1841 04cc 06        		.byte	6
- 1842 04cd 06        		.byte	6
- 1843 04ce 06        		.byte	6
- 1844 04cf 06        		.byte	6
- 1845 04d0 06        		.byte	6
- 1846 04d1 06        		.byte	6
- 1847 04d2 06        		.byte	6
- 1848 04d3 06        		.byte	6
- 1849 04d4 06        		.byte	6
- 1850 04d5 06        		.byte	6
- 1851 04d6 06        		.byte	6
- 1852 04d7 06        		.byte	6
- 1853 04d8 06        		.byte	6
- 1854 04d9 06        		.byte	6
- 1855 04da 06        		.byte	6
- 1856 04db 06        		.byte	6
- 1857 04dc 06        		.byte	6
- 1858 04dd 06        		.byte	6
- 1859 04de 06        		.byte	6
- 1860 04df 06        		.byte	6
- 1861 04e0 06        		.byte	6
- 1862 04e1 06        		.byte	6
- 1863 04e2 06        		.byte	6
- 1864 04e3 06        		.byte	6
- 1865 04e4 06        		.byte	6
- 1866 04e5 06        		.byte	6
- 1867 04e6 06        		.byte	6
- 1868 04e7 06        		.byte	6
- 1869 04e8 06        		.byte	6
- 1870 04e9 06        		.byte	6
- 1871 04ea 06        		.byte	6
- 1872 04eb 06        		.byte	6
- 1873 04ec 06        		.byte	6
- 1874 04ed 06        		.byte	6
- 1875 04ee 06        		.byte	6
- 1876 04ef 06        		.byte	6
- 1877 04f0 06        		.byte	6
- 1878 04f1 06        		.byte	6
- 1879 04f2 06        		.byte	6
- 1880 04f3 06        		.byte	6
- 1881 04f4 06        		.byte	6
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 34
+ 1825 0485 06        		.byte	6
+ 1826 0486 06        		.byte	6
+ 1827 0487 06        		.byte	6
+ 1828 0488 06        		.byte	6
+ 1829 0489 07        		.byte	7
+ 1830 048a 06        		.byte	6
+ 1831 048b 06        		.byte	6
+ 1832 048c 06        		.byte	6
+ 1833 048d 06        		.byte	6
+ 1834 048e 06        		.byte	6
+ 1835 048f 06        		.byte	6
+ 1836 0490 06        		.byte	6
+ 1837 0491 06        		.byte	6
+ 1838 0492 06        		.byte	6
+ 1839 0493 06        		.byte	6
+ 1840 0494 06        		.byte	6
+ 1841 0495 06        		.byte	6
+ 1842 0496 06        		.byte	6
+ 1843 0497 06        		.byte	6
+ 1844 0498 06        		.byte	6
+ 1845 0499 06        		.byte	6
+ 1846 049a 06        		.byte	6
+ 1847 049b 06        		.byte	6
+ 1848 049c 06        		.byte	6
+ 1849 049d 06        		.byte	6
+ 1850 049e 06        		.byte	6
+ 1851 049f 06        		.byte	6
+ 1852 04a0 06        		.byte	6
+ 1853 04a1 06        		.byte	6
+ 1854 04a2 06        		.byte	6
+ 1855 04a3 06        		.byte	6
+ 1856 04a4 06        		.byte	6
+ 1857 04a5 06        		.byte	6
+ 1858 04a6 06        		.byte	6
+ 1859 04a7 06        		.byte	6
+ 1860 04a8 06        		.byte	6
+ 1861 04a9 06        		.byte	6
+ 1862 04aa 06        		.byte	6
+ 1863 04ab 06        		.byte	6
+ 1864 04ac 06        		.byte	6
+ 1865 04ad 06        		.byte	6
+ 1866 04ae 06        		.byte	6
+ 1867 04af 06        		.byte	6
+ 1868 04b0 06        		.byte	6
+ 1869 04b1 06        		.byte	6
+ 1870 04b2 06        		.byte	6
+ 1871 04b3 06        		.byte	6
+ 1872 04b4 06        		.byte	6
+ 1873 04b5 06        		.byte	6
+ 1874 04b6 06        		.byte	6
+ 1875 04b7 06        		.byte	6
+ 1876 04b8 06        		.byte	6
+ 1877 04b9 06        		.byte	6
+ 1878 04ba 06        		.byte	6
+ 1879 04bb 06        		.byte	6
+ 1880 04bc 06        		.byte	6
+ 1881 04bd 06        		.byte	6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 34
 
 
- 1882 04f5 06        		.byte	6
- 1883 04f6 06        		.byte	6
- 1884 04f7 06        		.byte	6
- 1885 04f8 06        		.byte	6
- 1886 04f9 06        		.byte	6
- 1887 04fa 06        		.byte	6
- 1888 04fb 06        		.byte	6
- 1889 04fc 06        		.byte	6
- 1890 04fd 06        		.byte	6
- 1891 04fe 06        		.byte	6
- 1892 04ff 06        		.byte	6
- 1893 0500 06        		.byte	6
- 1894 0501 06        		.byte	6
- 1895 0502 06        		.byte	6
- 1896 0503 06        		.byte	6
- 1897 0504 06        		.byte	6
- 1898 0505 06        		.byte	6
- 1899 0506 06        		.byte	6
- 1900 0507 06        		.byte	6
- 1901 0508 06        		.byte	6
- 1902 0509 06        		.byte	6
- 1903 050a 06        		.byte	6
- 1904 050b 06        		.byte	6
- 1905 050c 06        		.byte	6
- 1906 050d 06        		.byte	6
- 1907 050e 06        		.byte	6
- 1908 050f 06        		.byte	6
- 1909 0510 06        		.byte	6
- 1910 0511 06        		.byte	6
- 1911 0512 06        		.byte	6
- 1912 0513 06        		.byte	6
- 1913 0514 06        		.byte	6
- 1914 0515 06        		.byte	6
- 1915 0516 06        		.byte	6
- 1916 0517 06        		.byte	6
- 1917 0518 06        		.byte	6
- 1918 0519 06        		.byte	6
- 1919 051a 06        		.byte	6
- 1920 051b 06        		.byte	6
- 1921 051c 06        		.byte	6
- 1922 051d 06        		.byte	6
- 1923 051e 06        		.byte	6
- 1924 051f 06        		.byte	6
- 1925 0520 06        		.byte	6
- 1926 0521 06        		.byte	6
- 1927 0522 06        		.byte	6
- 1928 0523 06        		.byte	6
- 1929 0524 06        		.byte	6
- 1930 0525 06        		.byte	6
- 1931 0526 06        		.byte	6
- 1932 0527 06        		.byte	6
- 1933 0528 06        		.byte	6
- 1934 0529 06        		.byte	6
- 1935 052a 06        		.byte	6
- 1936 052b 06        		.byte	6
- 1937 052c 06        		.byte	6
- 1938 052d 06        		.byte	6
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 35
+ 1882 04be 06        		.byte	6
+ 1883 04bf 06        		.byte	6
+ 1884 04c0 06        		.byte	6
+ 1885 04c1 06        		.byte	6
+ 1886 04c2 06        		.byte	6
+ 1887 04c3 06        		.byte	6
+ 1888 04c4 06        		.byte	6
+ 1889 04c5 06        		.byte	6
+ 1890 04c6 06        		.byte	6
+ 1891 04c7 06        		.byte	6
+ 1892 04c8 06        		.byte	6
+ 1893 04c9 06        		.byte	6
+ 1894 04ca 06        		.byte	6
+ 1895 04cb 06        		.byte	6
+ 1896 04cc 06        		.byte	6
+ 1897 04cd 06        		.byte	6
+ 1898 04ce 06        		.byte	6
+ 1899 04cf 06        		.byte	6
+ 1900 04d0 06        		.byte	6
+ 1901 04d1 06        		.byte	6
+ 1902 04d2 06        		.byte	6
+ 1903 04d3 06        		.byte	6
+ 1904 04d4 06        		.byte	6
+ 1905 04d5 06        		.byte	6
+ 1906 04d6 06        		.byte	6
+ 1907 04d7 06        		.byte	6
+ 1908 04d8 06        		.byte	6
+ 1909 04d9 06        		.byte	6
+ 1910 04da 06        		.byte	6
+ 1911 04db 06        		.byte	6
+ 1912 04dc 06        		.byte	6
+ 1913 04dd 06        		.byte	6
+ 1914 04de 06        		.byte	6
+ 1915 04df 06        		.byte	6
+ 1916 04e0 06        		.byte	6
+ 1917 04e1 06        		.byte	6
+ 1918 04e2 06        		.byte	6
+ 1919 04e3 06        		.byte	6
+ 1920 04e4 06        		.byte	6
+ 1921 04e5 06        		.byte	6
+ 1922 04e6 06        		.byte	6
+ 1923 04e7 06        		.byte	6
+ 1924 04e8 06        		.byte	6
+ 1925 04e9 06        		.byte	6
+ 1926 04ea 06        		.byte	6
+ 1927 04eb 06        		.byte	6
+ 1928 04ec 06        		.byte	6
+ 1929 04ed 06        		.byte	6
+ 1930 04ee 06        		.byte	6
+ 1931 04ef 06        		.byte	6
+ 1932 04f0 06        		.byte	6
+ 1933 04f1 06        		.byte	6
+ 1934 04f2 06        		.byte	6
+ 1935 04f3 06        		.byte	6
+ 1936 04f4 06        		.byte	6
+ 1937 04f5 06        		.byte	6
+ 1938 04f6 06        		.byte	6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 35
 
 
- 1939 052e 06        		.byte	6
- 1940 052f 06        		.byte	6
- 1941 0530 06        		.byte	6
- 1942 0531 06        		.byte	6
- 1943 0532 06        		.byte	6
- 1944 0533 06        		.byte	6
- 1945 0534 06        		.byte	6
- 1946 0535 06        		.byte	6
- 1947 0536 06        		.byte	6
- 1948 0537 06        		.byte	6
- 1949 0538 06        		.byte	6
- 1950 0539 06        		.byte	6
- 1951 053a 06        		.byte	6
- 1952 053b 06        		.byte	6
- 1953 053c 06        		.byte	6
- 1954 053d 06        		.byte	6
- 1955 053e 06        		.byte	6
- 1956 053f 06        		.byte	6
- 1957 0540 06        		.byte	6
- 1958               		.lcomm g_vs_type,2
- 1959               	/* File "source/vs10xx.c": code  906 = 0x038a ( 722), prologues  84, epilogues 100 */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 36
+ 1939 04f7 06        		.byte	6
+ 1940 04f8 06        		.byte	6
+ 1941 04f9 06        		.byte	6
+ 1942 04fa 06        		.byte	6
+ 1943 04fb 06        		.byte	6
+ 1944 04fc 06        		.byte	6
+ 1945 04fd 06        		.byte	6
+ 1946 04fe 06        		.byte	6
+ 1947 04ff 06        		.byte	6
+ 1948 0500 06        		.byte	6
+ 1949 0501 06        		.byte	6
+ 1950 0502 06        		.byte	6
+ 1951 0503 06        		.byte	6
+ 1952 0504 06        		.byte	6
+ 1953 0505 06        		.byte	6
+ 1954 0506 06        		.byte	6
+ 1955 0507 06        		.byte	6
+ 1956 0508 06        		.byte	6
+ 1957 0509 06        		.byte	6
+ 1958 050a 06        		.byte	6
+ 1959 050b 06        		.byte	6
+ 1960 050c 06        		.byte	6
+ 1961 050d 06        		.byte	6
+ 1962 050e 06        		.byte	6
+ 1963 050f 06        		.byte	6
+ 1964 0510 06        		.byte	6
+ 1965 0511 06        		.byte	6
+ 1966 0512 06        		.byte	6
+ 1967 0513 06        		.byte	6
+ 1968 0514 06        		.byte	6
+ 1969 0515 06        		.byte	6
+ 1970 0516 06        		.byte	6
+ 1971 0517 06        		.byte	6
+ 1972 0518 06        		.byte	6
+ 1973 0519 06        		.byte	6
+ 1974 051a 06        		.byte	6
+ 1975 051b 06        		.byte	6
+ 1976 051c 06        		.byte	6
+ 1977 051d 06        		.byte	6
+ 1978 051e 06        		.byte	6
+ 1979 051f 06        		.byte	6
+ 1980 0520 06        		.byte	6
+ 1981 0521 06        		.byte	6
+ 1982 0522 06        		.byte	6
+ 1983 0523 06        		.byte	6
+ 1984 0524 06        		.byte	6
+ 1985 0525 06        		.byte	6
+ 1986 0526 06        		.byte	6
+ 1987 0527 06        		.byte	6
+ 1988 0528 06        		.byte	6
+ 1989 0529 06        		.byte	6
+ 1990 052a 06        		.byte	6
+ 1991 052b 06        		.byte	6
+ 1992 052c 06        		.byte	6
+ 1993 052d 06        		.byte	6
+ 1994 052e 06        		.byte	6
+ 1995 052f 06        		.byte	6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 36
+
+
+ 1996 0530 06        		.byte	6
+ 1997 0531 06        		.byte	6
+ 1998 0532 06        		.byte	6
+ 1999 0533 06        		.byte	6
+ 2000 0534 06        		.byte	6
+ 2001 0535 06        		.byte	6
+ 2002 0536 06        		.byte	6
+ 2003 0537 06        		.byte	6
+ 2004 0538 06        		.byte	6
+ 2005 0539 06        		.byte	6
+ 2006 053a 06        		.byte	6
+ 2007 053b 06        		.byte	6
+ 2008 053c 06        		.byte	6
+ 2009 053d 06        		.byte	6
+ 2010 053e 06        		.byte	6
+ 2011 053f 06        		.byte	6
+ 2012 0540 06        		.byte	6
+ 2013               		.lcomm g_vs_type,2
+ 2014               	/* File "source/vs10xx.c": code  949 = 0x03b5 ( 759), prologues  86, epilogues 104 */
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 37
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 vs10xx.c
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:3      *ABS*:0000003f __SREG__
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:13     .text:00000000 VsPlayerInterrupts
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:51     .text:0000002a VsPlayerStop
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:3      *ABS*:0000003f __SREG__
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:13     .text:00000000 VsPlayerInterrupts
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:51     .text:0000002a VsPlayerStop
                              .bss:00000000 vs_status
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:73     .text:0000004a VsGetStatus
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:85     .text:00000052 VsGetType
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1517   .bss:00000001 g_vs_type
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:97     .text:0000005c VsGetTypeHex
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:108    .text:00000066 VsSdiWrite_P
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:148    .text:000000a0 VsBeepStop
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1474   .progmem.data:0000036e off.2559
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1470   .progmem.data:0000036a end.2560
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:176    .text:000000d0 VsSdiWrite
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:212    .text:00000108 VsRegWrite
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:253    .text:0000015a VsSetVolume
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:291    .text:0000019a VsPlayerSetMode
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:319    .text:000001c6 VsBeepStartRaw
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1485   .progmem.data:00000376 on.2552
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1481   .progmem.data:00000372 end.2553
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:375    .text:00000230 VsBeepStart
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:399    .text:00000250 VsBeep
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1502   .progmem.data:00000381 on.2527
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1491   .progmem.data:00000379 end.2529
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1495   .progmem.data:0000037d off.2528
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:481    .text:000002f4 VsPlayerReset
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:507    .text:00000320 VsRegRead
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:555    .text:00000380 VsGetVolume
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:580    .text:000003a6 VsRegInfo
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:606    .text:000003ce VsStreamValid
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:685    .text:00000452 VsPlayerInit
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:767    .text:00000502 VsPlayerFeed
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:894    .text:000005ec VsPlayerKick
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1030   .progmem.data:00000000 dtab
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1520   .progmem.data:0000038c atab
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:979    .text:00000676 VsMemoryTest
-C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s:1508   .progmem.data:00000384 mtcmd.2487
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:73     .text:0000004a VsGetStatus
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:85     .text:00000052 VsGetType
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1572   .bss:00000001 g_vs_type
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:97     .text:0000005c VsGetTypeHex
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:108    .text:00000066 VsSdiWrite_P
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:148    .text:000000a0 VsBeepStop
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1529   .progmem.data:0000036e off.2560
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1525   .progmem.data:0000036a end.2561
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:176    .text:000000d0 VsSdiWrite
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:212    .text:00000108 VsRegWrite
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:253    .text:0000015a VsSetVolume
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:291    .text:0000019a VsPlayerSetMode
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:319    .text:000001c6 VsBeepStartRaw
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1540   .progmem.data:00000376 on.2553
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1536   .progmem.data:00000372 end.2554
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:375    .text:00000230 VsBeepStart
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:399    .text:00000250 VsBeep
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1557   .progmem.data:00000381 on.2527
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1546   .progmem.data:00000379 end.2529
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1550   .progmem.data:0000037d off.2528
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:485    .text:000002fc SoundB
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:506    .text:00000318 SoundA
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:535    .text:0000034a VsRegRead
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:583    .text:000003aa VsGetVolume
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:608    .text:000003d0 VsRegInfo
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:634    .text:000003f8 VsStreamValid
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:713    .text:0000047c VsPlayerReset
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:740    .text:000004a8 VsPlayerInit
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:822    .text:00000558 VsPlayerFeed
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:949    .text:00000642 VsPlayerKick
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1085   .progmem.data:00000000 dtab
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1575   .progmem.data:0000038c atab
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1034   .text:000006cc VsMemoryTest
+C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s:1563   .progmem.data:00000384 mtcmd.2487
 
 UNDEFINED SYMBOLS
 __do_copy_data
@@ -2116,15 +2176,16 @@ SPIputByte
 SPIdeselect
 SPIgetmode
 SPImode
-NutDelay
+NutSleep
 SPIgetByte
+NutDelay
 sig_INTERRUPT6
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/ccKpNHfe.s 			page 38
+
+
 NutRegisterIrqHandler
 NutIrqSetMode
 NutSegBufReadCommit
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/cclU4wS1.s 			page 37
-
-
 NutSegBufReadRequest
 NutSegBufReadLast
 __divmodhi4

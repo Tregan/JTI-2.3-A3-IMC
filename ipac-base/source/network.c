@@ -39,6 +39,7 @@ int NetworkInit()
     LcdBackLight(LCD_BACKLIGHT_ON);
     LcdWriteSecondLine("Registering device...");
     printf("\nRegistering device...");
+    /*
     if (NutRegisterDevice(&DEV_ETHER, 0, 0)) 
     {
         puts("Registering " DEV_ETHER_NAME " failed.");
@@ -60,7 +61,7 @@ int NetworkInit()
         
         
     }
-    
+    */
     LcdClearLine();
     LcdBackLight(LCD_BACKLIGHT_OFF);
     return 0;

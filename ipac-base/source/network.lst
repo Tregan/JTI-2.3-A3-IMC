@@ -1,0 +1,337 @@
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s 			page 1
+
+
+   1               		.file	"network.c"
+   2               		.arch atmega2561
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  10               		.data
+  11               	.LC0:
+  12 0000 0A52 6574 		.string	"\nRetrieving time from ntp"
+  12      7269 6576 
+  12      696E 6720 
+  12      7469 6D65 
+  12      2066 726F 
+  13               	.LC1:
+  14 001a 5265 7472 		.string	"Retrieving time from NTP..."
+  14      6965 7669 
+  14      6E67 2074 
+  14      696D 6520 
+  14      6672 6F6D 
+  15               	.LC2:
+  16 0036 3738 2E31 		.string	"78.192.65.63"
+  16      3932 2E36 
+  16      352E 3633 
+  16      00
+  17               	.LC3:
+  18 0043 6574 6830 		.string	"eth0"
+  18      00
+  19               	.LC4:
+  20 0048 0A53 7461 		.string	"\nStatus in NTP: %d. Error: %d"
+  20      7475 7320 
+  20      696E 204E 
+  20      5450 3A20 
+  20      2564 2E20 
+  21               	.LC5:
+  22 0066 0A25 642C 		.string	"\n%d, Failed to retrieve time. Retrying..."
+  22      2046 6169 
+  22      6C65 6420 
+  22      746F 2072 
+  22      6574 7269 
+  23               	.LC6:
+  24 0090 0A45 7272 		.string	"\nError retrieving NTP. Time not synced with the NTP server!"
+  24      6F72 2072 
+  24      6574 7269 
+  24      6576 696E 
+  24      6720 4E54 
+  25               	.LC7:
+  26 00cc 0A53 7563 		.string	"\nSuccess. NTP time is: %02d:%02d:%02d"
+  26      6365 7373 
+  26      2E20 4E54 
+  26      5020 7469 
+  26      6D65 2069 
+  27               		.text
+  28               	.global	NTP
+  29               		.type	NTP, @function
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s 			page 2
+
+
+  30               	NTP:
+  31               	/* prologue: frame size=8 */
+  32 0000 CF92      		push r12
+  33 0002 DF92      		push r13
+  34 0004 EF92      		push r14
+  35 0006 FF92      		push r15
+  36 0008 0F93      		push r16
+  37 000a 1F93      		push r17
+  38 000c CF93      		push r28
+  39 000e DF93      		push r29
+  40 0010 CDB7      		in r28,__SP_L__
+  41 0012 DEB7      		in r29,__SP_H__
+  42 0014 2897      		sbiw r28,8
+  43 0016 0FB6      		in __tmp_reg__,__SREG__
+  44 0018 F894      		cli
+  45 001a DEBF      		out __SP_H__,r29
+  46 001c 0FBE      		out __SREG__,__tmp_reg__
+  47 001e CDBF      		out __SP_L__,r28
+  48               	/* prologue end (size=16) */
+  49 0020 6C01      		movw r12,r24
+  50 0022 82E0      		ldi r24,lo8(2)
+  51 0024 90E0      		ldi r25,hi8(2)
+  52 0026 A0E0      		ldi r26,hlo8(2)
+  53 0028 B0E0      		ldi r27,hhi8(2)
+  54 002a 8D83      		std Y+5,r24
+  55 002c 9E83      		std Y+6,r25
+  56 002e AF83      		std Y+7,r26
+  57 0030 B887      		std Y+8,r27
+  58 0032 1982      		std Y+1,__zero_reg__
+  59 0034 1A82      		std Y+2,__zero_reg__
+  60 0036 1B82      		std Y+3,__zero_reg__
+  61 0038 1C82      		std Y+4,__zero_reg__
+  62 003a 80E0      		ldi r24,lo8(.LC0)
+  63 003c 90E0      		ldi r25,hi8(.LC0)
+  64 003e 0E94 0000 		call puts
+  65 0042 81E0      		ldi r24,lo8(1)
+  66 0044 0E94 0000 		call LcdBackLight
+  67 0048 80E0      		ldi r24,lo8(.LC1)
+  68 004a 90E0      		ldi r25,hi8(.LC1)
+  69 004c 0E94 0000 		call LcdWriteSecondLine
+  70 0050 80E0      		ldi r24,lo8(.LC2)
+  71 0052 90E0      		ldi r25,hi8(.LC2)
+  72 0054 0E94 0000 		call inet_addr
+  73 0058 6983      		std Y+1,r22
+  74 005a 7A83      		std Y+2,r23
+  75 005c 8B83      		std Y+3,r24
+  76 005e 9C83      		std Y+4,r25
+  77 0060 80E0      		ldi r24,lo8(.LC3)
+  78 0062 90E0      		ldi r25,hi8(.LC3)
+  79 0064 0E94 0000 		call NutDhcpError
+  80 0068 8C01      		movw r16,r24
+  81 006a 80E0      		ldi r24,lo8(.LC3)
+  82 006c 90E0      		ldi r25,hi8(.LC3)
+  83 006e 0E94 0000 		call NutDhcpStatus
+  84 0072 1F93      		push r17
+  85 0074 0F93      		push r16
+  86 0076 9F93      		push r25
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s 			page 3
+
+
+  87 0078 8F93      		push r24
+  88 007a 80E0      		ldi r24,lo8(.LC4)
+  89 007c 90E0      		ldi r25,hi8(.LC4)
+  90 007e 9F93      		push r25
+  91 0080 8F93      		push r24
+  92 0082 0E94 0000 		call printf
+  93 0086 2DB7      		in r18,__SP_L__
+  94 0088 3EB7      		in r19,__SP_H__
+  95 008a 2A5F      		subi r18,lo8(-(6))
+  96 008c 3F4F      		sbci r19,hi8(-(6))
+  97 008e 0FB6      		in __tmp_reg__,__SREG__
+  98 0090 F894      		cli
+  99 0092 3EBF      		out __SP_H__,r19
+ 100 0094 0FBE      		out __SREG__,__tmp_reg__
+ 101 0096 2DBF      		out __SP_L__,r18
+ 102 0098 012B      		or r16,r17
+ 103 009a 01F4      		brne .L2
+ 104 009c 00E0      		ldi r16,lo8(0)
+ 105 009e 10E0      		ldi r17,hi8(0)
+ 106               	.L4:
+ 107 00a0 85E0      		ldi r24,lo8(5)
+ 108 00a2 E82E      		mov r14,r24
+ 109 00a4 F12C      		mov r15,__zero_reg__
+ 110 00a6 EC0E      		add r14,r28
+ 111 00a8 FD1E      		adc r15,r29
+ 112 00aa B701      		movw r22,r14
+ 113 00ac CE01      		movw r24,r28
+ 114 00ae 0196      		adiw r24,1
+ 115 00b0 0E94 0000 		call NutSNTPGetTime
+ 116 00b4 892B      		or r24,r25
+ 117 00b6 01F0      		breq .L5
+ 118 00b8 68EE      		ldi r22,lo8(1000)
+ 119 00ba 73E0      		ldi r23,hi8(1000)
+ 120 00bc 80E0      		ldi r24,hlo8(1000)
+ 121 00be 90E0      		ldi r25,hhi8(1000)
+ 122 00c0 0E94 0000 		call NutSleep
+ 123 00c4 1F93      		push r17
+ 124 00c6 0F93      		push r16
+ 125 00c8 80E0      		ldi r24,lo8(.LC5)
+ 126 00ca 90E0      		ldi r25,hi8(.LC5)
+ 127 00cc 9F93      		push r25
+ 128 00ce 8F93      		push r24
+ 129 00d0 0E94 0000 		call printf
+ 130 00d4 0F90      		pop __tmp_reg__
+ 131 00d6 0F90      		pop __tmp_reg__
+ 132 00d8 0F90      		pop __tmp_reg__
+ 133 00da 0F90      		pop __tmp_reg__
+ 134 00dc 0A30      		cpi r16,10
+ 135 00de 1105      		cpc r17,__zero_reg__
+ 136 00e0 01F0      		breq .L2
+ 137 00e2 0F5F      		subi r16,lo8(-(1))
+ 138 00e4 1F4F      		sbci r17,hi8(-(1))
+ 139 00e6 00C0      		rjmp .L4
+ 140               	.L2:
+ 141 00e8 80E0      		ldi r24,lo8(.LC6)
+ 142 00ea 90E0      		ldi r25,hi8(.LC6)
+ 143 00ec 9F93      		push r25
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s 			page 4
+
+
+ 144 00ee 8F93      		push r24
+ 145 00f0 0E94 0000 		call printf
+ 146 00f4 F601      		movw r30,r12
+ 147 00f6 1582      		std Z+5,__zero_reg__
+ 148 00f8 1482      		std Z+4,__zero_reg__
+ 149 00fa 1382      		std Z+3,__zero_reg__
+ 150 00fc 1282      		std Z+2,__zero_reg__
+ 151 00fe 1182      		std Z+1,__zero_reg__
+ 152 0100 1082      		st Z,__zero_reg__
+ 153 0102 CE01      		movw r24,r28
+ 154 0104 0596      		adiw r24,5
+ 155 0106 0E94 0000 		call localtime
+ 156 010a 0E94 0000 		call X12RtcSetClock
+ 157 010e 0E94 0000 		call LcdClearLine
+ 158 0112 80E0      		ldi r24,lo8(0)
+ 159 0114 0E94 0000 		call LcdBackLight
+ 160 0118 80E0      		ldi r24,lo8(0)
+ 161 011a 90E0      		ldi r25,hi8(0)
+ 162 011c 0F90      		pop __tmp_reg__
+ 163 011e 0F90      		pop __tmp_reg__
+ 164 0120 00C0      		rjmp .L8
+ 165               	.L5:
+ 166 0122 C701      		movw r24,r14
+ 167 0124 0E94 0000 		call localtime
+ 168 0128 8C01      		movw r16,r24
+ 169 012a 0E94 0000 		call X12RtcSetClock
+ 170 012e F801      		movw r30,r16
+ 171 0130 8081      		ld r24,Z
+ 172 0132 9181      		ldd r25,Z+1
+ 173 0134 9F93      		push r25
+ 174 0136 8F93      		push r24
+ 175 0138 8281      		ldd r24,Z+2
+ 176 013a 9381      		ldd r25,Z+3
+ 177 013c 9F93      		push r25
+ 178 013e 8F93      		push r24
+ 179 0140 8481      		ldd r24,Z+4
+ 180 0142 9581      		ldd r25,Z+5
+ 181 0144 9F93      		push r25
+ 182 0146 8F93      		push r24
+ 183 0148 80E0      		ldi r24,lo8(.LC7)
+ 184 014a 90E0      		ldi r25,hi8(.LC7)
+ 185 014c 9F93      		push r25
+ 186 014e 8F93      		push r24
+ 187 0150 0E94 0000 		call printf
+ 188 0154 0E94 0000 		call LcdClearLine
+ 189 0158 80E0      		ldi r24,lo8(0)
+ 190 015a 0E94 0000 		call LcdBackLight
+ 191 015e 81E0      		ldi r24,lo8(1)
+ 192 0160 90E0      		ldi r25,hi8(1)
+ 193 0162 2DB7      		in r18,__SP_L__
+ 194 0164 3EB7      		in r19,__SP_H__
+ 195 0166 285F      		subi r18,lo8(-(8))
+ 196 0168 3F4F      		sbci r19,hi8(-(8))
+ 197 016a 0FB6      		in __tmp_reg__,__SREG__
+ 198 016c F894      		cli
+ 199 016e 3EBF      		out __SP_H__,r19
+ 200 0170 0FBE      		out __SREG__,__tmp_reg__
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s 			page 5
+
+
+ 201 0172 2DBF      		out __SP_L__,r18
+ 202               	.L8:
+ 203               	/* epilogue: frame size=8 */
+ 204 0174 2896      		adiw r28,8
+ 205 0176 0FB6      		in __tmp_reg__,__SREG__
+ 206 0178 F894      		cli
+ 207 017a DEBF      		out __SP_H__,r29
+ 208 017c 0FBE      		out __SREG__,__tmp_reg__
+ 209 017e CDBF      		out __SP_L__,r28
+ 210 0180 DF91      		pop r29
+ 211 0182 CF91      		pop r28
+ 212 0184 1F91      		pop r17
+ 213 0186 0F91      		pop r16
+ 214 0188 FF90      		pop r15
+ 215 018a EF90      		pop r14
+ 216 018c DF90      		pop r13
+ 217 018e CF90      		pop r12
+ 218 0190 0895      		ret
+ 219               	/* epilogue end (size=15) */
+ 220               	/* function NTP size 201 (170) */
+ 221               		.size	NTP, .-NTP
+ 222               		.data
+ 223               	.LC8:
+ 224 00f2 5265 6769 		.string	"Registering device..."
+ 224      7374 6572 
+ 224      696E 6720 
+ 224      6465 7669 
+ 224      6365 2E2E 
+ 225               	.LC9:
+ 226 0108 0A52 6567 		.string	"\nRegistering device..."
+ 226      6973 7465 
+ 226      7269 6E67 
+ 226      2064 6576 
+ 226      6963 652E 
+ 227               		.text
+ 228               	.global	NetworkInit
+ 229               		.type	NetworkInit, @function
+ 230               	NetworkInit:
+ 231               	/* prologue: frame size=0 */
+ 232               	/* prologue end (size=0) */
+ 233 0192 81E0      		ldi r24,lo8(1)
+ 234 0194 0E94 0000 		call LcdBackLight
+ 235 0198 80E0      		ldi r24,lo8(.LC8)
+ 236 019a 90E0      		ldi r25,hi8(.LC8)
+ 237 019c 0E94 0000 		call LcdWriteSecondLine
+ 238 01a0 80E0      		ldi r24,lo8(.LC9)
+ 239 01a2 90E0      		ldi r25,hi8(.LC9)
+ 240 01a4 9F93      		push r25
+ 241 01a6 8F93      		push r24
+ 242 01a8 0E94 0000 		call printf
+ 243 01ac 0E94 0000 		call LcdClearLine
+ 244 01b0 80E0      		ldi r24,lo8(0)
+ 245 01b2 0E94 0000 		call LcdBackLight
+ 246 01b6 0F90      		pop __tmp_reg__
+ 247 01b8 0F90      		pop __tmp_reg__
+ 248 01ba 80E0      		ldi r24,lo8(0)
+ 249 01bc 90E0      		ldi r25,hi8(0)
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s 			page 6
+
+
+ 250               	/* epilogue: frame size=0 */
+ 251 01be 0895      		ret
+ 252               	/* epilogue end (size=1) */
+ 253               	/* function NetworkInit size 23 (22) */
+ 254               		.size	NetworkInit, .-NetworkInit
+ 255               	/* File "source/network.c": code  224 = 0x00e0 ( 192), prologues  16, epilogues  16 */
+GAS LISTING C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 network.c
+C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s:3      *ABS*:0000003f __SREG__
+C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s:30     .text:00000000 NTP
+C:\Users\Matthijs\AppData\Local\Temp/cc3p0YaZ.s:230    .text:00000192 NetworkInit
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+puts
+LcdBackLight
+LcdWriteSecondLine
+inet_addr
+NutDhcpError
+NutDhcpStatus
+printf
+NutSNTPGetTime
+NutSleep
+localtime
+X12RtcSetClock
+LcdClearLine
