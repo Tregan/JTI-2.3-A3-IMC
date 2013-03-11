@@ -89,12 +89,16 @@ extern void LcdLowLevelInit(void);
 
 void LcdTimeDisplay(char text[]);
 void LcdWriteTitle(char text[]);
+void LcdWriteFirstLine(char text[]);
 void LcdWriteSecondLine(char text[]);
 
 void LcdClearAll(void);
 void LcdClearTitle(void);
-void LcdClearLine(void);
+void LcdClearFirstLine(void);
+void LcdClearSecondLine(void);
 void LcdClearTitleLine(void);
+
+void LcdClearLine(void); //Deprecated
 
 #endif /* _Display_H */
 /*  ����  End Of File  �������� �������������������������������������������� */
