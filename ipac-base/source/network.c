@@ -56,9 +56,7 @@ int NetworkInit()
         {
             puts("\nError: Cannot configure network.");
             printf("%d", NutDhcpError(DEV_ETHER_NAME));
-        }
-        
-        
+        } 
     }
     
     LcdClearLine();

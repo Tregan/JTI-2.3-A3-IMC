@@ -55,6 +55,8 @@ const int DEBUG = 0;
 
 //General
 tm datetime;
+int firstStartup;
+int threadExit;
 //backlightCounter
 int backlightCounter;
 int backlightStayOn;
@@ -67,7 +69,6 @@ int setTimezoneFromMenu;
 int selectedDatetimeUnit;
 int pauseCurrentDatetime;
 int datetimeSetManually;
-int datetimeExit;
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -237,6 +238,12 @@ THREAD(KBThreadTimeZone, args)
                 //Thread no longer needed, exit please
                 NutThreadExit();
             }
+            else if(key == KEY_ESC  && !firstStartup)
+            {
+                threadExit = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
         }
     }
 }
@@ -337,9 +344,9 @@ THREAD(KBThreadManualTime, args)
                 //Thread no longer needed, exit please
                 NutThreadExit();
             }
-            else if(key == KEY_ESC)
+            else if(key == KEY_ESC && !firstStartup)
             {
-                datetimeExit = 1;
+                threadExit = 1;
                 //Thread no longer needed, exit please
                 NutThreadExit();
             }
@@ -438,9 +445,9 @@ THREAD(KBThreadManualDate, args)
                 //Thread no longer needed, exit please
                 NutThreadExit();
             }
-            else if(key == KEY_ESC)
+            else if(key == KEY_ESC  && !firstStartup)
             {
-                datetimeExit = 1;
+                threadExit = 1;
                 //Thread no longer needed, exit please
                 NutThreadExit();
             }
@@ -572,16 +579,6 @@ void SetTimezone(void)
 {
     //Clear display
     LcdClearAll();
-    
-    int firstStartup;
-    //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
-    At45dbPageRead(0, &firstStartup, sizeof(int));
-    
-    //If debugging is enabled, erase the firstStartup page (pgn 0)
-    if(DEBUG)
-        firstStartup = 1;
-    
-    LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
 
     At45dbPageRead(0 + sizeof(int), &timezone, sizeof(int));
     
@@ -610,6 +607,16 @@ void SetTimezone(void)
         while(timeZoneSet != 1)
         {
             NutSleep(100);
+            
+            //If the user wants to quit, return
+            if(threadExit)
+            {
+                //Clear display
+                LcdClearAll();
+
+                threadExit = 0;
+                return;
+            }
 
             //array of 20 chars should be enough for "UTC +(or -)14"
             char output[20];
@@ -624,15 +631,7 @@ void SetTimezone(void)
 
         //Backlight can go out again
         SetBacklightStayOn(BACKLIGHT_OFF);
-        
-        if(firstStartup)
-        {
-            firstStartup = 0;
-            At45dbPageWrite(0, &firstStartup, sizeof(int));
-            if(DEBUG)
-                LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
-        }
-        
+
         //Time changed, because timezone changed
         if(setTimezoneFromMenu)
         {
@@ -703,12 +702,12 @@ void SetTimeManually(void)
         NutSleep(100);
         
         //If the user wants to quit, return
-        if(datetimeExit)
+        if(threadExit)
         {
             //Clear display
             LcdClearAll();
             
-            datetimeExit = 0;
+            threadExit = 0;
             //Done, start updating the current time again
             pauseCurrentDatetime = 0;
             return;
@@ -785,12 +784,12 @@ void SetDateManually(void)
         NutSleep(100);
         
         //If the user wants to quit, return
-        if(datetimeExit)
+        if(threadExit)
         {
             //Clear display
             LcdClearAll();
             
-            datetimeExit = 0;
+            threadExit = 0;
             //Done, start updating the current time again
             pauseCurrentDatetime = 0;
             return;
@@ -873,30 +872,45 @@ int main(void)
     /* Enable global interrupts */
     sei();
     
+    //Create the backlight thread
     NutThreadCreate("BacklightThread", BacklightThread, NULL, 1024);
     
     //Initialize persistent data chip
     if (At45dbInit()==AT45DB041B)
-    {      
-        //timeZone check
-        SetTimezone();
-        //From now on, set the timezone from the menu
-        setTimezoneFromMenu = 1;
+    {   
+        //Read SRAM, starting at page 0. Put the address of firstStartup as a parameter, and the bytesize is a size of an int
+        At45dbPageRead(0, &firstStartup, sizeof(int));
+
+        //If debugging is enabled, erase the firstStartup page (pgn 0)
+        if(DEBUG)
+            firstStartup = 1;
+
+        LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
     }
-    
     //Initialize RTC
-    X12Init(); 
+    X12Init();
+    
     //Initialize network
     NetworkInit();
-    
+    //timeZone check
+    SetTimezone();
+    //From now on, set the timezone from the menu
+    setTimezoneFromMenu = 1;
     //Try to sync the time and date with an NTP server
     SyncDatetime();
-    
     //Initialize Menu
     MenuInit();
     
     //Do not pause the updating of the current time;
     pauseCurrentDatetime = 0;
+    
+    if(firstStartup)
+    {
+        firstStartup = 0;
+        At45dbPageWrite(0, &firstStartup, sizeof(int));
+        if(DEBUG)
+            LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
+    }
     
     /*
      * Increase our priority so we can feed the watchdog.

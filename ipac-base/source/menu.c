@@ -75,7 +75,6 @@ THREAD(MenuThread, args)
         {
             ResetBacklightCounter();
             LcdBackLight(LCD_BACKLIGHT_ON);
-            LcdWriteTitle("Menu");
             
             //Menu Controlls
             if(menu_enabled == 1 && submenu_enabled == 0)
@@ -186,8 +185,12 @@ THREAD(MenuThread, args)
 void DisplayItem(char text[], int clear)
 {
     if(clear == 1)
+    {
+        LcdClearTitle();
         LcdClearLine();
+    }
     
+    LcdWriteTitle("Menu");
     LcdWriteSecondLine(text);
 }
 
