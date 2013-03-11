@@ -56,7 +56,7 @@ char* menuitems[3] = {
 
 struct menuSubItem menusubitems[3][4] = {
     {{"Radio", &ShowSetting}},
-    {{"Alarm A", &ShowSetting}, {"Alarm B", &ShowSetting}},
+    {{"Alarm A", &AlarmAMenu}, {"Alarm B", &AlarmBMenu}},
     {{"Timezone", &SetTimezone}, {"Sync Time&Date", &SyncDatetime}, {"Set Time", &SetTimeManually}, {"Set Date", &SetDateManually}}
 };
 

@@ -66,6 +66,8 @@
 #include "portio.h"    // for debug purposes only
 #include "spidrv.h"    // for debug purposes only
 #include "watchdog.h"
+#include "keyboard.h"
+#include "rtc.h"
 
 
 /*-------------------------------------------------------------------------*/
@@ -92,7 +94,6 @@
 static volatile u_char vs_status = VS_STATUS_STOPPED;
 static u_short g_vs_type;
 static u_char VsPlayMode;
-
 
 static void VsLoadProgramCode(void);
 
@@ -877,7 +878,7 @@ int VsBeep(u_char fsin, u_short ms)
 /*
  * SoundA is an quick repating sound
  */
-int SoundA()
+int SoundA(void)
 {
     VsBeep(100, 200);
     NutSleep(100);
@@ -889,7 +890,7 @@ int SoundA()
 /*
  * SoundB is an slow repeating sound on a high pitch
  */
-int SoundB()
+int SoundB(void)
 {   
     VsBeep(80, 500);
     NutSleep(500);
