@@ -561,7 +561,7 @@ void SyncDatetime(void)
     //Query NTP server and set time. If no time was set, set it manually.
     if(!NTP(&datetime))
     {
-        LcdWriteTitle("Failed.");
+        LcdWriteFirstLine("Failed.");
         LcdWriteSecondLine("No time obtained");
         NutSleep(2000);
         SetTimeManually();
@@ -598,7 +598,10 @@ void SetTimezone(void)
 
         //Backlight should stay on during setting
         SetBacklightStayOn(BACKLIGHT_ON);
-        LcdWriteTitle("Set Timezone");
+        if(firstStartup)
+            LcdWriteFirstLine("Set Timezone");
+        else
+            LcdWriteTitle("Set Timezone");
         timeZoneSet = 0;
         
         //Create the Keyboard Thread for setting the timeZone
@@ -656,7 +659,6 @@ void SetTimezone(void)
     
     LogMsg_P(LOG_INFO, PSTR("Value of timeZone: %d"), timezone);
         
-    //TODO use the timeZone value on startup, not working atm
     //Clear the display
     LcdClearAll();
 
@@ -690,10 +692,14 @@ void SetTimeManually(void)
     SetBacklightStayOn(BACKLIGHT_ON);
     //Clear the title
     LcdClearAll();
-    LcdWriteTitle("Set Time Manually");
-    
-    //Show the current time, but do NOT update it! We're setting a time, updating while setting would be very silly
-    ShowCurrentTime();
+    if(firstStartup)
+        LcdWriteFirstLine("Set Manual Time");
+    else
+    {
+        LcdWriteTitle("Set Manual Time");
+        //Show the current time, but do NOT update it! We're setting a time, updating while setting would be very silly
+        ShowCurrentTime();
+    }
     
     char output[20];
     
@@ -771,7 +777,10 @@ void SetDateManually(void)
     SetBacklightStayOn(BACKLIGHT_ON);
     //Clear the title
     LcdClearAll();
-    LcdWriteTitle("Set Date Manually");
+    if(firstStartup)
+        LcdWriteFirstLine("Set Manual Date");
+    else
+        LcdWriteTitle("Set Manual Date");
     
     //TODO, if time left. Not really important and needs the displaying of time changed...
     //Show the current time, but do NOT update it! We're setting a time, updating while setting would be very silly
