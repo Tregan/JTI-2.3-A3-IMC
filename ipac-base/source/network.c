@@ -73,7 +73,6 @@ int NTP(tm* datetime)
  
     //Retrieve time from the NTP server.
     puts("\nRetrieving time from ntp");
-    LcdBackLight(LCD_BACKLIGHT_ON);
     LcdWriteSecondLine("Retrieving time from NTP...");
  
     timeserver = inet_addr("78.192.65.63");
@@ -128,7 +127,6 @@ int NTP(tm* datetime)
  
     printf("\nSuccess. NTP time is: %02d:%02d:%02d %d-%d-%d", datetime->tm_hour, datetime->tm_min, datetime->tm_sec, datetime->tm_mday, datetime->tm_mon + 1, datetime->tm_year + 1900);
     LcdClearLine();
-    LcdBackLight(LCD_BACKLIGHT_OFF);
     
     return 1;
 }

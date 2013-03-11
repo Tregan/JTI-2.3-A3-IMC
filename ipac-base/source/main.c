@@ -241,6 +241,12 @@ THREAD(KBThreadTimeZone, args)
     }
 }
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief Thread for setting the time manually
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
 THREAD(KBThreadManualTime, args)
 {
     //Time units: 0 = hours, 1 = minutes, 2 = seconds
@@ -341,6 +347,12 @@ THREAD(KBThreadManualTime, args)
     }
 }
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief Thread for setting the date manually
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
 THREAD(KBThreadManualDate, args)
 {
     //Time units: 0 = days, 1 = months, 2 = years
@@ -436,7 +448,12 @@ THREAD(KBThreadManualDate, args)
     }
 }
 
-//ThreadA for turning on LED
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief Thread for setting the backlight
+ * \author Bas
+ */
+/* ����������������������������������������������������������������������� */
 THREAD(BacklightThread, args)
 {
     backlightCounter = 0;
@@ -450,12 +467,17 @@ THREAD(BacklightThread, args)
             LcdBackLight(LCD_BACKLIGHT_ON);
         }
         
-        backlightCounter++;
+        if(!backlightStayOn)
+            backlightCounter++;
         
-        if(backlightCounter >= 25 && !backlightStayOn)
+        if(backlightCounter >= 25)
             LcdBackLight(LCD_BACKLIGHT_OFF);
     }
 }
+
+/*-------------------------------------------------------------------------*/
+/* Functions                                                                */
+/*-------------------------------------------------------------------------*/
 
 /* ����������������������������������������������������������������������� */
 /*!
@@ -687,6 +709,8 @@ void SetTimeManually(void)
             LcdClearAll();
             
             datetimeExit = 0;
+            //Done, start updating the current time again
+            pauseCurrentDatetime = 0;
             return;
         }
         
@@ -767,6 +791,8 @@ void SetDateManually(void)
             LcdClearAll();
             
             datetimeExit = 0;
+            //Done, start updating the current time again
+            pauseCurrentDatetime = 0;
             return;
         }
         
@@ -847,6 +873,8 @@ int main(void)
     /* Enable global interrupts */
     sei();
     
+    NutThreadCreate("BacklightThread", BacklightThread, NULL, 1024);
+    
     //Initialize persistent data chip
     if (At45dbInit()==AT45DB041B)
     {      
@@ -875,8 +903,6 @@ int main(void)
      */
     NutThreadSetPriority(1);
     
-    NutThreadCreate("BacklightThread", BacklightThread, NULL, 1024);
-
     for (;;)
     {
         NutSleep(500);
