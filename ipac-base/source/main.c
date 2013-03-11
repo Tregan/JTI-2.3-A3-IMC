@@ -795,6 +795,8 @@ void SyncDatetime(void)
         LcdWriteFirstLine("Failed.");
         LcdWriteSecondLine("No time obtained");
         NutSleep(2000);
+        //Set the year to 2013, so make sure it is close by
+        datetime.tm_year = 113;
         SetTimeManually();
         SetDateManually();
     }
