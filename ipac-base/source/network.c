@@ -128,5 +128,3 @@ int NTP(tm* datetime)
     
     return 1;
 }
-
-
