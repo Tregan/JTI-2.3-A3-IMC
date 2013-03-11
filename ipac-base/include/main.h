@@ -29,7 +29,9 @@ void SetTimeManually(void);
 void SetDateManually(void);
 void ResetBacklightCounter(void);
 void SetBacklightStayOn(int);
-    
+void AlarmAMenu(void);
+void AlarmBMenu(void);
+
 #ifdef	__cplusplus
 }
 #endif
