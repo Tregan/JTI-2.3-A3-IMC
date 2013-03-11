@@ -15,6 +15,7 @@
 #include "keyboard.h"
 #include "log.h"
 #include "main.h"
+#include "shoutcast.h"
 
 #define LOG_MODULE  LOG_MENU_MODULE
 
@@ -55,7 +56,7 @@ char* menuitems[3] = {
 };
 
 struct menuSubItem menusubitems[3][4] = {
-    {{"Radio", &ShowSetting}},
+    {{"Start Radio Stream", &playStream}, {"Stop Radio Stream", &stopStream}},
     {{"Alarm A", &AlarmAMenu}, {"Weekend Alarm", &ShowSetting}, {"Alarm B", &AlarmBMenu}},
     {{"Timezone", &SetTimezone}, {"Sync Time&Date", &SyncDatetime}, {"Set Time", &SetTimeManually}, {"Set Date", &SetDateManually}}
 };
