@@ -491,16 +491,16 @@ THREAD(BacklightThread, args)
     }
 }
 
+/* ����������������������������������������������������������������������� */
 /*!
- * \brief setting Alarm A thread
- * 
+ * \brief Thread for setting the backlight
  * even kijken of dit zo blijft of dat het makkelijker kan, (dit is eigenlijk precies het zelfde als de set time)
- * 
  * \author Bas, Matthijs
  */
+/* ����������������������������������������������������������������������� */
 THREAD(SetAlarmAThread, args)
 {
-    selectedAlarmtimeUnit = 0;
+    selectedAlarmtimeUnit = DATETIME_DAYS;
     
     for(;;)
     {
@@ -591,13 +591,13 @@ THREAD(SetAlarmAThread, args)
     }
 }
 
+/* ����������������������������������������������������������������������� */
 /*!
  * \brief setting Alarm B thread
- * 
  * aangevuld met de datum door Matthijs
- * 
  * \author Bas, Matthijs
  */
+/* ����������������������������������������������������������������������� */
 THREAD(SetAlarmBThread, args)
 {
     selectedAlarmtimeUnit = 0;
@@ -982,10 +982,12 @@ void SetTimeManually(void)
     pauseCurrentDatetime = 0;
 }
 
+/* ����������������������������������������������������������������������� */
 /*!
  * \brief set Alarm A
  * \author Bas, Matthijs
  */
+/* ����������������������������������������������������������������������� */
 void AlarmAMenu(void)
 {
     int flags;
@@ -1012,7 +1014,7 @@ void AlarmAMenu(void)
         //Clear the second line
         LcdClearLine();
         
-        switch(selectedTimeUnit)
+        switch(selectedAlarmtimeUnit)
         {
             case 0:
                 sprintf(output, "Set Hours: %02d", alarmA.tm_hour);
@@ -1038,10 +1040,12 @@ void AlarmAMenu(void)
     X12RtcSetAlarm(0,&alarmA,7);
 }
 
+/* ����������������������������������������������������������������������� */
 /*!
  * \brief set Alarm B
  * \author Bas, Matthijs
  */
+/* ����������������������������������������������������������������������� */
 void AlarmBMenu(void)
 {
     int flags;
@@ -1068,7 +1072,7 @@ void AlarmBMenu(void)
         //Clear the second line
         LcdClearLine();
         
-        switch(selectedTimeUnit)
+        switch(selectedAlarmtimeUnit)
         {
             case 0:
                 sprintf(output, "Set Month: %02d", alarmB.tm_mon);
