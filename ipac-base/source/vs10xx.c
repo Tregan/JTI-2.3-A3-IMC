@@ -897,6 +897,118 @@ int SoundB()
 }
 
 /*!
+* \brief Snooze Function for Alarm A.
+* \author Farhad
+*/
+
+u_char setVolume = 50;
+int snooze = 1;
+int snoozeMathTime;
+
+THREAD(SnoozethreadA, args)
+{
+     tm current;
+    //The time when the snooze function gets called.
+    tm gmt;
+    X12RtcGetClock(&gmt);
+    int mathTimeStart = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec);
+    //Set the volume of the snooze.
+    VsSetVolume(setVolume,setVolume);
+    // The time it takes before the second snooze starts again.
+    int SnoozeDelay = 9;
+    // The maximum time that the snooze function will go off.
+    int MaxSnoozeTime = 200;
+    for(;;)
+    {
+        X12RtcGetClock(&gmt);
+        // Store current time in 1 integer to calculate .
+        // Hours are x1000, Minutes are x100 and Seconds are x1.
+        // Example: 01:02:03 will be 1203 and 21:00:31 will be 21031.
+        int mathTime = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec);
+        u_char key = KbGetKey();
+        // For Testing purposes
+        LogMsg_P(LOG_INFO, PSTR("SnoozeTime %d"), mathTime - snoozeMathTime);
+        // If the snooze button (currently button 4) is pressed the alarm will turn offfor a certain time (SnoozeDelay) and the volume for the next period will be raised (setVolume).
+        if(key == KEY_04 && snooze == 1)
+        {
+            // Time that snoozebutton gets pressed.
+            snoozeMathTime = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec);
+            snooze = 2;
+            // For Testing purposes
+            LogMsg_P(LOG_INFO, PSTR("SNOOZE"));
+            //Set the volume higher for the next snooze.
+            if(setVolume != 0)
+            {
+                setVolume -= 5;
+                VsSetVolume(setVolume,setVolume);
+            }
+        }
+        // When the snooze button is pressed and the SnoozeDelay is done it will go back to playing the alarm.
+        if(snooze == 2 && (mathTime - snoozeMathTime) > SnoozeDelay)
+        {
+            snooze = 1;
+        }
+        // If snooze button didnt get pressed it will play the alarm.
+        if(snooze == 1)
+        {
+            SoundA();
+        }
+        // If snooze takes longer than the value set at MaxSnoozeTime the snooze function will stop.
+        if((mathTime - mathTimeStart) > MaxSnoozeTime || key == KEY_01 )
+        {            
+            current.tm_hour = 13;
+            current.tm_min = 10;
+            current.tm_sec = 0;
+            current.tm_mday = 5;
+            current.tm_mon = 3;
+            X12RtcSetClock(&current);
+            NutThreadExit();
+        }
+        
+    }
+}
+
+/*!
+* \brief Snooze Function for Alarm B.
+* \author Farhad
+*/
+THREAD(SnoozethreadB, args)
+{
+    tm gmt;
+    X12RtcGetClock(&gmt);
+    int mathTimeStart = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec);
+    int MaxSnoozeTime = 30;   
+    
+    for(;;)
+    {  
+        X12RtcGetClock(&gmt);
+        int mathTime = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec);
+        u_char key = KbGetKey();
+        if((mathTime - mathTimeStart) > MaxSnoozeTime || key == KEY_01 )
+        {
+            NutThreadExit();
+        }
+        else
+        {
+            SoundB();       
+        }
+
+    }
+}
+
+void startSnoozeThreadA(void)
+{
+    NutThreadSetPriority(1);
+    NutThreadCreate("SnoozethreadA", SnoozethreadA, NULL, 1024);  
+}
+
+void startSnoozeThreadB(void)
+{
+    NutThreadSetPriority(1);
+    NutThreadCreate("SnoozethreadB", SnoozethreadB, NULL, 1024);  
+}
+
+/*!
  * \brief Sine wave beep start.
  *
  * \param fsin Frequency.

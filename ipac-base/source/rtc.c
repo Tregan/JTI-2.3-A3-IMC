@@ -587,7 +587,7 @@ THREAD(AlarmThread, args)
         //power fail
         if(flags == 0)
         {
-            printf("\n ========== Power Fial ========== \n");
+            printf("\n ========== Power Fail ========== \n");
             X12RtcClearStatus(0);
         }
 
@@ -599,7 +599,7 @@ THREAD(AlarmThread, args)
             {
                 //==============================================AlarmA==================================
                 AlarmAWent = 1;
-                SoundA();  
+                startSnoozeThreadA();				
                 X12RtcClearStatus(32);
             }
         }
@@ -612,7 +612,8 @@ THREAD(AlarmThread, args)
             {
                 //==============================================AlarmB==================================
                 AlarmBWent = 1;
-                SoundB();
+                startSnoozeThreadB();
+				ClearAlarm('b');
                X12RtcClearStatus(64);
             }
         }
