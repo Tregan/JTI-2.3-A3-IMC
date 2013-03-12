@@ -10,5 +10,8 @@
 
 int NetworkInit(void);
 int NTP(tm*);
+int connectToStream(void);
+void playStream(void);
+void stopStream(void);
 
 #endif /* NETWORK_H_ */

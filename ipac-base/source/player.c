@@ -11,8 +11,6 @@
 #include "vs10xx.h"
 #include "log.h"
 
-
-
 #define OK			1
 #define NOK			0
 

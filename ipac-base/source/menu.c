@@ -15,7 +15,7 @@
 #include "keyboard.h"
 #include "log.h"
 #include "main.h"
-#include "shoutcast.h"
+#include "network.h"
 
 #define LOG_MODULE  LOG_MENU_MODULE
 
