@@ -28,7 +28,8 @@
 #define NOK		0
 
 static char eth0IfName[9] = "eth0";
-FILE *stream;
+FILE* stream;
+TCPSOCKET *sock;
 
 int NetworkInit(void)
 {
@@ -150,18 +151,17 @@ int connectToStream(void)
     int result = OK;
     char *data;
 
-    TCPSOCKET *sock;
-
     sock = NutTcpCreateSocket();
     if(NutTcpConnect(sock, inet_addr("81.173.3.132"), 8082))
     {
         LogMsg_P(LOG_ERR, PSTR("Error: >> NutTcpConnect()"));
-        exit(1);
+        result = NOK;
+        return result;
     }
-    stream = _fdopen( (int) sock, "r+b" );
+    stream = _fdopen((int) sock, "r+b");
 
     fprintf(stream, "GET %s HTTP/1.0\r\n", "/");
-    fprintf(stream, "Host: %s\r\n", "62.212.132.54");
+    fprintf(stream, "Host: %s\r\n", "81.173.3.132");
     fprintf(stream, "User-Agent: Ethernut\r\n");
     fprintf(stream, "Accept: */*\r\n");
     fprintf(stream, "Icy-MetaData: 1\r\n");
@@ -187,7 +187,9 @@ int connectToStream(void)
 
 void playStream(void)
 {
+    //Connect to the stream
     connectToStream();
+    //Start playing
     play(stream);
 	
     return;
@@ -195,6 +197,8 @@ void playStream(void)
 
 void stopStream(void)
 {
+    //TODO why does this close the network connection and why does it automatically initializes it again?
+    //Close the stream
     fclose(stream);	
 	
     return;
