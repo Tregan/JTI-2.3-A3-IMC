@@ -86,6 +86,8 @@ THREAD(MenuThread, args)
                     {
                         menu_item -= 1;
                     }
+                    else
+                        menu_item = (sizeof(menuitems)/sizeof(menuitems[0])) - 1;
                 }
                 if(key == KEY_DOWN)
                 {
@@ -93,6 +95,8 @@ THREAD(MenuThread, args)
                     {
                         menu_item += 1;
                     }
+                    else
+                        menu_item = 0;
                 }
             }
             if(menu_enabled == 1 && submenu_enabled == 1)
@@ -110,6 +114,13 @@ THREAD(MenuThread, args)
                     {
                         menu_subitem -= 1;
                     }
+                    else
+                    {
+                        menu_subitem = sizeof(menusubitems[menu_item])/sizeof(menusubitems[menu_item][0]) - 1;
+                        
+                        while(strlen(menusubitems[menu_item][menu_subitem].text) < 1)
+                            menu_subitem -= 1;
+                    }
                 }
                 if(key == KEY_DOWN)
                 {
@@ -117,6 +128,8 @@ THREAD(MenuThread, args)
                     {
                         menu_subitem += 1;
                     }
+                    else
+                        menu_subitem = 0;
                 }
             }
             
@@ -143,6 +156,7 @@ THREAD(MenuThread, args)
                             LcdClearLine();
                             LcdClearTitle();
                         }
+                        menu_subitem = 0;
                     }
                 }
             }
@@ -169,8 +183,13 @@ THREAD(MenuThread, args)
                     // Do nothing for now.
                     break;
                 case 1: 
-                    DisplayItem(menusubitems[menu_item][menu_subitem].text, 1);
-                    break;
+                    if(strlen(menusubitems[menu_item][menu_subitem].text) > 0)
+                    {
+                        DisplayItem(menusubitems[menu_item][menu_subitem].text, 1);
+                        break;
+                    }
+                    else
+                        menu_subitem = 0;
             }
         
             while(1)
