@@ -334,6 +334,7 @@ void LcdClearTitle()
 void LcdClearFirstLine()
 {
         LcdWriteFirstLine("                ");
+        LcdClearTitle();
 }
 
 /* ����������������������������������������������������������������������� */
