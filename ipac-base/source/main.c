@@ -735,12 +735,20 @@ THREAD(SetAlarmBThread, args)
  * \author Niels & Bas
  */
 /* ����������������������������������������������������������������������� */
-void SetTimezone_timeh(int* timezone)
+void SetTimezone_timeh(long* timezone)
 {
     if((-12 <= *timezone) && (*timezone <= 14))
     {
-        printf("\ntimezone = %d", *timezone);
-        _timezone = -*timezone * 60 * 60;
+        //Why can't the timezone hold anything lower than 0...?
+        //DAFUQ
+        printf("\ntimezone = %lu", *timezone);
+        printf("\ntimezone * 60 = %lu", *timezone * 60);
+        printf("\ntimezone * 60 * 60 = %lu", *timezone * 60 * 60);
+        long tz = *timezone * 60 * 60;
+        tz = 0;
+        printf("\ntz = %lu", tz);
+        _timezone = tz;
+        printf("\n_timezone = %lu", _timezone);
     }
     else
     {
@@ -906,9 +914,10 @@ void SetTimezone(void)
         
     //Clear the display
     LcdClearAll();
-
+    
+    long test = timezone;
     //Set timezone of time.h to our timezone
-    SetTimezone_timeh(&timezone);
+    SetTimezone_timeh(&test);
 }
 
 /* ����������������������������������������������������������������������� */

@@ -83,7 +83,7 @@ int NetworkInit(void)
 
 int NTP(tm* datetime)
 {
-    time_t ntp_time = 2;
+    time_t ntp_time;
     uint32_t timeserver = 0;
  
     //Retrieve time from the NTP server.
