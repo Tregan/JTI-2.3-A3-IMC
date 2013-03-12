@@ -57,7 +57,7 @@ const int DEBUG = 0;
 tm datetime;
 int firstStartup;
 int threadExit;
-//backlightCounter
+//Backlight
 int backlightCounter;
 int backlightStayOn;
 //Timezone
@@ -70,7 +70,7 @@ int selectedDatetimeUnit;
 int pauseCurrentDatetime;
 int datetimeSetManually;
 
-//alarm A and B
+//Alarm A and B
 int selectedAlarmtimeUnit;
 int alarmAset;
 int alarmBset;
@@ -587,6 +587,12 @@ THREAD(SetAlarmAThread, args)
                 //Thread no longer needed, exit please
                 NutThreadExit();
             }
+            else if(key == KEY_ESC)
+            {
+                threadExit = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
         }
     }
 }
@@ -706,6 +712,12 @@ THREAD(SetAlarmBThread, args)
             else if(key == KEY_OK)
             {
                 alarmBset = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
+            else if(key == KEY_ESC)
+            {
+                threadExit = 1;
                 //Thread no longer needed, exit please
                 NutThreadExit();
             }
@@ -1013,6 +1025,16 @@ void AlarmAMenu(void)
     {
         NutSleep(100);
         
+        //If the user wants to quit, return
+        if(threadExit)
+        {
+            //Clear display
+            LcdClearAll();
+            
+            threadExit = 0;
+            return;
+        }
+        
         //Clear the second line
         LcdClearLine();
         
@@ -1070,6 +1092,16 @@ void AlarmBMenu(void)
     while(alarmBset != 1)
     {
         NutSleep(100);
+        
+        //If the user wants to quit, return
+        if(threadExit)
+        {
+            //Clear display
+            LcdClearAll();
+            
+            threadExit = 0;
+            return;
+        }
         
         //Clear the second line
         LcdClearLine();
