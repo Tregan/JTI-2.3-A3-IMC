@@ -741,11 +741,12 @@ void SetTimezone_timeh(long* timezone)
     {
         //Why can't the timezone hold anything lower than 0...?
         //DAFUQ
+        //Or... did I fix it...?
         printf("\ntimezone = %lu", *timezone);
         printf("\ntimezone * 60 = %lu", *timezone * 60);
         printf("\ntimezone * 60 * 60 = %lu", *timezone * 60 * 60);
         long tz = *timezone * 60 * 60;
-        tz = 0;
+        tz = -tz;
         printf("\ntz = %lu", tz);
         _timezone = tz;
         printf("\n_timezone = %lu", _timezone);
