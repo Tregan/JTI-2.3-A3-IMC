@@ -42,6 +42,7 @@
 #include "rtc.h"
 #include "menu.h"
 #include "main.h"
+#include "vs10xx.h"
 
 /*-------------------------------------------------------------------------*/
 /* global variable definitions                                             */
@@ -84,6 +85,15 @@ int noteSet;
 char keys[28] = "abcdefghijklmnopqrstuvwxyz-";
 alarmBStruct alarmbstruct;
 
+//Scheduler
+int SchedulerSet;
+int schedulerInput = 0;
+
+tm alarmB;
+tm scheduler;
+
+tm SchedulerDate1;
+tm SchedulerDate2;
 
 
 /*-------------------------------------------------------------------------*/
@@ -1149,6 +1159,137 @@ THREAD(NoteAlarmBThread, args)
     }
 }
 
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief setting Scheduler thread
+ * aangevuld met de datum door Matthijs
+ * \author Bas, Matthijs
+ */
+/* ����������������������������������������������������������������������� */
+THREAD(SchedulerThread, args)
+{
+    selectedAlarmtimeUnit = 0;
+    
+    for(;;)
+    {
+        NutSleep(300);
+        //Wait for keyboard event
+        if(KbWaitForKeyEvent(500) != KB_ERROR)
+        {
+            u_char key = KbGetKey();
+            if(key == KEY_UP)
+            {
+                switch(selectedAlarmtimeUnit)
+                {
+                    case 0:
+                        if(scheduler.tm_mon >= 11)
+                            scheduler.tm_mon = 0;
+                        else
+                            scheduler.tm_mon++;
+                        break;
+                    case 1:
+                        if(scheduler.tm_mday >= 31)
+                            scheduler.tm_mday = 1;
+                        else
+                            scheduler.tm_mday++;
+                        break;
+                    case 2:
+                        if(scheduler.tm_hour >= 23)
+                            scheduler.tm_hour = 0;
+                        else
+                            scheduler.tm_hour++;
+                        break;
+                    case 3:
+                        if(scheduler.tm_min >= 59)
+                            scheduler.tm_min = 0;
+                        else
+                            scheduler.tm_min++;
+                        break;
+                    case 4:
+                        if(scheduler.tm_sec >= 59)
+                            scheduler.tm_sec = 0;
+                        else
+                            scheduler.tm_sec++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_DOWN)
+            {
+                switch(selectedAlarmtimeUnit)
+                {
+                    case 0:
+                        if(scheduler.tm_mon <= 0)
+                            scheduler.tm_mon = 11;
+                        else
+                            scheduler.tm_mon--;
+                        break;
+                    case 1:
+                        if(scheduler.tm_mday <= 1)
+                            scheduler.tm_mday = 31;
+                        else
+                            scheduler.tm_mday--;
+                        break;
+                    case 2:
+                        if(scheduler.tm_hour <= 0)
+                            scheduler.tm_hour = 23;
+                        else
+                            scheduler.tm_hour--;
+                        break;
+                    case 3:
+                        if(scheduler.tm_min <= 0)
+                            scheduler.tm_min = 59;
+                        else
+                            scheduler.tm_min--;
+                        break;
+                    case 4:
+                        if(scheduler.tm_sec <= 0)
+                            scheduler.tm_sec = 59;
+                        else
+                            scheduler.tm_sec--;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_LEFT)
+            {
+                if(selectedAlarmtimeUnit <= 0)
+                {
+                    selectedAlarmtimeUnit = 4;
+                }
+                else
+                    selectedAlarmtimeUnit--;
+            }
+            else if(key == KEY_RIGHT)
+            {
+                if(selectedAlarmtimeUnit >= 4)
+                {
+                    selectedAlarmtimeUnit = 0;
+                }
+                else
+                    selectedAlarmtimeUnit++;
+            }
+            else if(key == KEY_OK)
+            {
+                SchedulerSet = 1;
+                if(schedulerInput == 2)
+                {
+                   //Do nothing
+                }
+                else if(schedulerInput == 0)
+                {
+                    schedulerInput = 1;
+                }
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
+        }
+    }
+}
+
+
 /*-------------------------------------------------------------------------*/
 /* Functions                                                                */
 /*-------------------------------------------------------------------------*/
@@ -1658,6 +1799,91 @@ void NoteAlarmBMenu(void)
     AlarmBMenu();
 }
 
+
+/* ����������������������������������������������������������������������� */
+/*!
+ * \brief set Scheduler
+ * \author Bas, Matthijs
+ * \modified Farhad
+ */
+/* ����������������������������������������������������������������������� */
+void SchedulerMenu(void)
+{
+    SchedulerSet = 0; 
+    //key listener starten
+    NutThreadCreate("SchedulerThread", SchedulerThread, NULL, 1024);
+    
+    char output[20];
+    //Backlight on during setting
+    LcdBackLight(LCD_BACKLIGHT_ON);
+    //Clear the title
+    LcdClearAll();
+    
+    if(schedulerInput < 2 )
+    {
+        LcdWriteTitle("Set First Scheduler Time");
+    }
+    else if(schedulerInput == 2)
+    {
+        LcdWriteTitle("Set Second Scheduler Time");
+    }   
+    
+    ShowCurrentTime();
+    
+    while(SchedulerSet != 1)
+    {
+        NutSleep(100);
+        
+        //Clear the second line
+        LcdClearLine();
+        
+        switch(selectedAlarmtimeUnit)
+        {
+            case 0:
+                sprintf(output, "Set Month: %02d", scheduler.tm_mon);
+                LcdWriteSecondLine(output);
+                break;
+            case 1:
+                sprintf(output, "Set Day: %02d", scheduler.tm_mday);
+                LcdWriteSecondLine(output);
+                break;
+            case 2:
+                sprintf(output, "Set Hour: %02d", scheduler.tm_hour);
+                LcdWriteSecondLine(output);
+                break;
+            case 3:
+                sprintf(output, "Set Minutes: %02d", scheduler.tm_min);
+                LcdWriteSecondLine(output);
+                break;
+             case 4:
+                sprintf(output, "Set Seconds: %02d", scheduler.tm_sec);
+                LcdWriteSecondLine(output);
+                break;
+            default:
+                break;
+        }
+    }   
+    LcdClearAll();
+    //Backlight no longer needed, turn off
+    LcdBackLight(LCD_BACKLIGHT_OFF);
+    
+    if(schedulerInput == 2)
+    {
+        SchedulerDate2 = scheduler;
+        schedulerInput= 0;
+        printf("\nSuccess. Second Scheduler Time: %02d:%02d:%02d %d-%d-%d", scheduler.tm_hour, scheduler.tm_min, scheduler.tm_sec, scheduler.tm_mday, scheduler.tm_mon + 1, scheduler.tm_year + 1900);
+        startSchedulerThread();      
+    }
+    if(schedulerInput == 1)
+    {
+        SchedulerDate1 = scheduler;
+        schedulerInput = 2;
+        printf("\nSuccess. First Scheduler Time: %02d:%02d:%02d %d-%d-%d", scheduler.tm_hour, scheduler.tm_min, scheduler.tm_sec, scheduler.tm_mday, scheduler.tm_mon + 1, scheduler.tm_year + 1900);
+        SchedulerMenu();
+    }
+}
+
+
 /* ����������������������������������������������������������������������� */
 /*!
  * \brief Manually set the time
@@ -1782,6 +2008,7 @@ int main(void)
     LedInit();
     //Initialize LCD screen
     LcdLowLevelInit();
+    VsPlayerInit();
 
     SysControlMainBeat(ON);             // enable 4.4 msecs hartbeat interrupt
     
@@ -1816,6 +2043,8 @@ int main(void)
     SyncDatetime();
     //Initialize Menu
     MenuInit();
+    
+    SchedulerMenu();
     
     //Do not pause the updating of the current time;
     pauseCurrentDatetime = 0;

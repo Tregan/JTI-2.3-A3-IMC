@@ -22,7 +22,9 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-    
+tm SchedulerDate1;
+tm SchedulerDate2;
+void SchedulerDate(void);     
 void SetTimezone(void);
 void SyncDatetime(void);
 void SetTimeManually(void);
@@ -33,6 +35,7 @@ void AlarmAMenu(void);
 void AlarmBMenu(void);
 void MainAlarmBMenu(void);
 void NoteAlarmBMenu(void);
+void SchedulerMenu(void);
 
 #ifdef	__cplusplus
 }

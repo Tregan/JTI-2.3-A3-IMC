@@ -68,6 +68,7 @@
 #include "watchdog.h"
 #include "keyboard.h"
 #include "rtc.h"
+#include "main.h"
 
 
 /*-------------------------------------------------------------------------*/
@@ -997,6 +998,48 @@ THREAD(SnoozethreadB, args)
     }
 }
 
+/*!
+* \brief Scheduler Function.
+* \author Farhad
+*/
+THREAD(SchedulerSetthread, args)
+{
+    for(;;)
+    {  
+        tm gmt;
+        X12RtcGetClock(&gmt);
+        int GMTsec = gmt.tm_sec;
+        int GMTmin = gmt.tm_min;
+        int GMThour = gmt.tm_hour;
+        int GMTday = gmt.tm_mday;
+        int GMTmonth = gmt.tm_mon;
+        
+        int SCDLRsec = SchedulerDate1.tm_sec;
+        int SCDLRmin = SchedulerDate1.tm_min;
+        int SCDLRhour = SchedulerDate1.tm_hour;
+        int SCDLRday = SchedulerDate1.tm_mday;       
+        int SCDLRmonth = SchedulerDate1.tm_mon;
+        
+        int SCDLR2sec = SchedulerDate2.tm_sec;
+        int SCDLR2min = SchedulerDate2.tm_min;
+        int SCDLR2hour = SchedulerDate2.tm_hour;
+        int SCDLR2day = SchedulerDate2.tm_mday;       
+        int SCDLR2month = SchedulerDate2.tm_mon;
+        
+        u_char key = KbGetKey();
+        if(SCDLRsec <= GMTsec && SCDLRmin <= GMTmin && SCDLRhour <= GMThour && SCDLRday <= GMTday && SCDLRmonth <= GMTmonth)
+        {
+           SoundB();
+           printf("\nFirst Past 1 Time: %02d:%02d:%02d %d-%d-%d", SchedulerDate1.tm_hour, SchedulerDate1.tm_min, SchedulerDate1.tm_sec, SchedulerDate1.tm_mday, SchedulerDate1.tm_mon + 1, SchedulerDate1.tm_year + 1900);
+        }
+        if((SCDLR2sec == GMTsec && SCDLR2min == GMTmin && SCDLR2hour == GMThour && SCDLR2day == GMTday && SCDLR2month == GMTmonth) || key == KEY_01)
+        {                
+            printf("\nFirst Exit Time: %02d:%02d:%02d %d-%d-%d", SchedulerDate1.tm_hour, SchedulerDate1.tm_min, SchedulerDate1.tm_sec, SchedulerDate1.tm_mday, SchedulerDate1.tm_mon + 1, SchedulerDate1.tm_year + 1900);
+            NutThreadExit(); 
+        }
+    }
+}
+
 void startSnoozeThreadA(void)
 {
     NutThreadSetPriority(1);
@@ -1007,6 +1050,12 @@ void startSnoozeThreadB(void)
 {
     NutThreadSetPriority(1);
     NutThreadCreate("SnoozethreadB", SnoozethreadB, NULL, 1024);  
+}
+
+void startSchedulerThread(void)
+{
+    NutThreadSetPriority(1);
+    NutThreadCreate("Schedulerthread", SchedulerSetthread, NULL, 1024);  
 }
 
 /*!

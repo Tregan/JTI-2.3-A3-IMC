@@ -164,5 +164,6 @@ extern int SoundA(void);
 extern int SoundB(void);
 extern void startSnoozeThreadA(void);
 extern void startSnoozeThreadB(void);
+extern void startSchedulerThread(void);
 
 /*@}*/

@@ -14,8 +14,8 @@
 #include "display.h"
 #include "keyboard.h"
 #include "log.h"
-#include "main.h"
 #include "network.h"
+#include "main.h"
 
 #define LOG_MODULE  LOG_MENU_MODULE
 
