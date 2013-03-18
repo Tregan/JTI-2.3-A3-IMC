@@ -1289,7 +1289,6 @@ THREAD(SchedulerThread, args)
     }
 }
 
-
 /*-------------------------------------------------------------------------*/
 /* Functions                                                                */
 /*-------------------------------------------------------------------------*/
@@ -2048,8 +2047,6 @@ int main(void)
     SyncDatetime();
     //Initialize Menu
     MenuInit();
-    
-    SchedulerMenu();
     
     //Do not pause the updating of the current time;
     pauseCurrentDatetime = 0;

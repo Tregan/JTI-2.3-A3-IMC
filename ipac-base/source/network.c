@@ -198,7 +198,7 @@ void playStream(void)
 {
     //Exit the menu
     menuExit();
-    while(VsGetStatus() != VS_STATUS_RUNNING)
+    if(VsGetStatus() != VS_STATUS_RUNNING)
     {
         //Connect to the stream
         connectToStream();

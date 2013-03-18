@@ -9,6 +9,7 @@
 #include "vs10xx.h"
 #include "log.h"
 #include "network.h"
+#include "menu.h"
 
 #define OK			1
 #define NOK			0
@@ -30,10 +31,10 @@ THREAD(FallingAsleep, arg)
 
         //Get the amount of seconds from the fallingAsleepTime minutes
         long totalSeconds = (long)fallingAsleepTime * 1000 * 60;
-        printf("totalseconds = %lu", totalSeconds);
+        printf("totalseconds = %lu\n", totalSeconds);
         //Get the time to sleep before "increasing" the volume. Divide the totalSeconds by the volumeGoal to get a smooth transition
         long sleepTime = totalSeconds / volumeGoal;
-        printf("sleeptime = %lu", sleepTime);
+        printf("sleeptime = %lu\n", sleepTime);
         int currentVolume = VsGetVolume();
         
         //"Increase" the volume until it hits the goal
@@ -178,12 +179,15 @@ void setCloseStream(int value)
  * \author Bas
  */
 /* ����������������������������������������������������������������������� */
-void setFallingAsleepMode(int time)
+void enableFallingAsleepMode(void)
 {
+    menuExit();
     if(time > 0)
     {
+        //Set variable of mode to 1, falling asleep mode enabled
         fallingAsleepMode = 1;
-        fallingAsleepTime = time;
+        //Set falling asleep time to 1 hour
+        fallingAsleepTime = 60;
         //Create the thread for falling asleep
         NutThreadCreate("FallingAsleep", FallingAsleep, NULL, 1024);
     }
@@ -212,7 +216,6 @@ int play(FILE *stream)
 {
     NutThreadCreate("Bg", StreamPlayer, stream, 512);
     printf("\nPlay thread created. Device is playing stream now !\n");
-    setFallingAsleepMode(5);
 
     return OK;
 }

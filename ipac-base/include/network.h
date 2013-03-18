@@ -10,7 +10,7 @@
 
 int NetworkInit(void);
 int NTP(tm*);
-int connectToStream(void);
+//int connectToStream(void);
 void playStream(void);
 void stopStream(void);
 
