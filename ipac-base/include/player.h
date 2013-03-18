@@ -10,6 +10,7 @@
 #include <io.h>
 
 int initPlayer(void);
+void setCloseStream(int);
 int play(FILE *stream);
 
 

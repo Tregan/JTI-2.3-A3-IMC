@@ -1,5 +1,3 @@
-
-///
 #define LOG_MODULE  LOG_PLAYER_MODULE
 
 #include <sys/heap.h>
@@ -14,20 +12,7 @@
 #define OK			1
 #define NOK			0
 
-THREAD(StreamPlayer, arg);
-
-int initPlayer(void)
-{
-    return OK;
-}
-
-int play(FILE *stream)
-{
-    NutThreadCreate("Bg", StreamPlayer, stream, 512);
-    printf("Play thread created. Device is playing stream now !\n");
-
-    return OK;
-}
+int closeStream;
 
 THREAD(StreamPlayer, arg)
 {
@@ -84,7 +69,7 @@ THREAD(StreamPlayer, arg)
             }*/
         }
 
-        while(rbytes)
+        while(rbytes && !closeStream)
         {
             // Copy rbytes (van 1 byte) van stream naar mp3buf.
             nrBytesRead = fread(mp3buf,1,rbytes,stream);
@@ -110,6 +95,30 @@ THREAD(StreamPlayer, arg)
                 break;
             }				
         }
+        
+        if(closeStream)
+        {
+            closeStream = 0;
+            NutThreadExit();
+        }
     }
 }
 
+int initPlayer(void)
+{
+    closeStream = 0;
+    return OK;
+}
+
+void setCloseStream(int value)
+{
+    closeStream = value;
+}
+
+int play(FILE *stream)
+{
+    NutThreadCreate("Bg", StreamPlayer, stream, 512);
+    printf("\nPlay thread created. Device is playing stream now !\n");
+
+    return OK;
+}

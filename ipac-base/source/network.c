@@ -20,6 +20,7 @@
 #include "display.h"
 #include "player.h"
 #include "log.h"
+#include "vs10xx.h"
 
 #define ETH0_BASE	0xC300
 #define ETH0_IRQ	5
@@ -152,6 +153,7 @@ int connectToStream(void)
     char *data;
 
     sock = NutTcpCreateSocket();
+    
     if(NutTcpConnect(sock, inet_addr("81.173.3.132"), 8082))
     {
         LogMsg_P(LOG_ERR, PSTR("Error: >> NutTcpConnect()"));
@@ -197,7 +199,12 @@ void playStream(void)
 
 void stopStream(void)
 {
-    //TODO why does this close the network connection and why does it automatically initializes it again?
+    //Stop the VsPlayer
+    VsPlayerStop();
+    //Tell the thread that he needs to exit
+    setCloseStream(1);
+    //Make sure the thread is gone, so wait half a second
+    NutSleep(500);
     //Close the stream
     fclose(stream);	
 	
