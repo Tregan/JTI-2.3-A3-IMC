@@ -31,6 +31,8 @@ void ResetBacklightCounter(void);
 void SetBacklightStayOn(int);
 void AlarmAMenu(void);
 void AlarmBMenu(void);
+void MainAlarmBMenu(void);
+void NoteAlarmBMenu(void);
 
 #ifdef	__cplusplus
 }

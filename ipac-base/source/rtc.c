@@ -21,9 +21,12 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "rtc.h"
 #include "portio.h"
+#include "vs10xx.h"
+#include "flash.h"
 
 #define I2C_SLA_RTC         0x6F
 #define I2C_SLA_EEPROM      0x57
@@ -31,6 +34,73 @@
 
 
 static u_long rtc_status;
+
+/*!
+ * \brief thread that checks the alarms every 10 seconds
+ * 
+ * \author Matthijs
+ */
+THREAD(AlarmThread, args)
+{
+    u_long flags;
+       
+    for(;;)
+    {
+        int succes = X12RtcGetStatus(&flags);
+        int i;
+        
+        for(i = 0; i <=10; i++)
+        {
+                NutSleep(1000);
+        }
+        
+        //power fail
+        if(flags == 0)
+        {
+            printf("\n ========== Power Fail ========== \n");
+            X12RtcClearStatus(0);
+        }
+
+        //alarm A
+        if(flags == 32)
+        {
+            printf("\n ========== Alarm 0 =========== \n");       
+            startSnoozeThreadA();				
+            X12RtcClearStatus(32);
+        }
+
+        //alarm B
+        if(flags == 64)
+        {
+            printf("\n ============ Alarm 1================== \n");
+           
+            startSnoozeThreadB();
+            ClearAlarm('b');
+            X12RtcClearStatus(64);
+        }
+
+        //both alarms
+        if(flags == 96)
+        {
+            //kijkt of alarm a of b nog niet heeft geluid, en speelt die dan
+            printf("\n ========== Alarm 0 en 1  ========= \n");
+            //kijkt welke van de 2 nog niet is afgegaan en speelt die dan nog af
+            SoundA();  
+            X12RtcClearStatus(32);
+            SoundB();
+            X12RtcClearStatus(64);
+        }
+
+        if(succes == 0)
+        {
+            //succes
+        }
+        else
+        {
+            //error
+        }
+    }
+}
 
 /*!
  * \brief Enable or disable write access.
@@ -360,6 +430,8 @@ int X12RtcClearStatus(u_long sflgs)
     return(0);
 }
 
+
+
 /*!
  * \brief Read contents from non-volatile EEPROM.
  *
@@ -451,6 +523,47 @@ int X12EepromWrite(u_int addr, CONST void *buff, size_t len)
     return(rc);
 }
 
+/*
+ * \brief save the alarms to sram
+ * 
+ * \author Matthijs
+ */
+void save(void)
+{
+    //write the alarmBArray to the sram
+    At45dbPageWrite(5, &alarmBArray, sizeof(alarmBArray));
+}
+
+/*
+ * \brief load the alarms from the sram
+ * 
+ * \author Matthijs
+ */
+void load(void)
+{
+    //read the alarmBArray from the sram
+    At45dbPageRead(5,&alarmBArray, sizeof(alarmBArray));
+}
+
+/*
+ * \brief setting the alarms at a initiallizer
+ * 
+ * \author Matthijs
+ */
+void createAlarms(void)
+{   
+    tm startTime;
+    startTime.tm_year = 0;
+    alarmBStruct test;
+    int i;
+    for (i = 0; i <=10; i++)
+    {
+        test.timeSet = startTime;
+        test.set = 0;
+        alarmBArray[i] = test;
+    }
+}
+
 /*!
  * \brief Initialize the interface to an Intersil X12xx hardware clock.
  *
@@ -468,6 +581,13 @@ int X12Init(void)
     {
         rc = X12RtcGetStatus(&tmp);
     }
+    
+    // loading ands setting the alarm
+    createAlarms();
+    load();
+    alarmBStruct first = checkFirst();
+    X12RtcSetAlarm(1, &first.timeSet, 31);
+    
     return (rc);
 }
 
@@ -503,41 +623,72 @@ void setAlarmA(int hours, int minutes, int seconds)
     }
 }
 
+/*
+ * \brief returns the first alarm That needs to be set
+ * 
+ * \author Matthijs
+ */
+alarmBStruct checkFirst(void)
+{
+    int i;
+    alarmBStruct first = alarmBArray[0];
+    for(i = 1; i<= 10; i++)
+    {
+        if(alarmBArray[i].set == 1)
+        {
+            if(first.timeSet.tm_year > alarmBArray[i].timeSet.tm_year)
+            {
+                first = alarmBArray[i];
+            }
+            else if(first.timeSet.tm_year == alarmBArray[i].timeSet.tm_year)
+            {
+                if(first.timeSet.tm_yday > alarmBArray[i].timeSet.tm_yday)
+                {  
+                     first = alarmBArray[i];
+                }
+                else if(first.timeSet.tm_yday == alarmBArray[i].timeSet.tm_yday)
+                {
+                    if(first.timeSet.tm_hour > alarmBArray[i].timeSet.tm_hour)
+                    {
+                         first = alarmBArray[i];
+                    }
+                    else if(first.timeSet.tm_hour == alarmBArray[i].timeSet.tm_hour)
+                    {
+                        if(first.timeSet.tm_min > alarmBArray[i].timeSet.tm_min)
+                        {
+                             first = alarmBArray[i];
+                        }
+                        else if(first.timeSet.tm_min == alarmBArray[i].timeSet.tm_min)
+                        {
+                            if(first.timeSet.tm_sec >= alarmBArray[i].timeSet.tm_sec)
+                            {
+                                 first = alarmBArray[i];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return first;
+}
+
 /*!
  * \brief sets AlarmB
  * 
- * \param month     : 0 - 11 month of the year
+ * \param alarm         : alarmBStruct of a alarm to set
  * 
- * \param dayMonth     : 1 - 31 seconds in minutes
+ * \param index         : the index of the alarm
  * 
- * \param hours        : 0 - 23 hours from midnight
- * 
- * \param minutes      : 0 - 59 minutes in hour
- * 
- * \param seconds     : 0 - 59 seconds in minutes
- *
  * \author Matthijs
  */
-void setAlarmB(int month, int dayMonth, int hours, int minutes, int seconds)
+void setAlarmB(alarmBStruct alarm, int index)
 {
-    tm alarmB;
-    
-    alarmB.tm_sec = seconds; 
-    alarmB.tm_min = minutes;    
-    alarmB.tm_hour = hours;     
-    alarmB.tm_mday = dayMonth;  
-    alarmB.tm_mon = month;      
-    
-    int succes = X12RtcSetAlarm(1, &alarmB, 31);
-        
-    if(succes == 0)
-    {
-        //klaar    
-    }
-    else
-    {
-        //fout!
-    }
+    alarmBArray[index] = alarm;
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    save();
+    alarmBStruct toSet = checkFirst();
+    X12RtcSetAlarm(1, &toSet.timeSet, 31);
 }
 
 /*!
@@ -561,97 +712,6 @@ void ClearAlarm(char ID)
 }
 
 
-// waardes voor de alarmen, of ze zijn afgegaan of niet
-int AlarmAWent = 0;
-int AlarmBWent = 0;
-
-/*!
- * \brief thread that checks the alarms every 10 seconds
- * 
- * \author Matthijs
- */
-THREAD(AlarmThread, args)
-{
-    u_long flags;
-       
-    for(;;)
-    {
-        int succes = X12RtcGetStatus(&flags);
-        int i;
-        
-        for(i = 0; i <=10; i++)
-        {
-                NutSleep(1000);
-        }
-        
-        //power fail
-        if(flags == 0)
-        {
-            printf("\n ========== Power Fail ========== \n");
-            X12RtcClearStatus(0);
-        }
-
-        //alarm A
-        if(flags == 32)
-        {
-            printf("\n ========== Alarm 0 =========== \n");
-            if(AlarmAWent == 0)
-            {
-                //==============================================AlarmA==================================
-                AlarmAWent = 1;
-                startSnoozeThreadA();				
-                X12RtcClearStatus(32);
-            }
-        }
-
-        //alarm B
-        if(flags == 64)
-        {
-            printf("\n ============ Alarm 1================== \n");
-            if(AlarmBWent == 0)
-            {
-                //==============================================AlarmB==================================
-                AlarmBWent = 1;
-                startSnoozeThreadB();
-				ClearAlarm('b');
-               X12RtcClearStatus(64);
-            }
-        }
-
-        //both alarms
-        if(flags == 96)
-        {
-            //kijkt of alarm a of b nog niet heeft geluid, en speelt die dan
-            printf("\n ========== Alarm 0 en 1  ========= \n");
-            
-            //kijkt welke van de 2 nog niet is afgegaan en speelt die dan nog af
-            if(AlarmAWent == 0)
-            {
-                //==============================================AlarmA==================================
-                AlarmAWent = 1;
-                SoundA();  
-                X12RtcClearStatus(32);
-            }
-            if(AlarmBWent == 0)
-            {
-                //==============================================AlarmB==================================
-                AlarmBWent = 1;
-                SoundB();
-                X12RtcClearStatus(64);
-            }
-            
-        }
-
-        if(succes == 0)
-        {
-            //succes
-        }
-        else
-        {
-            //error
-        }
-    }
-}
 
 /*!
  * \brief start the alarm check thread
