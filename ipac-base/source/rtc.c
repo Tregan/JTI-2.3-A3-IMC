@@ -697,46 +697,63 @@ void setAlarmA(int hours, int minutes, int seconds)
 alarmBStruct checkFirst(void)
 {
     int i;
-    alarmBStruct first = alarmBArray[0];
-    for(i = 1; i<= 10; i++)
+    int set = 0;
+    alarmBStruct first;
+    for(i = 0; i <= 10; i++)
     {
         if(alarmBArray[i].set == 1)
         {
-            if(first.timeSet.tm_year > alarmBArray[i].timeSet.tm_year)
+             first = alarmBArray[i];
+             set = 1;
+             break;
+        }
+    }
+    
+    if(set == 1)
+    {
+        for(i = 0; i<= 10; i++)
+        {
+            if(alarmBArray[i].set == 1)
             {
-                first = alarmBArray[i];
-            }
-            else if(first.timeSet.tm_year == alarmBArray[i].timeSet.tm_year)
-            {
-                if(first.timeSet.tm_yday > alarmBArray[i].timeSet.tm_yday)
-                {  
-                     first = alarmBArray[i];
-                }
-                else if(first.timeSet.tm_yday == alarmBArray[i].timeSet.tm_yday)
+                if(first.timeSet.tm_year > alarmBArray[i].timeSet.tm_year)
                 {
-                    if(first.timeSet.tm_hour > alarmBArray[i].timeSet.tm_hour)
-                    {
+                    first = alarmBArray[i];
+                }
+                else if(first.timeSet.tm_year == alarmBArray[i].timeSet.tm_year)
+                {
+                    if(first.timeSet.tm_yday > alarmBArray[i].timeSet.tm_yday)
+                    {  
                          first = alarmBArray[i];
                     }
-                    else if(first.timeSet.tm_hour == alarmBArray[i].timeSet.tm_hour)
+                    else if(first.timeSet.tm_yday == alarmBArray[i].timeSet.tm_yday)
                     {
-                        if(first.timeSet.tm_min > alarmBArray[i].timeSet.tm_min)
+                        if(first.timeSet.tm_hour > alarmBArray[i].timeSet.tm_hour)
                         {
                              first = alarmBArray[i];
                         }
-                        else if(first.timeSet.tm_min == alarmBArray[i].timeSet.tm_min)
+                        else if(first.timeSet.tm_hour == alarmBArray[i].timeSet.tm_hour)
                         {
-                            if(first.timeSet.tm_sec >= alarmBArray[i].timeSet.tm_sec)
+                            if(first.timeSet.tm_min > alarmBArray[i].timeSet.tm_min)
                             {
                                  first = alarmBArray[i];
+                            }
+                            else if(first.timeSet.tm_min == alarmBArray[i].timeSet.tm_min)
+                            {
+                                if(first.timeSet.tm_sec >= alarmBArray[i].timeSet.tm_sec)
+                                {
+                                     first = alarmBArray[i];
+                                }
                             }
                         }
                     }
                 }
             }
         }
+        return first;
     }
-    return first;
+    alarmBStruct off;
+    off.timeSet.tm_year = 0;
+    return off;
 }
 
 /*!
