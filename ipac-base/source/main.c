@@ -70,13 +70,20 @@ int selectedDatetimeUnit;
 int pauseCurrentDatetime;
 int datetimeSetManually;
 
-//Alarm A and B
+//Alarm A
 int selectedAlarmtimeUnit;
 int alarmAset;
-int alarmBset;
-
 tm alarmA;
-tm alarmB;
+
+//alarmB
+int selectedAlarmBindex;
+int alarmBset;
+int NotealarmBset;
+int noteIndex;
+int noteSet;
+char keys[28] = "abcdefghijklmnopqrstuvwxyz-";
+alarmBStruct alarmbstruct;
+
 
 
 /*-------------------------------------------------------------------------*/
@@ -604,10 +611,58 @@ THREAD(SetAlarmAThread, args)
  * \author Bas, Matthijs
  */
 /* ����������������������������������������������������������������������� */
+THREAD(MainSetAlarmBThread, args)
+{
+    selectedAlarmtimeUnit = 0;
+    if(alarmBArray[selectedAlarmBindex].timeSet.tm_year == 0)
+    {
+        X12RtcGetClock(&datetime);
+        alarmbstruct.timeSet = datetime;
+    }
+    for(;;)
+    {
+        NutSleep(300);
+        //Wait for keyboard event
+        if(KbWaitForKeyEvent(500) != KB_ERROR)
+        {
+            u_char key = KbGetKey();
+            if(key == KEY_UP)
+            {
+                if(selectedAlarmBindex >= 10)
+                    selectedAlarmBindex = 0;
+                else
+                    selectedAlarmBindex++;
+            }
+            else if(key == KEY_DOWN)
+            {
+                        if(selectedAlarmBindex <= 0)
+                            selectedAlarmBindex = 10;
+                        else
+                            selectedAlarmBindex--;
+            }
+            else if(key == KEY_OK)
+            {
+                alarmBset = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
+        }
+    }
+}
+
+/*!
+ * \brief setting Alarm B thread
+ * 
+ * \author Matthijs, bas
+ */
 THREAD(SetAlarmBThread, args)
 {
     selectedAlarmtimeUnit = 0;
-    
+    if(alarmBArray[selectedAlarmBindex].timeSet.tm_year == 0)
+    {
+        X12RtcGetClock(&datetime);
+        alarmbstruct.timeSet = datetime;
+    }
     for(;;)
     {
         NutSleep(300);
@@ -620,34 +675,46 @@ THREAD(SetAlarmBThread, args)
                 switch(selectedAlarmtimeUnit)
                 {
                     case 0:
-                        if(alarmB.tm_mon >= 11)
-                            alarmB.tm_mon = 0;
+                        if(alarmbstruct.timeSet.tm_year >= 199)
+                            alarmbstruct.timeSet.tm_year = datetime.tm_year;
                         else
-                            alarmB.tm_mon++;
+                            alarmbstruct.timeSet.tm_year++;
                         break;
-                    case 1:
-                        if(alarmB.tm_mday >= 31)
-                            alarmB.tm_mday = 1;
+                     case 1:
+                        if(alarmbstruct.timeSet.tm_mon >= 11)
+                            alarmbstruct.timeSet.tm_mon = 0;
                         else
-                            alarmB.tm_mday++;
+                            alarmbstruct.timeSet.tm_mon++;
                         break;
                     case 2:
-                        if(alarmB.tm_hour >= 23)
-                            alarmB.tm_hour = 0;
+                        if(alarmbstruct.timeSet.tm_mday >= 31)
+                            alarmbstruct.timeSet.tm_mday = 1;
                         else
-                            alarmB.tm_hour++;
+                            alarmbstruct.timeSet.tm_mday++;
                         break;
                     case 3:
-                        if(alarmB.tm_min >= 59)
-                            alarmB.tm_min = 0;
+                        if(alarmbstruct.timeSet.tm_hour >= 23)
+                            alarmbstruct.timeSet.tm_hour = 0;
                         else
-                            alarmB.tm_min++;
+                            alarmbstruct.timeSet.tm_hour++;
                         break;
                     case 4:
-                        if(alarmB.tm_sec >= 59)
-                            alarmB.tm_sec = 0;
+                        if(alarmbstruct.timeSet.tm_min >= 59)
+                            alarmbstruct.timeSet.tm_min = 0;
                         else
-                            alarmB.tm_sec++;
+                            alarmbstruct.timeSet.tm_min++;
+                        break;
+                    case 5:
+                        if(alarmbstruct.timeSet.tm_sec >= 59)
+                            alarmbstruct.timeSet.tm_sec = 0;
+                        else
+                            alarmbstruct.timeSet.tm_sec++;
+                        break;
+                    case 6:
+                        if(alarmbstruct.set >= 1)
+                            alarmbstruct.set = 0;
+                        else
+                            alarmbstruct.set++;
                         break;
                     default:
                         break;
@@ -658,34 +725,46 @@ THREAD(SetAlarmBThread, args)
                 switch(selectedAlarmtimeUnit)
                 {
                     case 0:
-                        if(alarmB.tm_mon <= 0)
-                            alarmB.tm_mon = 11;
+                        if(alarmbstruct.timeSet.tm_year <= datetime.tm_year)
+                            alarmbstruct.timeSet.tm_year = 199;
                         else
-                            alarmB.tm_mon--;
+                            alarmbstruct.timeSet.tm_year--;
                         break;
                     case 1:
-                        if(alarmB.tm_mday <= 1)
-                            alarmB.tm_mday = 31;
+                        if(alarmbstruct.timeSet.tm_mon <= 0)
+                            alarmbstruct.timeSet.tm_mon = 11;
                         else
-                            alarmB.tm_mday--;
+                            alarmbstruct.timeSet.tm_mon--;
                         break;
                     case 2:
-                        if(alarmB.tm_hour <= 0)
-                            alarmB.tm_hour = 23;
+                        if(alarmbstruct.timeSet.tm_mday <= 1)
+                            alarmbstruct.timeSet.tm_mday = 31;
                         else
-                            alarmB.tm_hour--;
+                            alarmbstruct.timeSet.tm_mday--;
                         break;
                     case 3:
-                        if(alarmB.tm_min <= 0)
-                            alarmB.tm_min = 59;
+                        if(alarmbstruct.timeSet.tm_hour <= 0)
+                            alarmbstruct.timeSet.tm_hour = 23;
                         else
-                            alarmB.tm_min--;
+                            alarmbstruct.timeSet.tm_hour--;
                         break;
                     case 4:
-                        if(alarmB.tm_sec <= 0)
-                            alarmB.tm_sec = 59;
+                        if(alarmbstruct.timeSet.tm_min <= 0)
+                            alarmbstruct.timeSet.tm_min = 59;
                         else
-                            alarmB.tm_sec--;
+                            alarmbstruct.timeSet.tm_min--;
+                        break;
+                    case 5:
+                        if(alarmbstruct.timeSet.tm_sec <= 0)
+                            alarmbstruct.timeSet.tm_sec = 59;
+                        else
+                            alarmbstruct.timeSet.tm_sec--;
+                        break;
+                    case 6:
+                        if(alarmbstruct.set <= 0)
+                            alarmbstruct.set = 1;
+                        else
+                            alarmbstruct.set--;
                         break;
                     default:
                         break;
@@ -695,14 +774,14 @@ THREAD(SetAlarmBThread, args)
             {
                 if(selectedAlarmtimeUnit <= 0)
                 {
-                    selectedAlarmtimeUnit = 4;
+                    selectedAlarmtimeUnit = 7;
                 }
                 else
                     selectedAlarmtimeUnit--;
             }
             else if(key == KEY_RIGHT)
             {
-                if(selectedAlarmtimeUnit >= 4)
+                if(selectedAlarmtimeUnit >= 7)
                 {
                     selectedAlarmtimeUnit = 0;
                 }
@@ -711,14 +790,359 @@ THREAD(SetAlarmBThread, args)
             }
             else if(key == KEY_OK)
             {
-                alarmBset = 1;
-                //Thread no longer needed, exit please
-                NutThreadExit();
+                if(selectedAlarmtimeUnit == 7)
+                {
+                    //note
+                    alarmBset = 1;
+                    NoteAlarmBMenu();
+                    NutThreadExit();
+                }
+                else
+                {
+                    alarmBset = 1;
+                    //Thread no longer needed, exit please
+                    NutThreadExit();
+                }
             }
-            else if(key == KEY_ESC)
+        }
+    }
+}
+
+/*!
+ * \brief setting the note for Alarm B thread
+ * 
+ * \author Matthijs
+ */
+THREAD(NoteAlarmBThread, args)
+{
+    int letterindex = 0;
+    int maxLetter = 26;
+    noteIndex = 0;
+    alarmbstruct.note[noteIndex] = keys[letterindex];
+    for(;;)
+    {
+        NutSleep(300);
+        //Wait for keyboard event
+        if(KbWaitForKeyEvent(500) != KB_ERROR)
+        {
+            u_char key = KbGetKey();
+            if(key == KEY_UP)
             {
-                threadExit = 1;
+                switch(noteIndex)
+                {
+                    case 0:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                     case 1:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 2:
+                       if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 3:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 4:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 5:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 6:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 7:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 8:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 9:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 10:
+                        if(letterindex >= maxLetter)
+                        {
+                            letterindex = 0;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex++;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_DOWN)
+            {
+                switch(selectedAlarmtimeUnit)
+                {
+                    case 0:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 1:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 2:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 3:
+                       if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 4:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 5:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 6:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 7:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 8:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    case 10:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                         case 9:
+                        if(letterindex <= 0)
+                        {
+                            letterindex = maxLetter;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        else
+                        {
+                            letterindex--;
+                            alarmbstruct.note[noteIndex] = keys[letterindex];
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_LEFT)
+            {
+                if(noteIndex <= 0)
+                    noteIndex = 9;
+                else
+                    noteIndex--;
+                
+                //check witch letter there is at that location
+                for(letterindex = 0;letterindex <=maxLetter; letterindex++)
+                {
+                    if(alarmbstruct.note[noteIndex] == keys[letterindex])
+                    {
+                        break;
+                    }
+                }
+                //letterindex = 0;
+            }
+            else if(key == KEY_RIGHT)
+            {
+                if(noteIndex >= 9)
+                    noteIndex = 0;
+                else
+                    noteIndex++;
+                //check witch letter there is at that location
+                for(letterindex = 0;letterindex <=maxLetter; letterindex++)
+                {
+                    if(alarmbstruct.note[noteIndex] == keys[letterindex])
+                    {
+                        break;
+                    }
+                }
+            }
+            else if(key == KEY_OK)
+            {
+                //alarmBset = 1;
                 //Thread no longer needed, exit please
+                noteSet = 1;
                 NutThreadExit();
             }
         }
@@ -1084,9 +1508,6 @@ void AlarmAMenu(void)
 /* ����������������������������������������������������������������������� */
 void AlarmBMenu(void)
 {
-    int flags;
-    //alarm ophalen
-    X12RtcGetAlarm(1,&alarmB, &flags);  
     alarmBset = 0;
     
     //key listener starten
@@ -1105,51 +1526,136 @@ void AlarmBMenu(void)
     {
         NutSleep(100);
         
-        //If the user wants to quit, return
-        if(threadExit)
-        {
-            //Clear display
-            LcdClearAll();
-            
-            threadExit = 0;
-            return;
-        }
-        
         //Clear the second line
         LcdClearLine();
         
         switch(selectedAlarmtimeUnit)
         {
             case 0:
-                sprintf(output, "Set Month: %02d", alarmB.tm_mon);
+                sprintf(output, "Set Year: %02d", (alarmbstruct.timeSet.tm_year +1900));
                 LcdWriteSecondLine(output);
                 break;
             case 1:
-                sprintf(output, "Set Day: %02d", alarmB.tm_mday);
+                sprintf(output, "Set Month: %02d", (alarmbstruct.timeSet.tm_mon + 1));
                 LcdWriteSecondLine(output);
                 break;
             case 2:
-                sprintf(output, "Set Hour: %02d", alarmB.tm_hour);
+                sprintf(output, "Set Day: %02d", alarmbstruct.timeSet.tm_mday);
                 LcdWriteSecondLine(output);
                 break;
             case 3:
-                sprintf(output, "Set Minutes: %02d", alarmB.tm_min);
+                sprintf(output, "Set Hour: %02d", alarmbstruct.timeSet.tm_hour);
                 LcdWriteSecondLine(output);
                 break;
-             case 4:
-                sprintf(output, "Set Seconds: %02d", alarmB.tm_sec);
+            case 4:
+                sprintf(output, "Set Minutes: %02d", alarmbstruct.timeSet.tm_min);
+                LcdWriteSecondLine(output);
+                break;
+            case 5:
+                sprintf(output, "Set Seconds: %02d", alarmbstruct.timeSet.tm_sec);
+                LcdWriteSecondLine(output);
+                break;
+            case 6:
+                if(alarmbstruct.set == 0)
+                {
+                        sprintf(output, "On/Off: Off");
+                }
+                else
+                {
+                        sprintf(output, "On/Off: On");
+                }
+                LcdWriteSecondLine(output);
+                break;
+            case 7:
+                sprintf(output, "Set Note?");
                 LcdWriteSecondLine(output);
                 break;
             default:
                 break;
         }
     }
-    
     LcdClearAll();
     //Backlight no longer needed, turn off
     LcdBackLight(LCD_BACKLIGHT_OFF);
     //set Alarm B
-    X12RtcSetAlarm(1,&alarmB,31);
+    setAlarmB(alarmbstruct, selectedAlarmBindex);
+    
+    LcdClearAll();
+}
+
+/*
+ * \brief the start menu for alarm B
+ * 
+ * \author Matthijs
+ * 
+ */
+void MainAlarmBMenu(void)
+{
+    //alarm ophalen
+    //X12RtcGetAlarm(1,&alarmB, &flags);  
+    alarmBset = 0;
+    
+    //key listener starten
+    NutThreadCreate("MainSetAlarmBThread", MainSetAlarmBThread, NULL, 1024);
+    
+    char output[20];
+    //Backlight on during setting
+    LcdBackLight(LCD_BACKLIGHT_ON);
+    //Clear the title
+    LcdClearAll();
+    LcdWriteTitle("Set Alarm B");
+    
+    ShowCurrentTime();
+    
+    while(alarmBset != 1)
+    {
+        NutSleep(100);
+        
+        //Clear the second line
+        LcdClearLine();
+
+        sprintf(output, "Alarm B: %02d", selectedAlarmBindex);
+        LcdWriteSecondLine(output);
+    }
+    AlarmBMenu();
+}
+
+/*
+ * \brief the menu for the note from alarm B
+ * 
+ * \author Matthijs
+ */
+void NoteAlarmBMenu(void)
+{
+    strcpy(alarmbstruct.note, "..........");
+    noteSet = 0;
+    
+    //key listener starten
+    NutThreadSetPriority(1);
+    NutThreadCreate("NoteAlarmBThread", NoteAlarmBThread, NULL, 1024);
+    
+    char output[20];
+    //Backlight on during setting
+    //LcdBackLight(LCD_BACKLIGHT_ON);
+    //Clear the title
+    LcdClearAll();
+    LcdWriteTitle("Note");
+    
+    ShowCurrentTime();
+    
+    while(noteSet != 1)
+    {
+         NutSleep(100);
+
+        //Clear the second line
+        LcdClearLine();
+        sprintf(output, "Note|%s|", alarmbstruct.note);
+        
+        LcdWriteSecondLine(output);
+    }
+    printf(output);
+    //AlarmBMenu();
+    AlarmBMenu();
 }
 
 /* ����������������������������������������������������������������������� */
