@@ -175,6 +175,6 @@ extern alarmBStruct checkFirst(void);
 extern void save(void);
 extern void load(void);
 extern void createAlarms(void);
-
+extern int compareTime(tm current, tm end);
 /* End of prototypes */
 #endif

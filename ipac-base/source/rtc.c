@@ -43,7 +43,9 @@ static u_long rtc_status;
 THREAD(AlarmThread, args)
 {
     u_long flags;
-       
+    tm toCheck;
+    int checkFlags;  
+    alarmBStruct newSet;
     for(;;)
     {
         int succes = X12RtcGetStatus(&flags);
@@ -75,8 +77,20 @@ THREAD(AlarmThread, args)
             printf("\n ============ Alarm 1================== \n");
            
             startSnoozeThreadB();
+            X12RtcGetAlarm(1, &toCheck, &checkFlags);
+            int k;
+            for(k = 0; k <= 10; k++)
+            {
+                if((compareTime(toCheck, alarmBArray[i].timeSet)) == 2 || (compareTime(toCheck, alarmBArray[i].timeSet)) == 0)
+                {
+                    //alarm uit zetten als het geweest is
+                    alarmBArray[i].set = 0;
+                }
+            }
             ClearAlarm('b');
             X12RtcClearStatus(64);
+            newSet = checkFirst();
+            X12RtcSetAlarm(1, &newSet.timeSet, 31);
         }
 
         //both alarms
@@ -100,6 +114,58 @@ THREAD(AlarmThread, args)
             //error
         }
     }
+}
+
+/*
+ * \brief       compares two time structs, 
+ *              returns 0 if current is bigger after end
+ *              returns 1 if current is smaller then end
+ *              return 2 if they are the same
+ */
+int compareTime(tm current, tm end)
+{
+    if(current.tm_year > end.tm_year)
+    {
+        //alarm uit zettern
+        return 0;
+    }
+    else if(current.tm_year ==  end.tm_year)
+    {
+        if(current.tm_yday >  end.tm_yday)
+        {  
+            //alarm uit zettern
+            return 0;
+        }
+        else if(current.tm_yday ==  end.tm_yday)
+        {
+            if(current.tm_hour > end.tm_hour)
+            {
+                //alarm uit zettern
+                return 0;
+            }
+            else if(current.tm_hour == end.tm_hour)
+            {
+                if(current.tm_min > end.tm_min)
+                {
+                    //alarm uit zettern
+                    return 0;
+                }
+                else if(current.tm_min == end.tm_min)
+                {
+                    if(current.tm_sec > end.tm_sec)
+                    {
+                        //alarm uit zettern
+                        return 0;
+                    }
+                    else if(current.tm_sec > end.tm_sec)
+                    {
+                        return 2;
+                    }
+                }
+            }
+        }
+    }
+    return 1;
 }
 
 /*!
