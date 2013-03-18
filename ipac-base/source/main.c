@@ -1302,21 +1302,20 @@ THREAD(SchedulerThread, args)
 /* ����������������������������������������������������������������������� */
 void SetTimezone_timeh(long* timezone)
 {
-    if((-12 <= *timezone) && (*timezone <= 14))
+    if((*timezone >= -12) && (*timezone <= 14))
     {
         //Why can't the timezone hold anything lower than 0...?
         //DAFUQ
         //Or... did I fix it...?
-        //Not sure... the printf's say it shouldn't be working now (They were correct before o.0'), but it seems to be working fine...
-        printf("\ntimezone = %lu", *timezone);
-        printf("\ntimezone * 60 = %lu", *timezone * 60);
-        printf("\ntimezone * 60 * 60 = %lu", *timezone * 60 * 60);
+        printf("\ntimezone = %ld", *timezone);
+        printf("\ntimezone * 60 = %ld", *timezone * 60);
+        printf("\ntimezone * 60 * 60 = %ld", *timezone * 60 * 60);
         long tz = *timezone * 60 * 60;
-        printf("\ntz = %lu", tz);
+        printf("\ntz = %ld", tz);
         tz = -tz;
-        printf("\ntz = %lu", tz);
+        printf("\ntz = %ld", tz);
         _timezone = tz;
-        printf("\n_timezone = %lu", _timezone);
+        printf("\n_timezone = %ld", _timezone);
     }
     else
     {
@@ -1377,6 +1376,9 @@ void ShowCurrentTime(void)
 /* ����������������������������������������������������������������������� */
 void SyncDatetime(void)
 {
+    //Exit the menu
+    menuExit();
+    
     //Query NTP server and set time. If no time was set, set it manually.
     if(!NTP(&datetime))
     {
@@ -1398,8 +1400,8 @@ void SyncDatetime(void)
 /* ����������������������������������������������������������������������� */
 void SetTimezone(void)
 {
-    //Clear display
-    LcdClearAll();
+    //Exit the menu
+    menuExit();
 
     At45dbPageRead(0 + sizeof(int), &timezone, sizeof(int));
     
@@ -1496,6 +1498,9 @@ void SetTimezone(void)
 /* ����������������������������������������������������������������������� */
 void SetTimeManually(void)
 {
+    //Exit the menu
+    menuExit();
+    
     //Create a backup of the current datetime
     tm datetimeBackup = datetime;
     

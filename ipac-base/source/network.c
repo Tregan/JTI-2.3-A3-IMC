@@ -21,6 +21,7 @@
 #include "player.h"
 #include "log.h"
 #include "vs10xx.h"
+#include "menu.h"
 
 #define ETH0_BASE	0xC300
 #define ETH0_IRQ	5
@@ -170,6 +171,12 @@ int connectToStream(void)
     fprintf(stream, "Connection: close\r\n\r\n");
     fflush(stream);
 
+    //Increase buffer size
+    u_short tcpbufsiz = 8760;
+    NutTcpSetSockOpt(sock, SO_RCVBUF, &tcpbufsiz, sizeof(tcpbufsiz));
+    //Set read timeout of 3 seconds. After that, the stream will read 0
+    u_long rx_to = 3000;
+    NutTcpSetSockOpt(sock, SO_RCVTIMEO, &rx_to, sizeof(rx_to));
 
     // Server stuurt nu HTTP header terug, catch in buffer
     data = (char *) malloc(512 * sizeof(char));
@@ -189,16 +196,23 @@ int connectToStream(void)
 
 void playStream(void)
 {
-    //Connect to the stream
-    connectToStream();
-    //Start playing
-    play(stream);
+    //Exit the menu
+    menuExit();
+    while(VsGetStatus() != VS_STATUS_RUNNING)
+    {
+        //Connect to the stream
+        connectToStream();
+        //Start playing
+        play(stream);
+    }
 	
     return;
 }
 
 void stopStream(void)
 {
+    //Exit the menu
+    menuExit();
     //Stop the VsPlayer
     VsPlayerStop();
     //Tell the thread that he needs to exit

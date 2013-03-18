@@ -11,6 +11,8 @@
 
 int initPlayer(void);
 void setCloseStream(int);
+void setFallingAsleepMode(int);
+int getFallingAsleepMode(void);
 int play(FILE *stream);
 
 

@@ -153,8 +153,6 @@ THREAD(MenuThread, args)
                         {
                             submenu_enabled = 0;
                             menu_enabled = 0;
-                            LcdClearLine();
-                            LcdClearTitle();
                         }
                         menu_subitem = 0;
                     }
@@ -199,6 +197,11 @@ THREAD(MenuThread, args)
                     break;
             }
         }
+        else
+        {
+            LcdClearLine();
+            LcdClearTitle();
+        }
     }
 }
 
@@ -212,6 +215,11 @@ void DisplayItem(char text[], int clear)
     
     LcdWriteTitle("Menu");
     LcdWriteSecondLine(text);
+}
+
+void menuExit(void)
+{
+    menu_enabled = 0;
 }
 
 /*
