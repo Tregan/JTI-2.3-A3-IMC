@@ -43,8 +43,6 @@ static u_long rtc_status;
 THREAD(AlarmThread, args)
 {
     u_long flags;
-    tm toCheck;
-    int checkFlags;  
     alarmBStruct newSet;
     for(;;)
     {
@@ -76,18 +74,15 @@ THREAD(AlarmThread, args)
         {
             printf("\n ============ Alarm 1================== \n");
            
-            startSnoozeThreadB();
-            X12RtcGetAlarm(1, &toCheck, &checkFlags);
             int k;
             for(k = 0; k <= 10; k++)
             {
-                if((compareTime(toCheck, alarmBArray[i].timeSet)) == 2 || (compareTime(toCheck, alarmBArray[i].timeSet)) == 0)
+                if(alarmBArray[k].index == currentAlarm.index)
                 {
-                    //alarm uit zetten als het geweest is
-                    alarmBArray[i].set = 0;
+                    alarmBArray[k].set = 0;
                 }
             }
-            ClearAlarm('b');
+            startSnoozeThreadB();
             X12RtcClearStatus(64);
             newSet = checkFirst();
             X12RtcSetAlarm(1, &newSet.timeSet, 31);
@@ -624,6 +619,7 @@ void createAlarms(void)
     int i;
     for (i = 0; i <=10; i++)
     {
+        test.index = i;
         test.timeSet = startTime;
         test.set = 0;
         alarmBArray[i] = test;
@@ -652,6 +648,7 @@ int X12Init(void)
     createAlarms();
     load();
     alarmBStruct first = checkFirst();
+    currentAlarm = first;
     X12RtcSetAlarm(1, &first.timeSet, 31);
     
     return (rc);
@@ -771,6 +768,7 @@ void setAlarmB(alarmBStruct alarm, int index)
     //////////////////////////////////////////////////////////////////////////////////////////////
     save();
     alarmBStruct toSet = checkFirst();
+    currentAlarm = toSet;
     X12RtcSetAlarm(1, &toSet.timeSet, 31);
 }
 
