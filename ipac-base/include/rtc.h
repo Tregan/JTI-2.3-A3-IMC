@@ -140,6 +140,7 @@
 
 typedef struct 
 {
+    int index;
     //the time of the alarm
     tm timeSet;
     // if the alarm is set
@@ -151,7 +152,7 @@ typedef struct
 }alarmBStruct;
 
 alarmBStruct alarmBArray[10];
-
+alarmBStruct currentAlarm;
 /* Prototypes */
 extern int X12Init(void);
 
