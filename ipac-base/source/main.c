@@ -628,7 +628,7 @@ THREAD(MainSetAlarmBThread, args)
             u_char key = KbGetKey();
             if(key == KEY_UP)
             {
-                if(selectedAlarmBindex >= 10)
+                if(selectedAlarmBindex >= 9)
                     selectedAlarmBindex = 0;
                 else
                     selectedAlarmBindex++;
@@ -636,7 +636,7 @@ THREAD(MainSetAlarmBThread, args)
             else if(key == KEY_DOWN)
             {
                         if(selectedAlarmBindex <= 0)
-                            selectedAlarmBindex = 10;
+                            selectedAlarmBindex = 9;
                         else
                             selectedAlarmBindex--;
             }
@@ -658,11 +658,9 @@ THREAD(MainSetAlarmBThread, args)
 THREAD(SetAlarmBThread, args)
 {
     selectedAlarmtimeUnit = 0;
-    if(alarmBArray[selectedAlarmBindex].timeSet.tm_year == 0)
-    {
-        X12RtcGetClock(&datetime);
-        alarmbstruct.timeSet = datetime;
-    }
+    X12RtcGetClock(&datetime);
+    alarmbstruct.timeSet = datetime;
+    alarmbstruct.set = 0;
     for(;;)
     {
         NutSleep(300);
@@ -1558,11 +1556,12 @@ void AlarmBMenu(void)
             case 6:
                 if(alarmbstruct.set == 0)
                 {
-                        sprintf(output, "On/Off: Off");
+                    
+                    sprintf(output, "On/Off: Off");
                 }
                 else
                 {
-                        sprintf(output, "On/Off: On");
+                    sprintf(output, "On/Off: On");
                 }
                 LcdWriteSecondLine(output);
                 break;
@@ -1578,6 +1577,8 @@ void AlarmBMenu(void)
     //Backlight no longer needed, turn off
     LcdBackLight(LCD_BACKLIGHT_OFF);
     //set Alarm B
+    printf("selectedindex = %d", selectedAlarmBindex);
+    alarmbstruct.index = selectedAlarmBindex;
     setAlarmB(alarmbstruct, selectedAlarmBindex);
     
     LcdClearAll();
@@ -1614,7 +1615,7 @@ void MainAlarmBMenu(void)
         //Clear the second line
         LcdClearLine();
 
-        sprintf(output, "Alarm B: %02d", selectedAlarmBindex);
+        sprintf(output, "Alarm B: %02d", selectedAlarmBindex + 1);
         LcdWriteSecondLine(output);
     }
     AlarmBMenu();
@@ -1832,7 +1833,7 @@ int main(void)
      * Increase our priority so we can feed the watchdog.
      */
     NutThreadSetPriority(1);
-    
+    startAlarmThread();
     for (;;)
     {
         NutSleep(500);

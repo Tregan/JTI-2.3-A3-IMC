@@ -43,13 +43,12 @@ static u_long rtc_status;
 THREAD(AlarmThread, args)
 {
     u_long flags;
-    alarmBStruct newSet;
+    
     for(;;)
     {
         int succes = X12RtcGetStatus(&flags);
         int i;
-        
-        for(i = 0; i <=10; i++)
+        for(i = 0; i <4; i++)
         {
                 NutSleep(1000);
         }
@@ -73,19 +72,13 @@ THREAD(AlarmThread, args)
         if(flags == 64)
         {
             printf("\n ============ Alarm 1================== \n");
-           
-            int k;
-            for(k = 0; k <= 10; k++)
-            {
-                if(alarmBArray[k].index == currentAlarm.index)
-                {
-                    alarmBArray[k].set = 0;
-                }
-            }
+            
             startSnoozeThreadB();
             X12RtcClearStatus(64);
-            newSet = checkFirst();
+            alarmBArray[currentAlarm.index].set = 0;
+            alarmBStruct newSet = checkFirst();
             X12RtcSetAlarm(1, &newSet.timeSet, 31);
+            currentAlarm = newSet;
         }
 
         //both alarms
@@ -109,58 +102,6 @@ THREAD(AlarmThread, args)
             //error
         }
     }
-}
-
-/*
- * \brief       compares two time structs, 
- *              returns 0 if current is bigger after end
- *              returns 1 if current is smaller then end
- *              return 2 if they are the same
- */
-int compareTime(tm current, tm end)
-{
-    if(current.tm_year > end.tm_year)
-    {
-        //alarm uit zettern
-        return 0;
-    }
-    else if(current.tm_year ==  end.tm_year)
-    {
-        if(current.tm_yday >  end.tm_yday)
-        {  
-            //alarm uit zettern
-            return 0;
-        }
-        else if(current.tm_yday ==  end.tm_yday)
-        {
-            if(current.tm_hour > end.tm_hour)
-            {
-                //alarm uit zettern
-                return 0;
-            }
-            else if(current.tm_hour == end.tm_hour)
-            {
-                if(current.tm_min > end.tm_min)
-                {
-                    //alarm uit zettern
-                    return 0;
-                }
-                else if(current.tm_min == end.tm_min)
-                {
-                    if(current.tm_sec > end.tm_sec)
-                    {
-                        //alarm uit zettern
-                        return 0;
-                    }
-                    else if(current.tm_sec > end.tm_sec)
-                    {
-                        return 2;
-                    }
-                }
-            }
-        }
-    }
-    return 1;
 }
 
 /*!
@@ -395,7 +336,7 @@ int X12RtcGetAlarm(int idx, struct _tm *tm, int *aflgs)
     }
     return(rc);
 }
-
+tm test;
 /*!
  * \brief Set alarm of an X12xx hardware clock.
  *
@@ -417,7 +358,9 @@ int X12RtcGetAlarm(int idx, struct _tm *tm, int *aflgs)
 int X12RtcSetAlarm(int idx, CONST struct _tm *tm, int aflgs)
 {
     u_char data[10];
-
+    int flags;
+    
+    
     memset(data, 0, sizeof(data));
     data[1] = idx * 8;
     if (tm)
@@ -447,6 +390,8 @@ int X12RtcSetAlarm(int idx, CONST struct _tm *tm, int aflgs)
             data[8] = BIN2BCD(tm->tm_wday) | X12RTC_DWA_EDW;
         }
     }
+    X12RtcGetAlarm(1, &test, &flags);
+    //printf("\n set Alarm: date: %d-%d-%d Time: %d:%d:%d \n", test.tm_year, test.tm_mon, test.tm_mday, test.tm_hour, test.tm_min, test.tm_sec);
     return(X12RtcWrite(1, data, 10));
 }
 
@@ -588,24 +533,24 @@ int X12EepromWrite(u_int addr, CONST void *buff, size_t len)
  * \brief save the alarms to sram
  * 
  * \author Matthijs
- */
+
 void save(void)
 {
     //write the alarmBArray to the sram
     At45dbPageWrite(5, &alarmBArray, sizeof(alarmBArray));
 }
-
+ */
 /*
  * \brief load the alarms from the sram
  * 
  * \author Matthijs
- */
+ 
 void load(void)
 {
     //read the alarmBArray from the sram
     At45dbPageRead(5,&alarmBArray, sizeof(alarmBArray));
 }
-
+*/
 /*
  * \brief setting the alarms at a initiallizer
  * 
@@ -615,10 +560,15 @@ void createAlarms(void)
 {   
     tm startTime;
     startTime.tm_year = 0;
+    startTime.tm_mon = 0;
+    startTime.tm_mday = 0;
+    startTime.tm_hour = 0;
+    startTime.tm_min = 0;
+    startTime.tm_sec = 0;
     alarmBStruct test;
     int i;
     for (i = 0; i <=10; i++)
-    {
+    {        
         test.index = i;
         test.timeSet = startTime;
         test.set = 0;
@@ -646,7 +596,7 @@ int X12Init(void)
     
     // loading ands setting the alarm
     createAlarms();
-    load();
+    //load();
     alarmBStruct first = checkFirst();
     currentAlarm = first;
     X12RtcSetAlarm(1, &first.timeSet, 31);
@@ -694,63 +644,47 @@ void setAlarmA(int hours, int minutes, int seconds)
 alarmBStruct checkFirst(void)
 {
     int i;
-    int set = 0;
     alarmBStruct first;
-    for(i = 0; i <= 10; i++)
+    for(i = 0; i <=10; i++)
     {
         if(alarmBArray[i].set == 1)
         {
-             first = alarmBArray[i];
-             set = 1;
-             break;
+                first = alarmBArray[i];
+                break;
         }
     }
     
-    if(set == 1)
+    for(i = 0; i<= 9; i++)
     {
-        for(i = 0; i<= 10; i++)
+        printf("CheckFirst ==  Alarm %d date: %d-%d-%d time: %d:%d:%d set= %d \n", alarmBArray[i].index, alarmBArray[i].timeSet.tm_year, alarmBArray[i].timeSet.tm_mon, alarmBArray[i].timeSet.tm_mday, alarmBArray[i].timeSet.tm_hour, alarmBArray[i].timeSet.tm_min, alarmBArray[i].timeSet.tm_sec, alarmBArray[i].set);
+        if(alarmBArray[i].set != 1)
         {
-            if(alarmBArray[i].set == 1)
+           continue;
+        }
+        if(first.timeSet.tm_year > alarmBArray[i].timeSet.tm_year)
+        {
+            first = alarmBArray[i];
+        }
+        else if(first.timeSet.tm_year == alarmBArray[i].timeSet.tm_year)
+        {
+            if(first.timeSet.tm_yday > alarmBArray[i].timeSet.tm_yday)
+            {  
+                 first = alarmBArray[i];
+            }
+            else if(first.timeSet.tm_yday == alarmBArray[i].timeSet.tm_yday)
             {
-                if(first.timeSet.tm_year > alarmBArray[i].timeSet.tm_year)
+                int a;
+                int b;
+                a = (first.timeSet.tm_hour *360) + (first.timeSet.tm_min * 6) + (first.timeSet.tm_sec /10);
+                b = (alarmBArray[i].timeSet.tm_hour *360) + (alarmBArray[i].timeSet.tm_min * 6) + (alarmBArray[i].timeSet.tm_sec /10);
+                if(b < a)
                 {
                     first = alarmBArray[i];
                 }
-                else if(first.timeSet.tm_year == alarmBArray[i].timeSet.tm_year)
-                {
-                    if(first.timeSet.tm_yday > alarmBArray[i].timeSet.tm_yday)
-                    {  
-                         first = alarmBArray[i];
-                    }
-                    else if(first.timeSet.tm_yday == alarmBArray[i].timeSet.tm_yday)
-                    {
-                        if(first.timeSet.tm_hour > alarmBArray[i].timeSet.tm_hour)
-                        {
-                             first = alarmBArray[i];
-                        }
-                        else if(first.timeSet.tm_hour == alarmBArray[i].timeSet.tm_hour)
-                        {
-                            if(first.timeSet.tm_min > alarmBArray[i].timeSet.tm_min)
-                            {
-                                 first = alarmBArray[i];
-                            }
-                            else if(first.timeSet.tm_min == alarmBArray[i].timeSet.tm_min)
-                            {
-                                if(first.timeSet.tm_sec >= alarmBArray[i].timeSet.tm_sec)
-                                {
-                                     first = alarmBArray[i];
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
-        return first;
     }
-    alarmBStruct off;
-    off.timeSet.tm_year = 0;
-    return off;
+    return first; 
 }
 
 /*!
@@ -766,10 +700,17 @@ void setAlarmB(alarmBStruct alarm, int index)
 {
     alarmBArray[index] = alarm;
     //////////////////////////////////////////////////////////////////////////////////////////////
-    save();
+    //save();
     alarmBStruct toSet = checkFirst();
     currentAlarm = toSet;
     X12RtcSetAlarm(1, &toSet.timeSet, 31);
+//    int i;
+    //for(i = 0; i <=10; i++)
+    //{
+    //    toSet = alarmBArray[i];
+    //    printf("SetAlarm == AlarmB %d date: %d-%d-%d time: %d:%d:%d\n", i, toSet.timeSet.tm_year, toSet.timeSet.tm_mon, toSet.timeSet.tm_mday, toSet.timeSet.tm_hour, toSet.timeSet.tm_min, toSet.timeSet.tm_sec);
+    //}
+    
 }
 
 /*!
