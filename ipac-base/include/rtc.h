@@ -138,8 +138,17 @@
  */
 #define BIN2BCD(x) (((((u_char)(x)) / 10) << 4) + (x) % 10)
 
+struct weekendTime
+{
+	int hour;
+	int minute;
+	int second;
+} ;
+struct weekendTime weekendtime;
+
 typedef struct 
 {
+	int index;
     //the time of the alarm
     tm timeSet;
     // if the alarm is set
@@ -151,6 +160,7 @@ typedef struct
 }alarmBStruct;
 
 alarmBStruct alarmBArray[10];
+alarmBStruct currentAlarm;
 
 /* Prototypes */
 extern int X12Init(void);
@@ -172,9 +182,9 @@ extern void setAlarmB(alarmBStruct alarm, int index);
 extern void ClearAlarm(char ID);
 extern void startAlarmThread(void);
 extern alarmBStruct checkFirst(void);
-extern void save(void);
-extern void load(void);
 extern void createAlarms(void);
 
+extern void setWeekendTime(int hour, int minute, int second);
+int checkWeekend(void);
 /* End of prototypes */
 #endif

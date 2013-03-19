@@ -33,6 +33,7 @@ void ResetBacklightCounter(void);
 void SetBacklightStayOn(int);
 void AlarmAMenu(void);
 void AlarmBMenu(void);
+void AlarmWeekendMenu(void);
 void MainAlarmBMenu(void);
 void NoteAlarmBMenu(void);
 void SchedulerMenu(void);

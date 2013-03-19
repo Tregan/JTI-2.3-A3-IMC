@@ -668,11 +668,12 @@ THREAD(MainSetAlarmBThread, args)
 THREAD(SetAlarmBThread, args)
 {
     selectedAlarmtimeUnit = 0;
-    if(alarmBArray[selectedAlarmBindex].timeSet.tm_year == 0)
-    {
-        X12RtcGetClock(&datetime);
-        alarmbstruct.timeSet = datetime;
-    }
+
+
+    X12RtcGetClock(&datetime);
+    alarmbstruct.timeSet = datetime;
+
+    alarmbstruct.set = 0;
     for(;;)
     {
         NutSleep(300);
@@ -813,6 +814,103 @@ THREAD(SetAlarmBThread, args)
                     //Thread no longer needed, exit please
                     NutThreadExit();
                 }
+            }
+        }
+    }
+}
+
+/*
+ * Alarm thread for weekend settings. The X12Init() has to be called before this thread
+ * can be created.
+ */
+THREAD(SetAlarmWeekendThread, args)
+{
+    selectedAlarmtimeUnit = 0;
+
+    for(;;)
+    {
+        NutSleep(300);
+        //Wait for keyboard event
+        if(KbWaitForKeyEvent(500) != KB_ERROR)
+        {
+            u_char key = KbGetKey();
+            if(key == KEY_UP)
+            {
+                switch(selectedAlarmtimeUnit)
+                {
+                    case 0:
+                        if(weekendtime.hour >= 23)
+                        	weekendtime.hour = 0;
+                        else
+                        	weekendtime.hour++;
+                        break;
+                    case 1:
+                        if(weekendtime.minute >= 59)
+                        	weekendtime.minute = 0;
+                        else
+                        	weekendtime.minute++;
+                        break;
+                    case 2:
+                        if(weekendtime.second >= 59)
+                        	weekendtime.second = 0;
+                        else
+                        	weekendtime.second++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_DOWN)
+            {
+                switch(selectedAlarmtimeUnit)
+                {
+                    case 0:
+                        if(weekendtime.hour <= 0)
+                        	weekendtime.hour = 23;
+                        else
+                        	weekendtime.hour--;
+                        break;
+                    case 1:
+                        if(weekendtime.minute <= 0)
+                        	weekendtime.minute = 59;
+                        else
+                        	weekendtime.minute--;
+                        break;
+                    case 2:
+                        if(weekendtime.second <= 0)
+                        	weekendtime.second = 59;
+                        else
+                        	weekendtime.second--;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if(key == KEY_LEFT)
+            {
+                //Set to seconds if it already is at hours
+                if(selectedAlarmtimeUnit <= 0)
+                {
+                    selectedAlarmtimeUnit = 2;
+                }
+                else
+                    selectedAlarmtimeUnit--;
+            }
+            else if(key == KEY_RIGHT)
+            {
+                //Set to hours if it already is at seconds
+                if(selectedAlarmtimeUnit >= 2)
+                {
+                    selectedAlarmtimeUnit = 0;
+                }
+                else
+                    selectedAlarmtimeUnit++;
+            }
+            else if(key == KEY_OK)
+            {
+                alarmAset = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
             }
         }
     }
@@ -1723,11 +1821,74 @@ void AlarmBMenu(void)
     //Backlight no longer needed, turn off
     LcdBackLight(LCD_BACKLIGHT_OFF);
     //set Alarm B
+	//printf("selectedindex = %d", selectedAlarmBindex);
+    alarmbstruct.index = selectedAlarmBindex;
     setAlarmB(alarmbstruct, selectedAlarmBindex);
     
     LcdClearAll();
 }
 
+void AlarmWeekendMenu(void)
+{
+    int flags;
+    //alarm ophalen
+    X12RtcGetAlarm(0,&alarmA, &flags);
+    alarmAset = 0;
+
+    //key listener starten
+    NutThreadCreate("SetAlarmWeekendThread", SetAlarmWeekendThread, NULL, 1024);
+
+    char output[20];
+    //Backlight on during setting
+    LcdBackLight(LCD_BACKLIGHT_ON);
+    //Clear the title
+    LcdClearAll();
+    LcdWriteTitle("Set Alarm Weekend");
+
+    ShowCurrentTime();
+
+    while(alarmAset != 1)
+    {
+        NutSleep(100);
+
+        //If the user wants to quit, return
+        if(threadExit)
+        {
+            //Clear display
+            LcdClearAll();
+
+            threadExit = 0;
+            return;
+        }
+
+        //Clear the second line
+        LcdClearLine();
+
+        switch(selectedAlarmtimeUnit)
+        {
+            case 0:
+                sprintf(output, "Set Hours: %02d", weekendtime.hour);
+                LcdWriteSecondLine(output);
+                break;
+            case 1:
+                sprintf(output, "Set Minutes: %02d", weekendtime.minute);
+                LcdWriteSecondLine(output);
+                break;
+            case 2:
+                sprintf(output, "Set Seconds: %02d", weekendtime.second);
+                LcdWriteSecondLine(output);
+                break;
+            default:
+                break;
+        }
+    }
+
+    LcdClearAll();
+    //Backlight no longer needed, turn off
+    LcdBackLight(LCD_BACKLIGHT_OFF);
+    //set Alarm A
+    //X12RtcSetAlarm(0,&alarmA,7);
+}
 /*
  * \brief the start menu for alarm B
  * 

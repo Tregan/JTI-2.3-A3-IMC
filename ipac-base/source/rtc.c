@@ -34,6 +34,7 @@
 
 
 static u_long rtc_status;
+tm alarmA;
 
 /*!
  * \brief thread that checks the alarms every 10 seconds
@@ -42,8 +43,11 @@ static u_long rtc_status;
  */
 THREAD(AlarmThread, args)
 {
+//time struct datetime can't be found when placed in main.h
+	tm datetime;
     u_long flags;
        
+	 X12RtcGetClock(&datetime);
     for(;;)
     {
         int succes = X12RtcGetStatus(&flags);
@@ -65,7 +69,75 @@ THREAD(AlarmThread, args)
         if(flags == 32)
         {
             printf("\n ========== Alarm 0 =========== \n");       
-            startSnoozeThreadA();				
+
+
+            //get current alarm time to compare to the weekendtime, if weekendtime is
+            //equal to currentAlarm and the day of the week is friday. The alarm should
+            //not go off.
+            tm currentAlarm;
+            int iets = 0;
+            X12RtcGetAlarm(0, &currentAlarm, &iets);
+
+            int alarmASeconds = 0;
+            alarmASeconds = (currentAlarm.tm_hour * 360) + (currentAlarm.tm_min * 6) + (currentAlarm.tm_sec / 10);
+
+            int weekendtimeSeconds = 0;
+            weekendtimeSeconds = (weekendtime.hour * 360) + (weekendtime.minute * 6) + (weekendtime.second / 10);
+
+
+            printf("\nalarmASeconds: %d, weekendtimeSeconds: %d", alarmASeconds, weekendtimeSeconds);
+            if((alarmASeconds != weekendtimeSeconds) && checkWeekend() == 1)
+            {
+                printf("\nHet is VRIJDAG!!! alarm is niet gelijk aan de weekendtijd en moet dus nog geset worden\n SOUND IS PLAYING");
+                //SoundA();
+                startSnoozeThreadA();
+            }
+            else if(((alarmASeconds != weekendtimeSeconds) && (checkWeekend() == 2) || ((alarmASeconds != weekendtimeSeconds) && (checkWeekend() == 3))))
+            {
+                printf("\nalarm is niet gelijk aan de weekendtijd en het is weekend, dus set");
+            }
+            else if(((alarmASeconds == weekendtimeSeconds) && (checkWeekend() == 2) || ((alarmASeconds == weekendtimeSeconds) && (checkWeekend() == 3))))
+            {
+                printf("\nalarm is gelijk aan de weekendtijd en het is weekend,\n SOUND IS PLAYING");
+                //SoundA();
+                startSnoozeThreadA();
+
+                //if the alarm goes off and it is sunday set the alarm back to its
+                //original settings
+                if(checkWeekend() == 3)
+                {
+                    printf("het is blijkbaar zondag dus terug naar doordeweekse tijd");
+                    setAlarmA(alarmA.tm_hour, alarmA.tm_min, alarmA.tm_sec);
+                }
+            }
+            else if(checkWeekend() == 0)
+            {
+                printf("\nhet is doordeweeks,\nSOUND IS PLAYING");
+                startSnoozeThreadA();
+                //SoundA();
+            }
+            //else
+            //{
+            //	printf("weekendAlarm gaat af!!!");
+            //}
+
+            //when checkWeekend returns 1(Friday) or 2(Saturday) it means that it
+            //will be weekend the next day. Therefore we set the alarm to the weekend
+            //settings. Problem is that most likely the alarm in the weekends will go
+            //off later then it would during the week. This problem is solved underneath
+            //the if(checkWeekend() == 3){}.
+            int currentTime = (datetime.tm_hour * 360) + (datetime.tm_min * 6) + (datetime.tm_sec / 10);
+
+            if(checkWeekend() > 0 && checkWeekend() < 3)
+            {
+                printf("alarmA set to weekend time");
+                setAlarmA(weekendtime.hour,weekendtime.minute,weekendtime.second);
+            }
+            else if(checkWeekend() == 3 && (currentTime <= weekendtimeSeconds))
+            {
+                setAlarmA(weekendtime.hour,weekendtime.minute,weekendtime.second);
+            }
+
             X12RtcClearStatus(32);
         }
 
@@ -77,6 +149,10 @@ THREAD(AlarmThread, args)
             startSnoozeThreadB();
             ClearAlarm('b');
             X12RtcClearStatus(64);
+			alarmBArray[currentAlarm.index].set = 0;
+            alarmBStruct newSet = checkFirst();
+            X12RtcSetAlarm(1, &newSet.timeSet, 31);
+            currentAlarm = newSet;
         }
 
         //both alarms
@@ -335,6 +411,7 @@ int X12RtcGetAlarm(int idx, struct _tm *tm, int *aflgs)
     return(rc);
 }
 
+tm test;
 /*!
  * \brief Set alarm of an X12xx hardware clock.
  *
@@ -357,6 +434,7 @@ int X12RtcSetAlarm(int idx, CONST struct _tm *tm, int aflgs)
 {
     u_char data[10];
 
+	int flags;
     memset(data, 0, sizeof(data));
     data[1] = idx * 8;
     if (tm)
@@ -386,6 +464,8 @@ int X12RtcSetAlarm(int idx, CONST struct _tm *tm, int aflgs)
             data[8] = BIN2BCD(tm->tm_wday) | X12RTC_DWA_EDW;
         }
     }
+	X12RtcGetAlarm(1, &test, &flags);
+    //printf("\n set Alarm: date: %d-%d-%d Time: %d:%d:%d \n", test.tm_year, test.tm_mon, test.tm_mday, test.tm_hour, test.tm_min, test.tm_sec);
     return(X12RtcWrite(1, data, 10));
 }
 
@@ -524,28 +604,6 @@ int X12EepromWrite(u_int addr, CONST void *buff, size_t len)
 }
 
 /*
- * \brief save the alarms to sram
- * 
- * \author Matthijs
- */
-void save(void)
-{
-    //write the alarmBArray to the sram
-    At45dbPageWrite(5, &alarmBArray, sizeof(alarmBArray));
-}
-
-/*
- * \brief load the alarms from the sram
- * 
- * \author Matthijs
- */
-void load(void)
-{
-    //read the alarmBArray from the sram
-    At45dbPageRead(5,&alarmBArray, sizeof(alarmBArray));
-}
-
-/*
  * \brief setting the alarms at a initiallizer
  * 
  * \author Matthijs
@@ -554,10 +612,16 @@ void createAlarms(void)
 {   
     tm startTime;
     startTime.tm_year = 0;
+	startTime.tm_mon = 0;
+	startTime.tm_mday = 0;
+    startTime.tm_hour = 0;
+    startTime.tm_min = 0;
+    startTime.tm_sec = 0;
     alarmBStruct test;
     int i;
-    for (i = 0; i <=10; i++)
+    for (i = 0; i <=9; i++)
     {
+		test.index = i;
         test.timeSet = startTime;
         test.set = 0;
         alarmBArray[i] = test;
@@ -584,10 +648,12 @@ int X12Init(void)
     
     // loading ands setting the alarm
     createAlarms();
-    load();
+    //load();
     alarmBStruct first = checkFirst();
+	currentAlarm = first;
     X12RtcSetAlarm(1, &first.timeSet, 31);
     
+	startAlarmThread();
     return (rc);
 }
 
@@ -631,46 +697,54 @@ void setAlarmA(int hours, int minutes, int seconds)
 alarmBStruct checkFirst(void)
 {
     int i;
-    alarmBStruct first = alarmBArray[0];
-    for(i = 1; i<= 10; i++)
+    alarmBStruct first;
+    for(i = 0; i <=10; i++)
     {
         if(alarmBArray[i].set == 1)
         {
-            if(first.timeSet.tm_year > alarmBArray[i].timeSet.tm_year)
-            {
+
+
                 first = alarmBArray[i];
+                break;
+        }
+    }
+    
+    for(i = 0; i<= 9; i++)
+    {
+        printf("CheckFirst ==  Alarm %d date: %d-%d-%d time: %d:%d:%d set= %d \n", alarmBArray[i].index, alarmBArray[i].timeSet.tm_year, alarmBArray[i].timeSet.tm_mon, alarmBArray[i].timeSet.tm_mday, alarmBArray[i].timeSet.tm_hour, alarmBArray[i].timeSet.tm_min, alarmBArray[i].timeSet.tm_sec, alarmBArray[i].set);
+        if(alarmBArray[i].set != 1)
+        {
+           continue;
+        }
+        if(first.timeSet.tm_year > alarmBArray[i].timeSet.tm_year)
+        {
+            first = alarmBArray[i];
+        }
+        else if(first.timeSet.tm_year == alarmBArray[i].timeSet.tm_year)
+        {
+            if(first.timeSet.tm_yday > alarmBArray[i].timeSet.tm_yday)
+            {  
+                 first = alarmBArray[i];
             }
-            else if(first.timeSet.tm_year == alarmBArray[i].timeSet.tm_year)
+            else if(first.timeSet.tm_yday == alarmBArray[i].timeSet.tm_yday)
             {
-                if(first.timeSet.tm_yday > alarmBArray[i].timeSet.tm_yday)
-                {  
-                     first = alarmBArray[i];
-                }
-                else if(first.timeSet.tm_yday == alarmBArray[i].timeSet.tm_yday)
+                int a;
+                int b;
+                a = (first.timeSet.tm_hour *360) + (first.timeSet.tm_min * 6) + (first.timeSet.tm_sec /10);
+
+
+
+                b = (alarmBArray[i].timeSet.tm_hour *360) + (alarmBArray[i].timeSet.tm_min * 6) + (alarmBArray[i].timeSet.tm_sec /10);
+                if(b < a)
                 {
-                    if(first.timeSet.tm_hour > alarmBArray[i].timeSet.tm_hour)
-                    {
-                         first = alarmBArray[i];
-                    }
-                    else if(first.timeSet.tm_hour == alarmBArray[i].timeSet.tm_hour)
-                    {
-                        if(first.timeSet.tm_min > alarmBArray[i].timeSet.tm_min)
-                        {
-                             first = alarmBArray[i];
-                        }
-                        else if(first.timeSet.tm_min == alarmBArray[i].timeSet.tm_min)
-                        {
-                            if(first.timeSet.tm_sec >= alarmBArray[i].timeSet.tm_sec)
-                            {
-                                 first = alarmBArray[i];
-                            }
-                        }
-                    }
-                }
+
+
+                    first = alarmBArray[i];
+               }
             }
         }
     }
-    return first;
+    return first; 
 }
 
 /*!
@@ -685,9 +759,8 @@ alarmBStruct checkFirst(void)
 void setAlarmB(alarmBStruct alarm, int index)
 {
     alarmBArray[index] = alarm;
-    //////////////////////////////////////////////////////////////////////////////////////////////
-    save();
     alarmBStruct toSet = checkFirst();
+	currentAlarm = toSet;
     X12RtcSetAlarm(1, &toSet.timeSet, 31);
 }
 
@@ -724,4 +797,78 @@ void startAlarmThread(void)
     NutThreadCreate("AlarmThread1", AlarmThread, NULL, 1024);
 }
 
+void setWeekendTime(int hour, int minute, int second)
+{
+    weekendtime.hour = hour;
+    weekendtime.minute = minute;
+    weekendtime.second = second;
+}
+
+void setAlarmATime(int hour, int minute, int second)
+{
+    alarmA.tm_hour = hour;
+    alarmA.tm_min = minute;
+    alarmA.tm_sec = second;
+}
+
+int checkWeekend()
+{
+    tm time;
+    X12RtcGetClock(&time);
+
+    printf("\n checkWeekend = %d-%d-%d, day if the week %d",time.tm_year, time.tm_mon, time.tm_mday, time.tm_wday);
+
+    if(time.tm_wday == 0)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Sunday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+        return 3;
+    }
+    else if(time.tm_wday == 1)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Monday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 0;
+    }
+    else if(time.tm_wday == 2)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Teusday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 0;
+    }
+    else if(time.tm_wday == 3)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Wednesday");
+       // setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 0;
+    }
+    else if(time.tm_wday == 4)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Thursday");
+       // setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 0;
+    }
+    else if(time.tm_wday == 5)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Friday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 1;
+    }
+    else if(time.tm_wday == 6)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Saturday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+        return 2;
+    }
+    else
+    {
+        return 0;
+    }
+
+}
 
