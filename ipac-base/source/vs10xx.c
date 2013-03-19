@@ -928,7 +928,7 @@ THREAD(SnoozethreadA, args)
         int mathTime = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec);
         u_char key = KbGetKey();
         // For Testing purposes
-        LogMsg_P(LOG_INFO, PSTR("SnoozeTime %d"), mathTime - snoozeMathTime);
+        //LogMsg_P(LOG_INFO, PSTR("SnoozeTime %d"), mathTime - snoozeMathTime);
         // If the snooze button (currently button 4) is pressed the alarm will turn offfor a certain time (SnoozeDelay) and the volume for the next period will be raised (setVolume).
         if(key == KEY_04 && snooze == 1)
         {
@@ -936,7 +936,7 @@ THREAD(SnoozethreadA, args)
             snoozeMathTime = (gmt.tm_hour * 1000) + (gmt.tm_min * 100) + (gmt.tm_sec);
             snooze = 2;
             // For Testing purposes
-            LogMsg_P(LOG_INFO, PSTR("SNOOZE"));
+            //LogMsg_P(LOG_INFO, PSTR("SNOOZE"));
             //Set the volume higher for the next snooze.
             if(setVolume != 0)
             {
@@ -957,12 +957,6 @@ THREAD(SnoozethreadA, args)
         // If snooze takes longer than the value set at MaxSnoozeTime the snooze function will stop.
         if((mathTime - mathTimeStart) > MaxSnoozeTime || key == KEY_01 )
         {            
-            current.tm_hour = 13;
-            current.tm_min = 10;
-            current.tm_sec = 0;
-            current.tm_mday = 5;
-            current.tm_mon = 3;
-            X12RtcSetClock(&current);
             NutThreadExit();
         }
         

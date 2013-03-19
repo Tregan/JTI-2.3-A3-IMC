@@ -138,6 +138,14 @@
  */
 #define BIN2BCD(x) (((((u_char)(x)) / 10) << 4) + (x) % 10)
 
+struct weekendTime
+{
+	int hour;
+	int minute;
+	int second;
+} ;
+struct weekendTime weekendtime;
+
 typedef struct 
 {
     int index;
@@ -173,9 +181,9 @@ extern void setAlarmB(alarmBStruct alarm, int index);
 extern void ClearAlarm(char ID);
 extern void startAlarmThread(void);
 extern alarmBStruct checkFirst(void);
-extern void save(void);
-extern void load(void);
 extern void createAlarms(void);
-extern int compareTime(tm current, tm end);
+
+extern void setWeekendTime(int hour, int minute, int second);
+int checkWeekend(void);
 /* End of prototypes */
 #endif

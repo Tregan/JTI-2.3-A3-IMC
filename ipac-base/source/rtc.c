@@ -34,6 +34,7 @@
 
 
 static u_long rtc_status;
+tm alarmA;
 
 /*!
  * \brief thread that checks the alarms every 10 seconds
@@ -42,15 +43,20 @@ static u_long rtc_status;
  */
 THREAD(AlarmThread, args)
 {
+	//time struct datetime can't be found when placed in main.h
+	tm datetime;
+
     u_long flags;
-    
+    X12RtcGetClock(&datetime);
+
     for(;;)
     {
         int succes = X12RtcGetStatus(&flags);
         int i;
-        for(i = 0; i <4; i++)
+        
+        for(i = 0; i <=5; i++)
         {
-                NutSleep(1000);
+            NutSleep(1000);
         }
         
         //power fail
@@ -63,8 +69,77 @@ THREAD(AlarmThread, args)
         //alarm A
         if(flags == 32)
         {
-            printf("\n ========== Alarm 0 =========== \n");       
-            startSnoozeThreadA();				
+            printf("\n ====================================================== Alarm A =========== \n");
+
+
+            //get current alarm time to compare to the weekendtime, if weekendtime is
+            //equal to currentAlarm and the day of the week is friday. The alarm should
+            //not go off.
+            tm currentAlarm;
+            int iets = 0;
+            X12RtcGetAlarm(0, &currentAlarm, &iets);
+
+            int alarmASeconds = 0;
+            alarmASeconds = (currentAlarm.tm_hour * 360) + (currentAlarm.tm_min * 6) + (currentAlarm.tm_sec / 10);
+
+            int weekendtimeSeconds = 0;
+            weekendtimeSeconds = (weekendtime.hour * 360) + (weekendtime.minute * 6) + (weekendtime.second / 10);
+
+
+            printf("\nalarmASeconds: %d, weekendtimeSeconds: %d", alarmASeconds, weekendtimeSeconds);
+            if((alarmASeconds != weekendtimeSeconds) && checkWeekend() == 1)
+            {
+                printf("\nHet is VRIJDAG!!! alarm is niet gelijk aan de weekendtijd en moet dus nog geset worden\n SOUND IS PLAYING");
+                //SoundA();
+                startSnoozeThreadA();
+            }
+            else if(((alarmASeconds != weekendtimeSeconds) && (checkWeekend() == 2) || ((alarmASeconds != weekendtimeSeconds) && (checkWeekend() == 3))))
+            {
+                printf("\nalarm is niet gelijk aan de weekendtijd en het is weekend, dus set");
+            }
+            else if(((alarmASeconds == weekendtimeSeconds) && (checkWeekend() == 2) || ((alarmASeconds == weekendtimeSeconds) && (checkWeekend() == 3))))
+            {
+                printf("\nalarm is gelijk aan de weekendtijd en het is weekend,\n SOUND IS PLAYING");
+                //SoundA();
+                startSnoozeThreadA();
+
+                //if the alarm goes off and it is sunday set the alarm back to its
+                //original settings
+                if(checkWeekend() == 3)
+                {
+                    printf("het is blijkbaar zondag dus terug naar doordeweekse tijd");
+                    setAlarmA(alarmA.tm_hour, alarmA.tm_min, alarmA.tm_sec);
+                }
+            }
+            else if(checkWeekend() == 0)
+            {
+                printf("\nhet is doordeweeks,\nSOUND IS PLAYING");
+                startSnoozeThreadA();
+                //SoundA();
+            }
+            //else
+            //{
+            //	printf("weekendAlarm gaat af!!!");
+            //}
+
+            //when checkWeekend returns 1(Friday) or 2(Saturday) it means that it
+            //will be weekend the next day. Therefore we set the alarm to the weekend
+            //settings. Problem is that most likely the alarm in the weekends will go
+            //off later then it would during the week. This problem is solved underneath
+            //the if(checkWeekend() == 3){}.
+            int currentTime = (datetime.tm_hour * 360) + (datetime.tm_min * 6) + (datetime.tm_sec / 10);
+
+            if(checkWeekend() > 0 && checkWeekend() < 3)
+            {
+                printf("alarmA set to weekend time");
+                setAlarmA(weekendtime.hour,weekendtime.minute,weekendtime.second);
+            }
+            else if(checkWeekend() == 3 && (currentTime <= weekendtimeSeconds))
+            {
+                setAlarmA(weekendtime.hour,weekendtime.minute,weekendtime.second);
+            }
+
+
             X12RtcClearStatus(32);
         }
 
@@ -72,7 +147,6 @@ THREAD(AlarmThread, args)
         if(flags == 64)
         {
             printf("\n ============ Alarm 1================== \n");
-            
             startSnoozeThreadB();
             X12RtcClearStatus(64);
             alarmBArray[currentAlarm.index].set = 0;
@@ -600,7 +674,7 @@ int X12Init(void)
     alarmBStruct first = checkFirst();
     currentAlarm = first;
     X12RtcSetAlarm(1, &first.timeSet, 31);
-    
+    startAlarmThread();
     return (rc);
 }
 
@@ -704,12 +778,6 @@ void setAlarmB(alarmBStruct alarm, int index)
     alarmBStruct toSet = checkFirst();
     currentAlarm = toSet;
     X12RtcSetAlarm(1, &toSet.timeSet, 31);
-//    int i;
-    //for(i = 0; i <=10; i++)
-    //{
-    //    toSet = alarmBArray[i];
-    //    printf("SetAlarm == AlarmB %d date: %d-%d-%d time: %d:%d:%d\n", i, toSet.timeSet.tm_year, toSet.timeSet.tm_mon, toSet.timeSet.tm_mday, toSet.timeSet.tm_hour, toSet.timeSet.tm_min, toSet.timeSet.tm_sec);
-    //}
     
 }
 
@@ -744,6 +812,81 @@ void startAlarmThread(void)
 {
     NutThreadSetPriority(1);
     NutThreadCreate("AlarmThread1", AlarmThread, NULL, 1024);
+}
+
+void setWeekendTime(int hour, int minute, int second)
+{
+    weekendtime.hour = hour;
+    weekendtime.minute = minute;
+    weekendtime.second = second;
+}
+
+void setAlarmATime(int hour, int minute, int second)
+{
+    alarmA.tm_hour = hour;
+    alarmA.tm_min = minute;
+    alarmA.tm_sec = second;
+}
+
+int checkWeekend()
+{
+    tm time;
+    X12RtcGetClock(&time);
+
+    printf("\n checkWeekend = %d-%d-%d, day if the week %d",time.tm_year, time.tm_mon, time.tm_mday, time.tm_wday);
+
+    if(time.tm_wday == 0)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Sunday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+        return 3;
+    }
+    else if(time.tm_wday == 1)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Monday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 0;
+    }
+    else if(time.tm_wday == 2)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Teusday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 0;
+    }
+    else if(time.tm_wday == 3)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Wednesday");
+       // setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 0;
+    }
+    else if(time.tm_wday == 4)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Thursday");
+       // setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 0;
+    }
+    else if(time.tm_wday == 5)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Friday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+
+        return 1;
+    }
+    else if(time.tm_wday == 6)
+    {
+        printf("X12RTC_DW: %d day of the week: %s \n", time.tm_wday, "Saturday");
+        //setAlarmA(weekendtime.hour, weekendtime.minute, weekendtime.second);
+        return 2;
+    }
+    else
+    {
+        return 0;
+    }
+
 }
 
 
