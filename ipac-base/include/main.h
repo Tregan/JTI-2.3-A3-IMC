@@ -37,6 +37,7 @@ void AlarmWeekendMenu(void);
 void MainAlarmBMenu(void);
 void NoteAlarmBMenu(void);
 void SchedulerMenu(void);
+void VolumeMenu(void);
 
 #ifdef	__cplusplus
 }

@@ -89,6 +89,7 @@
 #define VsSelectVs()    SPIselect(SPI_DEV_VS10XX)
 
 
+
 /*-------------------------------------------------------------------------*/
 /* local variable definitions                                              */
 /*-------------------------------------------------------------------------*/
@@ -815,6 +816,44 @@ u_short VsGetVolume()
     return(vol);
 }
 
+ int VsDecoderSetBass(NUTDEVICE *dev, int treb, int tfin, int bass, int bfin)
+ {
+ #ifdef VS_HAS_BASS_REG
+     VSDCB *dcb = (VSDCB *)dev->dev_dcb;
+ //    uint16_t t;
+ //    uint16_t b;
+ 
+     //printf("bass: t:%ddB tf:%dHz b:%ddB bf:%dHz\n", treb, tfin*1000, bass, bfin);
+     /* Honor limits. */
+     treb = treb > AUDIO_DAC_MAX_TREB ? AUDIO_DAC_MAX_TREB : treb;
+     treb = treb < 0 ? 0 : treb;
+     tfin = tfin > AUDIO_DAC_MAX_TFIN ? AUDIO_DAC_MAX_TFIN : tfin;
+     tfin = tfin < 0 ? 0 : tfin;
+     bass = bass > AUDIO_DAC_MAX_BASS ? AUDIO_DAC_MAX_BASS : bass;
+     bass = bass < 0 ? 0 : bass;
+     bfin = bfin > AUDIO_DAC_MAX_BFIN ? AUDIO_DAC_MAX_BFIN : bfin;
+     bfin = bfin < 0 ? 0 : bfin;
+ 
+     /* Convert to register values. */
+     /*
+     l = (uint16_t)(-2 * left);
+     r = (uint16_t)(-2 * right);
+     */
+ 
+     VsCodecReg(dev, VS_OPCODE_WRITE, VS_BASS_REG,
+         (treb << VS_ST_AMPLITUDE_LSB) | (tfin << VS_ST_FREQLIMIT_LSB) |
+         (treb << VS_SB_AMPLITUDE_LSB) | (tfin << VS_SB_FREQLIMIT_LSB)
+     );
+ 
+     dcb->dcb_treb = treb;
+     dcb->dcb_tfin = tfin;
+     dcb->dcb_bass = bass;
+     dcb->dcb_bfin = bfin;
+ #endif
+ 
+     return 0;
+ }	
+
 /*!
  * \brief Return the number of the VS10xx chip.
  *
@@ -1029,12 +1068,13 @@ THREAD(SchedulerSetthread, args)
         u_char key = KbGetKey();
         if(SCDLRsec <= GMTsec && SCDLRmin <= GMTmin && SCDLRhour <= GMThour && SCDLRday <= GMTday && SCDLRmonth <= GMTmonth)
         {
-           SoundB();
+           playStream();
            printf("\nFirst Past 1 Time: %02d:%02d:%02d %d-%d-%d", SchedulerDate1.tm_hour, SchedulerDate1.tm_min, SchedulerDate1.tm_sec, SchedulerDate1.tm_mday, SchedulerDate1.tm_mon + 1, SchedulerDate1.tm_year + 1900);
         }
         if((SCDLR2sec == GMTsec && SCDLR2min == GMTmin && SCDLR2hour == GMThour && SCDLR2day == GMTday && SCDLR2month == GMTmonth) || key == KEY_01)
         {                
             printf("\nFirst Exit Time: %02d:%02d:%02d %d-%d-%d", SchedulerDate1.tm_hour, SchedulerDate1.tm_min, SchedulerDate1.tm_sec, SchedulerDate1.tm_mday, SchedulerDate1.tm_mon + 1, SchedulerDate1.tm_year + 1900);
+            stopStream();
             NutThreadExit(); 
         }
     }

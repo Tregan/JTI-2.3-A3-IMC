@@ -165,5 +165,5 @@ extern int SoundB(void);
 extern void startSnoozeThreadA(void);
 extern void startSnoozeThreadB(void);
 extern void startSchedulerThread(void);
-
+extern  int VsDecoderSetBass(NUTDEVICE *dev, int treb, int tfin, int bass, int bfin);
 /*@}*/
