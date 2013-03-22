@@ -2203,9 +2203,8 @@ int main(void)
     }
     //Initialize RTC
     X12Init();
-    MenuInit();
     //Initialize network
-    //NetworkInit();
+    NetworkInit();
     //timeZone check
     SetTimezone();
     //From now on, set the timezone from the menu
@@ -2213,7 +2212,7 @@ int main(void)
     //Try to sync the time and date with an NTP server
     SyncDatetime();
     //Initialize Menu
-    //MenuInit();
+    MenuInit();
     
     //Do not pause the updating of the current time;
     pauseCurrentDatetime = 0;
