@@ -95,6 +95,11 @@ tm scheduler;
 tm SchedulerDate1;
 tm SchedulerDate2;
 
+//Volume
+int VolumeSet;
+
+int volume;
+
 
 /*-------------------------------------------------------------------------*/
 /* local routines (prototyping)                                            */
@@ -1974,6 +1979,7 @@ void NoteAlarmBMenu(void)
 /* ����������������������������������������������������������������������� */
 void SchedulerMenu(void)
 {
+    menuExit();
     SchedulerSet = 0; 
     //key listener starten
     NutThreadCreate("SchedulerThread", SchedulerThread, NULL, 1024);
@@ -2005,7 +2011,7 @@ void SchedulerMenu(void)
         switch(selectedAlarmtimeUnit)
         {
             case 0:
-                sprintf(output, "Set Month: %02d", scheduler.tm_mon);
+                sprintf(output, "Set Month: %02d", scheduler.tm_mon + 1);
                 LcdWriteSecondLine(output);
                 break;
             case 1:
@@ -2197,9 +2203,9 @@ int main(void)
     }
     //Initialize RTC
     X12Init();
-    
+    MenuInit();
     //Initialize network
-    NetworkInit();
+    //NetworkInit();
     //timeZone check
     SetTimezone();
     //From now on, set the timezone from the menu
@@ -2207,7 +2213,7 @@ int main(void)
     //Try to sync the time and date with an NTP server
     SyncDatetime();
     //Initialize Menu
-    MenuInit();
+    //MenuInit();
     
     //Do not pause the updating of the current time;
     pauseCurrentDatetime = 0;

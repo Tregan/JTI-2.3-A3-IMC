@@ -1029,12 +1029,11 @@ THREAD(SchedulerSetthread, args)
         u_char key = KbGetKey();
         if(SCDLRsec <= GMTsec && SCDLRmin <= GMTmin && SCDLRhour <= GMThour && SCDLRday <= GMTday && SCDLRmonth <= GMTmonth)
         {
-           SoundB();
-           printf("\nFirst Past 1 Time: %02d:%02d:%02d %d-%d-%d", SchedulerDate1.tm_hour, SchedulerDate1.tm_min, SchedulerDate1.tm_sec, SchedulerDate1.tm_mday, SchedulerDate1.tm_mon + 1, SchedulerDate1.tm_year + 1900);
+           playStream();
         }
         if((SCDLR2sec == GMTsec && SCDLR2min == GMTmin && SCDLR2hour == GMThour && SCDLR2day == GMTday && SCDLR2month == GMTmonth) || key == KEY_01)
         {                
-            printf("\nFirst Exit Time: %02d:%02d:%02d %d-%d-%d", SchedulerDate1.tm_hour, SchedulerDate1.tm_min, SchedulerDate1.tm_sec, SchedulerDate1.tm_mday, SchedulerDate1.tm_mon + 1, SchedulerDate1.tm_year + 1900);
+            stopStream();
             NutThreadExit(); 
         }
     }
