@@ -14,8 +14,6 @@
  */
  
 #define LOG_MODULE  LOG_MAIN_MODULE
-#define AUDIO_SET_BASS   0x301e
-#define AUDIO_SET_TREB   0x301a
 
 /*--------------------------------------------------------------------------*/
 /*  Include files                                                           */
@@ -96,10 +94,6 @@ tm scheduler;
 
 tm SchedulerDate1;
 tm SchedulerDate2;
-
-int VolumeSet;
-
-int volume;
 
 
 /*-------------------------------------------------------------------------*/
@@ -1393,129 +1387,6 @@ THREAD(SchedulerThread, args)
     }
 }
 
-/* ����������������������������������������������������������������������� */
-/*!
- * \brief setting Volume thread
- * aangevuld met de datum door Matthijs
- * \author Bas, Matthijs
- */
-/* ����������������������������������������������������������������������� */
-THREAD(VolumeThread, args)
-{
-    selectedAlarmtimeUnit = 0;
-    volume = VsGetVolume();
-    
-    for(;;)
-    {
-        NutSleep(300);
-        //Wait for keyboard event
-        if(KbWaitForKeyEvent(500) != KB_ERROR)
-        {
-            u_char key = KbGetKey();
-            if(key == KEY_UP)
-            {
-                switch(selectedAlarmtimeUnit)
-                {
-                    case 0:
-                        if(volume >= 250)
-                            volume = 0;
-                        else
-                            volume += 10;
-                        break;
-                    case 1:
-                        if(volume >= 31)
-                            scheduler.tm_mday = 1;
-                        else
-                            scheduler.tm_mday++;
-                        break;
-                    case 2:
-                        if(scheduler.tm_hour >= 23)
-                            scheduler.tm_hour = 0;
-                        else
-                            scheduler.tm_hour++;
-                        break;
-                    case 3:
-                        if(scheduler.tm_min >= 59)
-                            scheduler.tm_min = 0;
-                        else
-                            scheduler.tm_min++;
-                        break;
-                    case 4:
-                        if(scheduler.tm_sec >= 59)
-                            scheduler.tm_sec = 0;
-                        else
-                            scheduler.tm_sec++;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if(key == KEY_DOWN)
-            {
-                switch(selectedAlarmtimeUnit)
-                {
-                    case 0:
-                        if(volume <= 0)
-                            volume = 250;
-                        else
-                            volume -= 10;
-                        break;
-                    case 1:
-                        if(scheduler.tm_mday <= 1)
-                            scheduler.tm_mday = 31;
-                        else
-                            scheduler.tm_mday--;
-                        break;
-                    case 2:
-                        if(scheduler.tm_hour <= 0)
-                            scheduler.tm_hour = 23;
-                        else
-                            scheduler.tm_hour--;
-                        break;
-                    case 3:
-                        if(scheduler.tm_min <= 0)
-                            scheduler.tm_min = 59;
-                        else
-                            scheduler.tm_min--;
-                        break;
-                    case 4:
-                        if(scheduler.tm_sec <= 0)
-                            scheduler.tm_sec = 59;
-                        else
-                            scheduler.tm_sec--;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else if(key == KEY_LEFT)
-            {
-                if(selectedAlarmtimeUnit <= 0)
-                {
-                    selectedAlarmtimeUnit = 4;
-                }
-                else
-                    selectedAlarmtimeUnit--;
-            }
-            else if(key == KEY_RIGHT)
-            {
-                if(selectedAlarmtimeUnit >= 4)
-                {
-                    selectedAlarmtimeUnit = 0;
-                }
-                else
-                    selectedAlarmtimeUnit++;
-            }
-            else if(key == KEY_OK)
-            {
-                VolumeSet = 1;
-                //Thread no longer needed, exit please
-                NutThreadExit();
-            }
-        }
-    }
-}
-
 /*-------------------------------------------------------------------------*/
 /* Functions                                                                */
 /*-------------------------------------------------------------------------*/
@@ -2103,7 +1974,6 @@ void NoteAlarmBMenu(void)
 /* ����������������������������������������������������������������������� */
 void SchedulerMenu(void)
 {
-    menuExit();
     SchedulerSet = 0; 
     //key listener starten
     NutThreadCreate("SchedulerThread", SchedulerThread, NULL, 1024);
@@ -2135,7 +2005,7 @@ void SchedulerMenu(void)
         switch(selectedAlarmtimeUnit)
         {
             case 0:
-                sprintf(output, "Set Month: %02d", scheduler.tm_mon + 1);
+                sprintf(output, "Set Month: %02d", scheduler.tm_mon);
                 LcdWriteSecondLine(output);
                 break;
             case 1:
@@ -2176,71 +2046,6 @@ void SchedulerMenu(void)
         printf("\nSuccess. First Scheduler Time: %02d:%02d:%02d %d-%d-%d", scheduler.tm_hour, scheduler.tm_min, scheduler.tm_sec, scheduler.tm_mday, scheduler.tm_mon + 1, scheduler.tm_year + 1900);
         SchedulerMenu();
     }
-}
-
-/* ����������������������������������������������������������������������� */
-/*!
- * \brief set Volume
- * \author Bas, Matthijs
- * \modified Farhad
- */
-/* ����������������������������������������������������������������������� */
-void VolumeMenu(void)
-{
-    VolumeSet = 0; 
-    //key listener starten
-    NutThreadCreate("VolumeThread", VolumeThread, NULL, 1024);
-    
-    char output[20];
-    //Backlight on during setting
-    LcdBackLight(LCD_BACKLIGHT_ON);
-    //Clear the title
-    LcdClearAll();
-    LcdWriteTitle("Set Volume");
-    
-    ShowCurrentTime();
-    
-    while(VolumeSet != 1)
-    {
-        NutSleep(100);
-        
-        //Clear the second line
-        LcdClearLine();
-        
-        switch(selectedAlarmtimeUnit)
-        {
-            case 0:
-                sprintf(output, "Set Volume: %03d", volume);
-                LcdWriteSecondLine(output);
-                break;
-            case 1:
-                sprintf(output, "Set Day: %02d", scheduler.tm_mday);
-                LcdWriteSecondLine(output);
-                break;
-            case 2:
-                sprintf(output, "Set Hour: %02d", scheduler.tm_hour);
-                LcdWriteSecondLine(output);
-                break;
-            case 3:
-                sprintf(output, "Set Minutes: %02d", scheduler.tm_min);
-                LcdWriteSecondLine(output);
-                break;
-             case 4:
-                sprintf(output, "Set Seconds: %02d", scheduler.tm_sec);
-                LcdWriteSecondLine(output);
-                break;
-            default:
-                break;
-        }
-    }   
-    LcdClearAll();
-    //Backlight no longer needed, turn off
-    LcdBackLight(LCD_BACKLIGHT_OFF);
-    
-    VsSetVolume(volume,volume);
-    //VsDecoderSetBass(0, 0, 0, 0, 0);
-    printf("\nSuccess. Volume: %03d", volume);
-
 }
 
 
@@ -2390,9 +2195,9 @@ int main(void)
 
         LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
     }
-      
     //Initialize RTC
-    X12Init(); 
+    X12Init();
+    
     //Initialize network
     NetworkInit();
     //timeZone check
@@ -2402,7 +2207,7 @@ int main(void)
     //Try to sync the time and date with an NTP server
     SyncDatetime();
     //Initialize Menu
-    MenuInit();       
+    MenuInit();
     
     //Do not pause the updating of the current time;
     pauseCurrentDatetime = 0;

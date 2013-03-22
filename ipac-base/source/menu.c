@@ -53,13 +53,13 @@ void ShowSetting()
 char* menuitems[3] = {
     "Music",
     "Alarm",
-    "Settings",
+    "Settings"
 };
 
-struct menuSubItem menusubitems[3][5] = {
+struct menuSubItem menusubitems[3][4] = {
     {{"Start Radio Stream", &playStream}, {"Stop Radio Stream", &stopStream}, {"Falling Asleep Mode", &enableFallingAsleepMode}},
-    {{"Alarm A", &AlarmAMenu}, {"Weekend Alarm", &AlarmWeekendMenu}, {"Alarm B", &MainAlarmBMenu}, {"Scheduler", &SchedulerMenu}},
-    {{"Timezone", &SetTimezone}, {"Sync Time&Date", &SyncDatetime}, {"Set Time", &SetTimeManually}, {"Set Date", &SetDateManually}, {"Set Volume", &VolumeMenu}}
+    {{"Alarm A", &AlarmAMenu}, {"Weekend Alarm", &AlarmWeekendMenu}, {"Alarm B", &MainAlarmBMenu}},
+    {{"Timezone", &SetTimezone}, {"Sync Time&Date", &SyncDatetime}, {"Set Time", &SetTimeManually}, {"Set Date", &SetDateManually}}
 };
 
 /*
