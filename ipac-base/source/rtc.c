@@ -43,11 +43,12 @@ tm alarmA;
  */
 THREAD(AlarmThread, args)
 {
-//time struct datetime can't be found when placed in main.h
-	tm datetime;
+    //time struct datetime can't be found when placed in main.h
+    tm datetime;
     u_long flags;
        
-	 X12RtcGetClock(&datetime);
+    X12RtcGetClock(&datetime);
+    
     for(;;)
     {
         int succes = X12RtcGetStatus(&flags);
@@ -61,7 +62,7 @@ THREAD(AlarmThread, args)
         //power fail
         if(flags == 0)
         {
-            printf("\n ========== Power Fail ========== \n");
+            //printf("\n ========== Power Fail ========== \n");
             X12RtcClearStatus(0);
         }
 
@@ -92,11 +93,11 @@ THREAD(AlarmThread, args)
                 //SoundA();
                 startSnoozeThreadA();
             }
-            else if(((alarmASeconds != weekendtimeSeconds) && (checkWeekend() == 2) || ((alarmASeconds != weekendtimeSeconds) && (checkWeekend() == 3))))
+            else if(((alarmASeconds != weekendtimeSeconds) && (checkWeekend() == 2)) || ((alarmASeconds != weekendtimeSeconds) && (checkWeekend() == 3)))
             {
                 printf("\nalarm is niet gelijk aan de weekendtijd en het is weekend, dus set");
             }
-            else if(((alarmASeconds == weekendtimeSeconds) && (checkWeekend() == 2) || ((alarmASeconds == weekendtimeSeconds) && (checkWeekend() == 3))))
+            else if(((alarmASeconds == weekendtimeSeconds) && (checkWeekend() == 2)) || ((alarmASeconds == weekendtimeSeconds) && (checkWeekend() == 3)))
             {
                 printf("\nalarm is gelijk aan de weekendtijd en het is weekend,\n SOUND IS PLAYING");
                 //SoundA();
@@ -698,14 +699,12 @@ alarmBStruct checkFirst(void)
 {
     int i;
     alarmBStruct first;
-    for(i = 0; i <=10; i++)
+    for(i = 0; i <= 10; i++)
     {
         if(alarmBArray[i].set == 1)
         {
-
-
-                first = alarmBArray[i];
-                break;
+            first = alarmBArray[i];
+            break;
         }
     }
     
@@ -732,19 +731,15 @@ alarmBStruct checkFirst(void)
                 int b;
                 a = (first.timeSet.tm_hour *360) + (first.timeSet.tm_min * 6) + (first.timeSet.tm_sec /10);
 
-
-
                 b = (alarmBArray[i].timeSet.tm_hour *360) + (alarmBArray[i].timeSet.tm_min * 6) + (alarmBArray[i].timeSet.tm_sec /10);
                 if(b < a)
                 {
-
-
                     first = alarmBArray[i];
                }
             }
         }
     }
-    return first; 
+    return first;
 }
 
 /*!
