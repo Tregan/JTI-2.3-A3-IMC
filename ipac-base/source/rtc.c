@@ -698,14 +698,27 @@ void setAlarmA(int hours, int minutes, int seconds)
 alarmBStruct checkFirst(void)
 {
     int i;
+    int set = 0;
     alarmBStruct first;
     for(i = 0; i <= 10; i++)
     {
         if(alarmBArray[i].set == 1)
         {
             first = alarmBArray[i];
+            set = 1;
             break;
         }
+    }
+    if(set == 0)
+    {
+       first.index = -10; 
+       first.timeSet.tm_year = -1;
+       first.timeSet.tm_mon = -1;
+       first.timeSet.tm_mday = -1;
+       first.timeSet.tm_hour = -1;
+       first.timeSet.tm_min = -1;
+       first.timeSet.tm_sec = -1;
+       first.timeSet.tm_yday = -1;
     }
     
     for(i = 0; i<= 9; i++)
