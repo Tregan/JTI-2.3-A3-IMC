@@ -150,46 +150,62 @@ int NTP(tm* datetime)
 
 int connectToStream(void)
 {
-    int result = OK;
+    int result = NOK;
     char *data;
 
     sock = NutTcpCreateSocket();
+
+    if(NutTcpConnect(sock, inet_addr("193.17.192.13"), 80) != 0)
+    {
+        LogMsg_P(LOG_ERR, PSTR("Error: Stream 193.17.192.13:80 down. Trying next."));
+        
+        if(NutTcpConnect(sock, inet_addr("188.165.134.20"), 8024) != 0)
+        {
+            LogMsg_P(LOG_ERR, PSTR("Error: Stream 188.165.134.20:8024 down. Trying next."));
+            if(NutTcpConnect(sock, inet_addr("81.173.3.132"), 8082) != 0)
+            {
+                LogMsg_P(LOG_ERR, PSTR("Error: Stream 81.173.3.132:8082 down."));
+                LogMsg_P(LOG_ERR, PSTR("Error: >> NutTcpConnect()"));
+                LogMsg_P(LOG_ERR, PSTR("Errorcode: %d"), NutTcpError(sock));
+                LogMsg_P(LOG_ERR, PSTR("Error: All 3 streams not available."));
+            }
+        }
+    }
     
-    if(NutTcpConnect(sock, inet_addr("193.17.192.13"), 80))
+    if(NutTcpError(sock) == 0)
     {
-        LogMsg_P(LOG_ERR, PSTR("Error: >> NutTcpConnect()"));
-        result = NOK;
-        return result;
+        LogMsg_P(LOG_ERR, PSTR("Connected to stream.\n"));
+        stream = _fdopen((int) sock, "r+b");
+
+        fprintf(stream, "GET %s HTTP/1.0\r\n", "/");
+        fprintf(stream, "Host: %s\r\n", "81.173.3.132");
+        fprintf(stream, "User-Agent: Ethernut\r\n");
+        fprintf(stream, "Accept: */*\r\n");
+        fprintf(stream, "Icy-MetaData: 1\r\n");
+        fprintf(stream, "Connection: close\r\n\r\n");
+        fflush(stream);
+
+        //Increase buffer size
+        u_short tcpbufsiz = 8760;
+        NutTcpSetSockOpt(sock, SO_RCVBUF, &tcpbufsiz, sizeof(tcpbufsiz));
+        //Set read timeout of 3 seconds. After that, the stream will read 0
+        u_long rx_to = 3000;
+        NutTcpSetSockOpt(sock, SO_RCVTIMEO, &rx_to, sizeof(rx_to));
+
+        // Server stuurt nu HTTP header terug, catch in buffer
+        data = (char *) malloc(512 * sizeof(char));
+
+        while(fgets(data, 512, stream))
+        {
+            if( 0 == *data )
+                break;
+
+            printf("%s", data);
+        }
+
+        free(data);
+        result = OK;
     }
-    stream = _fdopen((int) sock, "r+b");
-
-    fprintf(stream, "GET %s HTTP/1.0\r\n", "/");
-    fprintf(stream, "Host: %s\r\n", "81.173.3.132");
-    fprintf(stream, "User-Agent: Ethernut\r\n");
-    fprintf(stream, "Accept: */*\r\n");
-    fprintf(stream, "Icy-MetaData: 1\r\n");
-    fprintf(stream, "Connection: close\r\n\r\n");
-    fflush(stream);
-
-    //Increase buffer size
-    u_short tcpbufsiz = 8760;
-    NutTcpSetSockOpt(sock, SO_RCVBUF, &tcpbufsiz, sizeof(tcpbufsiz));
-    //Set read timeout of 3 seconds. After that, the stream will read 0
-    u_long rx_to = 3000;
-    NutTcpSetSockOpt(sock, SO_RCVTIMEO, &rx_to, sizeof(rx_to));
-
-    // Server stuurt nu HTTP header terug, catch in buffer
-    data = (char *) malloc(512 * sizeof(char));
-
-    while(fgets(data, 512, stream))
-    {
-        if( 0 == *data )
-            break;
-
-        printf("%s", data);
-    }
-
-    free(data);
 
     return result;
 }
@@ -201,9 +217,11 @@ void playStream(void)
     if(VsGetStatus() != VS_STATUS_RUNNING)
     {
         //Connect to the stream
-        connectToStream();
-        //Start playing
-        play(stream);
+        if(connectToStream() == OK)
+            //Start playing
+            play(stream);
+        else
+            LogMsg_P(LOG_ERR, PSTR("Stream did not start playing, error connecting."));
     }
 	
     return;

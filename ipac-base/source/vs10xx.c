@@ -69,6 +69,7 @@
 #include "keyboard.h"
 #include "rtc.h"
 #include "main.h"
+#include "network.h"
 
 
 /*-------------------------------------------------------------------------*/
