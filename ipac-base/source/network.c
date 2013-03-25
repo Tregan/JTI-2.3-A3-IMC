@@ -156,23 +156,8 @@ int connectToStream(void)
     sock = NutTcpCreateSocket();
 
     if(NutTcpConnect(sock, inet_addr("193.17.192.13"), 80) != 0)
-    {
-        LogMsg_P(LOG_ERR, PSTR("Error: Stream 193.17.192.13:80 down. Trying next."));
-        
-        if(NutTcpConnect(sock, inet_addr("188.165.134.20"), 8024) != 0)
-        {
-            LogMsg_P(LOG_ERR, PSTR("Error: Stream 188.165.134.20:8024 down. Trying next."));
-            if(NutTcpConnect(sock, inet_addr("81.173.3.132"), 8082) != 0)
-            {
-                LogMsg_P(LOG_ERR, PSTR("Error: Stream 81.173.3.132:8082 down."));
-                LogMsg_P(LOG_ERR, PSTR("Error: >> NutTcpConnect()"));
-                LogMsg_P(LOG_ERR, PSTR("Errorcode: %d"), NutTcpError(sock));
-                LogMsg_P(LOG_ERR, PSTR("Error: All 3 streams not available."));
-            }
-        }
-    }
-    
-    if(NutTcpError(sock) == 0)
+        LogMsg_P(LOG_ERR, PSTR("Stream not available. Errorcode: %d"), NutTcpError(sock));
+    else
     {
         LogMsg_P(LOG_ERR, PSTR("Connected to stream.\n"));
         stream = _fdopen((int) sock, "r+b");
