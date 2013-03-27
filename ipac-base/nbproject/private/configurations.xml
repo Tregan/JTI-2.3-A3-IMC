@@ -10,11 +10,13 @@
         <in>keyboard.h</in>
         <in>led.h</in>
         <in>log.h</in>
+        <in>main.h</in>
         <in>menu.h</in>
         <in>mmc.h</in>
         <in>mmcdrv.h</in>
         <in>network.h</in>
         <in>platform.h</in>
+        <in>player.h</in>
         <in>portio.h</in>
         <in>remcon.h</in>
         <in>rtc.h</in>
@@ -39,6 +41,7 @@
         <in>mmc.c</in>
         <in>mmcdrv.c</in>
         <in>network.c</in>
+        <in>player.c</in>
         <in>remcon.c</in>
         <in>rtc.c</in>
         <in>session.c</in>

@@ -1,0 +1,216 @@
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s 			page 1
+
+
+   1               		.file	"player.c"
+   2               		.arch atmega2561
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  10               		.text
+  11               	.global	initPlayer
+  12               		.type	initPlayer, @function
+  13               	initPlayer:
+  14               	/* prologue: frame size=0 */
+  15               	/* prologue end (size=0) */
+  16 0000 81E0      		ldi r24,lo8(1)
+  17 0002 90E0      		ldi r25,hi8(1)
+  18               	/* epilogue: frame size=0 */
+  19 0004 0895      		ret
+  20               	/* epilogue end (size=1) */
+  21               	/* function initPlayer size 3 (2) */
+  22               		.size	initPlayer, .-initPlayer
+  23               		.data
+  24               	.LC0:
+  25 0000 5673 506C 		.string	"VsPlayerKick()"
+  25      6179 6572 
+  25      4B69 636B 
+  25      2829 00
+  26               		.text
+  27               	.global	StreamPlayer
+  28               		.type	StreamPlayer, @function
+  29               	StreamPlayer:
+  30               	/* prologue: frame size=2 */
+  31 0006 CF93      		push r28
+  32 0008 DF93      		push r29
+  33 000a CDB7      		in r28,__SP_L__
+  34 000c DEB7      		in r29,__SP_H__
+  35 000e 2297      		sbiw r28,2
+  36 0010 0FB6      		in __tmp_reg__,__SREG__
+  37 0012 F894      		cli
+  38 0014 DEBF      		out __SP_H__,r29
+  39 0016 0FBE      		out __SREG__,__tmp_reg__
+  40 0018 CDBF      		out __SP_L__,r28
+  41               	/* prologue end (size=10) */
+  42 001a 5C01      		movw r10,r24
+  43 001c 1A82      		std Y+2,__zero_reg__
+  44 001e 1982      		std Y+1,__zero_reg__
+  45 0020 80E0      		ldi r24,lo8(8192)
+  46 0022 90E2      		ldi r25,hi8(8192)
+  47 0024 0E94 0000 		call NutSegBufInit
+  48 0028 892B      		or r24,r25
+  49 002a 01F0      		breq .L23
+  50 002c 80E0      		ldi r24,lo8(0)
+  51 002e 0E94 0000 		call VsPlayerInterrupts
+  52 0032 182F      		mov r17,r24
+  53 0034 0E94 0000 		call NutSegBufReset
+  54 0038 812F      		mov r24,r17
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s 			page 2
+
+
+  55 003a 0E94 0000 		call VsPlayerInterrupts
+  56 003e 0E94 0000 		call VsPlayerInit
+  57 0042 8F5F      		subi r24,lo8(-1)
+  58 0044 9F4F      		sbci r25,hi8(-1)
+  59 0046 01F4      		brne .L23
+  60 0048 80E0      		ldi r24,lo8(0)
+  61 004a 90E0      		ldi r25,hi8(0)
+  62 004c 0E94 0000 		call VsPlayerReset
+  63               	.L23:
+  64 0050 80E0      		ldi r24,lo8(0)
+  65 0052 0E94 0000 		call VsPlayerInterrupts
+  66 0056 182F      		mov r17,r24
+  67 0058 CE01      		movw r24,r28
+  68 005a 0196      		adiw r24,1
+  69 005c 0E94 0000 		call NutSegBufWriteRequest
+  70 0060 6C01      		movw r12,r24
+  71 0062 812F      		mov r24,r17
+  72 0064 0E94 0000 		call VsPlayerInterrupts
+  73 0068 0E94 0000 		call VsGetStatus
+  74 006c 8130      		cpi r24,lo8(1)
+  75 006e 01F0      		breq .L21
+  76 0070 8981      		ldd r24,Y+1
+  77 0072 9A81      		ldd r25,Y+2
+  78 0074 8050      		subi r24,lo8(1024)
+  79 0076 9440      		sbci r25,hi8(1024)
+  80 0078 00F4      		brsh .L21
+  81 007a 80E0      		ldi r24,lo8(.LC0)
+  82 007c 90E0      		ldi r25,hi8(.LC0)
+  83 007e 0E94 0000 		call puts
+  84 0082 0E94 0000 		call VsPlayerKick
+  85 0086 00C0      		rjmp .L21
+  86               	.L10:
+  87 0088 9501      		movw r18,r10
+  88 008a 61E0      		ldi r22,lo8(1)
+  89 008c 70E0      		ldi r23,hi8(1)
+  90 008e C601      		movw r24,r12
+  91 0090 0E94 0000 		call fread
+  92 0094 7C01      		movw r14,r24
+  93 0096 1816      		cp __zero_reg__,r24
+  94 0098 1906      		cpc __zero_reg__,r25
+  95 009a 04F4      		brge .L23
+  96 009c 80E0      		ldi r24,lo8(0)
+  97 009e 0E94 0000 		call VsPlayerInterrupts
+  98 00a2 182F      		mov r17,r24
+  99 00a4 C701      		movw r24,r14
+ 100 00a6 0E94 0000 		call NutSegBufWriteCommit
+ 101 00aa 6C01      		movw r12,r24
+ 102 00ac 812F      		mov r24,r17
+ 103 00ae 0E94 0000 		call VsPlayerInterrupts
+ 104 00b2 8981      		ldd r24,Y+1
+ 105 00b4 9A81      		ldd r25,Y+2
+ 106 00b6 E816      		cp r14,r24
+ 107 00b8 F906      		cpc r15,r25
+ 108 00ba 00F4      		brsh .L12
+ 109 00bc 80E0      		ldi r24,lo8(512)
+ 110 00be E816      		cp r14,r24
+ 111 00c0 82E0      		ldi r24,hi8(512)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s 			page 3
+
+
+ 112 00c2 F806      		cpc r15,r24
+ 113 00c4 04F4      		brge .L12
+ 114 00c6 6AEF      		ldi r22,lo8(250)
+ 115 00c8 70E0      		ldi r23,hi8(250)
+ 116 00ca 80E0      		ldi r24,hlo8(250)
+ 117 00cc 90E0      		ldi r25,hhi8(250)
+ 118 00ce 0E94 0000 		call NutSleep
+ 119               	.L12:
+ 120 00d2 8981      		ldd r24,Y+1
+ 121 00d4 9A81      		ldd r25,Y+2
+ 122 00d6 8E19      		sub r24,r14
+ 123 00d8 9F09      		sbc r25,r15
+ 124 00da 9A83      		std Y+2,r25
+ 125 00dc 8983      		std Y+1,r24
+ 126               	.L21:
+ 127 00de 4981      		ldd r20,Y+1
+ 128 00e0 5A81      		ldd r21,Y+2
+ 129 00e2 4115      		cp r20,__zero_reg__
+ 130 00e4 5105      		cpc r21,__zero_reg__
+ 131 00e6 01F4      		brne .L10
+ 132 00e8 00C0      		rjmp .L23
+ 133               	/* epilogue: frame size=2 */
+ 134               	/* epilogue: noreturn */
+ 135               	/* epilogue end (size=0) */
+ 136               	/* function StreamPlayer size 116 (106) */
+ 137               		.size	StreamPlayer, .-StreamPlayer
+ 138               		.data
+ 139               	.LC1:
+ 140 000f 4267 00   		.string	"Bg"
+ 141               	.LC2:
+ 142 0012 506C 6179 		.string	"Play thread created. Device is playing stream now !"
+ 142      2074 6872 
+ 142      6561 6420 
+ 142      6372 6561 
+ 142      7465 642E 
+ 143               		.text
+ 144               	.global	play
+ 145               		.type	play, @function
+ 146               	play:
+ 147               	/* prologue: frame size=0 */
+ 148               	/* prologue end (size=0) */
+ 149 00ea 20E0      		ldi r18,lo8(512)
+ 150 00ec 32E0      		ldi r19,hi8(512)
+ 151 00ee AC01      		movw r20,r24
+ 152 00f0 60E0      		ldi r22,lo8(gs(StreamPlayer))
+ 153 00f2 70E0      		ldi r23,hi8(gs(StreamPlayer))
+ 154 00f4 80E0      		ldi r24,lo8(.LC1)
+ 155 00f6 90E0      		ldi r25,hi8(.LC1)
+ 156 00f8 0E94 0000 		call NutThreadCreate
+ 157 00fc 80E0      		ldi r24,lo8(.LC2)
+ 158 00fe 90E0      		ldi r25,hi8(.LC2)
+ 159 0100 0E94 0000 		call puts
+ 160 0104 81E0      		ldi r24,lo8(1)
+ 161 0106 90E0      		ldi r25,hi8(1)
+ 162               	/* epilogue: frame size=0 */
+ 163 0108 0895      		ret
+ 164               	/* epilogue end (size=1) */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s 			page 4
+
+
+ 165               	/* function play size 16 (15) */
+ 166               		.size	play, .-play
+ 167               	/* File "source/player.c": code  135 = 0x0087 ( 123), prologues  10, epilogues   2 */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 player.c
+C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s:3      *ABS*:0000003f __SREG__
+C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s:13     .text:00000000 initPlayer
+C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s:29     .text:00000006 StreamPlayer
+C:\Users\Robin\AppData\Local\Temp/ccYfeLhP.s:146    .text:000000ea play
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+NutSegBufInit
+VsPlayerInterrupts
+NutSegBufReset
+VsPlayerInit
+VsPlayerReset
+NutSegBufWriteRequest
+VsGetStatus
+puts
+VsPlayerKick
+fread
+NutSegBufWriteCommit
+NutSleep
+NutThreadCreate

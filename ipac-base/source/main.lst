@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 1
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 1
 
 
    1               		.file	"main.c"
@@ -49,254 +49,2960 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 1
   46               	/* epilogue end (size=1) */
   47               	/* function SysInitIO size 29 (28) */
   48               		.size	SysInitIO, .-SysInitIO
-  49               		.data
-  50               	.LC0:
-  51 0000 4D61 696E 		.string	"MainA"
-  51      4100 
-  52               	.LC1:
-  53 0006 4D61 696E 		.string	"MainB"
-  53      4200 
-  54               	.LC2:
-  55 000c 3133 3A33 		.string	"13:35:15"
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 2
+  49               	.global	ResetBacklightCounter
+  50               		.type	ResetBacklightCounter, @function
+  51               	ResetBacklightCounter:
+  52               	/* prologue: frame size=0 */
+  53               	/* prologue end (size=0) */
+  54 003a 1092 0000 		sts (backlightCounter)+1,__zero_reg__
+  55 003e 1092 0000 		sts backlightCounter,__zero_reg__
+  56               	/* epilogue: frame size=0 */
+  57 0042 0895      		ret
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 2
 
 
-  55      353A 3135 
-  55      00
-  56               		.text
-  57               	.global	NutAppMain
-  58               		.type	NutAppMain, @function
-  59               	NutAppMain:
-  60               	/* prologue: frame size=18 */
-  61 003a 1F93      		push r17
-  62 003c CF93      		push r28
-  63 003e DF93      		push r29
-  64 0040 CDB7      		in r28,__SP_L__
-  65 0042 DEB7      		in r29,__SP_H__
-  66 0044 6297      		sbiw r28,18
-  67 0046 0FB6      		in __tmp_reg__,__SREG__
-  68 0048 F894      		cli
-  69 004a DEBF      		out __SP_H__,r29
-  70 004c 0FBE      		out __SREG__,__tmp_reg__
-  71 004e CDBF      		out __SP_L__,r28
-  72               	/* prologue end (size=11) */
-  73 0050 0E94 0000 		call WatchDogDisable
-  74 0054 84E6      		ldi r24,lo8(100)
-  75 0056 0E94 0000 		call NutDelay
-  76 005a 0E94 0000 		call SysInitIO
-  77 005e 0E94 0000 		call SPIinit
-  78 0062 0E94 0000 		call Uart0DriverInit
-  79 0066 0E94 0000 		call Uart0DriverStart
-  80 006a 0E94 0000 		call LogInit
-  81 006e 80E0      		ldi r24,lo8(__c.2565)
-  82 0070 90E0      		ldi r25,hi8(__c.2565)
-  83 0072 9F93      		push r25
-  84 0074 8F93      		push r24
-  85 0076 16EC      		ldi r17,lo8(-58)
-  86 0078 1F93      		push r17
-  87 007a 0E94 0000 		call LogMsg_P
-  88 007e 0E94 0000 		call X12Init
-  89 0082 CE01      		movw r24,r28
-  90 0084 0196      		adiw r24,1
-  91 0086 0E94 0000 		call X12RtcGetClock
-  92 008a 0F90      		pop __tmp_reg__
-  93 008c 0F90      		pop __tmp_reg__
-  94 008e 0F90      	 	pop __tmp_reg__
-  95 0090 892B      		or r24,r25
-  96 0092 01F4      		brne .L4
-  97 0094 8981      		ldd r24,Y+1
-  98 0096 9A81      		ldd r25,Y+2
-  99 0098 9F93      		push r25
- 100 009a 8F93      		push r24
- 101 009c 8B81      		ldd r24,Y+3
- 102 009e 9C81      		ldd r25,Y+4
- 103 00a0 9F93      		push r25
- 104 00a2 8F93      		push r24
- 105 00a4 8D81      		ldd r24,Y+5
- 106 00a6 9E81      		ldd r25,Y+6
- 107 00a8 9F93      		push r25
- 108 00aa 8F93      		push r24
- 109 00ac 80E0      		ldi r24,lo8(__c.2567)
- 110 00ae 90E0      		ldi r25,hi8(__c.2567)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 3
+  58               	/* epilogue end (size=1) */
+  59               	/* function ResetBacklightCounter size 5 (4) */
+  60               		.size	ResetBacklightCounter, .-ResetBacklightCounter
+  61               	.global	SetBacklightStayOn
+  62               		.type	SetBacklightStayOn, @function
+  63               	SetBacklightStayOn:
+  64               	/* prologue: frame size=0 */
+  65               	/* prologue end (size=0) */
+  66 0044 9093 0000 		sts (backlightStayOn)+1,r25
+  67 0048 8093 0000 		sts backlightStayOn,r24
+  68               	/* epilogue: frame size=0 */
+  69 004c 0895      		ret
+  70               	/* epilogue end (size=1) */
+  71               	/* function SetBacklightStayOn size 5 (4) */
+  72               		.size	SetBacklightStayOn, .-SetBacklightStayOn
+  73               		.type	SysMainBeatInterrupt, @function
+  74               	SysMainBeatInterrupt:
+  75               	/* prologue: frame size=0 */
+  76               	/* prologue end (size=0) */
+  77 004e 0E94 0000 		call KbScan
+  78 0052 0E94 0000 		call CardCheckCard
+  79               	/* epilogue: frame size=0 */
+  80 0056 0895      		ret
+  81               	/* epilogue end (size=1) */
+  82               	/* function SysMainBeatInterrupt size 5 (4) */
+  83               		.size	SysMainBeatInterrupt, .-SysMainBeatInterrupt
+  84               		.data
+  85               	.LC0:
+  86 0000 4B42 5468 		.string	"KBThreadManualTime"
+  86      7265 6164 
+  86      4D61 6E75 
+  86      616C 5469 
+  86      6D65 00
+  87               	.LC1:
+  88 0013 5365 7420 		.string	"Set Manual Date"
+  88      4D61 6E75 
+  88      616C 2044 
+  88      6174 6500 
+  89               	.LC2:
+  90 0023 5365 7420 		.string	"Set Days: %02d"
+  90      4461 7973 
+  90      3A20 2530 
+  90      3264 00
+  91               	.LC3:
+  92 0032 5365 7420 		.string	"Set Months: %02d"
+  92      4D6F 6E74 
+  92      6873 3A20 
+  92      2530 3264 
+  92      00
+  93               	.LC4:
+  94 0043 5365 7420 		.string	"Set Years: %02d"
+  94      5965 6172 
+  94      733A 2025 
+  94      3032 6400 
+  95               	.LC5:
+  96 0053 0A53 7563 		.string	"\nSuccess. NTP time is: %02d:%02d:%02d %d-%d-%d"
+  96      6365 7373 
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 3
 
 
- 111 00b0 9F93      		push r25
- 112 00b2 8F93      		push r24
- 113 00b4 1F93      		push r17
- 114 00b6 0E94 0000 		call LogMsg_P
- 115 00ba 8DB7      		in r24,__SP_L__
- 116 00bc 9EB7      		in r25,__SP_H__
- 117 00be 0996      		adiw r24,9
- 118 00c0 0FB6      		in __tmp_reg__,__SREG__
- 119 00c2 F894      		cli
- 120 00c4 9EBF      		out __SP_H__,r25
- 121 00c6 0FBE      		out __SREG__,__tmp_reg__
- 122 00c8 8DBF      		out __SP_L__,r24
- 123               	.L4:
- 124 00ca 0E94 0000 		call At45dbInit
- 125 00ce 0E94 0000 		call CardInit
- 126 00d2 0E94 0000 		call RcInit
- 127 00d6 0E94 0000 		call KbInit
- 128 00da 0E94 0000 		call LedInit
- 129 00de 0E94 0000 		call LcdLowLevelInit
- 130 00e2 40E0      		ldi r20,lo8(0)
- 131 00e4 50E0      		ldi r21,hi8(0)
- 132 00e6 60E0      		ldi r22,lo8(gs(SysMainBeatInterrupt))
- 133 00e8 70E0      		ldi r23,hi8(gs(SysMainBeatInterrupt))
- 134 00ea 80E0      		ldi r24,lo8(sig_OVERFLOW0)
- 135 00ec 90E0      		ldi r25,hi8(sig_OVERFLOW0)
- 136 00ee 0E94 0000 		call NutRegisterIrqHandler
- 137 00f2 892B      		or r24,r25
- 138 00f4 01F4      		brne .L6
- 139 00f6 85B5      		in r24,69-0x20
- 140 00f8 8460      		ori r24,lo8(4)
- 141 00fa 85BD      		out 69-0x20,r24
- 142 00fc A89A      		sbi 53-0x20,0
- 143 00fe 8091 6E00 		lds r24,110
- 144 0102 8160      		ori r24,lo8(1)
- 145 0104 8093 6E00 		sts 110,r24
- 146               	.L6:
- 147 0108 81E0      		ldi r24,lo8(1)
- 148 010a 0E94 0000 		call NutThreadSetPriority
- 149 010e 20E0      		ldi r18,lo8(1024)
- 150 0110 34E0      		ldi r19,hi8(1024)
- 151 0112 40E0      		ldi r20,lo8(0)
- 152 0114 50E0      		ldi r21,hi8(0)
- 153 0116 60E0      		ldi r22,lo8(gs(ThreadA))
- 154 0118 70E0      		ldi r23,hi8(gs(ThreadA))
- 155 011a 80E0      		ldi r24,lo8(.LC0)
- 156 011c 90E0      		ldi r25,hi8(.LC0)
- 157 011e 0E94 0000 		call NutThreadCreate
- 158 0122 20E0      		ldi r18,lo8(1024)
- 159 0124 34E0      		ldi r19,hi8(1024)
- 160 0126 40E0      		ldi r20,lo8(0)
- 161 0128 50E0      		ldi r21,hi8(0)
- 162 012a 60E0      		ldi r22,lo8(gs(ThreadB))
- 163 012c 70E0      		ldi r23,hi8(gs(ThreadB))
- 164 012e 80E0      		ldi r24,lo8(.LC1)
- 165 0130 90E0      		ldi r25,hi8(.LC1)
- 166 0132 0E94 0000 		call NutThreadCreate
- 167               	/* #APP */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 4
+  96      2E20 4E54 
+  96      5020 7469 
+  96      6D65 2069 
+  97               		.text
+  98               	.global	SetDateManually
+  99               		.type	SetDateManually, @function
+ 100               	SetDateManually:
+ 101               	/* prologue: frame size=38 */
+ 102 0058 0F93      		push r16
+ 103 005a 1F93      		push r17
+ 104 005c CF93      		push r28
+ 105 005e DF93      		push r29
+ 106 0060 CDB7      		in r28,__SP_L__
+ 107 0062 DEB7      		in r29,__SP_H__
+ 108 0064 A697      		sbiw r28,38
+ 109 0066 0FB6      		in __tmp_reg__,__SREG__
+ 110 0068 F894      		cli
+ 111 006a DEBF      		out __SP_H__,r29
+ 112 006c 0FBE      		out __SREG__,__tmp_reg__
+ 113 006e CDBF      		out __SP_L__,r28
+ 114               	/* prologue end (size=12) */
+ 115 0070 DE01      		movw r26,r28
+ 116 0072 1196      		adiw r26,1
+ 117 0074 E0E0      		ldi r30,lo8(datetime)
+ 118 0076 F0E0      		ldi r31,hi8(datetime)
+ 119 0078 82E1      		ldi r24,lo8(18)
+ 120               	.L10:
+ 121 007a 0190      		ld r0,Z+
+ 122 007c 0D92      		st X+,r0
+ 123 007e 8150      		subi r24,lo8(-(-1))
+ 124 0080 01F4      		brne .L10
+ 125 0082 01E0      		ldi r16,lo8(1)
+ 126 0084 10E0      		ldi r17,hi8(1)
+ 127 0086 1093 0000 		sts (pauseCurrentDatetime)+1,r17
+ 128 008a 0093 0000 		sts pauseCurrentDatetime,r16
+ 129 008e 80E0      		ldi r24,lo8(datetime)
+ 130 0090 90E0      		ldi r25,hi8(datetime)
+ 131 0092 0E94 0000 		call X12RtcGetClock
+ 132 0096 1092 0000 		sts (datetimeSetManually)+1,__zero_reg__
+ 133 009a 1092 0000 		sts datetimeSetManually,__zero_reg__
+ 134 009e 20E0      		ldi r18,lo8(1024)
+ 135 00a0 34E0      		ldi r19,hi8(1024)
+ 136 00a2 40E0      		ldi r20,lo8(0)
+ 137 00a4 50E0      		ldi r21,hi8(0)
+ 138 00a6 60E0      		ldi r22,lo8(gs(KBThreadManualDate))
+ 139 00a8 70E0      		ldi r23,hi8(gs(KBThreadManualDate))
+ 140 00aa 80E0      		ldi r24,lo8(.LC0)
+ 141 00ac 90E0      		ldi r25,hi8(.LC0)
+ 142 00ae 0E94 0000 		call NutThreadCreate
+ 143 00b2 1093 0000 		sts (backlightStayOn)+1,r17
+ 144 00b6 0093 0000 		sts backlightStayOn,r16
+ 145 00ba 0E94 0000 		call LcdClearAll
+ 146 00be 8091 0000 		lds r24,firstStartup
+ 147 00c2 9091 0000 		lds r25,(firstStartup)+1
+ 148 00c6 892B      		or r24,r25
+ 149 00c8 01F0      		breq .L11
+ 150 00ca 80E0      		ldi r24,lo8(.LC1)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 4
 
 
- 168 0136 7894      		sei
- 169               	/* #NOAPP */
- 170               	.L8:
- 171 0138 64EF      		ldi r22,lo8(500)
- 172 013a 71E0      		ldi r23,hi8(500)
- 173 013c 80E0      		ldi r24,hlo8(500)
- 174 013e 90E0      		ldi r25,hhi8(500)
- 175 0140 0E94 0000 		call NutSleep
- 176 0144 80E0      		ldi r24,lo8(.LC2)
- 177 0146 90E0      		ldi r25,hi8(.LC2)
- 178 0148 0E94 0000 		call LcdTimeDisplay
- 179 014c 00C0      		rjmp .L8
- 180               	/* epilogue: frame size=18 */
- 181               	/* epilogue: noreturn */
- 182               	/* epilogue end (size=0) */
- 183               	/* function NutAppMain size 139 (128) */
- 184               		.size	NutAppMain, .-NutAppMain
- 185               		.type	SysMainBeatInterrupt, @function
- 186               	SysMainBeatInterrupt:
- 187               	/* prologue: frame size=0 */
- 188               	/* prologue end (size=0) */
- 189 014e 0E94 0000 		call KbScan
- 190 0152 0E94 0000 		call CardCheckCard
- 191               	/* epilogue: frame size=0 */
- 192 0156 0895      		ret
- 193               	/* epilogue end (size=1) */
- 194               	/* function SysMainBeatInterrupt size 5 (4) */
- 195               		.size	SysMainBeatInterrupt, .-SysMainBeatInterrupt
- 196               	.global	ThreadB
- 197               		.type	ThreadB, @function
- 198               	ThreadB:
- 199               	/* prologue: frame size=0 */
- 200               	/* prologue end (size=0) */
- 201               	.L14:
- 202 0158 64EF      		ldi r22,lo8(500)
- 203 015a 71E0      		ldi r23,hi8(500)
- 204 015c 80E0      		ldi r24,hlo8(500)
- 205 015e 90E0      		ldi r25,hhi8(500)
- 206 0160 0E94 0000 		call NutSleep
- 207 0164 83E0      		ldi r24,lo8(3)
- 208 0166 0E94 0000 		call LedControl
- 209 016a 00C0      		rjmp .L14
- 210               	/* epilogue: frame size=0 */
- 211               	/* epilogue: noreturn */
- 212               	/* epilogue end (size=0) */
- 213               	/* function ThreadB size 10 (10) */
- 214               		.size	ThreadB, .-ThreadB
- 215               	.global	ThreadA
- 216               		.type	ThreadA, @function
- 217               	ThreadA:
- 218               	/* prologue: frame size=0 */
- 219               	/* prologue end (size=0) */
- 220               	.L18:
- 221 016c 64EF      		ldi r22,lo8(500)
- 222 016e 71E0      		ldi r23,hi8(500)
- 223 0170 80E0      		ldi r24,hlo8(500)
- 224 0172 90E0      		ldi r25,hhi8(500)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 5
+ 151 00cc 90E0      		ldi r25,hi8(.LC1)
+ 152 00ce 0E94 0000 		call LcdWriteFirstLine
+ 153 00d2 00C0      		rjmp .L37
+ 154               	.L27:
+ 155 00d4 0E94 0000 		call LcdClearAll
+ 156 00d8 1092 0000 		sts (threadExit)+1,__zero_reg__
+ 157 00dc 1092 0000 		sts threadExit,__zero_reg__
+ 158 00e0 1092 0000 		sts (pauseCurrentDatetime)+1,__zero_reg__
+ 159 00e4 1092 0000 		sts pauseCurrentDatetime,__zero_reg__
+ 160 00e8 00C0      		rjmp .L25
+ 161               	.L11:
+ 162 00ea 80E0      		ldi r24,lo8(.LC1)
+ 163 00ec 90E0      		ldi r25,hi8(.LC1)
+ 164 00ee 0E94 0000 		call LcdWriteTitle
+ 165 00f2 00C0      		rjmp .L37
+ 166               	.L14:
+ 167 00f4 64E6      		ldi r22,lo8(100)
+ 168 00f6 70E0      		ldi r23,hi8(100)
+ 169 00f8 80E0      		ldi r24,hlo8(100)
+ 170 00fa 90E0      		ldi r25,hhi8(100)
+ 171 00fc 0E94 0000 		call NutSleep
+ 172 0100 8091 0000 		lds r24,threadExit
+ 173 0104 9091 0000 		lds r25,(threadExit)+1
+ 174 0108 892B      		or r24,r25
+ 175 010a 01F4      		brne .L27
+ 176 010c 0E94 0000 		call LcdClearLine
+ 177 0110 8091 0000 		lds r24,selectedDatetimeUnit
+ 178 0114 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 179 0118 8130      		cpi r24,1
+ 180 011a 9105      		cpc r25,__zero_reg__
+ 181 011c 01F0      		breq .L19
+ 182 011e 8230      		cpi r24,2
+ 183 0120 9105      		cpc r25,__zero_reg__
+ 184 0122 01F0      		breq .L20
+ 185 0124 892B      		or r24,r25
+ 186 0126 01F4      		brne .L37
+ 187 0128 8091 0000 		lds r24,datetime+6
+ 188 012c 9091 0000 		lds r25,(datetime+6)+1
+ 189 0130 9F93      		push r25
+ 190 0132 8F93      		push r24
+ 191 0134 80E0      		ldi r24,lo8(.LC2)
+ 192 0136 90E0      		ldi r25,hi8(.LC2)
+ 193 0138 00C0      		rjmp .L36
+ 194               	.L19:
+ 195 013a 8091 0000 		lds r24,datetime+8
+ 196 013e 9091 0000 		lds r25,(datetime+8)+1
+ 197 0142 0196      		adiw r24,1
+ 198 0144 9F93      		push r25
+ 199 0146 8F93      		push r24
+ 200 0148 80E0      		ldi r24,lo8(.LC3)
+ 201 014a 90E0      		ldi r25,hi8(.LC3)
+ 202 014c 00C0      		rjmp .L36
+ 203               	.L20:
+ 204 014e 8091 0000 		lds r24,datetime+10
+ 205 0152 9091 0000 		lds r25,(datetime+10)+1
+ 206 0156 8459      		subi r24,lo8(-(1900))
+ 207 0158 984F      		sbci r25,hi8(-(1900))
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 5
 
 
- 225 0174 0E94 0000 		call NutSleep
- 226 0178 82E0      		ldi r24,lo8(2)
- 227 017a 0E94 0000 		call LedControl
- 228 017e 00C0      		rjmp .L18
- 229               	/* epilogue: frame size=0 */
- 230               	/* epilogue: noreturn */
- 231               	/* epilogue end (size=0) */
- 232               	/* function ThreadA size 10 (10) */
- 233               		.size	ThreadA, .-ThreadA
- 234               		.section	.progmem.data,"a",@progbits
- 235               		.type	__c.2567, @object
- 236               		.size	__c.2567, 26
- 237               	__c.2567:
- 238 0000 5254 4320 		.string	"RTC time [%02d:%02d:%02d]"
- 238      7469 6D65 
- 238      205B 2530 
- 238      3264 3A25 
- 238      3032 643A 
- 239               		.type	__c.2565, @object
- 240               		.size	__c.2565, 12
- 241               	__c.2565:
- 242 001a 4865 6C6C 		.string	"Hello World"
- 242      6F20 576F 
- 242      726C 6400 
- 243               	/* File "source/main.c": code  193 = 0x00c1 ( 180), prologues  11, epilogues   2 */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s 			page 6
+ 208 015a 9F93      		push r25
+ 209 015c 8F93      		push r24
+ 210 015e 80E0      		ldi r24,lo8(.LC4)
+ 211 0160 90E0      		ldi r25,hi8(.LC4)
+ 212               	.L36:
+ 213 0162 9F93      		push r25
+ 214 0164 8F93      		push r24
+ 215 0166 8E01      		movw r16,r28
+ 216 0168 0D5E      		subi r16,lo8(-(19))
+ 217 016a 1F4F      		sbci r17,hi8(-(19))
+ 218 016c 1F93      		push r17
+ 219 016e 0F93      		push r16
+ 220 0170 0E94 0000 		call sprintf
+ 221 0174 C801      		movw r24,r16
+ 222 0176 0E94 0000 		call LcdWriteSecondLine
+ 223 017a 8DB7      		in r24,__SP_L__
+ 224 017c 9EB7      		in r25,__SP_H__
+ 225 017e 0696      		adiw r24,6
+ 226 0180 0FB6      		in __tmp_reg__,__SREG__
+ 227 0182 F894      		cli
+ 228 0184 9EBF      		out __SP_H__,r25
+ 229 0186 0FBE      		out __SREG__,__tmp_reg__
+ 230 0188 8DBF      		out __SP_L__,r24
+ 231               	.L37:
+ 232 018a 8091 0000 		lds r24,datetimeSetManually
+ 233 018e 9091 0000 		lds r25,(datetimeSetManually)+1
+ 234 0192 0197      		sbiw r24,1
+ 235 0194 01F0      		breq .+2
+ 236 0196 00C0      		rjmp .L14
+ 237 0198 0E94 0000 		call LcdClearAll
+ 238 019c 1092 0000 		sts (backlightStayOn)+1,__zero_reg__
+ 239 01a0 1092 0000 		sts backlightStayOn,__zero_reg__
+ 240 01a4 80E0      		ldi r24,lo8(datetime)
+ 241 01a6 90E0      		ldi r25,hi8(datetime)
+ 242 01a8 0E94 0000 		call X12RtcSetClock
+ 243 01ac 892B      		or r24,r25
+ 244 01ae 01F0      		breq .L22
+ 245 01b0 A0E0      		ldi r26,lo8(datetime)
+ 246 01b2 B0E0      		ldi r27,hi8(datetime)
+ 247 01b4 FE01      		movw r30,r28
+ 248 01b6 3196      		adiw r30,1
+ 249 01b8 82E1      		ldi r24,lo8(18)
+ 250               	.L24:
+ 251 01ba 0190      		ld r0,Z+
+ 252 01bc 0D92      		st X+,r0
+ 253 01be 8150      		subi r24,lo8(-(-1))
+ 254 01c0 01F4      		brne .L24
+ 255               	.L22:
+ 256 01c2 8091 0000 		lds r24,datetime+10
+ 257 01c6 9091 0000 		lds r25,(datetime+10)+1
+ 258 01ca 8459      		subi r24,lo8(-(1900))
+ 259 01cc 984F      		sbci r25,hi8(-(1900))
+ 260 01ce 9F93      		push r25
+ 261 01d0 8F93      		push r24
+ 262 01d2 8091 0000 		lds r24,datetime+8
+ 263 01d6 9091 0000 		lds r25,(datetime+8)+1
+ 264 01da 0196      		adiw r24,1
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 6
+
+
+ 265 01dc 9F93      		push r25
+ 266 01de 8F93      		push r24
+ 267 01e0 8091 0000 		lds r24,datetime+6
+ 268 01e4 9091 0000 		lds r25,(datetime+6)+1
+ 269 01e8 9F93      		push r25
+ 270 01ea 8F93      		push r24
+ 271 01ec 8091 0000 		lds r24,datetime
+ 272 01f0 9091 0000 		lds r25,(datetime)+1
+ 273 01f4 9F93      		push r25
+ 274 01f6 8F93      		push r24
+ 275 01f8 8091 0000 		lds r24,datetime+2
+ 276 01fc 9091 0000 		lds r25,(datetime+2)+1
+ 277 0200 9F93      		push r25
+ 278 0202 8F93      		push r24
+ 279 0204 8091 0000 		lds r24,datetime+4
+ 280 0208 9091 0000 		lds r25,(datetime+4)+1
+ 281 020c 9F93      		push r25
+ 282 020e 8F93      		push r24
+ 283 0210 80E0      		ldi r24,lo8(.LC5)
+ 284 0212 90E0      		ldi r25,hi8(.LC5)
+ 285 0214 9F93      		push r25
+ 286 0216 8F93      		push r24
+ 287 0218 0E94 0000 		call printf
+ 288 021c 1092 0000 		sts (pauseCurrentDatetime)+1,__zero_reg__
+ 289 0220 1092 0000 		sts pauseCurrentDatetime,__zero_reg__
+ 290 0224 8DB7      		in r24,__SP_L__
+ 291 0226 9EB7      		in r25,__SP_H__
+ 292 0228 0E96      		adiw r24,14
+ 293 022a 0FB6      		in __tmp_reg__,__SREG__
+ 294 022c F894      		cli
+ 295 022e 9EBF      		out __SP_H__,r25
+ 296 0230 0FBE      		out __SREG__,__tmp_reg__
+ 297 0232 8DBF      		out __SP_L__,r24
+ 298               	.L25:
+ 299               	/* epilogue: frame size=38 */
+ 300 0234 A696      		adiw r28,38
+ 301 0236 0FB6      		in __tmp_reg__,__SREG__
+ 302 0238 F894      		cli
+ 303 023a DEBF      		out __SP_H__,r29
+ 304 023c 0FBE      		out __SREG__,__tmp_reg__
+ 305 023e CDBF      		out __SP_L__,r28
+ 306 0240 DF91      		pop r29
+ 307 0242 CF91      		pop r28
+ 308 0244 1F91      		pop r17
+ 309 0246 0F91      		pop r16
+ 310 0248 0895      		ret
+ 311               	/* epilogue end (size=11) */
+ 312               	/* function SetDateManually size 252 (229) */
+ 313               		.size	SetDateManually, .-SetDateManually
+ 314               		.data
+ 315               	.LC6:
+ 316 0082 0A74 696D 		.string	"\ntimezone = %d"
+ 316      657A 6F6E 
+ 316      6520 3D20 
+ 316      2564 00
+ 317               		.text
+ 318               	.global	SetTimezone_timeh
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 7
+
+
+ 319               		.type	SetTimezone_timeh, @function
+ 320               	SetTimezone_timeh:
+ 321               	/* prologue: frame size=0 */
+ 322 024a CF93      		push r28
+ 323 024c DF93      		push r29
+ 324               	/* prologue end (size=2) */
+ 325 024e EC01      		movw r28,r24
+ 326 0250 2881      		ld r18,Y
+ 327 0252 3981      		ldd r19,Y+1
+ 328 0254 C901      		movw r24,r18
+ 329 0256 0C96      		adiw r24,12
+ 330 0258 4B97      		sbiw r24,27
+ 331 025a 00F4      		brsh .L39
+ 332 025c 3F93      		push r19
+ 333 025e 2F93      		push r18
+ 334 0260 80E0      		ldi r24,lo8(.LC6)
+ 335 0262 90E0      		ldi r25,hi8(.LC6)
+ 336 0264 9F93      		push r25
+ 337 0266 8F93      		push r24
+ 338 0268 0E94 0000 		call printf
+ 339 026c 2881      		ld r18,Y
+ 340 026e 3981      		ldd r19,Y+1
+ 341 0270 80EF      		ldi r24,lo8(-3600)
+ 342 0272 91EF      		ldi r25,hi8(-3600)
+ 343 0274 AC01      		movw r20,r24
+ 344 0276 249F      		mul r18,r20
+ 345 0278 C001      		movw r24,r0
+ 346 027a 259F      		mul r18,r21
+ 347 027c 900D      		add r25,r0
+ 348 027e 349F      		mul r19,r20
+ 349 0280 900D      		add r25,r0
+ 350 0282 1124      		clr r1
+ 351 0284 AA27      		clr r26
+ 352 0286 97FD      		sbrc r25,7
+ 353 0288 A095      		com r26
+ 354 028a BA2F      		mov r27,r26
+ 355 028c 8093 0000 		sts _timezone,r24
+ 356 0290 9093 0000 		sts (_timezone)+1,r25
+ 357 0294 A093 0000 		sts (_timezone)+2,r26
+ 358 0298 B093 0000 		sts (_timezone)+3,r27
+ 359 029c 0F90      		pop __tmp_reg__
+ 360 029e 0F90      		pop __tmp_reg__
+ 361 02a0 0F90      		pop __tmp_reg__
+ 362 02a2 0F90      		pop __tmp_reg__
+ 363 02a4 00C0      		rjmp .L42
+ 364               	.L39:
+ 365 02a6 1092 0000 		sts _timezone,__zero_reg__
+ 366 02aa 1092 0000 		sts (_timezone)+1,__zero_reg__
+ 367 02ae 1092 0000 		sts (_timezone)+2,__zero_reg__
+ 368 02b2 1092 0000 		sts (_timezone)+3,__zero_reg__
+ 369               	.L42:
+ 370               	/* epilogue: frame size=0 */
+ 371 02b6 DF91      		pop r29
+ 372 02b8 CF91      		pop r28
+ 373 02ba 0895      		ret
+ 374               	/* epilogue end (size=3) */
+ 375               	/* function SetTimezone_timeh size 58 (53) */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 8
+
+
+ 376               		.size	SetTimezone_timeh, .-SetTimezone_timeh
+ 377               		.data
+ 378               	.LC7:
+ 379 0091 5365 7420 		.string	"Set Timezone"
+ 379      5469 6D65 
+ 379      7A6F 6E65 
+ 379      00
+ 380               	.LC8:
+ 381 009e 4B42 5468 		.string	"KBThreadTimeZone"
+ 381      7265 6164 
+ 381      5469 6D65 
+ 381      5A6F 6E65 
+ 381      00
+ 382               	.LC9:
+ 383 00af 5554 4320 		.string	"UTC +%d "
+ 383      2B25 6420 
+ 383      00
+ 384               	.LC10:
+ 385 00b8 5554 4320 		.string	"UTC %d "
+ 385      2564 2000 
+ 386               		.text
+ 387               	.global	SetTimezone
+ 388               		.type	SetTimezone, @function
+ 389               	SetTimezone:
+ 390               	/* prologue: frame size=20 */
+ 391 02bc CF93      		push r28
+ 392 02be DF93      		push r29
+ 393 02c0 CDB7      		in r28,__SP_L__
+ 394 02c2 DEB7      		in r29,__SP_H__
+ 395 02c4 6497      		sbiw r28,20
+ 396 02c6 0FB6      		in __tmp_reg__,__SREG__
+ 397 02c8 F894      		cli
+ 398 02ca DEBF      		out __SP_H__,r29
+ 399 02cc 0FBE      		out __SREG__,__tmp_reg__
+ 400 02ce CDBF      		out __SP_L__,r28
+ 401               	/* prologue end (size=10) */
+ 402 02d0 0E94 0000 		call LcdClearAll
+ 403 02d4 22E0      		ldi r18,lo8(2)
+ 404 02d6 30E0      		ldi r19,hi8(2)
+ 405 02d8 40E0      		ldi r20,lo8(timezone)
+ 406 02da 50E0      		ldi r21,hi8(timezone)
+ 407 02dc 62E0      		ldi r22,lo8(2)
+ 408 02de 70E0      		ldi r23,hi8(2)
+ 409 02e0 80E0      		ldi r24,hlo8(2)
+ 410 02e2 90E0      		ldi r25,hhi8(2)
+ 411 02e4 0E94 0000 		call At45dbPageRead
+ 412 02e8 8091 0000 		lds r24,timezone
+ 413 02ec 9091 0000 		lds r25,(timezone)+1
+ 414 02f0 0C96      		adiw r24,12
+ 415 02f2 4B97      		sbiw r24,27
+ 416 02f4 00F0      		brlo .L44
+ 417 02f6 1092 0000 		sts (timezone)+1,__zero_reg__
+ 418 02fa 1092 0000 		sts timezone,__zero_reg__
+ 419               	.L44:
+ 420 02fe 8091 0000 		lds r24,firstStartup
+ 421 0302 9091 0000 		lds r25,(firstStartup)+1
+ 422 0306 892B      		or r24,r25
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 9
+
+
+ 423 0308 01F4      		brne .L46
+ 424 030a 8091 0000 		lds r24,setTimezoneFromMenu
+ 425 030e 9091 0000 		lds r25,(setTimezoneFromMenu)+1
+ 426 0312 892B      		or r24,r25
+ 427 0314 01F4      		brne .+2
+ 428 0316 00C0      		rjmp .L49
+ 429 0318 00C0      		rjmp .L48
+ 430               	.L46:
+ 431 031a 8091 0000 		lds r24,timezone
+ 432 031e 9091 0000 		lds r25,(timezone)+1
+ 433 0322 9093 0000 		sts (newTimezone)+1,r25
+ 434 0326 8093 0000 		sts newTimezone,r24
+ 435 032a 81E0      		ldi r24,lo8(1)
+ 436 032c 90E0      		ldi r25,hi8(1)
+ 437 032e 9093 0000 		sts (backlightStayOn)+1,r25
+ 438 0332 8093 0000 		sts backlightStayOn,r24
+ 439 0336 80E0      		ldi r24,lo8(.LC7)
+ 440 0338 90E0      		ldi r25,hi8(.LC7)
+ 441 033a 0E94 0000 		call LcdWriteFirstLine
+ 442               	.L50:
+ 443 033e 1092 0000 		sts (timeZoneSet)+1,__zero_reg__
+ 444 0342 1092 0000 		sts timeZoneSet,__zero_reg__
+ 445 0346 20E0      		ldi r18,lo8(1024)
+ 446 0348 34E0      		ldi r19,hi8(1024)
+ 447 034a 40E0      		ldi r20,lo8(0)
+ 448 034c 50E0      		ldi r21,hi8(0)
+ 449 034e 60E0      		ldi r22,lo8(gs(KBThreadTimeZone))
+ 450 0350 70E0      		ldi r23,hi8(gs(KBThreadTimeZone))
+ 451 0352 80E0      		ldi r24,lo8(.LC8)
+ 452 0354 90E0      		ldi r25,hi8(.LC8)
+ 453 0356 0E94 0000 		call NutThreadCreate
+ 454 035a 00C0      		rjmp .L51
+ 455               	.L52:
+ 456 035c 64E6      		ldi r22,lo8(100)
+ 457 035e 70E0      		ldi r23,hi8(100)
+ 458 0360 80E0      		ldi r24,hlo8(100)
+ 459 0362 90E0      		ldi r25,hhi8(100)
+ 460 0364 0E94 0000 		call NutSleep
+ 461 0368 8091 0000 		lds r24,threadExit
+ 462 036c 9091 0000 		lds r25,(threadExit)+1
+ 463 0370 892B      		or r24,r25
+ 464 0372 01F0      		breq .+2
+ 465 0374 00C0      		rjmp .L67
+ 466 0376 8091 0000 		lds r24,newTimezone
+ 467 037a 9091 0000 		lds r25,(newTimezone)+1
+ 468 037e 9E01      		movw r18,r28
+ 469 0380 2F5F      		subi r18,lo8(-(1))
+ 470 0382 3F4F      		sbci r19,hi8(-(1))
+ 471 0384 4FEF      		ldi r20,hi8(-1)
+ 472 0386 8F3F      		cpi r24,lo8(-1)
+ 473 0388 9407      		cpc r25,r20
+ 474 038a 01F0      		breq .L56
+ 475 038c 04F0      		brlt .L56
+ 476 038e 9F93      		push r25
+ 477 0390 8F93      		push r24
+ 478 0392 80E0      		ldi r24,lo8(.LC9)
+ 479 0394 90E0      		ldi r25,hi8(.LC9)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 10
+
+
+ 480 0396 00C0      		rjmp .L68
+ 481               	.L56:
+ 482 0398 9F93      		push r25
+ 483 039a 8F93      		push r24
+ 484 039c 80E0      		ldi r24,lo8(.LC10)
+ 485 039e 90E0      		ldi r25,hi8(.LC10)
+ 486               	.L68:
+ 487 03a0 9F93      		push r25
+ 488 03a2 8F93      		push r24
+ 489 03a4 3F93      		push r19
+ 490 03a6 2F93      		push r18
+ 491 03a8 0E94 0000 		call sprintf
+ 492 03ac 8DB7      		in r24,__SP_L__
+ 493 03ae 9EB7      		in r25,__SP_H__
+ 494 03b0 0696      		adiw r24,6
+ 495 03b2 0FB6      		in __tmp_reg__,__SREG__
+ 496 03b4 F894      		cli
+ 497 03b6 9EBF      		out __SP_H__,r25
+ 498 03b8 0FBE      		out __SREG__,__tmp_reg__
+ 499 03ba 8DBF      		out __SP_L__,r24
+ 500 03bc CE01      		movw r24,r28
+ 501 03be 0196      		adiw r24,1
+ 502 03c0 0E94 0000 		call LcdWriteSecondLine
+ 503 03c4 0E94 0000 		call WatchDogRestart
+ 504               	.L51:
+ 505 03c8 8091 0000 		lds r24,timeZoneSet
+ 506 03cc 9091 0000 		lds r25,(timeZoneSet)+1
+ 507 03d0 0197      		sbiw r24,1
+ 508 03d2 01F4      		brne .L52
+ 509 03d4 1092 0000 		sts (backlightStayOn)+1,__zero_reg__
+ 510 03d8 1092 0000 		sts backlightStayOn,__zero_reg__
+ 511 03dc 8091 0000 		lds r24,setTimezoneFromMenu
+ 512 03e0 9091 0000 		lds r25,(setTimezoneFromMenu)+1
+ 513 03e4 892B      		or r24,r25
+ 514 03e6 01F0      		breq .L60
+ 515 03e8 4091 0000 		lds r20,newTimezone
+ 516 03ec 5091 0000 		lds r21,(newTimezone)+1
+ 517 03f0 8091 0000 		lds r24,timezone
+ 518 03f4 9091 0000 		lds r25,(timezone)+1
+ 519 03f8 9A01      		movw r18,r20
+ 520 03fa 281B      		sub r18,r24
+ 521 03fc 390B      		sbc r19,r25
+ 522 03fe 8091 0000 		lds r24,datetime+4
+ 523 0402 9091 0000 		lds r25,(datetime+4)+1
+ 524 0406 280F      		add r18,r24
+ 525 0408 391F      		adc r19,r25
+ 526 040a 3093 0000 		sts (datetime+4)+1,r19
+ 527 040e 2093 0000 		sts datetime+4,r18
+ 528 0412 2831      		cpi r18,24
+ 529 0414 3105      		cpc r19,__zero_reg__
+ 530 0416 04F0      		brlt .L62
+ 531 0418 2851      		subi r18,lo8(-(-24))
+ 532 041a 3040      		sbci r19,hi8(-(-24))
+ 533 041c 00C0      		rjmp .L69
+ 534               	.L62:
+ 535 041e 37FF      		sbrs r19,7
+ 536 0420 00C0      		rjmp .L64
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 11
+
+
+ 537 0422 285E      		subi r18,lo8(-(24))
+ 538 0424 3F4F      		sbci r19,hi8(-(24))
+ 539               	.L69:
+ 540 0426 3093 0000 		sts (datetime+4)+1,r19
+ 541 042a 2093 0000 		sts datetime+4,r18
+ 542               	.L64:
+ 543 042e 5093 0000 		sts (timezone)+1,r21
+ 544 0432 4093 0000 		sts timezone,r20
+ 545 0436 80E0      		ldi r24,lo8(datetime)
+ 546 0438 90E0      		ldi r25,hi8(datetime)
+ 547 043a 0E94 0000 		call X12RtcSetClock
+ 548               	.L60:
+ 549 043e 22E0      		ldi r18,lo8(2)
+ 550 0440 30E0      		ldi r19,hi8(2)
+ 551 0442 40E0      		ldi r20,lo8(timezone)
+ 552 0444 50E0      		ldi r21,hi8(timezone)
+ 553 0446 62E0      		ldi r22,lo8(2)
+ 554 0448 70E0      		ldi r23,hi8(2)
+ 555 044a 80E0      		ldi r24,hlo8(2)
+ 556 044c 90E0      		ldi r25,hhi8(2)
+ 557 044e 0E94 0000 		call At45dbPageWrite
+ 558               	.L49:
+ 559 0452 8091 0000 		lds r24,timezone
+ 560 0456 9091 0000 		lds r25,(timezone)+1
+ 561 045a 9F93      		push r25
+ 562 045c 8F93      		push r24
+ 563 045e 80E0      		ldi r24,lo8(__c.3214)
+ 564 0460 90E0      		ldi r25,hi8(__c.3214)
+ 565 0462 9F93      		push r25
+ 566 0464 8F93      		push r24
+ 567 0466 86EC      		ldi r24,lo8(-58)
+ 568 0468 8F93      		push r24
+ 569 046a 0E94 0000 		call LogMsg_P
+ 570 046e 0E94 0000 		call LcdClearAll
+ 571 0472 80E0      		ldi r24,lo8(timezone)
+ 572 0474 90E0      		ldi r25,hi8(timezone)
+ 573 0476 0E94 0000 		call SetTimezone_timeh
+ 574 047a 0F90      		pop __tmp_reg__
+ 575 047c 0F90      		pop __tmp_reg__
+ 576 047e 0F90      		pop __tmp_reg__
+ 577 0480 0F90      		pop __tmp_reg__
+ 578 0482 0F90      		pop __tmp_reg__
+ 579 0484 00C0      		rjmp .L66
+ 580               	.L48:
+ 581 0486 8091 0000 		lds r24,timezone
+ 582 048a 9091 0000 		lds r25,(timezone)+1
+ 583 048e 9093 0000 		sts (newTimezone)+1,r25
+ 584 0492 8093 0000 		sts newTimezone,r24
+ 585 0496 81E0      		ldi r24,lo8(1)
+ 586 0498 90E0      		ldi r25,hi8(1)
+ 587 049a 9093 0000 		sts (backlightStayOn)+1,r25
+ 588 049e 8093 0000 		sts backlightStayOn,r24
+ 589 04a2 80E0      		ldi r24,lo8(.LC7)
+ 590 04a4 90E0      		ldi r25,hi8(.LC7)
+ 591 04a6 0E94 0000 		call LcdWriteTitle
+ 592 04aa 00C0      		rjmp .L50
+ 593               	.L67:
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 12
+
+
+ 594 04ac 0E94 0000 		call LcdClearAll
+ 595 04b0 1092 0000 		sts (threadExit)+1,__zero_reg__
+ 596 04b4 1092 0000 		sts threadExit,__zero_reg__
+ 597               	.L66:
+ 598               	/* epilogue: frame size=20 */
+ 599 04b8 6496      		adiw r28,20
+ 600 04ba 0FB6      		in __tmp_reg__,__SREG__
+ 601 04bc F894      		cli
+ 602 04be DEBF      		out __SP_H__,r29
+ 603 04c0 0FBE      		out __SREG__,__tmp_reg__
+ 604 04c2 CDBF      		out __SP_L__,r28
+ 605 04c4 DF91      		pop r29
+ 606 04c6 CF91      		pop r28
+ 607 04c8 0895      		ret
+ 608               	/* epilogue end (size=9) */
+ 609               	/* function SetTimezone size 265 (246) */
+ 610               		.size	SetTimezone, .-SetTimezone
+ 611               		.data
+ 612               	.LC11:
+ 613 00c0 2530 3264 		.string	"%02d:%02d:%02d"
+ 613      3A25 3032 
+ 613      643A 2530 
+ 613      3264 00
+ 614               		.text
+ 615               	.global	ShowCurrentTime
+ 616               		.type	ShowCurrentTime, @function
+ 617               	ShowCurrentTime:
+ 618               	/* prologue: frame size=20 */
+ 619 04ca 0F93      		push r16
+ 620 04cc 1F93      		push r17
+ 621 04ce CF93      		push r28
+ 622 04d0 DF93      		push r29
+ 623 04d2 CDB7      		in r28,__SP_L__
+ 624 04d4 DEB7      		in r29,__SP_H__
+ 625 04d6 6497      		sbiw r28,20
+ 626 04d8 0FB6      		in __tmp_reg__,__SREG__
+ 627 04da F894      		cli
+ 628 04dc DEBF      		out __SP_H__,r29
+ 629 04de 0FBE      		out __SREG__,__tmp_reg__
+ 630 04e0 CDBF      		out __SP_L__,r28
+ 631               	/* prologue end (size=12) */
+ 632 04e2 80E0      		ldi r24,lo8(datetime)
+ 633 04e4 90E0      		ldi r25,hi8(datetime)
+ 634 04e6 0E94 0000 		call X12RtcGetClock
+ 635 04ea 892B      		or r24,r25
+ 636 04ec 01F4      		brne .L73
+ 637 04ee 8091 0000 		lds r24,datetime
+ 638 04f2 9091 0000 		lds r25,(datetime)+1
+ 639 04f6 9F93      		push r25
+ 640 04f8 8F93      		push r24
+ 641 04fa 8091 0000 		lds r24,datetime+2
+ 642 04fe 9091 0000 		lds r25,(datetime+2)+1
+ 643 0502 9F93      		push r25
+ 644 0504 8F93      		push r24
+ 645 0506 8091 0000 		lds r24,datetime+4
+ 646 050a 9091 0000 		lds r25,(datetime+4)+1
+ 647 050e 9F93      		push r25
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 13
+
+
+ 648 0510 8F93      		push r24
+ 649 0512 80E0      		ldi r24,lo8(.LC11)
+ 650 0514 90E0      		ldi r25,hi8(.LC11)
+ 651 0516 9F93      		push r25
+ 652 0518 8F93      		push r24
+ 653 051a 8E01      		movw r16,r28
+ 654 051c 0F5F      		subi r16,lo8(-(1))
+ 655 051e 1F4F      		sbci r17,hi8(-(1))
+ 656 0520 1F93      		push r17
+ 657 0522 0F93      		push r16
+ 658 0524 0E94 0000 		call sprintf
+ 659 0528 C801      		movw r24,r16
+ 660 052a 0E94 0000 		call LcdTimeDisplay
+ 661 052e 8DB7      		in r24,__SP_L__
+ 662 0530 9EB7      		in r25,__SP_H__
+ 663 0532 0A96      		adiw r24,10
+ 664 0534 0FB6      		in __tmp_reg__,__SREG__
+ 665 0536 F894      		cli
+ 666 0538 9EBF      		out __SP_H__,r25
+ 667 053a 0FBE      		out __SREG__,__tmp_reg__
+ 668 053c 8DBF      		out __SP_L__,r24
+ 669               	.L73:
+ 670               	/* epilogue: frame size=20 */
+ 671 053e 6496      		adiw r28,20
+ 672 0540 0FB6      		in __tmp_reg__,__SREG__
+ 673 0542 F894      		cli
+ 674 0544 DEBF      		out __SP_H__,r29
+ 675 0546 0FBE      		out __SREG__,__tmp_reg__
+ 676 0548 CDBF      		out __SP_L__,r28
+ 677 054a DF91      		pop r29
+ 678 054c CF91      		pop r28
+ 679 054e 1F91      		pop r17
+ 680 0550 0F91      		pop r16
+ 681 0552 0895      		ret
+ 682               	/* epilogue end (size=11) */
+ 683               	/* function ShowCurrentTime size 69 (46) */
+ 684               		.size	ShowCurrentTime, .-ShowCurrentTime
+ 685               		.data
+ 686               	.LC12:
+ 687 00cf 5365 7441 		.string	"SetAlarmBThread"
+ 687      6C61 726D 
+ 687      4254 6872 
+ 687      6561 6400 
+ 688               	.LC13:
+ 689 00df 5365 7420 		.string	"Set Alarm B"
+ 689      416C 6172 
+ 689      6D20 4200 
+ 690               	.LC14:
+ 691 00eb 5365 7420 		.string	"Set Month: %02d"
+ 691      4D6F 6E74 
+ 691      683A 2025 
+ 691      3032 6400 
+ 692               	.LC15:
+ 693 00fb 5365 7420 		.string	"Set Day: %02d"
+ 693      4461 793A 
+ 693      2025 3032 
+ 693      6400 
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 14
+
+
+ 694               	.LC16:
+ 695 0109 5365 7420 		.string	"Set Hour: %02d"
+ 695      486F 7572 
+ 695      3A20 2530 
+ 695      3264 00
+ 696               	.LC17:
+ 697 0118 5365 7420 		.string	"Set Minutes: %02d"
+ 697      4D69 6E75 
+ 697      7465 733A 
+ 697      2025 3032 
+ 697      6400 
+ 698               	.LC18:
+ 699 012a 5365 7420 		.string	"Set Seconds: %02d"
+ 699      5365 636F 
+ 699      6E64 733A 
+ 699      2025 3032 
+ 699      6400 
+ 700               		.text
+ 701               	.global	AlarmBMenu
+ 702               		.type	AlarmBMenu, @function
+ 703               	AlarmBMenu:
+ 704               	/* prologue: frame size=22 */
+ 705 0554 0F93      		push r16
+ 706 0556 1F93      		push r17
+ 707 0558 CF93      		push r28
+ 708 055a DF93      		push r29
+ 709 055c CDB7      		in r28,__SP_L__
+ 710 055e DEB7      		in r29,__SP_H__
+ 711 0560 6697      		sbiw r28,22
+ 712 0562 0FB6      		in __tmp_reg__,__SREG__
+ 713 0564 F894      		cli
+ 714 0566 DEBF      		out __SP_H__,r29
+ 715 0568 0FBE      		out __SREG__,__tmp_reg__
+ 716 056a CDBF      		out __SP_L__,r28
+ 717               	/* prologue end (size=12) */
+ 718 056c AE01      		movw r20,r28
+ 719 056e 4F5F      		subi r20,lo8(-(1))
+ 720 0570 5F4F      		sbci r21,hi8(-(1))
+ 721 0572 60E0      		ldi r22,lo8(alarmB)
+ 722 0574 70E0      		ldi r23,hi8(alarmB)
+ 723 0576 81E0      		ldi r24,lo8(1)
+ 724 0578 90E0      		ldi r25,hi8(1)
+ 725 057a 0E94 0000 		call X12RtcGetAlarm
+ 726 057e 1092 0000 		sts (alarmBset)+1,__zero_reg__
+ 727 0582 1092 0000 		sts alarmBset,__zero_reg__
+ 728 0586 20E0      		ldi r18,lo8(1024)
+ 729 0588 34E0      		ldi r19,hi8(1024)
+ 730 058a 40E0      		ldi r20,lo8(0)
+ 731 058c 50E0      		ldi r21,hi8(0)
+ 732 058e 60E0      		ldi r22,lo8(gs(SetAlarmBThread))
+ 733 0590 70E0      		ldi r23,hi8(gs(SetAlarmBThread))
+ 734 0592 80E0      		ldi r24,lo8(.LC12)
+ 735 0594 90E0      		ldi r25,hi8(.LC12)
+ 736 0596 0E94 0000 		call NutThreadCreate
+ 737 059a 81E0      		ldi r24,lo8(1)
+ 738 059c 0E94 0000 		call LcdBackLight
+ 739 05a0 0E94 0000 		call LcdClearAll
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 15
+
+
+ 740 05a4 80E0      		ldi r24,lo8(.LC13)
+ 741 05a6 90E0      		ldi r25,hi8(.LC13)
+ 742 05a8 0E94 0000 		call LcdWriteTitle
+ 743 05ac 0E94 0000 		call ShowCurrentTime
+ 744 05b0 00C0      		rjmp .L94
+ 745               	.L76:
+ 746 05b2 64E6      		ldi r22,lo8(100)
+ 747 05b4 70E0      		ldi r23,hi8(100)
+ 748 05b6 80E0      		ldi r24,hlo8(100)
+ 749 05b8 90E0      		ldi r25,hhi8(100)
+ 750 05ba 0E94 0000 		call NutSleep
+ 751 05be 8091 0000 		lds r24,threadExit
+ 752 05c2 9091 0000 		lds r25,(threadExit)+1
+ 753 05c6 892B      		or r24,r25
+ 754 05c8 01F0      		breq .L77
+ 755 05ca 0E94 0000 		call LcdClearAll
+ 756 05ce 1092 0000 		sts (threadExit)+1,__zero_reg__
+ 757 05d2 1092 0000 		sts threadExit,__zero_reg__
+ 758 05d6 00C0      		rjmp .L87
+ 759               	.L77:
+ 760 05d8 0E94 0000 		call LcdClearLine
+ 761 05dc 8091 0000 		lds r24,selectedAlarmtimeUnit
+ 762 05e0 9091 0000 		lds r25,(selectedAlarmtimeUnit)+1
+ 763 05e4 8230      		cpi r24,2
+ 764 05e6 9105      		cpc r25,__zero_reg__
+ 765 05e8 01F0      		breq .L82
+ 766 05ea 8330      		cpi r24,3
+ 767 05ec 9105      		cpc r25,__zero_reg__
+ 768 05ee 04F4      		brge .L85
+ 769 05f0 0097      		sbiw r24,0
+ 770 05f2 01F0      		breq .L80
+ 771 05f4 0197      		sbiw r24,1
+ 772 05f6 01F0      		breq .+2
+ 773 05f8 00C0      		rjmp .L94
+ 774 05fa 00C0      		rjmp .L81
+ 775               	.L85:
+ 776 05fc 8330      		cpi r24,3
+ 777 05fe 9105      		cpc r25,__zero_reg__
+ 778 0600 01F0      		breq .L83
+ 779 0602 0497      		sbiw r24,4
+ 780 0604 01F0      		breq .+2
+ 781 0606 00C0      		rjmp .L94
+ 782 0608 00C0      		rjmp .L84
+ 783               	.L80:
+ 784 060a 8091 0000 		lds r24,alarmB+8
+ 785 060e 9091 0000 		lds r25,(alarmB+8)+1
+ 786 0612 9F93      		push r25
+ 787 0614 8F93      		push r24
+ 788 0616 80E0      		ldi r24,lo8(.LC14)
+ 789 0618 90E0      		ldi r25,hi8(.LC14)
+ 790 061a 00C0      		rjmp .L93
+ 791               	.L81:
+ 792 061c 8091 0000 		lds r24,alarmB+6
+ 793 0620 9091 0000 		lds r25,(alarmB+6)+1
+ 794 0624 9F93      		push r25
+ 795 0626 8F93      		push r24
+ 796 0628 80E0      		ldi r24,lo8(.LC15)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 16
+
+
+ 797 062a 90E0      		ldi r25,hi8(.LC15)
+ 798 062c 00C0      		rjmp .L93
+ 799               	.L82:
+ 800 062e 8091 0000 		lds r24,alarmB+4
+ 801 0632 9091 0000 		lds r25,(alarmB+4)+1
+ 802 0636 9F93      		push r25
+ 803 0638 8F93      		push r24
+ 804 063a 80E0      		ldi r24,lo8(.LC16)
+ 805 063c 90E0      		ldi r25,hi8(.LC16)
+ 806 063e 00C0      		rjmp .L93
+ 807               	.L83:
+ 808 0640 8091 0000 		lds r24,alarmB+2
+ 809 0644 9091 0000 		lds r25,(alarmB+2)+1
+ 810 0648 9F93      		push r25
+ 811 064a 8F93      		push r24
+ 812 064c 80E0      		ldi r24,lo8(.LC17)
+ 813 064e 90E0      		ldi r25,hi8(.LC17)
+ 814 0650 00C0      		rjmp .L93
+ 815               	.L84:
+ 816 0652 8091 0000 		lds r24,alarmB
+ 817 0656 9091 0000 		lds r25,(alarmB)+1
+ 818 065a 9F93      		push r25
+ 819 065c 8F93      		push r24
+ 820 065e 80E0      		ldi r24,lo8(.LC18)
+ 821 0660 90E0      		ldi r25,hi8(.LC18)
+ 822               	.L93:
+ 823 0662 9F93      		push r25
+ 824 0664 8F93      		push r24
+ 825 0666 8E01      		movw r16,r28
+ 826 0668 0D5F      		subi r16,lo8(-(3))
+ 827 066a 1F4F      		sbci r17,hi8(-(3))
+ 828 066c 1F93      		push r17
+ 829 066e 0F93      		push r16
+ 830 0670 0E94 0000 		call sprintf
+ 831 0674 C801      		movw r24,r16
+ 832 0676 0E94 0000 		call LcdWriteSecondLine
+ 833 067a 8DB7      		in r24,__SP_L__
+ 834 067c 9EB7      		in r25,__SP_H__
+ 835 067e 0696      		adiw r24,6
+ 836 0680 0FB6      		in __tmp_reg__,__SREG__
+ 837 0682 F894      		cli
+ 838 0684 9EBF      		out __SP_H__,r25
+ 839 0686 0FBE      		out __SREG__,__tmp_reg__
+ 840 0688 8DBF      		out __SP_L__,r24
+ 841               	.L94:
+ 842 068a 8091 0000 		lds r24,alarmBset
+ 843 068e 9091 0000 		lds r25,(alarmBset)+1
+ 844 0692 0197      		sbiw r24,1
+ 845 0694 01F0      		breq .+2
+ 846 0696 00C0      		rjmp .L76
+ 847 0698 0E94 0000 		call LcdClearAll
+ 848 069c 80E0      		ldi r24,lo8(0)
+ 849 069e 0E94 0000 		call LcdBackLight
+ 850 06a2 4FE1      		ldi r20,lo8(31)
+ 851 06a4 50E0      		ldi r21,hi8(31)
+ 852 06a6 60E0      		ldi r22,lo8(alarmB)
+ 853 06a8 70E0      		ldi r23,hi8(alarmB)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 17
+
+
+ 854 06aa 81E0      		ldi r24,lo8(1)
+ 855 06ac 90E0      		ldi r25,hi8(1)
+ 856 06ae 0E94 0000 		call X12RtcSetAlarm
+ 857               	.L87:
+ 858               	/* epilogue: frame size=22 */
+ 859 06b2 6696      		adiw r28,22
+ 860 06b4 0FB6      		in __tmp_reg__,__SREG__
+ 861 06b6 F894      		cli
+ 862 06b8 DEBF      		out __SP_H__,r29
+ 863 06ba 0FBE      		out __SREG__,__tmp_reg__
+ 864 06bc CDBF      		out __SP_L__,r28
+ 865 06be DF91      		pop r29
+ 866 06c0 CF91      		pop r28
+ 867 06c2 1F91      		pop r17
+ 868 06c4 0F91      		pop r16
+ 869 06c6 0895      		ret
+ 870               	/* epilogue end (size=11) */
+ 871               	/* function AlarmBMenu size 189 (166) */
+ 872               		.size	AlarmBMenu, .-AlarmBMenu
+ 873               		.data
+ 874               	.LC19:
+ 875 013c 5365 7441 		.string	"SetAlarmAThread"
+ 875      6C61 726D 
+ 875      4154 6872 
+ 875      6561 6400 
+ 876               	.LC20:
+ 877 014c 5365 7420 		.string	"Set Alarm A"
+ 877      416C 6172 
+ 877      6D20 4100 
+ 878               	.LC21:
+ 879 0158 5365 7420 		.string	"Set Hours: %02d"
+ 879      486F 7572 
+ 879      733A 2025 
+ 879      3032 6400 
+ 880               		.text
+ 881               	.global	AlarmAMenu
+ 882               		.type	AlarmAMenu, @function
+ 883               	AlarmAMenu:
+ 884               	/* prologue: frame size=22 */
+ 885 06c8 0F93      		push r16
+ 886 06ca 1F93      		push r17
+ 887 06cc CF93      		push r28
+ 888 06ce DF93      		push r29
+ 889 06d0 CDB7      		in r28,__SP_L__
+ 890 06d2 DEB7      		in r29,__SP_H__
+ 891 06d4 6697      		sbiw r28,22
+ 892 06d6 0FB6      		in __tmp_reg__,__SREG__
+ 893 06d8 F894      		cli
+ 894 06da DEBF      		out __SP_H__,r29
+ 895 06dc 0FBE      		out __SREG__,__tmp_reg__
+ 896 06de CDBF      		out __SP_L__,r28
+ 897               	/* prologue end (size=12) */
+ 898 06e0 AE01      		movw r20,r28
+ 899 06e2 4F5F      		subi r20,lo8(-(1))
+ 900 06e4 5F4F      		sbci r21,hi8(-(1))
+ 901 06e6 60E0      		ldi r22,lo8(alarmA)
+ 902 06e8 70E0      		ldi r23,hi8(alarmA)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 18
+
+
+ 903 06ea 80E0      		ldi r24,lo8(0)
+ 904 06ec 90E0      		ldi r25,hi8(0)
+ 905 06ee 0E94 0000 		call X12RtcGetAlarm
+ 906 06f2 1092 0000 		sts (alarmAset)+1,__zero_reg__
+ 907 06f6 1092 0000 		sts alarmAset,__zero_reg__
+ 908 06fa 20E0      		ldi r18,lo8(1024)
+ 909 06fc 34E0      		ldi r19,hi8(1024)
+ 910 06fe 40E0      		ldi r20,lo8(0)
+ 911 0700 50E0      		ldi r21,hi8(0)
+ 912 0702 60E0      		ldi r22,lo8(gs(SetAlarmAThread))
+ 913 0704 70E0      		ldi r23,hi8(gs(SetAlarmAThread))
+ 914 0706 80E0      		ldi r24,lo8(.LC19)
+ 915 0708 90E0      		ldi r25,hi8(.LC19)
+ 916 070a 0E94 0000 		call NutThreadCreate
+ 917 070e 81E0      		ldi r24,lo8(1)
+ 918 0710 0E94 0000 		call LcdBackLight
+ 919 0714 0E94 0000 		call LcdClearAll
+ 920 0718 80E0      		ldi r24,lo8(.LC20)
+ 921 071a 90E0      		ldi r25,hi8(.LC20)
+ 922 071c 0E94 0000 		call LcdWriteTitle
+ 923 0720 0E94 0000 		call ShowCurrentTime
+ 924 0724 00C0      		rjmp .L112
+ 925               	.L97:
+ 926 0726 64E6      		ldi r22,lo8(100)
+ 927 0728 70E0      		ldi r23,hi8(100)
+ 928 072a 80E0      		ldi r24,hlo8(100)
+ 929 072c 90E0      		ldi r25,hhi8(100)
+ 930 072e 0E94 0000 		call NutSleep
+ 931 0732 8091 0000 		lds r24,threadExit
+ 932 0736 9091 0000 		lds r25,(threadExit)+1
+ 933 073a 892B      		or r24,r25
+ 934 073c 01F0      		breq .L98
+ 935 073e 0E94 0000 		call LcdClearAll
+ 936 0742 1092 0000 		sts (threadExit)+1,__zero_reg__
+ 937 0746 1092 0000 		sts threadExit,__zero_reg__
+ 938 074a 00C0      		rjmp .L105
+ 939               	.L98:
+ 940 074c 0E94 0000 		call LcdClearLine
+ 941 0750 8091 0000 		lds r24,selectedAlarmtimeUnit
+ 942 0754 9091 0000 		lds r25,(selectedAlarmtimeUnit)+1
+ 943 0758 8130      		cpi r24,1
+ 944 075a 9105      		cpc r25,__zero_reg__
+ 945 075c 01F0      		breq .L102
+ 946 075e 8230      		cpi r24,2
+ 947 0760 9105      		cpc r25,__zero_reg__
+ 948 0762 01F0      		breq .L103
+ 949 0764 892B      		or r24,r25
+ 950 0766 01F4      		brne .L112
+ 951 0768 8091 0000 		lds r24,alarmA+4
+ 952 076c 9091 0000 		lds r25,(alarmA+4)+1
+ 953 0770 9F93      		push r25
+ 954 0772 8F93      		push r24
+ 955 0774 80E0      		ldi r24,lo8(.LC21)
+ 956 0776 90E0      		ldi r25,hi8(.LC21)
+ 957 0778 00C0      		rjmp .L111
+ 958               	.L102:
+ 959 077a 8091 0000 		lds r24,alarmA+2
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 19
+
+
+ 960 077e 9091 0000 		lds r25,(alarmA+2)+1
+ 961 0782 9F93      		push r25
+ 962 0784 8F93      		push r24
+ 963 0786 80E0      		ldi r24,lo8(.LC17)
+ 964 0788 90E0      		ldi r25,hi8(.LC17)
+ 965 078a 00C0      		rjmp .L111
+ 966               	.L103:
+ 967 078c 8091 0000 		lds r24,alarmA
+ 968 0790 9091 0000 		lds r25,(alarmA)+1
+ 969 0794 9F93      		push r25
+ 970 0796 8F93      		push r24
+ 971 0798 80E0      		ldi r24,lo8(.LC18)
+ 972 079a 90E0      		ldi r25,hi8(.LC18)
+ 973               	.L111:
+ 974 079c 9F93      		push r25
+ 975 079e 8F93      		push r24
+ 976 07a0 8E01      		movw r16,r28
+ 977 07a2 0D5F      		subi r16,lo8(-(3))
+ 978 07a4 1F4F      		sbci r17,hi8(-(3))
+ 979 07a6 1F93      		push r17
+ 980 07a8 0F93      		push r16
+ 981 07aa 0E94 0000 		call sprintf
+ 982 07ae C801      		movw r24,r16
+ 983 07b0 0E94 0000 		call LcdWriteSecondLine
+ 984 07b4 8DB7      		in r24,__SP_L__
+ 985 07b6 9EB7      		in r25,__SP_H__
+ 986 07b8 0696      		adiw r24,6
+ 987 07ba 0FB6      		in __tmp_reg__,__SREG__
+ 988 07bc F894      		cli
+ 989 07be 9EBF      		out __SP_H__,r25
+ 990 07c0 0FBE      		out __SREG__,__tmp_reg__
+ 991 07c2 8DBF      		out __SP_L__,r24
+ 992               	.L112:
+ 993 07c4 8091 0000 		lds r24,alarmAset
+ 994 07c8 9091 0000 		lds r25,(alarmAset)+1
+ 995 07cc 0197      		sbiw r24,1
+ 996 07ce 01F0      		breq .+2
+ 997 07d0 00C0      		rjmp .L97
+ 998 07d2 0E94 0000 		call LcdClearAll
+ 999 07d6 80E0      		ldi r24,lo8(0)
+ 1000 07d8 0E94 0000 		call LcdBackLight
+ 1001 07dc 47E0      		ldi r20,lo8(7)
+ 1002 07de 50E0      		ldi r21,hi8(7)
+ 1003 07e0 60E0      		ldi r22,lo8(alarmA)
+ 1004 07e2 70E0      		ldi r23,hi8(alarmA)
+ 1005 07e4 80E0      		ldi r24,lo8(0)
+ 1006 07e6 90E0      		ldi r25,hi8(0)
+ 1007 07e8 0E94 0000 		call X12RtcSetAlarm
+ 1008               	.L105:
+ 1009               	/* epilogue: frame size=22 */
+ 1010 07ec 6696      		adiw r28,22
+ 1011 07ee 0FB6      		in __tmp_reg__,__SREG__
+ 1012 07f0 F894      		cli
+ 1013 07f2 DEBF      		out __SP_H__,r29
+ 1014 07f4 0FBE      		out __SREG__,__tmp_reg__
+ 1015 07f6 CDBF      		out __SP_L__,r28
+ 1016 07f8 DF91      		pop r29
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 20
+
+
+ 1017 07fa CF91      		pop r28
+ 1018 07fc 1F91      		pop r17
+ 1019 07fe 0F91      		pop r16
+ 1020 0800 0895      		ret
+ 1021               	/* epilogue end (size=11) */
+ 1022               	/* function AlarmAMenu size 158 (135) */
+ 1023               		.size	AlarmAMenu, .-AlarmAMenu
+ 1024               		.data
+ 1025               	.LC22:
+ 1026 0168 5365 7420 		.string	"Set Manual Time"
+ 1026      4D61 6E75 
+ 1026      616C 2054 
+ 1026      696D 6500 
+ 1027               		.text
+ 1028               	.global	SetTimeManually
+ 1029               		.type	SetTimeManually, @function
+ 1030               	SetTimeManually:
+ 1031               	/* prologue: frame size=38 */
+ 1032 0802 0F93      		push r16
+ 1033 0804 1F93      		push r17
+ 1034 0806 CF93      		push r28
+ 1035 0808 DF93      		push r29
+ 1036 080a CDB7      		in r28,__SP_L__
+ 1037 080c DEB7      		in r29,__SP_H__
+ 1038 080e A697      		sbiw r28,38
+ 1039 0810 0FB6      		in __tmp_reg__,__SREG__
+ 1040 0812 F894      		cli
+ 1041 0814 DEBF      		out __SP_H__,r29
+ 1042 0816 0FBE      		out __SREG__,__tmp_reg__
+ 1043 0818 CDBF      		out __SP_L__,r28
+ 1044               	/* prologue end (size=12) */
+ 1045 081a DE01      		movw r26,r28
+ 1046 081c 1196      		adiw r26,1
+ 1047 081e E0E0      		ldi r30,lo8(datetime)
+ 1048 0820 F0E0      		ldi r31,hi8(datetime)
+ 1049 0822 82E1      		ldi r24,lo8(18)
+ 1050               	.L114:
+ 1051 0824 0190      		ld r0,Z+
+ 1052 0826 0D92      		st X+,r0
+ 1053 0828 8150      		subi r24,lo8(-(-1))
+ 1054 082a 01F4      		brne .L114
+ 1055 082c 01E0      		ldi r16,lo8(1)
+ 1056 082e 10E0      		ldi r17,hi8(1)
+ 1057 0830 1093 0000 		sts (pauseCurrentDatetime)+1,r17
+ 1058 0834 0093 0000 		sts pauseCurrentDatetime,r16
+ 1059 0838 80E0      		ldi r24,lo8(datetime)
+ 1060 083a 90E0      		ldi r25,hi8(datetime)
+ 1061 083c 0E94 0000 		call X12RtcGetClock
+ 1062 0840 1092 0000 		sts (datetimeSetManually)+1,__zero_reg__
+ 1063 0844 1092 0000 		sts datetimeSetManually,__zero_reg__
+ 1064 0848 20E0      		ldi r18,lo8(1024)
+ 1065 084a 34E0      		ldi r19,hi8(1024)
+ 1066 084c 40E0      		ldi r20,lo8(0)
+ 1067 084e 50E0      		ldi r21,hi8(0)
+ 1068 0850 60E0      		ldi r22,lo8(gs(KBThreadManualTime))
+ 1069 0852 70E0      		ldi r23,hi8(gs(KBThreadManualTime))
+ 1070 0854 80E0      		ldi r24,lo8(.LC0)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 21
+
+
+ 1071 0856 90E0      		ldi r25,hi8(.LC0)
+ 1072 0858 0E94 0000 		call NutThreadCreate
+ 1073 085c 1093 0000 		sts (backlightStayOn)+1,r17
+ 1074 0860 0093 0000 		sts backlightStayOn,r16
+ 1075 0864 0E94 0000 		call LcdClearAll
+ 1076 0868 8091 0000 		lds r24,firstStartup
+ 1077 086c 9091 0000 		lds r25,(firstStartup)+1
+ 1078 0870 892B      		or r24,r25
+ 1079 0872 01F0      		breq .L115
+ 1080 0874 80E0      		ldi r24,lo8(.LC22)
+ 1081 0876 90E0      		ldi r25,hi8(.LC22)
+ 1082 0878 0E94 0000 		call LcdWriteFirstLine
+ 1083 087c 00C0      		rjmp .L141
+ 1084               	.L131:
+ 1085 087e 0E94 0000 		call LcdClearAll
+ 1086 0882 1092 0000 		sts (threadExit)+1,__zero_reg__
+ 1087 0886 1092 0000 		sts threadExit,__zero_reg__
+ 1088 088a 00C0      		rjmp .L126
+ 1089               	.L115:
+ 1090 088c 80E0      		ldi r24,lo8(.LC22)
+ 1091 088e 90E0      		ldi r25,hi8(.LC22)
+ 1092 0890 0E94 0000 		call LcdWriteTitle
+ 1093 0894 0E94 0000 		call ShowCurrentTime
+ 1094 0898 00C0      		rjmp .L141
+ 1095               	.L118:
+ 1096 089a 64E6      		ldi r22,lo8(100)
+ 1097 089c 70E0      		ldi r23,hi8(100)
+ 1098 089e 80E0      		ldi r24,hlo8(100)
+ 1099 08a0 90E0      		ldi r25,hhi8(100)
+ 1100 08a2 0E94 0000 		call NutSleep
+ 1101 08a6 8091 0000 		lds r24,threadExit
+ 1102 08aa 9091 0000 		lds r25,(threadExit)+1
+ 1103 08ae 892B      		or r24,r25
+ 1104 08b0 01F4      		brne .L131
+ 1105 08b2 0E94 0000 		call LcdClearLine
+ 1106 08b6 8091 0000 		lds r24,selectedDatetimeUnit
+ 1107 08ba 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 1108 08be 8130      		cpi r24,1
+ 1109 08c0 9105      		cpc r25,__zero_reg__
+ 1110 08c2 01F0      		breq .L123
+ 1111 08c4 8230      		cpi r24,2
+ 1112 08c6 9105      		cpc r25,__zero_reg__
+ 1113 08c8 01F0      		breq .L124
+ 1114 08ca 892B      		or r24,r25
+ 1115 08cc 01F4      		brne .L141
+ 1116 08ce 8091 0000 		lds r24,datetime+4
+ 1117 08d2 9091 0000 		lds r25,(datetime+4)+1
+ 1118 08d6 9F93      		push r25
+ 1119 08d8 8F93      		push r24
+ 1120 08da 80E0      		ldi r24,lo8(.LC21)
+ 1121 08dc 90E0      		ldi r25,hi8(.LC21)
+ 1122 08de 00C0      		rjmp .L140
+ 1123               	.L123:
+ 1124 08e0 8091 0000 		lds r24,datetime+2
+ 1125 08e4 9091 0000 		lds r25,(datetime+2)+1
+ 1126 08e8 9F93      		push r25
+ 1127 08ea 8F93      		push r24
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 22
+
+
+ 1128 08ec 80E0      		ldi r24,lo8(.LC17)
+ 1129 08ee 90E0      		ldi r25,hi8(.LC17)
+ 1130 08f0 00C0      		rjmp .L140
+ 1131               	.L124:
+ 1132 08f2 8091 0000 		lds r24,datetime
+ 1133 08f6 9091 0000 		lds r25,(datetime)+1
+ 1134 08fa 9F93      		push r25
+ 1135 08fc 8F93      		push r24
+ 1136 08fe 80E0      		ldi r24,lo8(.LC18)
+ 1137 0900 90E0      		ldi r25,hi8(.LC18)
+ 1138               	.L140:
+ 1139 0902 9F93      		push r25
+ 1140 0904 8F93      		push r24
+ 1141 0906 8E01      		movw r16,r28
+ 1142 0908 0D5E      		subi r16,lo8(-(19))
+ 1143 090a 1F4F      		sbci r17,hi8(-(19))
+ 1144 090c 1F93      		push r17
+ 1145 090e 0F93      		push r16
+ 1146 0910 0E94 0000 		call sprintf
+ 1147 0914 C801      		movw r24,r16
+ 1148 0916 0E94 0000 		call LcdWriteSecondLine
+ 1149 091a 8DB7      		in r24,__SP_L__
+ 1150 091c 9EB7      		in r25,__SP_H__
+ 1151 091e 0696      		adiw r24,6
+ 1152 0920 0FB6      		in __tmp_reg__,__SREG__
+ 1153 0922 F894      		cli
+ 1154 0924 9EBF      		out __SP_H__,r25
+ 1155 0926 0FBE      		out __SREG__,__tmp_reg__
+ 1156 0928 8DBF      		out __SP_L__,r24
+ 1157               	.L141:
+ 1158 092a 8091 0000 		lds r24,datetimeSetManually
+ 1159 092e 9091 0000 		lds r25,(datetimeSetManually)+1
+ 1160 0932 0197      		sbiw r24,1
+ 1161 0934 01F0      		breq .+2
+ 1162 0936 00C0      		rjmp .L118
+ 1163 0938 0E94 0000 		call LcdClearAll
+ 1164 093c 1092 0000 		sts (backlightStayOn)+1,__zero_reg__
+ 1165 0940 1092 0000 		sts backlightStayOn,__zero_reg__
+ 1166 0944 80E0      		ldi r24,lo8(datetime)
+ 1167 0946 90E0      		ldi r25,hi8(datetime)
+ 1168 0948 0E94 0000 		call X12RtcSetClock
+ 1169 094c 892B      		or r24,r25
+ 1170 094e 01F0      		breq .L126
+ 1171 0950 A0E0      		ldi r26,lo8(datetime)
+ 1172 0952 B0E0      		ldi r27,hi8(datetime)
+ 1173 0954 FE01      		movw r30,r28
+ 1174 0956 3196      		adiw r30,1
+ 1175 0958 82E1      		ldi r24,lo8(18)
+ 1176               	.L128:
+ 1177 095a 0190      		ld r0,Z+
+ 1178 095c 0D92      		st X+,r0
+ 1179 095e 8150      		subi r24,lo8(-(-1))
+ 1180 0960 01F4      		brne .L128
+ 1181               	.L126:
+ 1182 0962 1092 0000 		sts (pauseCurrentDatetime)+1,__zero_reg__
+ 1183 0966 1092 0000 		sts pauseCurrentDatetime,__zero_reg__
+ 1184               	/* epilogue: frame size=38 */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 23
+
+
+ 1185 096a A696      		adiw r28,38
+ 1186 096c 0FB6      		in __tmp_reg__,__SREG__
+ 1187 096e F894      		cli
+ 1188 0970 DEBF      		out __SP_H__,r29
+ 1189 0972 0FBE      		out __SREG__,__tmp_reg__
+ 1190 0974 CDBF      		out __SP_L__,r28
+ 1191 0976 DF91      		pop r29
+ 1192 0978 CF91      		pop r28
+ 1193 097a 1F91      		pop r17
+ 1194 097c 0F91      		pop r16
+ 1195 097e 0895      		ret
+ 1196               	/* epilogue end (size=11) */
+ 1197               	/* function SetTimeManually size 194 (171) */
+ 1198               		.size	SetTimeManually, .-SetTimeManually
+ 1199               		.data
+ 1200               	.LC23:
+ 1201 0178 4661 696C 		.string	"Failed."
+ 1201      6564 2E00 
+ 1202               	.LC24:
+ 1203 0180 4E6F 2074 		.string	"No time obtained"
+ 1203      696D 6520 
+ 1203      6F62 7461 
+ 1203      696E 6564 
+ 1203      00
+ 1204               		.text
+ 1205               	.global	SyncDatetime
+ 1206               		.type	SyncDatetime, @function
+ 1207               	SyncDatetime:
+ 1208               	/* prologue: frame size=0 */
+ 1209               	/* prologue end (size=0) */
+ 1210 0980 80E0      		ldi r24,lo8(datetime)
+ 1211 0982 90E0      		ldi r25,hi8(datetime)
+ 1212 0984 0E94 0000 		call NTP
+ 1213 0988 892B      		or r24,r25
+ 1214 098a 01F4      		brne .L145
+ 1215 098c 80E0      		ldi r24,lo8(.LC23)
+ 1216 098e 90E0      		ldi r25,hi8(.LC23)
+ 1217 0990 0E94 0000 		call LcdWriteFirstLine
+ 1218 0994 80E0      		ldi r24,lo8(.LC24)
+ 1219 0996 90E0      		ldi r25,hi8(.LC24)
+ 1220 0998 0E94 0000 		call LcdWriteSecondLine
+ 1221 099c 60ED      		ldi r22,lo8(2000)
+ 1222 099e 77E0      		ldi r23,hi8(2000)
+ 1223 09a0 80E0      		ldi r24,hlo8(2000)
+ 1224 09a2 90E0      		ldi r25,hhi8(2000)
+ 1225 09a4 0E94 0000 		call NutSleep
+ 1226 09a8 81E7      		ldi r24,lo8(113)
+ 1227 09aa 90E0      		ldi r25,hi8(113)
+ 1228 09ac 9093 0000 		sts (datetime+10)+1,r25
+ 1229 09b0 8093 0000 		sts datetime+10,r24
+ 1230 09b4 0E94 0000 		call SetTimeManually
+ 1231 09b8 0E94 0000 		call SetDateManually
+ 1232               	.L145:
+ 1233 09bc 0895      		ret
+ 1234               	/* epilogue: frame size=0 */
+ 1235               	/* epilogue: noreturn */
+ 1236               	/* epilogue end (size=0) */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 24
+
+
+ 1237               	/* function SyncDatetime size 31 (31) */
+ 1238               		.size	SyncDatetime, .-SyncDatetime
+ 1239               	.global	BacklightThread
+ 1240               		.type	BacklightThread, @function
+ 1241               	BacklightThread:
+ 1242               	/* prologue: frame size=0 */
+ 1243               	/* prologue end (size=0) */
+ 1244 09be 1092 0000 		sts (backlightCounter)+1,__zero_reg__
+ 1245 09c2 1092 0000 		sts backlightCounter,__zero_reg__
+ 1246               	.L159:
+ 1247 09c6 68EC      		ldi r22,lo8(200)
+ 1248 09c8 70E0      		ldi r23,hi8(200)
+ 1249 09ca 80E0      		ldi r24,hlo8(200)
+ 1250 09cc 90E0      		ldi r25,hhi8(200)
+ 1251 09ce 0E94 0000 		call NutSleep
+ 1252 09d2 0E94 0000 		call KbGetKey
+ 1253 09d6 8838      		cpi r24,lo8(-120)
+ 1254 09d8 01F0      		breq .L148
+ 1255 09da 1092 0000 		sts (backlightCounter)+1,__zero_reg__
+ 1256 09de 1092 0000 		sts backlightCounter,__zero_reg__
+ 1257 09e2 81E0      		ldi r24,lo8(1)
+ 1258 09e4 0E94 0000 		call LcdBackLight
+ 1259               	.L148:
+ 1260 09e8 8091 0000 		lds r24,backlightStayOn
+ 1261 09ec 9091 0000 		lds r25,(backlightStayOn)+1
+ 1262 09f0 892B      		or r24,r25
+ 1263 09f2 01F4      		brne .L150
+ 1264 09f4 8091 0000 		lds r24,backlightCounter
+ 1265 09f8 9091 0000 		lds r25,(backlightCounter)+1
+ 1266 09fc 0196      		adiw r24,1
+ 1267 09fe 9093 0000 		sts (backlightCounter)+1,r25
+ 1268 0a02 8093 0000 		sts backlightCounter,r24
+ 1269               	.L150:
+ 1270 0a06 8091 0000 		lds r24,backlightCounter
+ 1271 0a0a 9091 0000 		lds r25,(backlightCounter)+1
+ 1272 0a0e 4997      		sbiw r24,25
+ 1273 0a10 04F0      		brlt .L159
+ 1274 0a12 80E0      		ldi r24,lo8(0)
+ 1275 0a14 0E94 0000 		call LcdBackLight
+ 1276 0a18 00C0      		rjmp .L159
+ 1277               	/* epilogue: frame size=0 */
+ 1278               	/* epilogue: noreturn */
+ 1279               	/* epilogue end (size=0) */
+ 1280               	/* function BacklightThread size 47 (47) */
+ 1281               		.size	BacklightThread, .-BacklightThread
+ 1282               	.global	SetAlarmBThread
+ 1283               		.type	SetAlarmBThread, @function
+ 1284               	SetAlarmBThread:
+ 1285               	/* prologue: frame size=0 */
+ 1286               	/* prologue end (size=0) */
+ 1287               	.L220:
+ 1288 0a1a 1092 0000 		sts (selectedAlarmtimeUnit)+1,__zero_reg__
+ 1289 0a1e 1092 0000 		sts selectedAlarmtimeUnit,__zero_reg__
+ 1290               	.L224:
+ 1291 0a22 6CE2      		ldi r22,lo8(300)
+ 1292 0a24 71E0      		ldi r23,hi8(300)
+ 1293 0a26 80E0      		ldi r24,hlo8(300)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 25
+
+
+ 1294 0a28 90E0      		ldi r25,hhi8(300)
+ 1295 0a2a 0E94 0000 		call NutSleep
+ 1296 0a2e 64EF      		ldi r22,lo8(500)
+ 1297 0a30 71E0      		ldi r23,hi8(500)
+ 1298 0a32 80E0      		ldi r24,hlo8(500)
+ 1299 0a34 90E0      		ldi r25,hhi8(500)
+ 1300 0a36 0E94 0000 		call KbWaitForKeyEvent
+ 1301 0a3a 0197      		sbiw r24,1
+ 1302 0a3c 01F0      		breq .L224
+ 1303 0a3e 0E94 0000 		call KbGetKey
+ 1304 0a42 8830      		cpi r24,lo8(8)
+ 1305 0a44 01F0      		breq .+2
+ 1306 0a46 00C0      		rjmp .L163
+ 1307 0a48 2091 0000 		lds r18,selectedAlarmtimeUnit
+ 1308 0a4c 3091 0000 		lds r19,(selectedAlarmtimeUnit)+1
+ 1309 0a50 2230      		cpi r18,2
+ 1310 0a52 3105      		cpc r19,__zero_reg__
+ 1311 0a54 01F0      		breq .L167
+ 1312 0a56 2330      		cpi r18,3
+ 1313 0a58 3105      		cpc r19,__zero_reg__
+ 1314 0a5a 04F4      		brge .L170
+ 1315 0a5c 2115      		cp r18,__zero_reg__
+ 1316 0a5e 3105      		cpc r19,__zero_reg__
+ 1317 0a60 01F0      		breq .L165
+ 1318 0a62 2130      		cpi r18,1
+ 1319 0a64 3105      		cpc r19,__zero_reg__
+ 1320 0a66 01F4      		brne .L224
+ 1321 0a68 00C0      		rjmp .L166
+ 1322               	.L170:
+ 1323 0a6a 2330      		cpi r18,3
+ 1324 0a6c 3105      		cpc r19,__zero_reg__
+ 1325 0a6e 01F0      		breq .L168
+ 1326 0a70 2430      		cpi r18,4
+ 1327 0a72 3105      		cpc r19,__zero_reg__
+ 1328 0a74 01F4      		brne .L224
+ 1329 0a76 00C0      		rjmp .L169
+ 1330               	.L165:
+ 1331 0a78 8091 0000 		lds r24,alarmB+8
+ 1332 0a7c 9091 0000 		lds r25,(alarmB+8)+1
+ 1333 0a80 8B30      		cpi r24,11
+ 1334 0a82 9105      		cpc r25,__zero_reg__
+ 1335 0a84 04F0      		brlt .L171
+ 1336 0a86 1092 0000 		sts (alarmB+8)+1,__zero_reg__
+ 1337 0a8a 1092 0000 		sts alarmB+8,__zero_reg__
+ 1338 0a8e 00C0      		rjmp .L224
+ 1339               	.L171:
+ 1340 0a90 0196      		adiw r24,1
+ 1341 0a92 00C0      		rjmp .L216
+ 1342               	.L166:
+ 1343 0a94 8091 0000 		lds r24,alarmB+6
+ 1344 0a98 9091 0000 		lds r25,(alarmB+6)+1
+ 1345 0a9c 8F31      		cpi r24,31
+ 1346 0a9e 9105      		cpc r25,__zero_reg__
+ 1347 0aa0 04F0      		brlt .L173
+ 1348 0aa2 3093 0000 		sts (alarmB+6)+1,r19
+ 1349 0aa6 2093 0000 		sts alarmB+6,r18
+ 1350 0aaa 00C0      		rjmp .L224
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 26
+
+
+ 1351               	.L173:
+ 1352 0aac 0196      		adiw r24,1
+ 1353 0aae 00C0      		rjmp .L217
+ 1354               	.L167:
+ 1355 0ab0 8091 0000 		lds r24,alarmB+4
+ 1356 0ab4 9091 0000 		lds r25,(alarmB+4)+1
+ 1357 0ab8 8731      		cpi r24,23
+ 1358 0aba 9105      		cpc r25,__zero_reg__
+ 1359 0abc 04F0      		brlt .L175
+ 1360 0abe 1092 0000 		sts (alarmB+4)+1,__zero_reg__
+ 1361 0ac2 1092 0000 		sts alarmB+4,__zero_reg__
+ 1362 0ac6 00C0      		rjmp .L224
+ 1363               	.L175:
+ 1364 0ac8 0196      		adiw r24,1
+ 1365 0aca 00C0      		rjmp .L219
+ 1366               	.L168:
+ 1367 0acc 8091 0000 		lds r24,alarmB+2
+ 1368 0ad0 9091 0000 		lds r25,(alarmB+2)+1
+ 1369 0ad4 8B33      		cpi r24,59
+ 1370 0ad6 9105      		cpc r25,__zero_reg__
+ 1371 0ad8 04F0      		brlt .L177
+ 1372 0ada 1092 0000 		sts (alarmB+2)+1,__zero_reg__
+ 1373 0ade 1092 0000 		sts alarmB+2,__zero_reg__
+ 1374 0ae2 00C0      		rjmp .L224
+ 1375               	.L177:
+ 1376 0ae4 0196      		adiw r24,1
+ 1377 0ae6 00C0      		rjmp .L222
+ 1378               	.L169:
+ 1379 0ae8 8091 0000 		lds r24,alarmB
+ 1380 0aec 9091 0000 		lds r25,(alarmB)+1
+ 1381 0af0 8B33      		cpi r24,59
+ 1382 0af2 9105      		cpc r25,__zero_reg__
+ 1383 0af4 04F0      		brlt .L179
+ 1384 0af6 1092 0000 		sts (alarmB)+1,__zero_reg__
+ 1385 0afa 1092 0000 		sts alarmB,__zero_reg__
+ 1386 0afe 00C0      		rjmp .L224
+ 1387               	.L179:
+ 1388 0b00 0196      		adiw r24,1
+ 1389 0b02 00C0      		rjmp .L223
+ 1390               	.L163:
+ 1391 0b04 8B30      		cpi r24,lo8(11)
+ 1392 0b06 01F0      		breq .+2
+ 1393 0b08 00C0      		rjmp .L181
+ 1394 0b0a 8091 0000 		lds r24,selectedAlarmtimeUnit
+ 1395 0b0e 9091 0000 		lds r25,(selectedAlarmtimeUnit)+1
+ 1396 0b12 8230      		cpi r24,2
+ 1397 0b14 9105      		cpc r25,__zero_reg__
+ 1398 0b16 01F0      		breq .L185
+ 1399 0b18 8330      		cpi r24,3
+ 1400 0b1a 9105      		cpc r25,__zero_reg__
+ 1401 0b1c 04F4      		brge .L188
+ 1402 0b1e 0097      		sbiw r24,0
+ 1403 0b20 01F0      		breq .L183
+ 1404 0b22 0197      		sbiw r24,1
+ 1405 0b24 01F0      		breq .+2
+ 1406 0b26 00C0      		rjmp .L224
+ 1407 0b28 00C0      		rjmp .L184
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 27
+
+
+ 1408               	.L188:
+ 1409 0b2a 8330      		cpi r24,3
+ 1410 0b2c 9105      		cpc r25,__zero_reg__
+ 1411 0b2e 01F0      		breq .L186
+ 1412 0b30 0497      		sbiw r24,4
+ 1413 0b32 01F0      		breq .+2
+ 1414 0b34 00C0      		rjmp .L224
+ 1415 0b36 00C0      		rjmp .L187
+ 1416               	.L183:
+ 1417 0b38 8091 0000 		lds r24,alarmB+8
+ 1418 0b3c 9091 0000 		lds r25,(alarmB+8)+1
+ 1419 0b40 1816      		cp __zero_reg__,r24
+ 1420 0b42 1906      		cpc __zero_reg__,r25
+ 1421 0b44 04F0      		brlt .L189
+ 1422 0b46 8BE0      		ldi r24,lo8(11)
+ 1423 0b48 90E0      		ldi r25,hi8(11)
+ 1424               	.L216:
+ 1425 0b4a 9093 0000 		sts (alarmB+8)+1,r25
+ 1426 0b4e 8093 0000 		sts alarmB+8,r24
+ 1427 0b52 00C0      		rjmp .L224
+ 1428               	.L189:
+ 1429 0b54 0197      		sbiw r24,1
+ 1430 0b56 00C0      		rjmp .L216
+ 1431               	.L184:
+ 1432 0b58 8091 0000 		lds r24,alarmB+6
+ 1433 0b5c 9091 0000 		lds r25,(alarmB+6)+1
+ 1434 0b60 8230      		cpi r24,2
+ 1435 0b62 9105      		cpc r25,__zero_reg__
+ 1436 0b64 04F4      		brge .L191
+ 1437 0b66 8FE1      		ldi r24,lo8(31)
+ 1438 0b68 90E0      		ldi r25,hi8(31)
+ 1439               	.L217:
+ 1440 0b6a 9093 0000 		sts (alarmB+6)+1,r25
+ 1441 0b6e 8093 0000 		sts alarmB+6,r24
+ 1442 0b72 00C0      		rjmp .L224
+ 1443               	.L191:
+ 1444 0b74 0197      		sbiw r24,1
+ 1445 0b76 00C0      		rjmp .L217
+ 1446               	.L185:
+ 1447 0b78 8091 0000 		lds r24,alarmB+4
+ 1448 0b7c 9091 0000 		lds r25,(alarmB+4)+1
+ 1449 0b80 1816      		cp __zero_reg__,r24
+ 1450 0b82 1906      		cpc __zero_reg__,r25
+ 1451 0b84 04F0      		brlt .L193
+ 1452 0b86 87E1      		ldi r24,lo8(23)
+ 1453 0b88 90E0      		ldi r25,hi8(23)
+ 1454               	.L219:
+ 1455 0b8a 9093 0000 		sts (alarmB+4)+1,r25
+ 1456 0b8e 8093 0000 		sts alarmB+4,r24
+ 1457 0b92 00C0      		rjmp .L224
+ 1458               	.L193:
+ 1459 0b94 0197      		sbiw r24,1
+ 1460 0b96 00C0      		rjmp .L219
+ 1461               	.L186:
+ 1462 0b98 8091 0000 		lds r24,alarmB+2
+ 1463 0b9c 9091 0000 		lds r25,(alarmB+2)+1
+ 1464 0ba0 1816      		cp __zero_reg__,r24
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 28
+
+
+ 1465 0ba2 1906      		cpc __zero_reg__,r25
+ 1466 0ba4 04F0      		brlt .L195
+ 1467 0ba6 8BE3      		ldi r24,lo8(59)
+ 1468 0ba8 90E0      		ldi r25,hi8(59)
+ 1469               	.L222:
+ 1470 0baa 9093 0000 		sts (alarmB+2)+1,r25
+ 1471 0bae 8093 0000 		sts alarmB+2,r24
+ 1472 0bb2 00C0      		rjmp .L224
+ 1473               	.L195:
+ 1474 0bb4 0197      		sbiw r24,1
+ 1475 0bb6 00C0      		rjmp .L222
+ 1476               	.L187:
+ 1477 0bb8 8091 0000 		lds r24,alarmB
+ 1478 0bbc 9091 0000 		lds r25,(alarmB)+1
+ 1479 0bc0 1816      		cp __zero_reg__,r24
+ 1480 0bc2 1906      		cpc __zero_reg__,r25
+ 1481 0bc4 04F0      		brlt .L197
+ 1482 0bc6 8BE3      		ldi r24,lo8(59)
+ 1483 0bc8 90E0      		ldi r25,hi8(59)
+ 1484 0bca 00C0      		rjmp .L223
+ 1485               	.L197:
+ 1486 0bcc 0197      		sbiw r24,1
+ 1487               	.L223:
+ 1488 0bce 9093 0000 		sts (alarmB)+1,r25
+ 1489 0bd2 8093 0000 		sts alarmB,r24
+ 1490 0bd6 00C0      		rjmp .L224
+ 1491               	.L181:
+ 1492 0bd8 8A30      		cpi r24,lo8(10)
+ 1493 0bda 01F4      		brne .L199
+ 1494 0bdc 8091 0000 		lds r24,selectedAlarmtimeUnit
+ 1495 0be0 9091 0000 		lds r25,(selectedAlarmtimeUnit)+1
+ 1496 0be4 1816      		cp __zero_reg__,r24
+ 1497 0be6 1906      		cpc __zero_reg__,r25
+ 1498 0be8 04F0      		brlt .L201
+ 1499 0bea 84E0      		ldi r24,lo8(4)
+ 1500 0bec 90E0      		ldi r25,hi8(4)
+ 1501 0bee 00C0      		rjmp .L221
+ 1502               	.L201:
+ 1503 0bf0 0197      		sbiw r24,1
+ 1504 0bf2 00C0      		rjmp .L221
+ 1505               	.L199:
+ 1506 0bf4 8C30      		cpi r24,lo8(12)
+ 1507 0bf6 01F4      		brne .L203
+ 1508 0bf8 8091 0000 		lds r24,selectedAlarmtimeUnit
+ 1509 0bfc 9091 0000 		lds r25,(selectedAlarmtimeUnit)+1
+ 1510 0c00 8430      		cpi r24,4
+ 1511 0c02 9105      		cpc r25,__zero_reg__
+ 1512 0c04 04F0      		brlt .+2
+ 1513 0c06 00C0      		rjmp .L220
+ 1514 0c08 0196      		adiw r24,1
+ 1515               	.L221:
+ 1516 0c0a 9093 0000 		sts (selectedAlarmtimeUnit)+1,r25
+ 1517 0c0e 8093 0000 		sts selectedAlarmtimeUnit,r24
+ 1518 0c12 00C0      		rjmp .L224
+ 1519               	.L203:
+ 1520 0c14 8930      		cpi r24,lo8(9)
+ 1521 0c16 01F4      		brne .L207
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 29
+
+
+ 1522 0c18 81E0      		ldi r24,lo8(1)
+ 1523 0c1a 90E0      		ldi r25,hi8(1)
+ 1524 0c1c 9093 0000 		sts (alarmBset)+1,r25
+ 1525 0c20 8093 0000 		sts alarmBset,r24
+ 1526 0c24 00C0      		rjmp .L218
+ 1527               	.L207:
+ 1528 0c26 8730      		cpi r24,lo8(7)
+ 1529 0c28 01F0      		breq .+2
+ 1530 0c2a 00C0      		rjmp .L224
+ 1531 0c2c 81E0      		ldi r24,lo8(1)
+ 1532 0c2e 90E0      		ldi r25,hi8(1)
+ 1533 0c30 9093 0000 		sts (threadExit)+1,r25
+ 1534 0c34 8093 0000 		sts threadExit,r24
+ 1535               	.L218:
+ 1536 0c38 0E94 0000 		call NutThreadExit
+ 1537 0c3c 00C0      		rjmp .L224
+ 1538               	/* epilogue: frame size=0 */
+ 1539               	/* epilogue: noreturn */
+ 1540               	/* epilogue end (size=0) */
+ 1541               	/* function SetAlarmBThread size 277 (277) */
+ 1542               		.size	SetAlarmBThread, .-SetAlarmBThread
+ 1543               	.global	SetAlarmAThread
+ 1544               		.type	SetAlarmAThread, @function
+ 1545               	SetAlarmAThread:
+ 1546               	/* prologue: frame size=0 */
+ 1547               	/* prologue end (size=0) */
+ 1548               	.L271:
+ 1549 0c3e 1092 0000 		sts (selectedAlarmtimeUnit)+1,__zero_reg__
+ 1550 0c42 1092 0000 		sts selectedAlarmtimeUnit,__zero_reg__
+ 1551               	.L273:
+ 1552 0c46 6CE2      		ldi r22,lo8(300)
+ 1553 0c48 71E0      		ldi r23,hi8(300)
+ 1554 0c4a 80E0      		ldi r24,hlo8(300)
+ 1555 0c4c 90E0      		ldi r25,hhi8(300)
+ 1556 0c4e 0E94 0000 		call NutSleep
+ 1557 0c52 64EF      		ldi r22,lo8(500)
+ 1558 0c54 71E0      		ldi r23,hi8(500)
+ 1559 0c56 80E0      		ldi r24,hlo8(500)
+ 1560 0c58 90E0      		ldi r25,hhi8(500)
+ 1561 0c5a 0E94 0000 		call KbWaitForKeyEvent
+ 1562 0c5e 0197      		sbiw r24,1
+ 1563 0c60 01F0      		breq .L273
+ 1564 0c62 0E94 0000 		call KbGetKey
+ 1565 0c66 8830      		cpi r24,lo8(8)
+ 1566 0c68 01F4      		brne .L228
+ 1567 0c6a 8091 0000 		lds r24,selectedAlarmtimeUnit
+ 1568 0c6e 9091 0000 		lds r25,(selectedAlarmtimeUnit)+1
+ 1569 0c72 8130      		cpi r24,1
+ 1570 0c74 9105      		cpc r25,__zero_reg__
+ 1571 0c76 01F0      		breq .L231
+ 1572 0c78 8230      		cpi r24,2
+ 1573 0c7a 9105      		cpc r25,__zero_reg__
+ 1574 0c7c 01F0      		breq .L232
+ 1575 0c7e 892B      		or r24,r25
+ 1576 0c80 01F4      		brne .L273
+ 1577 0c82 8091 0000 		lds r24,alarmA+4
+ 1578 0c86 9091 0000 		lds r25,(alarmA+4)+1
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 30
+
+
+ 1579 0c8a 8731      		cpi r24,23
+ 1580 0c8c 9105      		cpc r25,__zero_reg__
+ 1581 0c8e 04F0      		brlt .L233
+ 1582 0c90 1092 0000 		sts (alarmA+4)+1,__zero_reg__
+ 1583 0c94 1092 0000 		sts alarmA+4,__zero_reg__
+ 1584 0c98 00C0      		rjmp .L273
+ 1585               	.L233:
+ 1586 0c9a 0196      		adiw r24,1
+ 1587 0c9c 00C0      		rjmp .L267
+ 1588               	.L231:
+ 1589 0c9e 8091 0000 		lds r24,alarmA+2
+ 1590 0ca2 9091 0000 		lds r25,(alarmA+2)+1
+ 1591 0ca6 8B33      		cpi r24,59
+ 1592 0ca8 9105      		cpc r25,__zero_reg__
+ 1593 0caa 04F0      		brlt .L235
+ 1594 0cac 1092 0000 		sts (alarmA+2)+1,__zero_reg__
+ 1595 0cb0 1092 0000 		sts alarmA+2,__zero_reg__
+ 1596 0cb4 00C0      		rjmp .L273
+ 1597               	.L235:
+ 1598 0cb6 0196      		adiw r24,1
+ 1599 0cb8 00C0      		rjmp .L268
+ 1600               	.L232:
+ 1601 0cba 8091 0000 		lds r24,alarmA
+ 1602 0cbe 9091 0000 		lds r25,(alarmA)+1
+ 1603 0cc2 8B33      		cpi r24,59
+ 1604 0cc4 9105      		cpc r25,__zero_reg__
+ 1605 0cc6 04F0      		brlt .L237
+ 1606 0cc8 1092 0000 		sts (alarmA)+1,__zero_reg__
+ 1607 0ccc 1092 0000 		sts alarmA,__zero_reg__
+ 1608 0cd0 00C0      		rjmp .L273
+ 1609               	.L237:
+ 1610 0cd2 0196      		adiw r24,1
+ 1611 0cd4 00C0      		rjmp .L270
+ 1612               	.L228:
+ 1613 0cd6 8B30      		cpi r24,lo8(11)
+ 1614 0cd8 01F4      		brne .L239
+ 1615 0cda 8091 0000 		lds r24,selectedAlarmtimeUnit
+ 1616 0cde 9091 0000 		lds r25,(selectedAlarmtimeUnit)+1
+ 1617 0ce2 8130      		cpi r24,1
+ 1618 0ce4 9105      		cpc r25,__zero_reg__
+ 1619 0ce6 01F0      		breq .L242
+ 1620 0ce8 8230      		cpi r24,2
+ 1621 0cea 9105      		cpc r25,__zero_reg__
+ 1622 0cec 01F0      		breq .L243
+ 1623 0cee 892B      		or r24,r25
+ 1624 0cf0 01F0      		breq .+2
+ 1625 0cf2 00C0      		rjmp .L273
+ 1626 0cf4 8091 0000 		lds r24,alarmA+4
+ 1627 0cf8 9091 0000 		lds r25,(alarmA+4)+1
+ 1628 0cfc 1816      		cp __zero_reg__,r24
+ 1629 0cfe 1906      		cpc __zero_reg__,r25
+ 1630 0d00 04F0      		brlt .L244
+ 1631 0d02 87E1      		ldi r24,lo8(23)
+ 1632 0d04 90E0      		ldi r25,hi8(23)
+ 1633               	.L267:
+ 1634 0d06 9093 0000 		sts (alarmA+4)+1,r25
+ 1635 0d0a 8093 0000 		sts alarmA+4,r24
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 31
+
+
+ 1636 0d0e 00C0      		rjmp .L273
+ 1637               	.L244:
+ 1638 0d10 0197      		sbiw r24,1
+ 1639 0d12 00C0      		rjmp .L267
+ 1640               	.L242:
+ 1641 0d14 8091 0000 		lds r24,alarmA+2
+ 1642 0d18 9091 0000 		lds r25,(alarmA+2)+1
+ 1643 0d1c 1816      		cp __zero_reg__,r24
+ 1644 0d1e 1906      		cpc __zero_reg__,r25
+ 1645 0d20 04F0      		brlt .L246
+ 1646 0d22 8BE3      		ldi r24,lo8(59)
+ 1647 0d24 90E0      		ldi r25,hi8(59)
+ 1648               	.L268:
+ 1649 0d26 9093 0000 		sts (alarmA+2)+1,r25
+ 1650 0d2a 8093 0000 		sts alarmA+2,r24
+ 1651 0d2e 00C0      		rjmp .L273
+ 1652               	.L246:
+ 1653 0d30 0197      		sbiw r24,1
+ 1654 0d32 00C0      		rjmp .L268
+ 1655               	.L243:
+ 1656 0d34 8091 0000 		lds r24,alarmA
+ 1657 0d38 9091 0000 		lds r25,(alarmA)+1
+ 1658 0d3c 1816      		cp __zero_reg__,r24
+ 1659 0d3e 1906      		cpc __zero_reg__,r25
+ 1660 0d40 04F0      		brlt .L248
+ 1661 0d42 8BE3      		ldi r24,lo8(59)
+ 1662 0d44 90E0      		ldi r25,hi8(59)
+ 1663               	.L270:
+ 1664 0d46 9093 0000 		sts (alarmA)+1,r25
+ 1665 0d4a 8093 0000 		sts alarmA,r24
+ 1666 0d4e 00C0      		rjmp .L273
+ 1667               	.L248:
+ 1668 0d50 0197      		sbiw r24,1
+ 1669 0d52 00C0      		rjmp .L270
+ 1670               	.L239:
+ 1671 0d54 8A30      		cpi r24,lo8(10)
+ 1672 0d56 01F4      		brne .L250
+ 1673 0d58 8091 0000 		lds r24,selectedAlarmtimeUnit
+ 1674 0d5c 9091 0000 		lds r25,(selectedAlarmtimeUnit)+1
+ 1675 0d60 1816      		cp __zero_reg__,r24
+ 1676 0d62 1906      		cpc __zero_reg__,r25
+ 1677 0d64 04F0      		brlt .L252
+ 1678 0d66 82E0      		ldi r24,lo8(2)
+ 1679 0d68 90E0      		ldi r25,hi8(2)
+ 1680 0d6a 00C0      		rjmp .L272
+ 1681               	.L252:
+ 1682 0d6c 0197      		sbiw r24,1
+ 1683 0d6e 00C0      		rjmp .L272
+ 1684               	.L250:
+ 1685 0d70 8C30      		cpi r24,lo8(12)
+ 1686 0d72 01F4      		brne .L254
+ 1687 0d74 8091 0000 		lds r24,selectedAlarmtimeUnit
+ 1688 0d78 9091 0000 		lds r25,(selectedAlarmtimeUnit)+1
+ 1689 0d7c 8230      		cpi r24,2
+ 1690 0d7e 9105      		cpc r25,__zero_reg__
+ 1691 0d80 04F0      		brlt .+2
+ 1692 0d82 00C0      		rjmp .L271
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 32
+
+
+ 1693 0d84 0196      		adiw r24,1
+ 1694               	.L272:
+ 1695 0d86 9093 0000 		sts (selectedAlarmtimeUnit)+1,r25
+ 1696 0d8a 8093 0000 		sts selectedAlarmtimeUnit,r24
+ 1697 0d8e 00C0      		rjmp .L273
+ 1698               	.L254:
+ 1699 0d90 8930      		cpi r24,lo8(9)
+ 1700 0d92 01F4      		brne .L258
+ 1701 0d94 81E0      		ldi r24,lo8(1)
+ 1702 0d96 90E0      		ldi r25,hi8(1)
+ 1703 0d98 9093 0000 		sts (alarmAset)+1,r25
+ 1704 0d9c 8093 0000 		sts alarmAset,r24
+ 1705 0da0 00C0      		rjmp .L269
+ 1706               	.L258:
+ 1707 0da2 8730      		cpi r24,lo8(7)
+ 1708 0da4 01F0      		breq .+2
+ 1709 0da6 00C0      		rjmp .L273
+ 1710 0da8 81E0      		ldi r24,lo8(1)
+ 1711 0daa 90E0      		ldi r25,hi8(1)
+ 1712 0dac 9093 0000 		sts (threadExit)+1,r25
+ 1713 0db0 8093 0000 		sts threadExit,r24
+ 1714               	.L269:
+ 1715 0db4 0E94 0000 		call NutThreadExit
+ 1716 0db8 00C0      		rjmp .L273
+ 1717               	/* epilogue: frame size=0 */
+ 1718               	/* epilogue: noreturn */
+ 1719               	/* epilogue end (size=0) */
+ 1720               	/* function SetAlarmAThread size 191 (191) */
+ 1721               		.size	SetAlarmAThread, .-SetAlarmAThread
+ 1722               	.global	KBThreadManualDate
+ 1723               		.type	KBThreadManualDate, @function
+ 1724               	KBThreadManualDate:
+ 1725               	/* prologue: frame size=0 */
+ 1726               	/* prologue end (size=0) */
+ 1727               	.L318:
+ 1728 0dba 1092 0000 		sts (selectedDatetimeUnit)+1,__zero_reg__
+ 1729 0dbe 1092 0000 		sts selectedDatetimeUnit,__zero_reg__
+ 1730               	.L320:
+ 1731 0dc2 6CE2      		ldi r22,lo8(300)
+ 1732 0dc4 71E0      		ldi r23,hi8(300)
+ 1733 0dc6 80E0      		ldi r24,hlo8(300)
+ 1734 0dc8 90E0      		ldi r25,hhi8(300)
+ 1735 0dca 0E94 0000 		call NutSleep
+ 1736 0dce 64EF      		ldi r22,lo8(500)
+ 1737 0dd0 71E0      		ldi r23,hi8(500)
+ 1738 0dd2 80E0      		ldi r24,hlo8(500)
+ 1739 0dd4 90E0      		ldi r25,hhi8(500)
+ 1740 0dd6 0E94 0000 		call KbWaitForKeyEvent
+ 1741 0dda 0197      		sbiw r24,1
+ 1742 0ddc 01F0      		breq .L320
+ 1743 0dde 0E94 0000 		call KbGetKey
+ 1744 0de2 8830      		cpi r24,lo8(8)
+ 1745 0de4 01F4      		brne .L277
+ 1746 0de6 8091 0000 		lds r24,selectedDatetimeUnit
+ 1747 0dea 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 1748 0dee 8130      		cpi r24,1
+ 1749 0df0 9105      		cpc r25,__zero_reg__
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 33
+
+
+ 1750 0df2 01F0      		breq .L280
+ 1751 0df4 8230      		cpi r24,2
+ 1752 0df6 9105      		cpc r25,__zero_reg__
+ 1753 0df8 01F0      		breq .L281
+ 1754 0dfa 892B      		or r24,r25
+ 1755 0dfc 01F4      		brne .L320
+ 1756 0dfe 8091 0000 		lds r24,datetime+6
+ 1757 0e02 9091 0000 		lds r25,(datetime+6)+1
+ 1758 0e06 8E31      		cpi r24,30
+ 1759 0e08 9105      		cpc r25,__zero_reg__
+ 1760 0e0a 04F0      		brlt .L282
+ 1761 0e0c 81E0      		ldi r24,lo8(1)
+ 1762 0e0e 90E0      		ldi r25,hi8(1)
+ 1763 0e10 00C0      		rjmp .L314
+ 1764               	.L282:
+ 1765 0e12 0196      		adiw r24,1
+ 1766               	.L314:
+ 1767 0e14 9093 0000 		sts (datetime+6)+1,r25
+ 1768 0e18 8093 0000 		sts datetime+6,r24
+ 1769 0e1c 00C0      		rjmp .L320
+ 1770               	.L280:
+ 1771 0e1e 8091 0000 		lds r24,datetime+8
+ 1772 0e22 9091 0000 		lds r25,(datetime+8)+1
+ 1773 0e26 8B30      		cpi r24,11
+ 1774 0e28 9105      		cpc r25,__zero_reg__
+ 1775 0e2a 04F0      		brlt .L284
+ 1776 0e2c 1092 0000 		sts (datetime+8)+1,__zero_reg__
+ 1777 0e30 1092 0000 		sts datetime+8,__zero_reg__
+ 1778 0e34 00C0      		rjmp .L320
+ 1779               	.L284:
+ 1780 0e36 0196      		adiw r24,1
+ 1781 0e38 00C0      		rjmp .L315
+ 1782               	.L281:
+ 1783 0e3a 8091 0000 		lds r24,datetime+10
+ 1784 0e3e 9091 0000 		lds r25,(datetime+10)+1
+ 1785 0e42 0196      		adiw r24,1
+ 1786 0e44 00C0      		rjmp .L316
+ 1787               	.L277:
+ 1788 0e46 8B30      		cpi r24,lo8(11)
+ 1789 0e48 01F4      		brne .L286
+ 1790 0e4a 8091 0000 		lds r24,selectedDatetimeUnit
+ 1791 0e4e 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 1792 0e52 8130      		cpi r24,1
+ 1793 0e54 9105      		cpc r25,__zero_reg__
+ 1794 0e56 01F0      		breq .L289
+ 1795 0e58 8230      		cpi r24,2
+ 1796 0e5a 9105      		cpc r25,__zero_reg__
+ 1797 0e5c 01F0      		breq .L290
+ 1798 0e5e 892B      		or r24,r25
+ 1799 0e60 01F0      		breq .+2
+ 1800 0e62 00C0      		rjmp .L320
+ 1801 0e64 8091 0000 		lds r24,datetime+6
+ 1802 0e68 9091 0000 		lds r25,(datetime+6)+1
+ 1803 0e6c 8230      		cpi r24,2
+ 1804 0e6e 9105      		cpc r25,__zero_reg__
+ 1805 0e70 04F4      		brge .L291
+ 1806 0e72 8FE1      		ldi r24,lo8(31)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 34
+
+
+ 1807 0e74 90E0      		ldi r25,hi8(31)
+ 1808 0e76 00C0      		rjmp .L314
+ 1809               	.L291:
+ 1810 0e78 0197      		sbiw r24,1
+ 1811 0e7a 00C0      		rjmp .L314
+ 1812               	.L289:
+ 1813 0e7c 8091 0000 		lds r24,datetime+8
+ 1814 0e80 9091 0000 		lds r25,(datetime+8)+1
+ 1815 0e84 1816      		cp __zero_reg__,r24
+ 1816 0e86 1906      		cpc __zero_reg__,r25
+ 1817 0e88 04F0      		brlt .L293
+ 1818 0e8a 8BE0      		ldi r24,lo8(11)
+ 1819 0e8c 90E0      		ldi r25,hi8(11)
+ 1820               	.L315:
+ 1821 0e8e 9093 0000 		sts (datetime+8)+1,r25
+ 1822 0e92 8093 0000 		sts datetime+8,r24
+ 1823 0e96 00C0      		rjmp .L320
+ 1824               	.L293:
+ 1825 0e98 0197      		sbiw r24,1
+ 1826 0e9a 00C0      		rjmp .L315
+ 1827               	.L290:
+ 1828 0e9c 8091 0000 		lds r24,datetime+10
+ 1829 0ea0 9091 0000 		lds r25,(datetime+10)+1
+ 1830 0ea4 1816      		cp __zero_reg__,r24
+ 1831 0ea6 1906      		cpc __zero_reg__,r25
+ 1832 0ea8 04F0      		brlt .+2
+ 1833 0eaa 00C0      		rjmp .L320
+ 1834 0eac 0197      		sbiw r24,1
+ 1835               	.L316:
+ 1836 0eae 9093 0000 		sts (datetime+10)+1,r25
+ 1837 0eb2 8093 0000 		sts datetime+10,r24
+ 1838 0eb6 00C0      		rjmp .L320
+ 1839               	.L286:
+ 1840 0eb8 8A30      		cpi r24,lo8(10)
+ 1841 0eba 01F4      		brne .L296
+ 1842 0ebc 8091 0000 		lds r24,selectedDatetimeUnit
+ 1843 0ec0 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 1844 0ec4 1816      		cp __zero_reg__,r24
+ 1845 0ec6 1906      		cpc __zero_reg__,r25
+ 1846 0ec8 04F0      		brlt .L298
+ 1847 0eca 82E0      		ldi r24,lo8(2)
+ 1848 0ecc 90E0      		ldi r25,hi8(2)
+ 1849 0ece 00C0      		rjmp .L319
+ 1850               	.L298:
+ 1851 0ed0 0197      		sbiw r24,1
+ 1852 0ed2 00C0      		rjmp .L319
+ 1853               	.L296:
+ 1854 0ed4 8C30      		cpi r24,lo8(12)
+ 1855 0ed6 01F4      		brne .L300
+ 1856 0ed8 8091 0000 		lds r24,selectedDatetimeUnit
+ 1857 0edc 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 1858 0ee0 8230      		cpi r24,2
+ 1859 0ee2 9105      		cpc r25,__zero_reg__
+ 1860 0ee4 04F0      		brlt .+2
+ 1861 0ee6 00C0      		rjmp .L318
+ 1862 0ee8 0196      		adiw r24,1
+ 1863               	.L319:
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 35
+
+
+ 1864 0eea 9093 0000 		sts (selectedDatetimeUnit)+1,r25
+ 1865 0eee 8093 0000 		sts selectedDatetimeUnit,r24
+ 1866 0ef2 00C0      		rjmp .L320
+ 1867               	.L300:
+ 1868 0ef4 8930      		cpi r24,lo8(9)
+ 1869 0ef6 01F4      		brne .L304
+ 1870 0ef8 81E0      		ldi r24,lo8(1)
+ 1871 0efa 90E0      		ldi r25,hi8(1)
+ 1872 0efc 9093 0000 		sts (datetimeSetManually)+1,r25
+ 1873 0f00 8093 0000 		sts datetimeSetManually,r24
+ 1874 0f04 00C0      		rjmp .L317
+ 1875               	.L304:
+ 1876 0f06 8730      		cpi r24,lo8(7)
+ 1877 0f08 01F0      		breq .+2
+ 1878 0f0a 00C0      		rjmp .L320
+ 1879 0f0c 8091 0000 		lds r24,firstStartup
+ 1880 0f10 9091 0000 		lds r25,(firstStartup)+1
+ 1881 0f14 892B      		or r24,r25
+ 1882 0f16 01F0      		breq .+2
+ 1883 0f18 00C0      		rjmp .L320
+ 1884 0f1a 81E0      		ldi r24,lo8(1)
+ 1885 0f1c 90E0      		ldi r25,hi8(1)
+ 1886 0f1e 9093 0000 		sts (threadExit)+1,r25
+ 1887 0f22 8093 0000 		sts threadExit,r24
+ 1888               	.L317:
+ 1889 0f26 0E94 0000 		call NutThreadExit
+ 1890 0f2a 00C0      		rjmp .L320
+ 1891               	/* epilogue: frame size=0 */
+ 1892               	/* epilogue: noreturn */
+ 1893               	/* epilogue end (size=0) */
+ 1894               	/* function KBThreadManualDate size 186 (186) */
+ 1895               		.size	KBThreadManualDate, .-KBThreadManualDate
+ 1896               	.global	KBThreadManualTime
+ 1897               		.type	KBThreadManualTime, @function
+ 1898               	KBThreadManualTime:
+ 1899               	/* prologue: frame size=0 */
+ 1900               	/* prologue end (size=0) */
+ 1901               	.L368:
+ 1902 0f2c 1092 0000 		sts (selectedDatetimeUnit)+1,__zero_reg__
+ 1903 0f30 1092 0000 		sts selectedDatetimeUnit,__zero_reg__
+ 1904               	.L370:
+ 1905 0f34 6CE2      		ldi r22,lo8(300)
+ 1906 0f36 71E0      		ldi r23,hi8(300)
+ 1907 0f38 80E0      		ldi r24,hlo8(300)
+ 1908 0f3a 90E0      		ldi r25,hhi8(300)
+ 1909 0f3c 0E94 0000 		call NutSleep
+ 1910 0f40 64EF      		ldi r22,lo8(500)
+ 1911 0f42 71E0      		ldi r23,hi8(500)
+ 1912 0f44 80E0      		ldi r24,hlo8(500)
+ 1913 0f46 90E0      		ldi r25,hhi8(500)
+ 1914 0f48 0E94 0000 		call KbWaitForKeyEvent
+ 1915 0f4c 0197      		sbiw r24,1
+ 1916 0f4e 01F0      		breq .L370
+ 1917 0f50 0E94 0000 		call KbGetKey
+ 1918 0f54 8830      		cpi r24,lo8(8)
+ 1919 0f56 01F4      		brne .L324
+ 1920 0f58 8091 0000 		lds r24,selectedDatetimeUnit
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 36
+
+
+ 1921 0f5c 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 1922 0f60 8130      		cpi r24,1
+ 1923 0f62 9105      		cpc r25,__zero_reg__
+ 1924 0f64 01F0      		breq .L327
+ 1925 0f66 8230      		cpi r24,2
+ 1926 0f68 9105      		cpc r25,__zero_reg__
+ 1927 0f6a 01F0      		breq .L328
+ 1928 0f6c 892B      		or r24,r25
+ 1929 0f6e 01F4      		brne .L370
+ 1930 0f70 8091 0000 		lds r24,datetime+4
+ 1931 0f74 9091 0000 		lds r25,(datetime+4)+1
+ 1932 0f78 8731      		cpi r24,23
+ 1933 0f7a 9105      		cpc r25,__zero_reg__
+ 1934 0f7c 04F0      		brlt .L329
+ 1935 0f7e 1092 0000 		sts (datetime+4)+1,__zero_reg__
+ 1936 0f82 1092 0000 		sts datetime+4,__zero_reg__
+ 1937 0f86 00C0      		rjmp .L370
+ 1938               	.L329:
+ 1939 0f88 0196      		adiw r24,1
+ 1940 0f8a 00C0      		rjmp .L364
+ 1941               	.L327:
+ 1942 0f8c 8091 0000 		lds r24,datetime+2
+ 1943 0f90 9091 0000 		lds r25,(datetime+2)+1
+ 1944 0f94 8B33      		cpi r24,59
+ 1945 0f96 9105      		cpc r25,__zero_reg__
+ 1946 0f98 04F0      		brlt .L331
+ 1947 0f9a 1092 0000 		sts (datetime+2)+1,__zero_reg__
+ 1948 0f9e 1092 0000 		sts datetime+2,__zero_reg__
+ 1949 0fa2 00C0      		rjmp .L370
+ 1950               	.L331:
+ 1951 0fa4 0196      		adiw r24,1
+ 1952 0fa6 00C0      		rjmp .L365
+ 1953               	.L328:
+ 1954 0fa8 8091 0000 		lds r24,datetime
+ 1955 0fac 9091 0000 		lds r25,(datetime)+1
+ 1956 0fb0 8B33      		cpi r24,59
+ 1957 0fb2 9105      		cpc r25,__zero_reg__
+ 1958 0fb4 04F0      		brlt .L333
+ 1959 0fb6 1092 0000 		sts (datetime)+1,__zero_reg__
+ 1960 0fba 1092 0000 		sts datetime,__zero_reg__
+ 1961 0fbe 00C0      		rjmp .L370
+ 1962               	.L333:
+ 1963 0fc0 0196      		adiw r24,1
+ 1964 0fc2 00C0      		rjmp .L366
+ 1965               	.L324:
+ 1966 0fc4 8B30      		cpi r24,lo8(11)
+ 1967 0fc6 01F4      		brne .L335
+ 1968 0fc8 8091 0000 		lds r24,selectedDatetimeUnit
+ 1969 0fcc 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 1970 0fd0 8130      		cpi r24,1
+ 1971 0fd2 9105      		cpc r25,__zero_reg__
+ 1972 0fd4 01F0      		breq .L338
+ 1973 0fd6 8230      		cpi r24,2
+ 1974 0fd8 9105      		cpc r25,__zero_reg__
+ 1975 0fda 01F0      		breq .L339
+ 1976 0fdc 892B      		or r24,r25
+ 1977 0fde 01F0      		breq .+2
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 37
+
+
+ 1978 0fe0 00C0      		rjmp .L370
+ 1979 0fe2 8091 0000 		lds r24,datetime+4
+ 1980 0fe6 9091 0000 		lds r25,(datetime+4)+1
+ 1981 0fea 1816      		cp __zero_reg__,r24
+ 1982 0fec 1906      		cpc __zero_reg__,r25
+ 1983 0fee 04F0      		brlt .L340
+ 1984 0ff0 87E1      		ldi r24,lo8(23)
+ 1985 0ff2 90E0      		ldi r25,hi8(23)
+ 1986               	.L364:
+ 1987 0ff4 9093 0000 		sts (datetime+4)+1,r25
+ 1988 0ff8 8093 0000 		sts datetime+4,r24
+ 1989 0ffc 00C0      		rjmp .L370
+ 1990               	.L340:
+ 1991 0ffe 0197      		sbiw r24,1
+ 1992 1000 00C0      		rjmp .L364
+ 1993               	.L338:
+ 1994 1002 8091 0000 		lds r24,datetime+2
+ 1995 1006 9091 0000 		lds r25,(datetime+2)+1
+ 1996 100a 1816      		cp __zero_reg__,r24
+ 1997 100c 1906      		cpc __zero_reg__,r25
+ 1998 100e 04F0      		brlt .L342
+ 1999 1010 8BE3      		ldi r24,lo8(59)
+ 2000 1012 90E0      		ldi r25,hi8(59)
+ 2001               	.L365:
+ 2002 1014 9093 0000 		sts (datetime+2)+1,r25
+ 2003 1018 8093 0000 		sts datetime+2,r24
+ 2004 101c 00C0      		rjmp .L370
+ 2005               	.L342:
+ 2006 101e 0197      		sbiw r24,1
+ 2007 1020 00C0      		rjmp .L365
+ 2008               	.L339:
+ 2009 1022 8091 0000 		lds r24,datetime
+ 2010 1026 9091 0000 		lds r25,(datetime)+1
+ 2011 102a 1816      		cp __zero_reg__,r24
+ 2012 102c 1906      		cpc __zero_reg__,r25
+ 2013 102e 04F0      		brlt .L344
+ 2014 1030 8BE3      		ldi r24,lo8(59)
+ 2015 1032 90E0      		ldi r25,hi8(59)
+ 2016               	.L366:
+ 2017 1034 9093 0000 		sts (datetime)+1,r25
+ 2018 1038 8093 0000 		sts datetime,r24
+ 2019 103c 00C0      		rjmp .L370
+ 2020               	.L344:
+ 2021 103e 0197      		sbiw r24,1
+ 2022 1040 00C0      		rjmp .L366
+ 2023               	.L335:
+ 2024 1042 8A30      		cpi r24,lo8(10)
+ 2025 1044 01F4      		brne .L346
+ 2026 1046 8091 0000 		lds r24,selectedDatetimeUnit
+ 2027 104a 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 2028 104e 1816      		cp __zero_reg__,r24
+ 2029 1050 1906      		cpc __zero_reg__,r25
+ 2030 1052 04F0      		brlt .L348
+ 2031 1054 82E0      		ldi r24,lo8(2)
+ 2032 1056 90E0      		ldi r25,hi8(2)
+ 2033 1058 00C0      		rjmp .L369
+ 2034               	.L348:
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 38
+
+
+ 2035 105a 0197      		sbiw r24,1
+ 2036 105c 00C0      		rjmp .L369
+ 2037               	.L346:
+ 2038 105e 8C30      		cpi r24,lo8(12)
+ 2039 1060 01F4      		brne .L350
+ 2040 1062 8091 0000 		lds r24,selectedDatetimeUnit
+ 2041 1066 9091 0000 		lds r25,(selectedDatetimeUnit)+1
+ 2042 106a 8230      		cpi r24,2
+ 2043 106c 9105      		cpc r25,__zero_reg__
+ 2044 106e 04F0      		brlt .+2
+ 2045 1070 00C0      		rjmp .L368
+ 2046 1072 0196      		adiw r24,1
+ 2047               	.L369:
+ 2048 1074 9093 0000 		sts (selectedDatetimeUnit)+1,r25
+ 2049 1078 8093 0000 		sts selectedDatetimeUnit,r24
+ 2050 107c 00C0      		rjmp .L370
+ 2051               	.L350:
+ 2052 107e 8930      		cpi r24,lo8(9)
+ 2053 1080 01F4      		brne .L354
+ 2054 1082 81E0      		ldi r24,lo8(1)
+ 2055 1084 90E0      		ldi r25,hi8(1)
+ 2056 1086 9093 0000 		sts (datetimeSetManually)+1,r25
+ 2057 108a 8093 0000 		sts datetimeSetManually,r24
+ 2058 108e 00C0      		rjmp .L367
+ 2059               	.L354:
+ 2060 1090 8730      		cpi r24,lo8(7)
+ 2061 1092 01F0      		breq .+2
+ 2062 1094 00C0      		rjmp .L370
+ 2063 1096 8091 0000 		lds r24,firstStartup
+ 2064 109a 9091 0000 		lds r25,(firstStartup)+1
+ 2065 109e 892B      		or r24,r25
+ 2066 10a0 01F0      		breq .+2
+ 2067 10a2 00C0      		rjmp .L370
+ 2068 10a4 81E0      		ldi r24,lo8(1)
+ 2069 10a6 90E0      		ldi r25,hi8(1)
+ 2070 10a8 9093 0000 		sts (threadExit)+1,r25
+ 2071 10ac 8093 0000 		sts threadExit,r24
+ 2072               	.L367:
+ 2073 10b0 0E94 0000 		call NutThreadExit
+ 2074 10b4 00C0      		rjmp .L370
+ 2075               	/* epilogue: frame size=0 */
+ 2076               	/* epilogue: noreturn */
+ 2077               	/* epilogue end (size=0) */
+ 2078               	/* function KBThreadManualTime size 198 (198) */
+ 2079               		.size	KBThreadManualTime, .-KBThreadManualTime
+ 2080               	.global	KBThreadTimeZone
+ 2081               		.type	KBThreadTimeZone, @function
+ 2082               	KBThreadTimeZone:
+ 2083               	/* prologue: frame size=0 */
+ 2084               	/* prologue end (size=0) */
+ 2085               	.L395:
+ 2086 10b6 68EC      		ldi r22,lo8(200)
+ 2087 10b8 70E0      		ldi r23,hi8(200)
+ 2088 10ba 80E0      		ldi r24,hlo8(200)
+ 2089 10bc 90E0      		ldi r25,hhi8(200)
+ 2090 10be 0E94 0000 		call NutSleep
+ 2091 10c2 64EF      		ldi r22,lo8(500)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 39
+
+
+ 2092 10c4 71E0      		ldi r23,hi8(500)
+ 2093 10c6 80E0      		ldi r24,hlo8(500)
+ 2094 10c8 90E0      		ldi r25,hhi8(500)
+ 2095 10ca 0E94 0000 		call KbWaitForKeyEvent
+ 2096 10ce 0197      		sbiw r24,1
+ 2097 10d0 01F0      		breq .L395
+ 2098 10d2 0E94 0000 		call KbGetKey
+ 2099 10d6 8830      		cpi r24,lo8(8)
+ 2100 10d8 01F4      		brne .L375
+ 2101 10da 8091 0000 		lds r24,newTimezone
+ 2102 10de 9091 0000 		lds r25,(newTimezone)+1
+ 2103 10e2 8E30      		cpi r24,14
+ 2104 10e4 9105      		cpc r25,__zero_reg__
+ 2105 10e6 04F4      		brge .L377
+ 2106 10e8 0196      		adiw r24,1
+ 2107 10ea 00C0      		rjmp .L393
+ 2108               	.L377:
+ 2109 10ec 84EF      		ldi r24,lo8(-12)
+ 2110 10ee 9FEF      		ldi r25,hi8(-12)
+ 2111               	.L393:
+ 2112 10f0 9093 0000 		sts (newTimezone)+1,r25
+ 2113 10f4 8093 0000 		sts newTimezone,r24
+ 2114 10f8 00C0      		rjmp .L395
+ 2115               	.L375:
+ 2116 10fa 8B30      		cpi r24,lo8(11)
+ 2117 10fc 01F4      		brne .L379
+ 2118 10fe 8091 0000 		lds r24,newTimezone
+ 2119 1102 9091 0000 		lds r25,(newTimezone)+1
+ 2120 1106 2FEF      		ldi r18,hi8(-11)
+ 2121 1108 853F      		cpi r24,lo8(-11)
+ 2122 110a 9207      		cpc r25,r18
+ 2123 110c 04F0      		brlt .L381
+ 2124 110e 0197      		sbiw r24,1
+ 2125 1110 00C0      		rjmp .L393
+ 2126               	.L381:
+ 2127 1112 8EE0      		ldi r24,lo8(14)
+ 2128 1114 90E0      		ldi r25,hi8(14)
+ 2129 1116 00C0      		rjmp .L393
+ 2130               	.L379:
+ 2131 1118 8930      		cpi r24,lo8(9)
+ 2132 111a 01F4      		brne .L383
+ 2133 111c 81E0      		ldi r24,lo8(1)
+ 2134 111e 90E0      		ldi r25,hi8(1)
+ 2135 1120 9093 0000 		sts (timeZoneSet)+1,r25
+ 2136 1124 8093 0000 		sts timeZoneSet,r24
+ 2137 1128 00C0      		rjmp .L394
+ 2138               	.L383:
+ 2139 112a 8730      		cpi r24,lo8(7)
+ 2140 112c 01F4      		brne .L395
+ 2141 112e 8091 0000 		lds r24,firstStartup
+ 2142 1132 9091 0000 		lds r25,(firstStartup)+1
+ 2143 1136 892B      		or r24,r25
+ 2144 1138 01F0      		breq .+2
+ 2145 113a 00C0      		rjmp .L395
+ 2146 113c 81E0      		ldi r24,lo8(1)
+ 2147 113e 90E0      		ldi r25,hi8(1)
+ 2148 1140 9093 0000 		sts (threadExit)+1,r25
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 40
+
+
+ 2149 1144 8093 0000 		sts threadExit,r24
+ 2150               	.L394:
+ 2151 1148 0E94 0000 		call NutThreadExit
+ 2152 114c 00C0      		rjmp .L395
+ 2153               	/* epilogue: frame size=0 */
+ 2154               	/* epilogue: noreturn */
+ 2155               	/* epilogue end (size=0) */
+ 2156               	/* function KBThreadTimeZone size 77 (77) */
+ 2157               		.size	KBThreadTimeZone, .-KBThreadTimeZone
+ 2158               	.global	concat
+ 2159               		.type	concat, @function
+ 2160               	concat:
+ 2161               	/* prologue: frame size=0 */
+ 2162 114e CF92      		push r12
+ 2163 1150 DF92      		push r13
+ 2164 1152 EF92      		push r14
+ 2165 1154 FF92      		push r15
+ 2166 1156 0F93      		push r16
+ 2167 1158 1F93      		push r17
+ 2168               	/* prologue end (size=6) */
+ 2169 115a 7C01      		movw r14,r24
+ 2170 115c 6B01      		movw r12,r22
+ 2171 115e DB01      		movw r26,r22
+ 2172 1160 0D90      		ld __tmp_reg__,X+
+ 2173 1162 0020      		tst __tmp_reg__
+ 2174 1164 01F4      		brne .-6
+ 2175 1166 1197      		sbiw r26,1
+ 2176 1168 A61B      		sub r26,r22
+ 2177 116a B70B      		sbc r27,r23
+ 2178 116c FC01      		movw r30,r24
+ 2179 116e 0190      		ld __tmp_reg__,Z+
+ 2180 1170 0020      		tst __tmp_reg__
+ 2181 1172 01F4      		brne .-6
+ 2182 1174 E81B      		sub r30,r24
+ 2183 1176 F90B      		sbc r31,r25
+ 2184 1178 CD01      		movw r24,r26
+ 2185 117a 8E0F      		add r24,r30
+ 2186 117c 9F1F      		adc r25,r31
+ 2187 117e 0E94 0000 		call malloc
+ 2188 1182 8C01      		movw r16,r24
+ 2189 1184 B701      		movw r22,r14
+ 2190 1186 0E94 0000 		call strcpy
+ 2191 118a B601      		movw r22,r12
+ 2192 118c C801      		movw r24,r16
+ 2193 118e 0E94 0000 		call strcat
+ 2194 1192 C801      		movw r24,r16
+ 2195               	/* epilogue: frame size=0 */
+ 2196 1194 1F91      		pop r17
+ 2197 1196 0F91      		pop r16
+ 2198 1198 FF90      		pop r15
+ 2199 119a EF90      		pop r14
+ 2200 119c DF90      		pop r13
+ 2201 119e CF90      		pop r12
+ 2202 11a0 0895      		ret
+ 2203               	/* epilogue end (size=7) */
+ 2204               	/* function concat size 42 (29) */
+ 2205               		.size	concat, .-concat
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 41
+
+
+ 2206               		.data
+ 2207               	.LC25:
+ 2208 0191 3138 352E 		.string	"185.10.48.119"
+ 2208      3130 2E34 
+ 2208      382E 3131 
+ 2208      3900 
+ 2209               	.LC26:
+ 2210 019f 722B 6200 		.string	"r+b"
+ 2211               	.LC27:
+ 2212 01a3 2F00      		.string	"/"
+ 2213               	.LC28:
+ 2214 01a5 4745 5420 		.string	"GET %s HTTP/1.0\r\n"
+ 2214      2573 2048 
+ 2214      5454 502F 
+ 2214      312E 300D 
+ 2214      0A00 
+ 2215               	.LC29:
+ 2216 01b7 3134 352E 		.string	"145.102.69.79"
+ 2216      3130 322E 
+ 2216      3639 2E37 
+ 2216      3900 
+ 2217               	.LC30:
+ 2218 01c5 486F 7374 		.string	"Host: %s\r\n"
+ 2218      3A20 2573 
+ 2218      0D0A 00
+ 2219               	.LC31:
+ 2220 01d0 5573 6572 		.string	"User-Agent: Ethernut\r\n"
+ 2220      2D41 6765 
+ 2220      6E74 3A20 
+ 2220      4574 6865 
+ 2220      726E 7574 
+ 2221               	.LC32:
+ 2222 01e7 4163 6365 		.string	"Accept: */*\r\n"
+ 2222      7074 3A20 
+ 2222      2A2F 2A0D 
+ 2222      0A00 
+ 2223               	.LC33:
+ 2224 01f5 4963 792D 		.string	"Icy-MetaData: 1\r\n"
+ 2224      4D65 7461 
+ 2224      4461 7461 
+ 2224      3A20 310D 
+ 2224      0A00 
+ 2225               	.LC34:
+ 2226 0207 436F 6E6E 		.string	"Connection: close\r\n\r\n"
+ 2226      6563 7469 
+ 2226      6F6E 3A20 
+ 2226      636C 6F73 
+ 2226      650D 0A0D 
+ 2227               	.LC35:
+ 2228 021d 00        		.string	""
+ 2229               		.text
+ 2230               	.global	connectToWebsite
+ 2231               		.type	connectToWebsite, @function
+ 2232               	connectToWebsite:
+ 2233               	/* prologue: frame size=0 */
+ 2234 11a2 8F92      		push r8
+ 2235 11a4 9F92      		push r9
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 42
+
+
+ 2236 11a6 AF92      		push r10
+ 2237 11a8 BF92      		push r11
+ 2238 11aa CF92      		push r12
+ 2239 11ac DF92      		push r13
+ 2240 11ae EF92      		push r14
+ 2241 11b0 FF92      		push r15
+ 2242 11b2 0F93      		push r16
+ 2243 11b4 1F93      		push r17
+ 2244 11b6 CF93      		push r28
+ 2245 11b8 DF93      		push r29
+ 2246               	/* prologue end (size=12) */
+ 2247 11ba 0E94 0000 		call NutTcpCreateSocket
+ 2248 11be EC01      		movw r28,r24
+ 2249 11c0 80E0      		ldi r24,lo8(.LC25)
+ 2250 11c2 90E0      		ldi r25,hi8(.LC25)
+ 2251 11c4 0E94 0000 		call inet_addr
+ 2252 11c8 AB01      		movw r20,r22
+ 2253 11ca BC01      		movw r22,r24
+ 2254 11cc 20E5      		ldi r18,lo8(80)
+ 2255 11ce 30E0      		ldi r19,hi8(80)
+ 2256 11d0 CE01      		movw r24,r28
+ 2257 11d2 0E94 0000 		call NutTcpConnect
+ 2258 11d6 892B      		or r24,r25
+ 2259 11d8 01F0      		breq .L399
+ 2260 11da 80E0      		ldi r24,lo8(__c.2967)
+ 2261 11dc 90E0      		ldi r25,hi8(__c.2967)
+ 2262 11de 9F93      		push r25
+ 2263 11e0 8F93      		push r24
+ 2264 11e2 83EC      		ldi r24,lo8(-61)
+ 2265 11e4 8F93      		push r24
+ 2266 11e6 0E94 0000 		call LogMsg_P
+ 2267 11ea 81E0      		ldi r24,lo8(1)
+ 2268 11ec 90E0      		ldi r25,hi8(1)
+ 2269 11ee 0E94 0000 		call exit
+ 2270               	.L399:
+ 2271 11f2 60E0      		ldi r22,lo8(.LC26)
+ 2272 11f4 70E0      		ldi r23,hi8(.LC26)
+ 2273 11f6 CE01      		movw r24,r28
+ 2274 11f8 0E94 0000 		call _fdopen
+ 2275 11fc EC01      		movw r28,r24
+ 2276 11fe 80E0      		ldi r24,lo8(.LC27)
+ 2277 1200 90E0      		ldi r25,hi8(.LC27)
+ 2278 1202 9F93      		push r25
+ 2279 1204 8F93      		push r24
+ 2280 1206 80E0      		ldi r24,lo8(.LC28)
+ 2281 1208 90E0      		ldi r25,hi8(.LC28)
+ 2282 120a 9F93      		push r25
+ 2283 120c 8F93      		push r24
+ 2284 120e DF93      		push r29
+ 2285 1210 CF93      		push r28
+ 2286 1212 0E94 0000 		call fprintf
+ 2287 1216 80E0      		ldi r24,lo8(.LC29)
+ 2288 1218 90E0      		ldi r25,hi8(.LC29)
+ 2289 121a 9F93      		push r25
+ 2290 121c 8F93      		push r24
+ 2291 121e 80E0      		ldi r24,lo8(.LC30)
+ 2292 1220 90E0      		ldi r25,hi8(.LC30)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 43
+
+
+ 2293 1222 9F93      		push r25
+ 2294 1224 8F93      		push r24
+ 2295 1226 DF93      		push r29
+ 2296 1228 CF93      		push r28
+ 2297 122a 0E94 0000 		call fprintf
+ 2298 122e BE01      		movw r22,r28
+ 2299 1230 80E0      		ldi r24,lo8(.LC31)
+ 2300 1232 90E0      		ldi r25,hi8(.LC31)
+ 2301 1234 0E94 0000 		call fputs
+ 2302 1238 BE01      		movw r22,r28
+ 2303 123a 80E0      		ldi r24,lo8(.LC32)
+ 2304 123c 90E0      		ldi r25,hi8(.LC32)
+ 2305 123e 0E94 0000 		call fputs
+ 2306 1242 BE01      		movw r22,r28
+ 2307 1244 80E0      		ldi r24,lo8(.LC33)
+ 2308 1246 90E0      		ldi r25,hi8(.LC33)
+ 2309 1248 0E94 0000 		call fputs
+ 2310 124c BE01      		movw r22,r28
+ 2311 124e 80E0      		ldi r24,lo8(.LC34)
+ 2312 1250 90E0      		ldi r25,hi8(.LC34)
+ 2313 1252 0E94 0000 		call fputs
+ 2314 1256 CE01      		movw r24,r28
+ 2315 1258 0E94 0000 		call fflush
+ 2316 125c 8AE0      		ldi r24,lo8(10)
+ 2317 125e 90E0      		ldi r25,hi8(10)
+ 2318 1260 0E94 0000 		call malloc
+ 2319 1264 4C01      		movw r8,r24
+ 2320 1266 00E0      		ldi r16,lo8(.LC35)
+ 2321 1268 10E0      		ldi r17,hi8(.LC35)
+ 2322 126a 8DB7      		in r24,__SP_L__
+ 2323 126c 9EB7      		in r25,__SP_H__
+ 2324 126e 0C96      		adiw r24,12
+ 2325 1270 0FB6      		in __tmp_reg__,__SREG__
+ 2326 1272 F894      		cli
+ 2327 1274 9EBF      		out __SP_H__,r25
+ 2328 1276 0FBE      		out __SREG__,__tmp_reg__
+ 2329 1278 8DBF      		out __SP_L__,r24
+ 2330 127a 00C0      		rjmp .L401
+ 2331               	.L402:
+ 2332 127c F401      		movw r30,r8
+ 2333 127e 8081      		ld r24,Z
+ 2334 1280 8823      		tst r24
+ 2335 1282 01F0      		breq .L403
+ 2336 1284 B401      		movw r22,r8
+ 2337 1286 C801      		movw r24,r16
+ 2338 1288 0E94 0000 		call concat
+ 2339 128c 8C01      		movw r16,r24
+ 2340               	.L401:
+ 2341 128e AE01      		movw r20,r28
+ 2342 1290 6AE0      		ldi r22,lo8(10)
+ 2343 1292 70E0      		ldi r23,hi8(10)
+ 2344 1294 C401      		movw r24,r8
+ 2345 1296 0E94 0000 		call fgets
+ 2346 129a 892B      		or r24,r25
+ 2347 129c 01F4      		brne .L402
+ 2348               	.L403:
+ 2349 129e 60E0      		ldi r22,lo8(0)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 44
+
+
+ 2350 12a0 70E0      		ldi r23,hi8(0)
+ 2351 12a2 C801      		movw r24,r16
+ 2352 12a4 0E94 0000 		call concat
+ 2353 12a8 8C01      		movw r16,r24
+ 2354 12aa CC24      		clr r12
+ 2355 12ac DD24      		clr r13
+ 2356 12ae 20E0      		ldi r18,lo8(0)
+ 2357 12b0 30E0      		ldi r19,hi8(0)
+ 2358 12b2 7C01      		movw r14,r24
+ 2359 12b4 00C0      		rjmp .L405
+ 2360               	.L406:
+ 2361 12b6 F701      		movw r30,r14
+ 2362 12b8 8081      		ld r24,Z
+ 2363 12ba 8C37      		cpi r24,lo8(124)
+ 2364 12bc 01F4      		brne .L407
+ 2365 12be 5801      		movw r10,r16
+ 2366 12c0 A20E      		add r10,r18
+ 2367 12c2 B31E      		adc r11,r19
+ 2368 12c4 E901      		movw r28,r18
+ 2369 12c6 00C0      		rjmp .L409
+ 2370               	.L410:
+ 2371 12c8 F501      		movw r30,r10
+ 2372 12ca 8191      		ld r24,Z+
+ 2373 12cc 5F01      		movw r10,r30
+ 2374 12ce 9927      		clr r25
+ 2375 12d0 87FD      		sbrc r24,7
+ 2376 12d2 9095      		com r25
+ 2377 12d4 9F93      		push r25
+ 2378 12d6 8F93      		push r24
+ 2379 12d8 80E0      		ldi r24,lo8(__c.2980)
+ 2380 12da 90E0      		ldi r25,hi8(__c.2980)
+ 2381 12dc 9F93      		push r25
+ 2382 12de 8F93      		push r24
+ 2383 12e0 86EC      		ldi r24,lo8(-58)
+ 2384 12e2 8F93      		push r24
+ 2385 12e4 0E94 0000 		call LogMsg_P
+ 2386 12e8 2196      		adiw r28,1
+ 2387 12ea 0F90      		pop __tmp_reg__
+ 2388 12ec 0F90      		pop __tmp_reg__
+ 2389 12ee 0F90      		pop __tmp_reg__
+ 2390 12f0 0F90      		pop __tmp_reg__
+ 2391 12f2 0F90      		pop __tmp_reg__
+ 2392               	.L409:
+ 2393 12f4 CC15      		cp r28,r12
+ 2394 12f6 DD05      		cpc r29,r13
+ 2395 12f8 04F0      		brlt .L410
+ 2396 12fa 9601      		movw r18,r12
+ 2397               	.L407:
+ 2398 12fc 0894      		sec
+ 2399 12fe C11C      		adc r12,__zero_reg__
+ 2400 1300 D11C      		adc r13,__zero_reg__
+ 2401 1302 0894      		sec
+ 2402 1304 E11C      		adc r14,__zero_reg__
+ 2403 1306 F11C      		adc r15,__zero_reg__
+ 2404               	.L405:
+ 2405 1308 F801      		movw r30,r16
+ 2406 130a 0190      		ld __tmp_reg__,Z+
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 45
+
+
+ 2407 130c 0020      		tst __tmp_reg__
+ 2408 130e 01F4      		brne .-6
+ 2409 1310 3197      		sbiw r30,1
+ 2410 1312 E01B      		sub r30,r16
+ 2411 1314 F10B      		sbc r31,r17
+ 2412 1316 CE16      		cp r12,r30
+ 2413 1318 DF06      		cpc r13,r31
+ 2414 131a 00F0      		brlo .L406
+ 2415 131c 80E0      		ldi r24,lo8(.LC35)
+ 2416 131e 90E0      		ldi r25,hi8(.LC35)
+ 2417 1320 9F93      		push r25
+ 2418 1322 8F93      		push r24
+ 2419 1324 9F93      		push r25
+ 2420 1326 8F93      		push r24
+ 2421 1328 80E0      		ldi r24,lo8(__c.2991)
+ 2422 132a 90E0      		ldi r25,hi8(__c.2991)
+ 2423 132c 9F93      		push r25
+ 2424 132e 8F93      		push r24
+ 2425 1330 86EC      		ldi r24,lo8(-58)
+ 2426 1332 8F93      		push r24
+ 2427 1334 0E94 0000 		call LogMsg_P
+ 2428 1338 C401      		movw r24,r8
+ 2429 133a 0E94 0000 		call free
+ 2430 133e 8DB7      		in r24,__SP_L__
+ 2431 1340 9EB7      		in r25,__SP_H__
+ 2432 1342 0796      		adiw r24,7
+ 2433 1344 0FB6      		in __tmp_reg__,__SREG__
+ 2434 1346 F894      		cli
+ 2435 1348 9EBF      		out __SP_H__,r25
+ 2436 134a 0FBE      		out __SREG__,__tmp_reg__
+ 2437 134c 8DBF      		out __SP_L__,r24
+ 2438               	/* epilogue: frame size=0 */
+ 2439 134e DF91      		pop r29
+ 2440 1350 CF91      		pop r28
+ 2441 1352 1F91      		pop r17
+ 2442 1354 0F91      		pop r16
+ 2443 1356 FF90      		pop r15
+ 2444 1358 EF90      		pop r14
+ 2445 135a DF90      		pop r13
+ 2446 135c CF90      		pop r12
+ 2447 135e BF90      		pop r11
+ 2448 1360 AF90      		pop r10
+ 2449 1362 9F90      		pop r9
+ 2450 1364 8F90      		pop r8
+ 2451 1366 0895      		ret
+ 2452               	/* epilogue end (size=13) */
+ 2453               	/* function connectToWebsite size 227 (202) */
+ 2454               		.size	connectToWebsite, .-connectToWebsite
+ 2455               		.data
+ 2456               	.LC36:
+ 2457 021e 4261 636B 		.string	"BacklightThread"
+ 2457      6C69 6768 
+ 2457      7454 6872 
+ 2457      6561 6400 
+ 2458               		.text
+ 2459               	.global	NutAppMain
+ 2460               		.type	NutAppMain, @function
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 46
+
+
+ 2461               	NutAppMain:
+ 2462               	/* prologue: frame size=0 */
+ 2463               	/* prologue end (size=0) */
+ 2464 1368 1092 0000 		sts (backlightStayOn)+1,__zero_reg__
+ 2465 136c 1092 0000 		sts backlightStayOn,__zero_reg__
+ 2466 1370 0E94 0000 		call WatchDogDisable
+ 2467 1374 84E6      		ldi r24,lo8(100)
+ 2468 1376 0E94 0000 		call NutDelay
+ 2469 137a 0E94 0000 		call SysInitIO
+ 2470 137e 0E94 0000 		call SPIinit
+ 2471 1382 0E94 0000 		call Uart0DriverInit
+ 2472 1386 0E94 0000 		call Uart0DriverStart
+ 2473 138a 0E94 0000 		call LogInit
+ 2474 138e 0E94 0000 		call CardInit
+ 2475 1392 0E94 0000 		call RcInit
+ 2476 1396 0E94 0000 		call KbInit
+ 2477 139a 0E94 0000 		call LedInit
+ 2478 139e 0E94 0000 		call LcdLowLevelInit
+ 2479 13a2 40E0      		ldi r20,lo8(0)
+ 2480 13a4 50E0      		ldi r21,hi8(0)
+ 2481 13a6 60E0      		ldi r22,lo8(gs(SysMainBeatInterrupt))
+ 2482 13a8 70E0      		ldi r23,hi8(gs(SysMainBeatInterrupt))
+ 2483 13aa 80E0      		ldi r24,lo8(sig_OVERFLOW0)
+ 2484 13ac 90E0      		ldi r25,hi8(sig_OVERFLOW0)
+ 2485 13ae 0E94 0000 		call NutRegisterIrqHandler
+ 2486 13b2 892B      		or r24,r25
+ 2487 13b4 01F4      		brne .L415
+ 2488 13b6 85B5      		in r24,69-0x20
+ 2489 13b8 8460      		ori r24,lo8(4)
+ 2490 13ba 85BD      		out 69-0x20,r24
+ 2491 13bc A89A      		sbi 53-0x20,0
+ 2492 13be 8091 6E00 		lds r24,110
+ 2493 13c2 8160      		ori r24,lo8(1)
+ 2494 13c4 8093 6E00 		sts 110,r24
+ 2495               	.L415:
+ 2496               	/* #APP */
+ 2497 13c8 7894      		sei
+ 2498               	/* #NOAPP */
+ 2499 13ca 20E0      		ldi r18,lo8(1024)
+ 2500 13cc 34E0      		ldi r19,hi8(1024)
+ 2501 13ce 40E0      		ldi r20,lo8(0)
+ 2502 13d0 50E0      		ldi r21,hi8(0)
+ 2503 13d2 60E0      		ldi r22,lo8(gs(BacklightThread))
+ 2504 13d4 70E0      		ldi r23,hi8(gs(BacklightThread))
+ 2505 13d6 80E0      		ldi r24,lo8(.LC36)
+ 2506 13d8 90E0      		ldi r25,hi8(.LC36)
+ 2507 13da 0E94 0000 		call NutThreadCreate
+ 2508 13de 0E94 0000 		call At45dbInit
+ 2509 13e2 0297      		sbiw r24,2
+ 2510 13e4 01F4      		brne .L417
+ 2511 13e6 22E0      		ldi r18,lo8(2)
+ 2512 13e8 30E0      		ldi r19,hi8(2)
+ 2513 13ea 40E0      		ldi r20,lo8(firstStartup)
+ 2514 13ec 50E0      		ldi r21,hi8(firstStartup)
+ 2515 13ee 60E0      		ldi r22,lo8(0)
+ 2516 13f0 70E0      		ldi r23,hi8(0)
+ 2517 13f2 80E0      		ldi r24,hlo8(0)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 47
+
+
+ 2518 13f4 90E0      		ldi r25,hhi8(0)
+ 2519 13f6 0E94 0000 		call At45dbPageRead
+ 2520 13fa 8091 0000 		lds r24,firstStartup
+ 2521 13fe 9091 0000 		lds r25,(firstStartup)+1
+ 2522 1402 9F93      		push r25
+ 2523 1404 8F93      		push r24
+ 2524 1406 80E0      		ldi r24,lo8(__c.3327)
+ 2525 1408 90E0      		ldi r25,hi8(__c.3327)
+ 2526 140a 9F93      		push r25
+ 2527 140c 8F93      		push r24
+ 2528 140e 86EC      		ldi r24,lo8(-58)
+ 2529 1410 8F93      		push r24
+ 2530 1412 0E94 0000 		call LogMsg_P
+ 2531 1416 0F90      		pop __tmp_reg__
+ 2532 1418 0F90      		pop __tmp_reg__
+ 2533 141a 0F90      		pop __tmp_reg__
+ 2534 141c 0F90      		pop __tmp_reg__
+ 2535 141e 0F90      		pop __tmp_reg__
+ 2536               	.L417:
+ 2537 1420 0E94 0000 		call X12Init
+ 2538 1424 0E94 0000 		call NetworkInit
+ 2539 1428 0E94 0000 		call SetTimezone
+ 2540 142c 81E0      		ldi r24,lo8(1)
+ 2541 142e 90E0      		ldi r25,hi8(1)
+ 2542 1430 9093 0000 		sts (setTimezoneFromMenu)+1,r25
+ 2543 1434 8093 0000 		sts setTimezoneFromMenu,r24
+ 2544 1438 0E94 0000 		call SyncDatetime
+ 2545 143c 0E94 0000 		call MenuInit
+ 2546 1440 1092 0000 		sts (pauseCurrentDatetime)+1,__zero_reg__
+ 2547 1444 1092 0000 		sts pauseCurrentDatetime,__zero_reg__
+ 2548 1448 8091 0000 		lds r24,firstStartup
+ 2549 144c 9091 0000 		lds r25,(firstStartup)+1
+ 2550 1450 892B      		or r24,r25
+ 2551 1452 01F0      		breq .L419
+ 2552 1454 1092 0000 		sts (firstStartup)+1,__zero_reg__
+ 2553 1458 1092 0000 		sts firstStartup,__zero_reg__
+ 2554 145c 22E0      		ldi r18,lo8(2)
+ 2555 145e 30E0      		ldi r19,hi8(2)
+ 2556 1460 40E0      		ldi r20,lo8(firstStartup)
+ 2557 1462 50E0      		ldi r21,hi8(firstStartup)
+ 2558 1464 60E0      		ldi r22,lo8(0)
+ 2559 1466 70E0      		ldi r23,hi8(0)
+ 2560 1468 80E0      		ldi r24,hlo8(0)
+ 2561 146a 90E0      		ldi r25,hhi8(0)
+ 2562 146c 0E94 0000 		call At45dbPageWrite
+ 2563               	.L419:
+ 2564 1470 0E94 0000 		call connectToWebsite
+ 2565 1474 81E0      		ldi r24,lo8(1)
+ 2566 1476 0E94 0000 		call NutThreadSetPriority
+ 2567               	.L421:
+ 2568 147a 64EF      		ldi r22,lo8(500)
+ 2569 147c 71E0      		ldi r23,hi8(500)
+ 2570 147e 80E0      		ldi r24,hlo8(500)
+ 2571 1480 90E0      		ldi r25,hhi8(500)
+ 2572 1482 0E94 0000 		call NutSleep
+ 2573 1486 8091 0000 		lds r24,pauseCurrentDatetime
+ 2574 148a 9091 0000 		lds r25,(pauseCurrentDatetime)+1
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 48
+
+
+ 2575 148e 892B      		or r24,r25
+ 2576 1490 01F4      		brne .L422
+ 2577 1492 0E94 0000 		call ShowCurrentTime
+ 2578               	.L422:
+ 2579 1496 0E94 0000 		call WatchDogRestart
+ 2580 149a 00C0      		rjmp .L421
+ 2581               	/* epilogue: frame size=0 */
+ 2582               	/* epilogue: noreturn */
+ 2583               	/* epilogue end (size=0) */
+ 2584               	/* function NutAppMain size 156 (156) */
+ 2585               		.size	NutAppMain, .-NutAppMain
+ 2586               	.global	DEBUG
+ 2587               		.data
+ 2588               		.type	DEBUG, @object
+ 2589               		.size	DEBUG, 2
+ 2590               	DEBUG:
+ 2591 022e 0000      		.skip 2,0
+ 2592               		.section	.progmem.data,"a",@progbits
+ 2593               		.type	__c.3327, @object
+ 2594               		.size	__c.3327, 26
+ 2595               	__c.3327:
+ 2596 0000 5661 6C75 		.string	"Value of firstStartup: %d"
+ 2596      6520 6F66 
+ 2596      2066 6972 
+ 2596      7374 5374 
+ 2596      6172 7475 
+ 2597               		.type	__c.3214, @object
+ 2598               		.size	__c.3214, 22
+ 2599               	__c.3214:
+ 2600 001a 5661 6C75 		.string	"Value of timeZone: %d"
+ 2600      6520 6F66 
+ 2600      2074 696D 
+ 2600      655A 6F6E 
+ 2600      653A 2025 
+ 2601               		.type	__c.2991, @object
+ 2602               		.size	__c.2991, 14
+ 2603               	__c.2991:
+ 2604 0030 4950 2025 		.string	"IP %s PORT %s"
+ 2604      7320 504F 
+ 2604      5254 2025 
+ 2604      7300 
+ 2605               		.type	__c.2980, @object
+ 2606               		.size	__c.2980, 10
+ 2607               	__c.2980:
+ 2608 003e 4348 4152 		.string	"CHAR = %c"
+ 2608      203D 2025 
+ 2608      6300 
+ 2609               		.type	__c.2967, @object
+ 2610               		.size	__c.2967, 26
+ 2611               	__c.2967:
+ 2612 0048 4572 726F 		.string	"Error: >> NutTcpConnect()"
+ 2612      723A 203E 
+ 2612      3E20 4E75 
+ 2612      7454 6370 
+ 2612      436F 6E6E 
+ 2613               		.comm datetime,18,1
+ 2614               		.comm firstStartup,2,1
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 49
+
+
+ 2615               		.comm threadExit,2,1
+ 2616               		.comm backlightCounter,2,1
+ 2617               		.comm backlightStayOn,2,1
+ 2618               		.comm timezone,2,1
+ 2619               		.comm newTimezone,2,1
+ 2620               		.comm timeZoneSet,2,1
+ 2621               		.comm setTimezoneFromMenu,2,1
+ 2622               		.comm selectedDatetimeUnit,2,1
+ 2623               		.comm pauseCurrentDatetime,2,1
+ 2624               		.comm datetimeSetManually,2,1
+ 2625               		.comm selectedAlarmtimeUnit,2,1
+ 2626               		.comm alarmAset,2,1
+ 2627               		.comm alarmBset,2,1
+ 2628               		.comm alarmA,18,1
+ 2629               		.comm alarmB,18,1
+ 2630               	/* File "source/main.c": code 2661 = 0x0a65 (2480), prologues  90, epilogues  91 */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 50
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:3      *ABS*:0000003f __SREG__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:13     .text:00000000 SysInitIO
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:59     .text:0000003a NutAppMain
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:241    .progmem.data:0000001a __c.2565
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:237    .progmem.data:00000000 __c.2567
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:186    .text:0000014e SysMainBeatInterrupt
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:217    .text:0000016c ThreadA
-C:\Users\Blommers\AppData\Local\Temp/ccP2IEYi.s:198    .text:00000158 ThreadB
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:3      *ABS*:0000003f __SREG__
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:13     .text:00000000 SysInitIO
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:51     .text:0000003a ResetBacklightCounter
+                            *COM*:00000002 backlightCounter
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:63     .text:00000044 SetBacklightStayOn
+                            *COM*:00000002 backlightStayOn
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:74     .text:0000004e SysMainBeatInterrupt
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:100    .text:00000058 SetDateManually
+                            *COM*:00000012 datetime
+                            *COM*:00000002 pauseCurrentDatetime
+                            *COM*:00000002 datetimeSetManually
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:1724   .text:00000dba KBThreadManualDate
+                            *COM*:00000002 firstStartup
+                            *COM*:00000002 threadExit
+                            *COM*:00000002 selectedDatetimeUnit
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:320    .text:0000024a SetTimezone_timeh
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:389    .text:000002bc SetTimezone
+                            *COM*:00000002 timezone
+                            *COM*:00000002 setTimezoneFromMenu
+                            *COM*:00000002 newTimezone
+                            *COM*:00000002 timeZoneSet
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2082   .text:000010b6 KBThreadTimeZone
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2599   .progmem.data:0000001a __c.3214
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:617    .text:000004ca ShowCurrentTime
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:703    .text:00000554 AlarmBMenu
+                            *COM*:00000012 alarmB
+                            *COM*:00000002 alarmBset
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:1284   .text:00000a1a SetAlarmBThread
+                            *COM*:00000002 selectedAlarmtimeUnit
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:883    .text:000006c8 AlarmAMenu
+                            *COM*:00000012 alarmA
+                            *COM*:00000002 alarmAset
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:1545   .text:00000c3e SetAlarmAThread
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:1030   .text:00000802 SetTimeManually
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:1898   .text:00000f2c KBThreadManualTime
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:1207   .text:00000980 SyncDatetime
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:1241   .text:000009be BacklightThread
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2160   .text:0000114e concat
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2232   .text:000011a2 connectToWebsite
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2611   .progmem.data:00000048 __c.2967
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2607   .progmem.data:0000003e __c.2980
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2603   .progmem.data:00000030 __c.2991
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2461   .text:00001368 NutAppMain
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2595   .progmem.data:00000000 __c.3327
+C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s:2590   .data:0000022e DEBUG
 
 UNDEFINED SYMBOLS
 __do_copy_data
 __do_clear_bss
+KbScan
+CardCheckCard
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccT9dATU.s 			page 51
+
+
+X12RtcGetClock
+NutThreadCreate
+LcdClearAll
+LcdWriteFirstLine
+LcdWriteTitle
+NutSleep
+LcdClearLine
+sprintf
+LcdWriteSecondLine
+X12RtcSetClock
+printf
+_timezone
+At45dbPageRead
+WatchDogRestart
+At45dbPageWrite
+LogMsg_P
+LcdTimeDisplay
+X12RtcGetAlarm
+LcdBackLight
+X12RtcSetAlarm
+NTP
+KbGetKey
+KbWaitForKeyEvent
+NutThreadExit
+malloc
+strcpy
+strcat
+NutTcpCreateSocket
+inet_addr
+NutTcpConnect
+exit
+_fdopen
+fprintf
+fputs
+fflush
+fgets
+free
 WatchDogDisable
 NutDelay
 SPIinit
 Uart0DriverInit
 Uart0DriverStart
 LogInit
-LogMsg_P
-X12Init
-X12RtcGetClock
-At45dbInit
 CardInit
 RcInit
 KbInit
@@ -304,10 +3010,8 @@ LedInit
 LcdLowLevelInit
 sig_OVERFLOW0
 NutRegisterIrqHandler
+At45dbInit
+X12Init
+NetworkInit
+MenuInit
 NutThreadSetPriority
-NutThreadCreate
-NutSleep
-LcdTimeDisplay
-KbScan
-CardCheckCard
-LedControl

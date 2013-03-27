@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cclClyMh.s 			page 1
 
 
    1               		.file	"mmc.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
   55 0058 1092 0000 		sts (CardState)+1,__zero_reg__
   56 005c 1092 0000 		sts CardState,__zero_reg__
   57 0060 00C0      		rjmp .L2
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 2
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cclClyMh.s 			page 2
 
 
   58               	.L5:
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  112               		.size	CardStatus, .-CardStatus
  113               	.global	CardClose
  114               		.type	CardClose, @function
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 3
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cclClyMh.s 			page 3
 
 
  115               	CardClose:
@@ -149,8 +149,8 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  140 00ca 1092 0000 		sts (CardState)+1,__zero_reg__
  141 00ce 1092 0000 		sts CardState,__zero_reg__
  142 00d2 1092 0000 		sts CardPresentFlag,__zero_reg__
- 143 00d6 60E0      		ldi r22,lo8(__c.2558)
- 144 00d8 70E0      		ldi r23,hi8(__c.2558)
+ 143 00d6 60E0      		ldi r22,lo8(__c.2578)
+ 144 00d8 70E0      		ldi r23,hi8(__c.2578)
  145 00da 8E01      		movw r16,r28
  146 00dc 0F5F      		subi r16,lo8(-(1))
  147 00de 1F4F      		sbci r17,hi8(-(1))
@@ -170,15 +170,15 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  161 00fe 0E94 0000 		call NutThreadCreate
  162 0102 892B      		or r24,r25
  163 0104 01F4      		brne .L26
- 164 0106 80E0      		ldi r24,lo8(__c.2560)
- 165 0108 90E0      		ldi r25,hi8(__c.2560)
+ 164 0106 80E0      		ldi r24,lo8(__c.2580)
+ 165 0108 90E0      		ldi r25,hi8(__c.2580)
  166 010a 9F93      		push r25
  167 010c 8F93      		push r24
  168 010e 80EE      		ldi r24,lo8(-32)
  169 0110 8F93      		push r24
  170 0112 0E94 0000 		call LogMsg_P
  171 0116 0F90      		pop __tmp_reg__
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 4
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cclClyMh.s 			page 4
 
 
  172 0118 0F90      		pop __tmp_reg__
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  226 0176 67E0      		ldi r22,lo8(7)
  227 0178 70E0      		ldi r23,hi8(7)
  228 017a 80E0      		ldi r24,lo8(devFATMMC0)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 5
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cclClyMh.s 			page 5
 
 
  229 017c 90E0      		ldi r25,hi8(devFATMMC0)
@@ -282,8 +282,8 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  267 01ce 0115      		cp r16,__zero_reg__
  268 01d0 1105      		cpc r17,__zero_reg__
  269 01d2 01F4      		brne .L39
- 270 01d4 80E0      		ldi r24,lo8(__c.2512)
- 271 01d6 90E0      		ldi r25,hi8(__c.2512)
+ 270 01d4 80E0      		ldi r24,lo8(__c.2532)
+ 271 01d6 90E0      		ldi r25,hi8(__c.2532)
  272 01d8 9F93      		push r25
  273 01da 8F93      		push r24
  274 01dc 86EE      		ldi r24,lo8(-26)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  283 01f2 0F90      		pop __tmp_reg__
  284 01f4 0F90      	 	pop __tmp_reg__
  285 01f6 2FEF      		ldi r18,hi8(-1)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 6
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cclClyMh.s 			page 6
 
 
  286 01f8 8F3F      		cpi r24,lo8(-1)
@@ -307,8 +307,8 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  289 01fe 0E94 0000 		call _close
  290 0202 00C0      		rjmp .L41
  291               	.L39:
- 292 0204 80E0      		ldi r24,lo8(__c.2514)
- 293 0206 90E0      		ldi r25,hi8(__c.2514)
+ 292 0204 80E0      		ldi r24,lo8(__c.2534)
+ 293 0206 90E0      		ldi r25,hi8(__c.2534)
  294 0208 9F93      		push r25
  295 020a 8F93      		push r24
  296 020c 83EE      		ldi r24,lo8(-29)
@@ -342,23 +342,23 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  324               	/* prologue end (size=0) */
  325               	.L65:
  326 0234 8091 0000 		lds r24,CardPresentFlag
- 327 0238 8093 0000 		sts OldCardStatus.2535,r24
+ 327 0238 8093 0000 		sts OldCardStatus.2555,r24
  328               	.L66:
  329 023c 8091 0000 		lds r24,CardPresentFlag
  330 0240 8130      		cpi r24,lo8(1)
  331 0242 01F4      		brne .L46
- 332 0244 8091 0000 		lds r24,OldCardStatus.2535
+ 332 0244 8091 0000 		lds r24,OldCardStatus.2555
  333 0248 8823      		tst r24
  334 024a 01F4      		brne .L48
- 335 024c 80E0      		ldi r24,lo8(__c.2536)
- 336 024e 90E0      		ldi r25,hi8(__c.2536)
+ 335 024c 80E0      		ldi r24,lo8(__c.2556)
+ 336 024e 90E0      		ldi r25,hi8(__c.2556)
  337 0250 9F93      		push r25
  338 0252 8F93      		push r24
  339 0254 86EE      		ldi r24,lo8(-26)
  340 0256 8F93      		push r24
  341 0258 0E94 0000 		call LogMsg_P
  342 025c 0E94 0000 		call CardInitCard
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 7
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cclClyMh.s 			page 7
 
 
  343 0260 0F90      		pop __tmp_reg__
@@ -372,18 +372,18 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  351               	.L46:
  352 0272 8823      		tst r24
  353 0274 01F4      		brne .L48
- 354 0276 8091 0000 		lds r24,OldCardStatus.2535
+ 354 0276 8091 0000 		lds r24,OldCardStatus.2555
  355 027a 8130      		cpi r24,lo8(1)
  356 027c 01F4      		brne .L48
- 357 027e 80E0      		ldi r24,lo8(__c.2538)
- 358 0280 90E0      		ldi r25,hi8(__c.2538)
+ 357 027e 80E0      		ldi r24,lo8(__c.2558)
+ 358 0280 90E0      		ldi r25,hi8(__c.2558)
  359 0282 9F93      		push r25
  360 0284 8F93      		push r24
  361 0286 86EE      		ldi r24,lo8(-26)
  362 0288 8F93      		push r24
  363 028a 0E94 0000 		call LogMsg_P
  364 028e 8091 0000 		lds r24,CardPresentFlag
- 365 0292 8093 0000 		sts OldCardStatus.2535,r24
+ 365 0292 8093 0000 		sts OldCardStatus.2555,r24
  366 0296 0F90      		pop __tmp_reg__
  367 0298 0F90      		pop __tmp_reg__
  368 029a 0F90      	 	pop __tmp_reg__
@@ -401,48 +401,48 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  380               	/* function CardPresent size 60 (60) */
  381               		.size	CardPresent, .-CardPresent
  382               		.section	.progmem.data,"a",@progbits
- 383               		.type	__c.2560, @object
- 384               		.size	__c.2560, 14
- 385               	__c.2560:
+ 383               		.type	__c.2580, @object
+ 384               		.size	__c.2580, 14
+ 385               	__c.2580:
  386 0000 5468 7265 		.string	"Thread failed"
  386      6164 2066 
  386      6169 6C65 
  386      6400 
- 387               		.type	__c.2558, @object
- 388               		.size	__c.2558, 9
- 389               	__c.2558:
+ 387               		.type	__c.2578, @object
+ 388               		.size	__c.2578, 9
+ 389               	__c.2578:
  390 000e 4361 7264 		.string	"CardPres"
  390      5072 6573 
  390      00
- 391               		.type	__c.2538, @object
- 392               		.size	__c.2538, 13
- 393               	__c.2538:
+ 391               		.type	__c.2558, @object
+ 392               		.size	__c.2558, 13
+ 393               	__c.2558:
  394 0017 4361 7264 		.string	"Card removed"
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 8
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cclClyMh.s 			page 8
 
 
  394      2072 656D 
  394      6F76 6564 
  394      00
- 395               		.type	__c.2536, @object
- 396               		.size	__c.2536, 14
- 397               	__c.2536:
+ 395               		.type	__c.2556, @object
+ 396               		.size	__c.2556, 14
+ 397               	__c.2556:
  398 0024 4361 7264 		.string	"Card inserted"
  398      2069 6E73 
  398      6572 7465 
  398      6400 
- 399               		.lcomm OldCardStatus.2535,1
- 400               		.type	__c.2514, @object
- 401               		.size	__c.2514, 47
- 402               	__c.2514:
+ 399               		.lcomm OldCardStatus.2555,1
+ 400               		.type	__c.2534, @object
+ 401               		.size	__c.2534, 47
+ 402               	__c.2534:
  403 0032 4572 726F 		.string	"Error initialising File system and Card-driver"
  403      7220 696E 
  403      6974 6961 
  403      6C69 7369 
  403      6E67 2046 
- 404               		.type	__c.2512, @object
- 405               		.size	__c.2512, 13
- 406               	__c.2512:
+ 404               		.type	__c.2532, @object
+ 405               		.size	__c.2532, 13
+ 406               	__c.2532:
  407 0061 4361 7264 		.string	"Card mounted"
  407      206D 6F75 
  407      6E74 6564 
@@ -452,34 +452,34 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 1
  410               		.lcomm CardState,2
  411               		.lcomm g_tStatus,2
  412               	/* File "source/mmc.c": code  343 = 0x0157 ( 291), prologues  25, epilogues  27 */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s 			page 9
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cclClyMh.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 mmc.c
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:3      *ABS*:0000003f __SREG__
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:13     .text:00000000 CardCheckCard
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:409    .bss:00000003 CardState
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:408    .bss:00000002 ValidateCounter
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:399    .bss:00000001 CardPresentFlag
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:91     .text:0000009e CardCheckPresent
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:103    .text:000000a6 CardStatus
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:410    .bss:00000005 g_tStatus
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:115    .text:000000b0 CardClose
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:125    .text:000000b2 CardInit
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:389    .progmem.data:0000000e __c.2558
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:322    .text:00000234 CardPresent
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:385    .progmem.data:00000000 __c.2560
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:192    .text:00000132 CardInitCard
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:406    .progmem.data:00000061 __c.2512
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:402    .progmem.data:00000032 __c.2514
-                             .bss:00000000 OldCardStatus.2535
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:397    .progmem.data:00000024 __c.2536
-C:\Users\Blommers\AppData\Local\Temp/ccsYGQ5i.s:393    .progmem.data:00000017 __c.2538
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:3      *ABS*:0000003f __SREG__
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:13     .text:00000000 CardCheckCard
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:409    .bss:00000003 CardState
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:408    .bss:00000002 ValidateCounter
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:399    .bss:00000001 CardPresentFlag
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:91     .text:0000009e CardCheckPresent
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:103    .text:000000a6 CardStatus
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:410    .bss:00000005 g_tStatus
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:115    .text:000000b0 CardClose
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:125    .text:000000b2 CardInit
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:389    .progmem.data:0000000e __c.2578
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:322    .text:00000234 CardPresent
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:385    .progmem.data:00000000 __c.2580
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:192    .text:00000132 CardInitCard
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:406    .progmem.data:00000061 __c.2532
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:402    .progmem.data:00000032 __c.2534
+                             .bss:00000000 OldCardStatus.2555
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:397    .progmem.data:00000024 __c.2556
+C:\Users\Robin\AppData\Local\Temp/cclClyMh.s:393    .progmem.data:00000017 __c.2558
 
 UNDEFINED SYMBOLS
 __do_copy_data

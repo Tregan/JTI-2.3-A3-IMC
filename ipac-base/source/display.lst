@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 1
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 1
 
 
    1               		.file	"display.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 1
   55               	/* #NOAPP */
   56 0032 7298      		cbi 46-0x20,2
   57 0034 8A98      		cbi 49-0x20,2
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 2
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 2
 
 
   58 0036 8AB1      		in r24,42-0x20
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 1
  112 007e 682F      		mov r22,r24
  113 0080 83E0      		ldi r24,lo8(3)
  114 0082 0E94 0000 		call LcdWriteByte
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 3
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 3
 
 
  115               	/* epilogue: frame size=0 */
@@ -145,215 +145,730 @@ GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 1
  136               	/* epilogue end (size=2) */
  137               	/* function WriteByteToLocation size 12 (9) */
  138               		.size	WriteByteToLocation, .-WriteByteToLocation
- 139               	.global	LcdTimeDisplay
- 140               		.type	LcdTimeDisplay, @function
- 141               	LcdTimeDisplay:
- 142               	/* prologue: frame size=1 */
- 143 00a0 CF92      		push r12
- 144 00a2 DF92      		push r13
- 145 00a4 EF92      		push r14
- 146 00a6 FF92      		push r15
- 147 00a8 0F93      		push r16
- 148 00aa 1F93      		push r17
- 149 00ac CF93      		push r28
- 150 00ae DF93      		push r29
- 151 00b0 CDB7      		in r28,__SP_L__
- 152 00b2 DEB7      		in r29,__SP_H__
- 153 00b4 2197      		sbiw r28,1
- 154 00b6 0FB6      		in __tmp_reg__,__SREG__
- 155 00b8 F894      		cli
- 156 00ba DEBF      		out __SP_H__,r29
- 157 00bc 0FBE      		out __SREG__,__tmp_reg__
- 158 00be CDBF      		out __SP_L__,r28
- 159               	/* prologue end (size=16) */
- 160 00c0 8C01      		movw r16,r24
- 161 00c2 81E0      		ldi r24,lo8(1)
- 162 00c4 0E94 0000 		call LcdBackLight
- 163 00c8 CC24      		clr r12
- 164 00ca DD24      		clr r13
- 165 00cc 7801      		movw r14,r16
- 166 00ce 00C0      		rjmp .L23
- 167               	.L24:
- 168 00d0 83E0      		ldi r24,lo8(3)
- 169 00d2 C816      		cp r12,r24
- 170 00d4 D104      		cpc r13,__zero_reg__
- 171 00d6 01F0      		breq .L29
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 4
+ 139               	.global	LcdWriteShortTitle
+ 140               		.type	LcdWriteShortTitle, @function
+ 141               	LcdWriteShortTitle:
+ 142               	/* prologue: frame size=0 */
+ 143 00a0 0F93      		push r16
+ 144 00a2 1F93      		push r17
+ 145 00a4 CF93      		push r28
+ 146 00a6 DF93      		push r29
+ 147               	/* prologue end (size=4) */
+ 148 00a8 8C01      		movw r16,r24
+ 149 00aa EC01      		movw r28,r24
+ 150 00ac 6991      		ld r22,Y+
+ 151 00ae 80E8      		ldi r24,lo8(-128)
+ 152 00b0 0E94 0000 		call WriteByteToLocation
+ 153 00b4 095F      		subi r16,lo8(-(7))
+ 154 00b6 1F4F      		sbci r17,hi8(-(7))
+ 155               	.L23:
+ 156 00b8 8991      		ld r24,Y+
+ 157 00ba 8823      		tst r24
+ 158 00bc 01F0      		breq .L26
+ 159 00be 0E94 0000 		call LcdChar
+ 160 00c2 C017      		cp r28,r16
+ 161 00c4 D107      		cpc r29,r17
+ 162 00c6 01F4      		brne .L23
+ 163               	.L26:
+ 164               	/* epilogue: frame size=0 */
+ 165 00c8 DF91      		pop r29
+ 166 00ca CF91      		pop r28
+ 167 00cc 1F91      		pop r17
+ 168 00ce 0F91      		pop r16
+ 169 00d0 0895      		ret
+ 170               	/* epilogue end (size=5) */
+ 171               	/* function LcdWriteShortTitle size 25 (16) */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 4
 
 
- 172 00d8 E4E0      		ldi r30,lo8(4)
- 173 00da CE16      		cp r12,r30
- 174 00dc D104      		cpc r13,__zero_reg__
- 175 00de 04F4      		brge .L34
- 176 00e0 F1E0      		ldi r31,lo8(1)
- 177 00e2 CF16      		cp r12,r31
- 178 00e4 D104      		cpc r13,__zero_reg__
- 179 00e6 01F0      		breq .L27
- 180 00e8 82E0      		ldi r24,lo8(2)
- 181 00ea C816      		cp r12,r24
- 182 00ec D104      		cpc r13,__zero_reg__
- 183 00ee 04F4      		brge .L28
- 184 00f0 C114      		cp r12,__zero_reg__
- 185 00f2 D104      		cpc r13,__zero_reg__
- 186 00f4 01F0      		breq .L26
- 187 00f6 00C0      		rjmp .L25
- 188               	.L34:
- 189 00f8 E5E0      		ldi r30,lo8(5)
- 190 00fa CE16      		cp r12,r30
- 191 00fc D104      		cpc r13,__zero_reg__
- 192 00fe 01F0      		breq .L31
- 193 0100 F5E0      		ldi r31,lo8(5)
- 194 0102 CF16      		cp r12,r31
- 195 0104 D104      		cpc r13,__zero_reg__
- 196 0106 04F0      		brlt .L30
- 197 0108 86E0      		ldi r24,lo8(6)
- 198 010a C816      		cp r12,r24
- 199 010c D104      		cpc r13,__zero_reg__
- 200 010e 01F0      		breq .L32
- 201 0110 E7E0      		ldi r30,lo8(7)
- 202 0112 CE16      		cp r12,r30
- 203 0114 D104      		cpc r13,__zero_reg__
- 204 0116 01F4      		brne .L25
- 205 0118 9FE8      		ldi r25,lo8(-113)
- 206 011a 00C0      		rjmp .L25
- 207               	.L26:
- 208 011c 98E8      		ldi r25,lo8(-120)
- 209 011e 00C0      		rjmp .L25
- 210               	.L27:
- 211 0120 99E8      		ldi r25,lo8(-119)
- 212 0122 00C0      		rjmp .L25
- 213               	.L28:
- 214 0124 9AE8      		ldi r25,lo8(-118)
- 215 0126 00C0      		rjmp .L25
- 216               	.L29:
- 217 0128 9BE8      		ldi r25,lo8(-117)
- 218 012a 00C0      		rjmp .L25
- 219               	.L30:
- 220 012c 9CE8      		ldi r25,lo8(-116)
- 221 012e 00C0      		rjmp .L25
- 222               	.L31:
- 223 0130 9DE8      		ldi r25,lo8(-115)
- 224 0132 00C0      		rjmp .L25
- 225               	.L32:
- 226 0134 9EE8      		ldi r25,lo8(-114)
- 227               	.L25:
- 228 0136 F701      		movw r30,r14
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 5
+ 172               		.size	LcdWriteShortTitle, .-LcdWriteShortTitle
+ 173               	.global	LcdWriteShortFirstLine
+ 174               		.type	LcdWriteShortFirstLine, @function
+ 175               	LcdWriteShortFirstLine:
+ 176               	/* prologue: frame size=0 */
+ 177 00d2 0F93      		push r16
+ 178 00d4 1F93      		push r17
+ 179 00d6 CF93      		push r28
+ 180 00d8 DF93      		push r29
+ 181               	/* prologue end (size=4) */
+ 182 00da 8C01      		movw r16,r24
+ 183 00dc EC01      		movw r28,r24
+ 184 00de 6991      		ld r22,Y+
+ 185 00e0 80E8      		ldi r24,lo8(-128)
+ 186 00e2 0E94 0000 		call WriteByteToLocation
+ 187 00e6 005F      		subi r16,lo8(-(16))
+ 188 00e8 1F4F      		sbci r17,hi8(-(16))
+ 189               	.L29:
+ 190 00ea 8991      		ld r24,Y+
+ 191 00ec 8823      		tst r24
+ 192 00ee 01F0      		breq .L32
+ 193 00f0 0E94 0000 		call LcdChar
+ 194 00f4 C017      		cp r28,r16
+ 195 00f6 D107      		cpc r29,r17
+ 196 00f8 01F4      		brne .L29
+ 197               	.L32:
+ 198               	/* epilogue: frame size=0 */
+ 199 00fa DF91      		pop r29
+ 200 00fc CF91      		pop r28
+ 201 00fe 1F91      		pop r17
+ 202 0100 0F91      		pop r16
+ 203 0102 0895      		ret
+ 204               	/* epilogue end (size=5) */
+ 205               	/* function LcdWriteShortFirstLine size 25 (16) */
+ 206               		.size	LcdWriteShortFirstLine, .-LcdWriteShortFirstLine
+ 207               	.global	LcdWriteShortSecondLine
+ 208               		.type	LcdWriteShortSecondLine, @function
+ 209               	LcdWriteShortSecondLine:
+ 210               	/* prologue: frame size=0 */
+ 211 0104 0F93      		push r16
+ 212 0106 1F93      		push r17
+ 213 0108 CF93      		push r28
+ 214 010a DF93      		push r29
+ 215               	/* prologue end (size=4) */
+ 216 010c 8C01      		movw r16,r24
+ 217 010e EC01      		movw r28,r24
+ 218 0110 6991      		ld r22,Y+
+ 219 0112 80EC      		ldi r24,lo8(-64)
+ 220 0114 0E94 0000 		call WriteByteToLocation
+ 221 0118 005F      		subi r16,lo8(-(16))
+ 222 011a 1F4F      		sbci r17,hi8(-(16))
+ 223               	.L35:
+ 224 011c 8991      		ld r24,Y+
+ 225 011e 8823      		tst r24
+ 226 0120 01F0      		breq .L38
+ 227 0122 0E94 0000 		call LcdChar
+ 228 0126 C017      		cp r28,r16
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 5
 
 
- 229 0138 6191      		ld r22,Z+
- 230 013a 7F01      		movw r14,r30
- 231 013c 892F      		mov r24,r25
- 232 013e 9983      		std Y+1,r25
- 233 0140 0E94 0000 		call WriteByteToLocation
- 234 0144 0894      		sec
- 235 0146 C11C      		adc r12,__zero_reg__
- 236 0148 D11C      		adc r13,__zero_reg__
- 237 014a 9981      		ldd r25,Y+1
- 238               	.L23:
- 239 014c F801      		movw r30,r16
- 240 014e 0190      		ld __tmp_reg__,Z+
- 241 0150 0020      		tst __tmp_reg__
- 242 0152 01F4      		brne .-6
- 243 0154 3197      		sbiw r30,1
- 244 0156 E01B      		sub r30,r16
- 245 0158 F10B      		sbc r31,r17
- 246 015a CE16      		cp r12,r30
- 247 015c DF06      		cpc r13,r31
- 248 015e 00F4      		brsh .+2
- 249 0160 00C0      		rjmp .L24
- 250               	/* epilogue: frame size=1 */
- 251 0162 2196      		adiw r28,1
- 252 0164 0FB6      		in __tmp_reg__,__SREG__
- 253 0166 F894      		cli
- 254 0168 DEBF      		out __SP_H__,r29
- 255 016a 0FBE      		out __SREG__,__tmp_reg__
- 256 016c CDBF      		out __SP_L__,r28
- 257 016e DF91      		pop r29
- 258 0170 CF91      		pop r28
- 259 0172 1F91      		pop r17
- 260 0174 0F91      		pop r16
- 261 0176 FF90      		pop r15
- 262 0178 EF90      		pop r14
- 263 017a DF90      		pop r13
- 264 017c CF90      		pop r12
- 265 017e 0895      		ret
- 266               	/* epilogue end (size=15) */
- 267               	/* function LcdTimeDisplay size 112 (81) */
- 268               		.size	LcdTimeDisplay, .-LcdTimeDisplay
- 269               	.global	LcdLowLevelInit
- 270               		.type	LcdLowLevelInit, @function
- 271               	LcdLowLevelInit:
- 272               	/* prologue: frame size=0 */
- 273 0180 1F93      		push r17
- 274               	/* prologue end (size=1) */
- 275 0182 8CE8      		ldi r24,lo8(-116)
- 276 0184 0E94 0000 		call NutDelay
- 277 0188 10E0      		ldi r17,lo8(0)
- 278               	.L38:
- 279 018a 63E3      		ldi r22,lo8(51)
- 280 018c 82E0      		ldi r24,lo8(2)
- 281 018e 0E94 0000 		call LcdWriteNibble
- 282 0192 84E0      		ldi r24,lo8(4)
- 283 0194 0E94 0000 		call NutDelay
- 284 0198 1F5F      		subi r17,lo8(-(1))
- 285 019a 1330      		cpi r17,lo8(3)
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 6
+ 229 0128 D107      		cpc r29,r17
+ 230 012a 01F4      		brne .L35
+ 231               	.L38:
+ 232               	/* epilogue: frame size=0 */
+ 233 012c DF91      		pop r29
+ 234 012e CF91      		pop r28
+ 235 0130 1F91      		pop r17
+ 236 0132 0F91      		pop r16
+ 237 0134 0895      		ret
+ 238               	/* epilogue end (size=5) */
+ 239               	/* function LcdWriteShortSecondLine size 25 (16) */
+ 240               		.size	LcdWriteShortSecondLine, .-LcdWriteShortSecondLine
+ 241               	.global	LcdWriteFirstLine
+ 242               		.type	LcdWriteFirstLine, @function
+ 243               	LcdWriteFirstLine:
+ 244               	/* prologue: frame size=0 */
+ 245               	/* prologue end (size=0) */
+ 246 0136 0E94 0000 		call LcdWriteShortFirstLine
+ 247               	/* epilogue: frame size=0 */
+ 248 013a 0895      		ret
+ 249               	/* epilogue end (size=1) */
+ 250               	/* function LcdWriteFirstLine size 3 (2) */
+ 251               		.size	LcdWriteFirstLine, .-LcdWriteFirstLine
+ 252               		.data
+ 253               	.LC0:
+ 254 0000 4C63 6442 		.string	"LcdB"
+ 254      00
+ 255               		.text
+ 256               	.global	LcdWriteSecondLine
+ 257               		.type	LcdWriteSecondLine, @function
+ 258               	LcdWriteSecondLine:
+ 259               	/* prologue: frame size=0 */
+ 260 013c CF93      		push r28
+ 261 013e DF93      		push r29
+ 262               	/* prologue end (size=2) */
+ 263 0140 EC01      		movw r28,r24
+ 264 0142 9093 0000 		sts (secondline)+1,r25
+ 265 0146 8093 0000 		sts secondline,r24
+ 266 014a 8091 0000 		lds r24,secondlinebool
+ 267 014e 9091 0000 		lds r25,(secondlinebool)+1
+ 268 0152 892B      		or r24,r25
+ 269 0154 01F4      		brne .L43
+ 270 0156 81E0      		ldi r24,lo8(1)
+ 271 0158 0E94 0000 		call NutThreadSetPriority
+ 272 015c 20E0      		ldi r18,lo8(1024)
+ 273 015e 34E0      		ldi r19,hi8(1024)
+ 274 0160 AE01      		movw r20,r28
+ 275 0162 60E0      		ldi r22,lo8(gs(SecondLineThread))
+ 276 0164 70E0      		ldi r23,hi8(gs(SecondLineThread))
+ 277 0166 80E0      		ldi r24,lo8(.LC0)
+ 278 0168 90E0      		ldi r25,hi8(.LC0)
+ 279 016a 0E94 0000 		call NutThreadCreate
+ 280 016e 80E0      		ldi r24,lo8(0)
+ 281 0170 0E94 0000 		call NutThreadSetPriority
+ 282               	.L43:
+ 283 0174 81E0      		ldi r24,lo8(1)
+ 284 0176 90E0      		ldi r25,hi8(1)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 6
 
 
- 286 019c 01F4      		brne .L38
- 287 019e 62E2      		ldi r22,lo8(34)
- 288 01a0 82E0      		ldi r24,lo8(2)
- 289 01a2 0E94 0000 		call LcdWriteNibble
- 290 01a6 81E0      		ldi r24,lo8(1)
- 291 01a8 0E94 0000 		call NutDelay
- 292 01ac 68E2      		ldi r22,lo8(40)
- 293 01ae 82E0      		ldi r24,lo8(2)
- 294 01b0 0E94 0000 		call LcdWriteByte
- 295 01b4 85E0      		ldi r24,lo8(5)
- 296 01b6 0E94 0000 		call NutDelay
- 297 01ba 6CE0      		ldi r22,lo8(12)
- 298 01bc 82E0      		ldi r24,lo8(2)
- 299 01be 0E94 0000 		call LcdWriteByte
- 300 01c2 85E0      		ldi r24,lo8(5)
- 301 01c4 0E94 0000 		call NutDelay
- 302 01c8 61E0      		ldi r22,lo8(1)
- 303 01ca 82E0      		ldi r24,lo8(2)
- 304 01cc 0E94 0000 		call LcdWriteByte
- 305 01d0 85E0      		ldi r24,lo8(5)
- 306 01d2 0E94 0000 		call NutDelay
- 307 01d6 66E0      		ldi r22,lo8(6)
- 308 01d8 82E0      		ldi r24,lo8(2)
- 309 01da 0E94 0000 		call LcdWriteByte
- 310 01de 60E8      		ldi r22,lo8(-128)
- 311 01e0 82E0      		ldi r24,lo8(2)
- 312 01e2 0E94 0000 		call LcdWriteByte
- 313               	/* epilogue: frame size=0 */
- 314 01e6 1F91      		pop r17
- 315 01e8 0895      		ret
- 316               	/* epilogue end (size=2) */
- 317               	/* function LcdLowLevelInit size 53 (50) */
- 318               		.size	LcdLowLevelInit, .-LcdLowLevelInit
- 319               	/* File "source/display.c": code  249 = 0x00f9 ( 205), prologues  20, epilogues  24 */
-GAS LISTING C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s 			page 7
+ 285 0178 9093 0000 		sts (secondlinebool)+1,r25
+ 286 017c 8093 0000 		sts secondlinebool,r24
+ 287               	/* epilogue: frame size=0 */
+ 288 0180 DF91      		pop r29
+ 289 0182 CF91      		pop r28
+ 290 0184 0895      		ret
+ 291               	/* epilogue end (size=3) */
+ 292               	/* function LcdWriteSecondLine size 37 (32) */
+ 293               		.size	LcdWriteSecondLine, .-LcdWriteSecondLine
+ 294               		.data
+ 295               	.LC1:
+ 296 0005 2020 2020 		.string	"                "
+ 296      2020 2020 
+ 296      2020 2020 
+ 296      2020 2020 
+ 296      00
+ 297               		.text
+ 298               	.global	LcdClearSecondLine
+ 299               		.type	LcdClearSecondLine, @function
+ 300               	LcdClearSecondLine:
+ 301               	/* prologue: frame size=0 */
+ 302               	/* prologue end (size=0) */
+ 303 0186 80E0      		ldi r24,lo8(.LC1)
+ 304 0188 90E0      		ldi r25,hi8(.LC1)
+ 305 018a 0E94 0000 		call LcdWriteSecondLine
+ 306               	/* epilogue: frame size=0 */
+ 307 018e 0895      		ret
+ 308               	/* epilogue end (size=1) */
+ 309               	/* function LcdClearSecondLine size 5 (4) */
+ 310               		.size	LcdClearSecondLine, .-LcdClearSecondLine
+ 311               		.data
+ 312               	.LC2:
+ 313 0016 2020 2020 		.string	"        "
+ 313      2020 2020 
+ 313      00
+ 314               		.text
+ 315               	.global	LcdClearTitleLine
+ 316               		.type	LcdClearTitleLine, @function
+ 317               	LcdClearTitleLine:
+ 318               	/* prologue: frame size=0 */
+ 319               	/* prologue end (size=0) */
+ 320 0190 80E0      		ldi r24,lo8(.LC2)
+ 321 0192 90E0      		ldi r25,hi8(.LC2)
+ 322 0194 0E94 0000 		call LcdWriteShortTitle
+ 323 0198 0E94 0000 		call LcdClearSecondLine
+ 324               	/* epilogue: frame size=0 */
+ 325 019c 0895      		ret
+ 326               	/* epilogue end (size=1) */
+ 327               	/* function LcdClearTitleLine size 7 (6) */
+ 328               		.size	LcdClearTitleLine, .-LcdClearTitleLine
+ 329               	.global	LcdClearLine
+ 330               		.type	LcdClearLine, @function
+ 331               	LcdClearLine:
+ 332               	/* prologue: frame size=0 */
+ 333               	/* prologue end (size=0) */
+ 334 019e 0E94 0000 		call LcdClearSecondLine
+ 335               	/* epilogue: frame size=0 */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 7
+
+
+ 336 01a2 0895      		ret
+ 337               	/* epilogue end (size=1) */
+ 338               	/* function LcdClearLine size 3 (2) */
+ 339               		.size	LcdClearLine, .-LcdClearLine
+ 340               		.data
+ 341               	.LC3:
+ 342 001f 4C63 6441 		.string	"LcdA"
+ 342      00
+ 343               		.text
+ 344               	.global	LcdWriteTitle
+ 345               		.type	LcdWriteTitle, @function
+ 346               	LcdWriteTitle:
+ 347               	/* prologue: frame size=0 */
+ 348 01a4 CF93      		push r28
+ 349 01a6 DF93      		push r29
+ 350               	/* prologue end (size=2) */
+ 351 01a8 EC01      		movw r28,r24
+ 352 01aa 9093 0000 		sts (title)+1,r25
+ 353 01ae 8093 0000 		sts title,r24
+ 354 01b2 8091 0000 		lds r24,titlebool
+ 355 01b6 9091 0000 		lds r25,(titlebool)+1
+ 356 01ba 892B      		or r24,r25
+ 357 01bc 01F4      		brne .L53
+ 358 01be 81E0      		ldi r24,lo8(1)
+ 359 01c0 0E94 0000 		call NutThreadSetPriority
+ 360 01c4 20E0      		ldi r18,lo8(1024)
+ 361 01c6 34E0      		ldi r19,hi8(1024)
+ 362 01c8 AE01      		movw r20,r28
+ 363 01ca 60E0      		ldi r22,lo8(gs(TitleThread))
+ 364 01cc 70E0      		ldi r23,hi8(gs(TitleThread))
+ 365 01ce 80E0      		ldi r24,lo8(.LC3)
+ 366 01d0 90E0      		ldi r25,hi8(.LC3)
+ 367 01d2 0E94 0000 		call NutThreadCreate
+ 368 01d6 80E0      		ldi r24,lo8(0)
+ 369 01d8 0E94 0000 		call NutThreadSetPriority
+ 370               	.L53:
+ 371 01dc 81E0      		ldi r24,lo8(1)
+ 372 01de 90E0      		ldi r25,hi8(1)
+ 373 01e0 9093 0000 		sts (titlebool)+1,r25
+ 374 01e4 8093 0000 		sts titlebool,r24
+ 375               	/* epilogue: frame size=0 */
+ 376 01e8 DF91      		pop r29
+ 377 01ea CF91      		pop r28
+ 378 01ec 0895      		ret
+ 379               	/* epilogue end (size=3) */
+ 380               	/* function LcdWriteTitle size 37 (32) */
+ 381               		.size	LcdWriteTitle, .-LcdWriteTitle
+ 382               		.data
+ 383               	.LC4:
+ 384 0024 2020 2020 		.string	"       "
+ 384      2020 2000 
+ 385               		.text
+ 386               	.global	LcdClearTitle
+ 387               		.type	LcdClearTitle, @function
+ 388               	LcdClearTitle:
+ 389               	/* prologue: frame size=0 */
+ 390               	/* prologue end (size=0) */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 8
+
+
+ 391 01ee 80E0      		ldi r24,lo8(.LC4)
+ 392 01f0 90E0      		ldi r25,hi8(.LC4)
+ 393 01f2 0E94 0000 		call LcdWriteTitle
+ 394               	/* epilogue: frame size=0 */
+ 395 01f6 0895      		ret
+ 396               	/* epilogue end (size=1) */
+ 397               	/* function LcdClearTitle size 5 (4) */
+ 398               		.size	LcdClearTitle, .-LcdClearTitle
+ 399               	.global	LcdClearFirstLine
+ 400               		.type	LcdClearFirstLine, @function
+ 401               	LcdClearFirstLine:
+ 402               	/* prologue: frame size=0 */
+ 403               	/* prologue end (size=0) */
+ 404 01f8 80E0      		ldi r24,lo8(.LC1)
+ 405 01fa 90E0      		ldi r25,hi8(.LC1)
+ 406 01fc 0E94 0000 		call LcdWriteFirstLine
+ 407 0200 0E94 0000 		call LcdClearTitle
+ 408               	/* epilogue: frame size=0 */
+ 409 0204 0895      		ret
+ 410               	/* epilogue end (size=1) */
+ 411               	/* function LcdClearFirstLine size 7 (6) */
+ 412               		.size	LcdClearFirstLine, .-LcdClearFirstLine
+ 413               	.global	LcdClearAll
+ 414               		.type	LcdClearAll, @function
+ 415               	LcdClearAll:
+ 416               	/* prologue: frame size=0 */
+ 417               	/* prologue end (size=0) */
+ 418 0206 0E94 0000 		call LcdClearFirstLine
+ 419 020a 0E94 0000 		call LcdClearSecondLine
+ 420               	/* epilogue: frame size=0 */
+ 421 020e 0895      		ret
+ 422               	/* epilogue end (size=1) */
+ 423               	/* function LcdClearAll size 5 (4) */
+ 424               		.size	LcdClearAll, .-LcdClearAll
+ 425               	.global	LcdTimeDisplay
+ 426               		.type	LcdTimeDisplay, @function
+ 427               	LcdTimeDisplay:
+ 428               	/* prologue: frame size=0 */
+ 429 0210 EF92      		push r14
+ 430 0212 FF92      		push r15
+ 431 0214 0F93      		push r16
+ 432 0216 1F93      		push r17
+ 433 0218 CF93      		push r28
+ 434 021a DF93      		push r29
+ 435               	/* prologue end (size=6) */
+ 436 021c 8C01      		movw r16,r24
+ 437 021e EC01      		movw r28,r24
+ 438 0220 6991      		ld r22,Y+
+ 439 0222 88E8      		ldi r24,lo8(-120)
+ 440 0224 0E94 0000 		call WriteByteToLocation
+ 441 0228 81E0      		ldi r24,lo8(1)
+ 442 022a E82E      		mov r14,r24
+ 443 022c F12C      		mov r15,__zero_reg__
+ 444 022e 00C0      		rjmp .L63
+ 445               	.L64:
+ 446 0230 8991      		ld r24,Y+
+ 447 0232 0E94 0000 		call LcdChar
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 9
+
+
+ 448 0236 0894      		sec
+ 449 0238 E11C      		adc r14,__zero_reg__
+ 450 023a F11C      		adc r15,__zero_reg__
+ 451               	.L63:
+ 452 023c F801      		movw r30,r16
+ 453 023e 0190      		ld __tmp_reg__,Z+
+ 454 0240 0020      		tst __tmp_reg__
+ 455 0242 01F4      		brne .-6
+ 456 0244 3197      		sbiw r30,1
+ 457 0246 E01B      		sub r30,r16
+ 458 0248 F10B      		sbc r31,r17
+ 459 024a EE16      		cp r14,r30
+ 460 024c FF06      		cpc r15,r31
+ 461 024e 00F0      		brlo .L64
+ 462               	/* epilogue: frame size=0 */
+ 463 0250 DF91      		pop r29
+ 464 0252 CF91      		pop r28
+ 465 0254 1F91      		pop r17
+ 466 0256 0F91      		pop r16
+ 467 0258 FF90      		pop r15
+ 468 025a EF90      		pop r14
+ 469 025c 0895      		ret
+ 470               	/* epilogue end (size=7) */
+ 471               	/* function LcdTimeDisplay size 39 (26) */
+ 472               		.size	LcdTimeDisplay, .-LcdTimeDisplay
+ 473               	.global	SecondLineThread
+ 474               		.type	SecondLineThread, @function
+ 475               	SecondLineThread:
+ 476               	/* prologue: frame size=16 */
+ 477 025e CF93      		push r28
+ 478 0260 DF93      		push r29
+ 479 0262 CDB7      		in r28,__SP_L__
+ 480 0264 DEB7      		in r29,__SP_H__
+ 481 0266 6097      		sbiw r28,16
+ 482 0268 0FB6      		in __tmp_reg__,__SREG__
+ 483 026a F894      		cli
+ 484 026c DEBF      		out __SP_H__,r29
+ 485 026e 0FBE      		out __SREG__,__tmp_reg__
+ 486 0270 CDBF      		out __SP_L__,r28
+ 487               	/* prologue end (size=10) */
+ 488 0272 00E0      		ldi r16,lo8(0)
+ 489 0274 10E0      		ldi r17,hi8(0)
+ 490               	.L68:
+ 491 0276 8091 0000 		lds r24,secondlinebool
+ 492 027a 9091 0000 		lds r25,(secondlinebool)+1
+ 493 027e 0197      		sbiw r24,1
+ 494 0280 01F4      		brne .L69
+ 495 0282 82E0      		ldi r24,lo8(2)
+ 496 0284 90E0      		ldi r25,hi8(2)
+ 497 0286 9093 0000 		sts (secondlinebool)+1,r25
+ 498 028a 8093 0000 		sts secondlinebool,r24
+ 499 028e 00E0      		ldi r16,lo8(0)
+ 500 0290 10E0      		ldi r17,hi8(0)
+ 501               	.L69:
+ 502 0292 A091 0000 		lds r26,secondline
+ 503 0296 B091 0000 		lds r27,(secondline)+1
+ 504 029a FD01      		movw r30,r26
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 10
+
+
+ 505 029c 0190      		ld __tmp_reg__,Z+
+ 506 029e 0020      		tst __tmp_reg__
+ 507 02a0 01F4      		brne .-6
+ 508 02a2 3197      		sbiw r30,1
+ 509 02a4 EA1B      		sub r30,r26
+ 510 02a6 FB0B      		sbc r31,r27
+ 511 02a8 7097      		sbiw r30,16
+ 512 02aa 00F4      		brsh .L71
+ 513 02ac 80E0      		ldi r24,lo8(.LC1)
+ 514 02ae 90E0      		ldi r25,hi8(.LC1)
+ 515 02b0 0E94 0000 		call LcdWriteShortSecondLine
+ 516 02b4 8091 0000 		lds r24,secondline
+ 517 02b8 9091 0000 		lds r25,(secondline)+1
+ 518 02bc 0E94 0000 		call LcdWriteShortSecondLine
+ 519 02c0 00C0      		rjmp .L73
+ 520               	.L71:
+ 521 02c2 0130      		cpi r16,1
+ 522 02c4 1105      		cpc r17,__zero_reg__
+ 523 02c6 01F4      		brne .L74
+ 524 02c8 60E9      		ldi r22,lo8(400)
+ 525 02ca 71E0      		ldi r23,hi8(400)
+ 526 02cc 80E0      		ldi r24,hlo8(400)
+ 527 02ce 90E0      		ldi r25,hhi8(400)
+ 528 02d0 0E94 0000 		call NutSleep
+ 529               	.L74:
+ 530 02d4 FE01      		movw r30,r28
+ 531 02d6 3196      		adiw r30,1
+ 532 02d8 80E1      		ldi r24,lo8(16)
+ 533 02da DF01      		movw r26,r30
+ 534 02dc 1D92      		st X+,__zero_reg__
+ 535 02de 8A95      	        dec r24
+ 536 02e0 01F4      		brne .-6
+ 537 02e2 A091 0000 		lds r26,secondline
+ 538 02e6 B091 0000 		lds r27,(secondline)+1
+ 539 02ea A00F      		add r26,r16
+ 540 02ec B11F      		adc r27,r17
+ 541 02ee 9E01      		movw r18,r28
+ 542 02f0 2F5E      		subi r18,lo8(-(17))
+ 543 02f2 3F4F      		sbci r19,hi8(-(17))
+ 544 02f4 00C0      		rjmp .L76
+ 545               	.L77:
+ 546 02f6 8D91      		ld r24,X+
+ 547 02f8 8193      		st Z+,r24
+ 548               	.L76:
+ 549 02fa E217      		cp r30,r18
+ 550 02fc F307      		cpc r31,r19
+ 551 02fe 01F4      		brne .L77
+ 552 0300 CE01      		movw r24,r28
+ 553 0302 0196      		adiw r24,1
+ 554 0304 0E94 0000 		call LcdWriteShortSecondLine
+ 555 0308 0F5F      		subi r16,lo8(-(1))
+ 556 030a 1F4F      		sbci r17,hi8(-(1))
+ 557 030c E091 0000 		lds r30,secondline
+ 558 0310 F091 0000 		lds r31,(secondline)+1
+ 559 0314 E00F      		add r30,r16
+ 560 0316 F11F      		adc r31,r17
+ 561 0318 8785      		ldd r24,Z+15
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 11
+
+
+ 562 031a 8823      		tst r24
+ 563 031c 01F4      		brne .L79
+ 564 031e 68EE      		ldi r22,lo8(1000)
+ 565 0320 73E0      		ldi r23,hi8(1000)
+ 566 0322 80E0      		ldi r24,hlo8(1000)
+ 567 0324 90E0      		ldi r25,hhi8(1000)
+ 568 0326 0E94 0000 		call NutSleep
+ 569 032a 00E0      		ldi r16,lo8(0)
+ 570 032c 10E0      		ldi r17,hi8(0)
+ 571               	.L79:
+ 572 032e 6AE8      		ldi r22,lo8(650)
+ 573 0330 72E0      		ldi r23,hi8(650)
+ 574 0332 80E0      		ldi r24,hlo8(650)
+ 575 0334 90E0      		ldi r25,hhi8(650)
+ 576 0336 0E94 0000 		call NutSleep
+ 577               	.L73:
+ 578 033a 64E6      		ldi r22,lo8(100)
+ 579 033c 70E0      		ldi r23,hi8(100)
+ 580 033e 80E0      		ldi r24,hlo8(100)
+ 581 0340 90E0      		ldi r25,hhi8(100)
+ 582 0342 0E94 0000 		call NutSleep
+ 583 0346 00C0      		rjmp .L68
+ 584               	/* epilogue: frame size=16 */
+ 585               	/* epilogue: noreturn */
+ 586               	/* epilogue end (size=0) */
+ 587               	/* function SecondLineThread size 119 (109) */
+ 588               		.size	SecondLineThread, .-SecondLineThread
+ 589               	.global	TitleThread
+ 590               		.type	TitleThread, @function
+ 591               	TitleThread:
+ 592               	/* prologue: frame size=7 */
+ 593 0348 CF93      		push r28
+ 594 034a DF93      		push r29
+ 595 034c CDB7      		in r28,__SP_L__
+ 596 034e DEB7      		in r29,__SP_H__
+ 597 0350 2797      		sbiw r28,7
+ 598 0352 0FB6      		in __tmp_reg__,__SREG__
+ 599 0354 F894      		cli
+ 600 0356 DEBF      		out __SP_H__,r29
+ 601 0358 0FBE      		out __SREG__,__tmp_reg__
+ 602 035a CDBF      		out __SP_L__,r28
+ 603               	/* prologue end (size=10) */
+ 604 035c 00E0      		ldi r16,lo8(0)
+ 605 035e 10E0      		ldi r17,hi8(0)
+ 606               	.L83:
+ 607 0360 8091 0000 		lds r24,titlebool
+ 608 0364 9091 0000 		lds r25,(titlebool)+1
+ 609 0368 0197      		sbiw r24,1
+ 610 036a 01F4      		brne .L84
+ 611 036c 82E0      		ldi r24,lo8(2)
+ 612 036e 90E0      		ldi r25,hi8(2)
+ 613 0370 9093 0000 		sts (titlebool)+1,r25
+ 614 0374 8093 0000 		sts titlebool,r24
+ 615 0378 00E0      		ldi r16,lo8(0)
+ 616 037a 10E0      		ldi r17,hi8(0)
+ 617               	.L84:
+ 618 037c A091 0000 		lds r26,title
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 12
+
+
+ 619 0380 B091 0000 		lds r27,(title)+1
+ 620 0384 FD01      		movw r30,r26
+ 621 0386 0190      		ld __tmp_reg__,Z+
+ 622 0388 0020      		tst __tmp_reg__
+ 623 038a 01F4      		brne .-6
+ 624 038c 3197      		sbiw r30,1
+ 625 038e EA1B      		sub r30,r26
+ 626 0390 FB0B      		sbc r31,r27
+ 627 0392 3797      		sbiw r30,7
+ 628 0394 00F4      		brsh .L86
+ 629 0396 80E0      		ldi r24,lo8(.LC4)
+ 630 0398 90E0      		ldi r25,hi8(.LC4)
+ 631 039a 0E94 0000 		call LcdWriteShortTitle
+ 632 039e 8091 0000 		lds r24,title
+ 633 03a2 9091 0000 		lds r25,(title)+1
+ 634 03a6 0E94 0000 		call LcdWriteShortTitle
+ 635 03aa 00C0      		rjmp .L88
+ 636               	.L86:
+ 637 03ac 0130      		cpi r16,1
+ 638 03ae 1105      		cpc r17,__zero_reg__
+ 639 03b0 01F4      		brne .L89
+ 640 03b2 60E9      		ldi r22,lo8(400)
+ 641 03b4 71E0      		ldi r23,hi8(400)
+ 642 03b6 80E0      		ldi r24,hlo8(400)
+ 643 03b8 90E0      		ldi r25,hhi8(400)
+ 644 03ba 0E94 0000 		call NutSleep
+ 645               	.L89:
+ 646 03be FE01      		movw r30,r28
+ 647 03c0 3196      		adiw r30,1
+ 648 03c2 87E0      		ldi r24,lo8(7)
+ 649 03c4 DF01      		movw r26,r30
+ 650 03c6 1D92      		st X+,__zero_reg__
+ 651 03c8 8A95      	        dec r24
+ 652 03ca 01F4      		brne .-6
+ 653 03cc A091 0000 		lds r26,title
+ 654 03d0 B091 0000 		lds r27,(title)+1
+ 655 03d4 A00F      		add r26,r16
+ 656 03d6 B11F      		adc r27,r17
+ 657 03d8 9E01      		movw r18,r28
+ 658 03da 285F      		subi r18,lo8(-(8))
+ 659 03dc 3F4F      		sbci r19,hi8(-(8))
+ 660 03de 00C0      		rjmp .L91
+ 661               	.L92:
+ 662 03e0 8D91      		ld r24,X+
+ 663 03e2 8193      		st Z+,r24
+ 664               	.L91:
+ 665 03e4 E217      		cp r30,r18
+ 666 03e6 F307      		cpc r31,r19
+ 667 03e8 01F4      		brne .L92
+ 668 03ea CE01      		movw r24,r28
+ 669 03ec 0196      		adiw r24,1
+ 670 03ee 0E94 0000 		call LcdWriteShortTitle
+ 671 03f2 0F5F      		subi r16,lo8(-(1))
+ 672 03f4 1F4F      		sbci r17,hi8(-(1))
+ 673 03f6 E091 0000 		lds r30,title
+ 674 03fa F091 0000 		lds r31,(title)+1
+ 675 03fe E00F      		add r30,r16
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 13
+
+
+ 676 0400 F11F      		adc r31,r17
+ 677 0402 8681      		ldd r24,Z+6
+ 678 0404 8823      		tst r24
+ 679 0406 01F4      		brne .L94
+ 680 0408 68EE      		ldi r22,lo8(1000)
+ 681 040a 73E0      		ldi r23,hi8(1000)
+ 682 040c 80E0      		ldi r24,hlo8(1000)
+ 683 040e 90E0      		ldi r25,hhi8(1000)
+ 684 0410 0E94 0000 		call NutSleep
+ 685 0414 00E0      		ldi r16,lo8(0)
+ 686 0416 10E0      		ldi r17,hi8(0)
+ 687               	.L94:
+ 688 0418 6AE8      		ldi r22,lo8(650)
+ 689 041a 72E0      		ldi r23,hi8(650)
+ 690 041c 80E0      		ldi r24,hlo8(650)
+ 691 041e 90E0      		ldi r25,hhi8(650)
+ 692 0420 0E94 0000 		call NutSleep
+ 693               	.L88:
+ 694 0424 64E6      		ldi r22,lo8(100)
+ 695 0426 70E0      		ldi r23,hi8(100)
+ 696 0428 80E0      		ldi r24,hlo8(100)
+ 697 042a 90E0      		ldi r25,hhi8(100)
+ 698 042c 0E94 0000 		call NutSleep
+ 699 0430 00C0      		rjmp .L83
+ 700               	/* epilogue: frame size=7 */
+ 701               	/* epilogue: noreturn */
+ 702               	/* epilogue end (size=0) */
+ 703               	/* function TitleThread size 119 (109) */
+ 704               		.size	TitleThread, .-TitleThread
+ 705               	.global	LcdLowLevelInit
+ 706               		.type	LcdLowLevelInit, @function
+ 707               	LcdLowLevelInit:
+ 708               	/* prologue: frame size=0 */
+ 709 0432 1F93      		push r17
+ 710               	/* prologue end (size=1) */
+ 711 0434 8CE8      		ldi r24,lo8(-116)
+ 712 0436 0E94 0000 		call NutDelay
+ 713 043a 10E0      		ldi r17,lo8(0)
+ 714               	.L98:
+ 715 043c 63E3      		ldi r22,lo8(51)
+ 716 043e 82E0      		ldi r24,lo8(2)
+ 717 0440 0E94 0000 		call LcdWriteNibble
+ 718 0444 84E0      		ldi r24,lo8(4)
+ 719 0446 0E94 0000 		call NutDelay
+ 720 044a 1F5F      		subi r17,lo8(-(1))
+ 721 044c 1330      		cpi r17,lo8(3)
+ 722 044e 01F4      		brne .L98
+ 723 0450 62E2      		ldi r22,lo8(34)
+ 724 0452 82E0      		ldi r24,lo8(2)
+ 725 0454 0E94 0000 		call LcdWriteNibble
+ 726 0458 81E0      		ldi r24,lo8(1)
+ 727 045a 0E94 0000 		call NutDelay
+ 728 045e 68E2      		ldi r22,lo8(40)
+ 729 0460 82E0      		ldi r24,lo8(2)
+ 730 0462 0E94 0000 		call LcdWriteByte
+ 731 0466 85E0      		ldi r24,lo8(5)
+ 732 0468 0E94 0000 		call NutDelay
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 14
+
+
+ 733 046c 6CE0      		ldi r22,lo8(12)
+ 734 046e 82E0      		ldi r24,lo8(2)
+ 735 0470 0E94 0000 		call LcdWriteByte
+ 736 0474 85E0      		ldi r24,lo8(5)
+ 737 0476 0E94 0000 		call NutDelay
+ 738 047a 61E0      		ldi r22,lo8(1)
+ 739 047c 82E0      		ldi r24,lo8(2)
+ 740 047e 0E94 0000 		call LcdWriteByte
+ 741 0482 85E0      		ldi r24,lo8(5)
+ 742 0484 0E94 0000 		call NutDelay
+ 743 0488 66E0      		ldi r22,lo8(6)
+ 744 048a 82E0      		ldi r24,lo8(2)
+ 745 048c 0E94 0000 		call LcdWriteByte
+ 746 0490 60E8      		ldi r22,lo8(-128)
+ 747 0492 82E0      		ldi r24,lo8(2)
+ 748 0494 0E94 0000 		call LcdWriteByte
+ 749               	/* epilogue: frame size=0 */
+ 750 0498 1F91      		pop r17
+ 751 049a 0895      		ret
+ 752               	/* epilogue end (size=2) */
+ 753               	/* function LcdLowLevelInit size 53 (50) */
+ 754               		.size	LcdLowLevelInit, .-LcdLowLevelInit
+ 755               	.global	title
+ 756               	.global	title
+ 757               		.section .bss
+ 758               		.type	title, @object
+ 759               		.size	title, 2
+ 760               	title:
+ 761 0000 0000      		.skip 2,0
+ 762               	.global	secondline
+ 763               	.global	secondline
+ 764               		.type	secondline, @object
+ 765               		.size	secondline, 2
+ 766               	secondline:
+ 767 0002 0000      		.skip 2,0
+ 768               	.global	titlebool
+ 769               	.global	titlebool
+ 770               		.type	titlebool, @object
+ 771               		.size	titlebool, 2
+ 772               	titlebool:
+ 773 0004 0000      		.skip 2,0
+ 774               	.global	secondlinebool
+ 775               	.global	secondlinebool
+ 776               		.type	secondlinebool, @object
+ 777               		.size	secondlinebool, 2
+ 778               	secondlinebool:
+ 779 0006 0000      		.skip 2,0
+ 780               	/* File "source/display.c": code  598 = 0x0256 ( 508), prologues  46, epilogues  44 */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 display.c
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:3      *ABS*:0000003f __SREG__
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:4      *ABS*:0000003e __SP_H__
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:5      *ABS*:0000003d __SP_L__
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:13     .text:00000000 LcdBackLight
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:32     .text:00000010 LcdWriteNibble
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:71     .text:00000046 LcdWriteByte
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:109    .text:0000007e LcdChar
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:122    .text:00000088 WriteByteToLocation
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:141    .text:000000a0 LcdTimeDisplay
-C:\Users\Blommers\AppData\Local\Temp/ccSL3hT4.s:271    .text:00000180 LcdLowLevelInit
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:3      *ABS*:0000003f __SREG__
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:13     .text:00000000 LcdBackLight
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:32     .text:00000010 LcdWriteNibble
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:71     .text:00000046 LcdWriteByte
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:109    .text:0000007e LcdChar
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:122    .text:00000088 WriteByteToLocation
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:141    .text:000000a0 LcdWriteShortTitle
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:175    .text:000000d2 LcdWriteShortFirstLine
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:209    .text:00000104 LcdWriteShortSecondLine
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:243    .text:00000136 LcdWriteFirstLine
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:258    .text:0000013c LcdWriteSecondLine
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:766    .bss:00000002 secondline
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:778    .bss:00000006 secondlinebool
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:475    .text:0000025e SecondLineThread
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:300    .text:00000186 LcdClearSecondLine
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:317    .text:00000190 LcdClearTitleLine
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:331    .text:0000019e LcdClearLine
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:346    .text:000001a4 LcdWriteTitle
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:760    .bss:00000000 title
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:772    .bss:00000004 titlebool
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:591    .text:00000348 TitleThread
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:388    .text:000001ee LcdClearTitle
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:401    .text:000001f8 LcdClearFirstLine
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:415    .text:00000206 LcdClearAll
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:427    .text:00000210 LcdTimeDisplay
+C:\Users\Robin\AppData\Local\Temp/cckiXHKT.s:707    .text:00000432 LcdLowLevelInit
 
 UNDEFINED SYMBOLS
 __do_copy_data
 __do_clear_bss
+NutThreadSetPriority
+NutThreadCreate
+NutSleep
 NutDelay

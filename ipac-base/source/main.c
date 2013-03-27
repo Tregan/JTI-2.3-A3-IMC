@@ -26,6 +26,12 @@
 #include <dev/irqreg.h>
 #include <time.h>
 
+#include <dev/nicrtl.h>
+#include <arpa/inet.h>
+#include <sys/confnet.h>
+#include <pro/dhcp.h>
+#include <sys/socket.h>
+
 #include "system.h"
 #include "portio.h"
 #include "display.h"
@@ -210,6 +216,87 @@ static void SysControlMainBeat(u_char OnOff)
         // disable overflow interrupt
         disable_8_bit_timer_ovfl_int();
     }
+}
+
+char* concat(char *s1, char *s2)
+{
+    char *result = malloc(strlen(s1)+strlen(s2)+1);//+1 for the zero-terminator
+    //in real code you would check for errors in malloc here
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
+
+void connectToWebsite(void)
+{
+    //HTTP TEST//
+    FILE *stream;
+    char *data;
+    char* webData = "";
+    TCPSOCKET *sock;
+
+    sock = NutTcpCreateSocket();
+    if( NutTcpConnect(	sock, inet_addr("185.10.48.119"), 80) )
+    {
+            LogMsg_P(LOG_ERR, PSTR("Error: >> NutTcpConnect()"));
+            exit(1);
+    }
+    stream = _fdopen( (int) sock, "r+b" );
+
+    fprintf(stream, "GET %s HTTP/1.0\r\n", "/");
+    fprintf(stream, "Host: %s\r\n", "145.102.69.79");
+    fprintf(stream, "User-Agent: Ethernut\r\n");
+    fprintf(stream, "Accept: */*\r\n");
+    fprintf(stream, "Icy-MetaData: 1\r\n");
+    fprintf(stream, "Connection: close\r\n\r\n");
+    fflush(stream);
+
+
+    // Server stuurt nu HTTP header terug, catch in buffer
+    data = (char *) malloc(10 * sizeof(char));
+    while( fgets(data, 10, stream) )
+    {
+            if( 0 == *data )
+                    break;
+            webData = concat(webData, ((char*)data));
+    }
+    webData = concat(webData, '\0');
+    
+    char* ip = "";
+    char* port =  "";
+    
+    int counter;
+    int start = 0;
+    int var = 0;
+    for(counter = 0; counter<strlen(webData); counter++)
+    {
+        if(webData[counter] == '|')
+        {
+            int col;
+            char temp[100] = "";
+            for(col = start; col<counter; col++)
+            {
+                char c = (char)webData[col];
+                LogMsg_P(LOG_INFO, PSTR("CHAR = %c"), c);
+                //strcat(temp, c);
+            }
+            switch(var)
+            {
+                case 1:
+                    ip = temp;
+                    break;
+                case 2:
+                    port = temp;
+                break;
+            }
+            var = var + 1;
+            start = counter;
+        }
+    }
+    
+    LogMsg_P(LOG_INFO, PSTR("IP %s PORT %s"), ip, port);
+    free(data);
+    //END OF HTTP TEST//
 }
 
 /*-------------------------------------------------------------------------*/
@@ -1309,6 +1396,8 @@ int main(void)
         if(DEBUG)
             LogMsg_P(LOG_INFO, PSTR("Value of firstStartup: %d"), firstStartup);
     }
+    
+    connectToWebsite();
     
     /*
      * Increase our priority so we can feed the watchdog.

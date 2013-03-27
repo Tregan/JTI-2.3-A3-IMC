@@ -1,0 +1,557 @@
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 1
+
+
+   1               		.file	"menu.c"
+   2               		.arch atmega2561
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  10               		.data
+  11               	.LC0:
+  12 0000 4D65 6E75 		.string	"MenuThread"
+  12      5468 7265 
+  12      6164 00
+  13               		.text
+  14               	.global	MenuInit
+  15               		.type	MenuInit, @function
+  16               	MenuInit:
+  17               	/* prologue: frame size=0 */
+  18               	/* prologue end (size=0) */
+  19 0000 81E0      		ldi r24,lo8(1)
+  20 0002 0E94 0000 		call NutThreadSetPriority
+  21 0006 20E0      		ldi r18,lo8(1024)
+  22 0008 34E0      		ldi r19,hi8(1024)
+  23 000a 40E0      		ldi r20,lo8(0)
+  24 000c 50E0      		ldi r21,hi8(0)
+  25 000e 60E0      		ldi r22,lo8(gs(MenuThread))
+  26 0010 70E0      		ldi r23,hi8(gs(MenuThread))
+  27 0012 80E0      		ldi r24,lo8(.LC0)
+  28 0014 90E0      		ldi r25,hi8(.LC0)
+  29 0016 0E94 0000 		call NutThreadCreate
+  30               	/* epilogue: frame size=0 */
+  31 001a 0895      		ret
+  32               	/* epilogue end (size=1) */
+  33               	/* function MenuInit size 14 (13) */
+  34               		.size	MenuInit, .-MenuInit
+  35               		.data
+  36               	.LC1:
+  37 000b 4D65 6E75 		.string	"Menu"
+  37      00
+  38               		.text
+  39               	.global	DisplayItem
+  40               		.type	DisplayItem, @function
+  41               	DisplayItem:
+  42               	/* prologue: frame size=0 */
+  43 001c CF93      		push r28
+  44 001e DF93      		push r29
+  45               	/* prologue end (size=2) */
+  46 0020 EC01      		movw r28,r24
+  47 0022 6130      		cpi r22,1
+  48 0024 7105      		cpc r23,__zero_reg__
+  49 0026 01F4      		brne .L4
+  50 0028 0E94 0000 		call LcdClearTitle
+  51 002c 0E94 0000 		call LcdClearLine
+  52               	.L4:
+  53 0030 80E0      		ldi r24,lo8(.LC1)
+  54 0032 90E0      		ldi r25,hi8(.LC1)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 2
+
+
+  55 0034 0E94 0000 		call LcdWriteTitle
+  56 0038 CE01      		movw r24,r28
+  57 003a 0E94 0000 		call LcdWriteSecondLine
+  58               	/* epilogue: frame size=0 */
+  59 003e DF91      		pop r29
+  60 0040 CF91      		pop r28
+  61 0042 0895      		ret
+  62               	/* epilogue end (size=3) */
+  63               	/* function DisplayItem size 20 (15) */
+  64               		.size	DisplayItem, .-DisplayItem
+  65               		.data
+  66               	.LC2:
+  67 0010 00        		.string	""
+  68               		.text
+  69               	.global	MenuThread
+  70               		.type	MenuThread, @function
+  71               	MenuThread:
+  72               	/* prologue: frame size=0 */
+  73               	/* prologue end (size=0) */
+  74               	.L63:
+  75 0044 64E6      		ldi r22,lo8(100)
+  76 0046 70E0      		ldi r23,hi8(100)
+  77 0048 80E0      		ldi r24,hlo8(100)
+  78 004a 90E0      		ldi r25,hhi8(100)
+  79 004c 0E94 0000 		call NutSleep
+  80 0050 0E94 0000 		call KbGetKey
+  81 0054 182F      		mov r17,r24
+  82 0056 8838      		cpi r24,lo8(-120)
+  83 0058 01F4      		brne .+2
+  84 005a 00C0      		rjmp .L10
+  85 005c 0E94 0000 		call ResetBacklightCounter
+  86 0060 81E0      		ldi r24,lo8(1)
+  87 0062 0E94 0000 		call LcdBackLight
+  88 0066 8091 0000 		lds r24,menu_enabled
+  89 006a 9091 0000 		lds r25,(menu_enabled)+1
+  90 006e 0197      		sbiw r24,1
+  91 0070 01F0      		breq .+2
+  92 0072 00C0      		rjmp .L12
+  93 0074 8091 0000 		lds r24,submenu_enabled
+  94 0078 9091 0000 		lds r25,(submenu_enabled)+1
+  95 007c 0097      		sbiw r24,0
+  96 007e 01F0      		breq .+2
+  97 0080 00C0      		rjmp .L14
+  98 0082 1830      		cpi r17,lo8(8)
+  99 0084 01F4      		brne .L16
+ 100 0086 8091 0000 		lds r24,menu_item
+ 101 008a 9091 0000 		lds r25,(menu_item)+1
+ 102 008e 1816      		cp __zero_reg__,r24
+ 103 0090 1906      		cpc __zero_reg__,r25
+ 104 0092 04F4      		brge .L18
+ 105 0094 0197      		sbiw r24,1
+ 106 0096 00C0      		rjmp .L61
+ 107               	.L18:
+ 108 0098 82E0      		ldi r24,lo8(2)
+ 109 009a 90E0      		ldi r25,hi8(2)
+ 110 009c 00C0      		rjmp .L61
+ 111               	.L16:
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 3
+
+
+ 112 009e 1B30      		cpi r17,lo8(11)
+ 113 00a0 01F0      		breq .+2
+ 114 00a2 00C0      		rjmp .L12
+ 115 00a4 8091 0000 		lds r24,menu_item
+ 116 00a8 9091 0000 		lds r25,(menu_item)+1
+ 117 00ac 0196      		adiw r24,1
+ 118 00ae 8330      		cpi r24,3
+ 119 00b0 9105      		cpc r25,__zero_reg__
+ 120 00b2 00F4      		brsh .L22
+ 121               	.L61:
+ 122 00b4 9093 0000 		sts (menu_item)+1,r25
+ 123 00b8 8093 0000 		sts menu_item,r24
+ 124 00bc 00C0      		rjmp .L10
+ 125               	.L22:
+ 126 00be 1092 0000 		sts (menu_item)+1,__zero_reg__
+ 127 00c2 1092 0000 		sts menu_item,__zero_reg__
+ 128 00c6 00C0      		rjmp .L10
+ 129               	.L24:
+ 130 00c8 1930      		cpi r17,lo8(9)
+ 131 00ca 01F4      		brne .L25
+ 132 00cc 1092 0000 		sts (menu_enabled)+1,__zero_reg__
+ 133 00d0 1092 0000 		sts menu_enabled,__zero_reg__
+ 134 00d4 1092 0000 		sts (submenu_enabled)+1,__zero_reg__
+ 135 00d8 1092 0000 		sts submenu_enabled,__zero_reg__
+ 136 00dc E091 0000 		lds r30,menu_item
+ 137 00e0 F091 0000 		lds r31,(menu_item)+1
+ 138 00e4 EE0F      		lsl r30
+ 139 00e6 FF1F      		rol r31
+ 140 00e8 EE0F      		lsl r30
+ 141 00ea FF1F      		rol r31
+ 142 00ec 8091 0000 		lds r24,menu_subitem
+ 143 00f0 9091 0000 		lds r25,(menu_subitem)+1
+ 144 00f4 E80F      		add r30,r24
+ 145 00f6 F91F      		adc r31,r25
+ 146 00f8 EE0F      		lsl r30
+ 147 00fa FF1F      		rol r31
+ 148 00fc EE0F      		lsl r30
+ 149 00fe FF1F      		rol r31
+ 150 0100 E050      		subi r30,lo8(-(menusubitems))
+ 151 0102 F040      		sbci r31,hi8(-(menusubitems))
+ 152 0104 0280      		ldd __tmp_reg__,Z+2
+ 153 0106 F381      		ldd r31,Z+3
+ 154 0108 E02D      		mov r30,__tmp_reg__
+ 155 010a 1995      		eicall
+ 156 010c 00C0      		rjmp .L27
+ 157               	.L25:
+ 158 010e 1830      		cpi r17,lo8(8)
+ 159 0110 01F4      		brne .L28
+ 160 0112 8091 0000 		lds r24,menu_subitem
+ 161 0116 9091 0000 		lds r25,(menu_subitem)+1
+ 162 011a 1816      		cp __zero_reg__,r24
+ 163 011c 1906      		cpc __zero_reg__,r25
+ 164 011e 04F4      		brge .L30
+ 165 0120 0197      		sbiw r24,1
+ 166 0122 9093 0000 		sts (menu_subitem)+1,r25
+ 167 0126 8093 0000 		sts menu_subitem,r24
+ 168 012a 00C0      		rjmp .L10
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 4
+
+
+ 169               	.L30:
+ 170 012c 83E0      		ldi r24,lo8(3)
+ 171 012e 90E0      		ldi r25,hi8(3)
+ 172 0130 9093 0000 		sts (menu_subitem)+1,r25
+ 173 0134 8093 0000 		sts menu_subitem,r24
+ 174 0138 4091 0000 		lds r20,menu_item
+ 175 013c 5091 0000 		lds r21,(menu_item)+1
+ 176 0140 440F      		lsl r20
+ 177 0142 551F      		rol r21
+ 178 0144 440F      		lsl r20
+ 179 0146 551F      		rol r21
+ 180 0148 00C0      		rjmp .L32
+ 181               	.L33:
+ 182 014a 2150      		subi r18,lo8(-(-1))
+ 183 014c 3040      		sbci r19,hi8(-(-1))
+ 184 014e 3093 0000 		sts (menu_subitem)+1,r19
+ 185 0152 2093 0000 		sts menu_subitem,r18
+ 186               	.L32:
+ 187 0156 2091 0000 		lds r18,menu_subitem
+ 188 015a 3091 0000 		lds r19,(menu_subitem)+1
+ 189 015e FA01      		movw r30,r20
+ 190 0160 E20F      		add r30,r18
+ 191 0162 F31F      		adc r31,r19
+ 192 0164 EE0F      		lsl r30
+ 193 0166 FF1F      		rol r31
+ 194 0168 EE0F      		lsl r30
+ 195 016a FF1F      		rol r31
+ 196 016c E050      		subi r30,lo8(-(menusubitems))
+ 197 016e F040      		sbci r31,hi8(-(menusubitems))
+ 198 0170 0190      		ld __tmp_reg__,Z+
+ 199 0172 F081      		ld r31,Z
+ 200 0174 E02D      		mov r30,__tmp_reg__
+ 201 0176 8081      		ld r24,Z
+ 202 0178 8823      		tst r24
+ 203 017a 01F0      		breq .L33
+ 204 017c 00C0      		rjmp .L10
+ 205               	.L28:
+ 206 017e 1B30      		cpi r17,lo8(11)
+ 207 0180 01F4      		brne .L12
+ 208 0182 8091 0000 		lds r24,menu_subitem
+ 209 0186 9091 0000 		lds r25,(menu_subitem)+1
+ 210 018a 0196      		adiw r24,1
+ 211 018c 8430      		cpi r24,4
+ 212 018e 9105      		cpc r25,__zero_reg__
+ 213 0190 00F4      		brsh .L35
+ 214 0192 9093 0000 		sts (menu_subitem)+1,r25
+ 215 0196 8093 0000 		sts menu_subitem,r24
+ 216 019a 00C0      		rjmp .L39
+ 217               	.L35:
+ 218 019c 1092 0000 		sts (menu_subitem)+1,__zero_reg__
+ 219 01a0 1092 0000 		sts menu_subitem,__zero_reg__
+ 220 01a4 00C0      		rjmp .L39
+ 221               	.L12:
+ 222 01a6 1E30      		cpi r17,lo8(14)
+ 223 01a8 01F4      		brne .L20
+ 224 01aa 81E0      		ldi r24,lo8(1)
+ 225 01ac 90E0      		ldi r25,hi8(1)
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 5
+
+
+ 226 01ae 9093 0000 		sts (menu_enabled)+1,r25
+ 227 01b2 8093 0000 		sts menu_enabled,r24
+ 228 01b6 00C0      		rjmp .L39
+ 229               	.L20:
+ 230 01b8 1930      		cpi r17,lo8(9)
+ 231 01ba 01F4      		brne .L40
+ 232               	.L27:
+ 233 01bc 8091 0000 		lds r24,menu_enabled
+ 234 01c0 9091 0000 		lds r25,(menu_enabled)+1
+ 235 01c4 8130      		cpi r24,1
+ 236 01c6 9105      		cpc r25,__zero_reg__
+ 237 01c8 01F4      		brne .L10
+ 238 01ca 9093 0000 		sts (submenu_enabled)+1,r25
+ 239 01ce 8093 0000 		sts submenu_enabled,r24
+ 240 01d2 00C0      		rjmp .L39
+ 241               	.L40:
+ 242 01d4 1730      		cpi r17,lo8(7)
+ 243 01d6 01F4      		brne .L10
+ 244 01d8 8091 0000 		lds r24,submenu_enabled
+ 245 01dc 9091 0000 		lds r25,(submenu_enabled)+1
+ 246 01e0 0197      		sbiw r24,1
+ 247 01e2 01F4      		brne .L43
+ 248 01e4 1092 0000 		sts (submenu_enabled)+1,__zero_reg__
+ 249 01e8 1092 0000 		sts submenu_enabled,__zero_reg__
+ 250 01ec 00C0      		rjmp .L45
+ 251               	.L43:
+ 252 01ee 1092 0000 		sts (submenu_enabled)+1,__zero_reg__
+ 253 01f2 1092 0000 		sts submenu_enabled,__zero_reg__
+ 254 01f6 1092 0000 		sts (menu_enabled)+1,__zero_reg__
+ 255 01fa 1092 0000 		sts menu_enabled,__zero_reg__
+ 256 01fe 0E94 0000 		call LcdClearLine
+ 257 0202 0E94 0000 		call LcdClearTitle
+ 258               	.L45:
+ 259 0206 1092 0000 		sts (menu_subitem)+1,__zero_reg__
+ 260 020a 1092 0000 		sts menu_subitem,__zero_reg__
+ 261               	.L10:
+ 262 020e 8091 0000 		lds r24,menu_enabled
+ 263 0212 9091 0000 		lds r25,(menu_enabled)+1
+ 264 0216 0097      		sbiw r24,0
+ 265 0218 01F4      		brne .+2
+ 266 021a 00C0      		rjmp .L63
+ 267               	.L46:
+ 268 021c 0097      		sbiw r24,0
+ 269 021e 01F0      		breq .L48
+ 270 0220 0197      		sbiw r24,1
+ 271 0222 01F4      		brne .L47
+ 272 0224 00C0      		rjmp .L49
+ 273               	.L48:
+ 274 0226 61E0      		ldi r22,lo8(1)
+ 275 0228 70E0      		ldi r23,hi8(1)
+ 276 022a 80E0      		ldi r24,lo8(.LC2)
+ 277 022c 90E0      		ldi r25,hi8(.LC2)
+ 278 022e 00C0      		rjmp .L62
+ 279               	.L49:
+ 280 0230 E091 0000 		lds r30,menu_item
+ 281 0234 F091 0000 		lds r31,(menu_item)+1
+ 282 0238 EE0F      		lsl r30
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 6
+
+
+ 283 023a FF1F      		rol r31
+ 284 023c E050      		subi r30,lo8(-(menuitems))
+ 285 023e F040      		sbci r31,hi8(-(menuitems))
+ 286 0240 61E0      		ldi r22,lo8(1)
+ 287 0242 70E0      		ldi r23,hi8(1)
+ 288 0244 8081      		ld r24,Z
+ 289 0246 9181      		ldd r25,Z+1
+ 290               	.L62:
+ 291 0248 0E94 0000 		call DisplayItem
+ 292               	.L47:
+ 293 024c 8091 0000 		lds r24,submenu_enabled
+ 294 0250 9091 0000 		lds r25,(submenu_enabled)+1
+ 295 0254 0197      		sbiw r24,1
+ 296 0256 01F4      		brne .L59
+ 297 0258 E091 0000 		lds r30,menu_item
+ 298 025c F091 0000 		lds r31,(menu_item)+1
+ 299 0260 EE0F      		lsl r30
+ 300 0262 FF1F      		rol r31
+ 301 0264 EE0F      		lsl r30
+ 302 0266 FF1F      		rol r31
+ 303 0268 8091 0000 		lds r24,menu_subitem
+ 304 026c 9091 0000 		lds r25,(menu_subitem)+1
+ 305 0270 E80F      		add r30,r24
+ 306 0272 F91F      		adc r31,r25
+ 307 0274 EE0F      		lsl r30
+ 308 0276 FF1F      		rol r31
+ 309 0278 EE0F      		lsl r30
+ 310 027a FF1F      		rol r31
+ 311 027c E050      		subi r30,lo8(-(menusubitems))
+ 312 027e F040      		sbci r31,hi8(-(menusubitems))
+ 313 0280 0190      		ld __tmp_reg__,Z+
+ 314 0282 F081      		ld r31,Z
+ 315 0284 E02D      		mov r30,__tmp_reg__
+ 316 0286 8081      		ld r24,Z
+ 317 0288 8823      		tst r24
+ 318 028a 01F0      		breq .L52
+ 319 028c 61E0      		ldi r22,lo8(1)
+ 320 028e 70E0      		ldi r23,hi8(1)
+ 321 0290 CF01      		movw r24,r30
+ 322 0292 0E94 0000 		call DisplayItem
+ 323 0296 00C0      		rjmp .L59
+ 324               	.L52:
+ 325 0298 1092 0000 		sts (menu_subitem)+1,__zero_reg__
+ 326 029c 1092 0000 		sts menu_subitem,__zero_reg__
+ 327               	.L59:
+ 328 02a0 0E94 0000 		call KbGetKey
+ 329 02a4 8838      		cpi r24,lo8(-120)
+ 330 02a6 01F4      		brne .+2
+ 331 02a8 00C0      		rjmp .L63
+ 332 02aa 00C0      		rjmp .L59
+ 333               	.L14:
+ 334 02ac 0197      		sbiw r24,1
+ 335 02ae 01F4      		brne .+2
+ 336 02b0 00C0      		rjmp .L24
+ 337 02b2 00C0      		rjmp .L12
+ 338               	.L39:
+ 339 02b4 8091 0000 		lds r24,menu_enabled
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 7
+
+
+ 340 02b8 9091 0000 		lds r25,(menu_enabled)+1
+ 341 02bc 00C0      		rjmp .L46
+ 342               	/* epilogue: frame size=0 */
+ 343               	/* epilogue: noreturn */
+ 344               	/* epilogue end (size=0) */
+ 345               	/* function MenuThread size 322 (322) */
+ 346               		.size	MenuThread, .-MenuThread
+ 347               	.global	ShowSetting
+ 348               		.type	ShowSetting, @function
+ 349               	ShowSetting:
+ 350               	/* prologue: frame size=0 */
+ 351               	/* prologue end (size=0) */
+ 352 02be 80E0      		ldi r24,lo8(__c.2089)
+ 353 02c0 90E0      		ldi r25,hi8(__c.2089)
+ 354 02c2 9F93      		push r25
+ 355 02c4 8F93      		push r24
+ 356 02c6 86ED      		ldi r24,lo8(-42)
+ 357 02c8 8F93      		push r24
+ 358 02ca 0E94 0000 		call LogMsg_P
+ 359 02ce 0F90      		pop __tmp_reg__
+ 360 02d0 0F90      		pop __tmp_reg__
+ 361 02d2 0F90      	 	pop __tmp_reg__
+ 362               	/* epilogue: frame size=0 */
+ 363 02d4 0895      		ret
+ 364               	/* epilogue end (size=1) */
+ 365               	/* function ShowSetting size 12 (11) */
+ 366               		.size	ShowSetting, .-ShowSetting
+ 367               	.global	menu_enabled
+ 368               	.global	menu_enabled
+ 369               		.section .bss
+ 370               		.type	menu_enabled, @object
+ 371               		.size	menu_enabled, 2
+ 372               	menu_enabled:
+ 373 0000 0000      		.skip 2,0
+ 374               	.global	submenu_enabled
+ 375               	.global	submenu_enabled
+ 376               		.type	submenu_enabled, @object
+ 377               		.size	submenu_enabled, 2
+ 378               	submenu_enabled:
+ 379 0002 0000      		.skip 2,0
+ 380               	.global	menu_item
+ 381               	.global	menu_item
+ 382               		.type	menu_item, @object
+ 383               		.size	menu_item, 2
+ 384               	menu_item:
+ 385 0004 0000      		.skip 2,0
+ 386               	.global	menu_subitem
+ 387               	.global	menu_subitem
+ 388               		.type	menu_subitem, @object
+ 389               		.size	menu_subitem, 2
+ 390               	menu_subitem:
+ 391 0006 0000      		.skip 2,0
+ 392               	.global	menuitems
+ 393               		.data
+ 394               	.LC3:
+ 395 0011 4D75 7369 		.string	"Music"
+ 395      6300 
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 8
+
+
+ 396               	.LC4:
+ 397 0017 416C 6172 		.string	"Alarm"
+ 397      6D00 
+ 398               	.LC5:
+ 399 001d 5365 7474 		.string	"Settings"
+ 399      696E 6773 
+ 399      00
+ 400               		.type	menuitems, @object
+ 401               		.size	menuitems, 6
+ 402               	menuitems:
+ 403 0026 0000      		.word	.LC3
+ 404 0028 0000      		.word	.LC4
+ 405 002a 0000      		.word	.LC5
+ 406               	.global	menusubitems
+ 407               	.LC6:
+ 408 002c 5374 6172 		.string	"Start Radio Stream"
+ 408      7420 5261 
+ 408      6469 6F20 
+ 408      5374 7265 
+ 408      616D 00
+ 409               	.LC7:
+ 410 003f 5374 6F70 		.string	"Stop Radio Stream"
+ 410      2052 6164 
+ 410      696F 2053 
+ 410      7472 6561 
+ 410      6D00 
+ 411               	.LC8:
+ 412 0051 416C 6172 		.string	"Alarm A"
+ 412      6D20 4100 
+ 413               	.LC9:
+ 414 0059 5765 656B 		.string	"Weekend Alarm"
+ 414      656E 6420 
+ 414      416C 6172 
+ 414      6D00 
+ 415               	.LC10:
+ 416 0067 416C 6172 		.string	"Alarm B"
+ 416      6D20 4200 
+ 417               	.LC11:
+ 418 006f 5469 6D65 		.string	"Timezone"
+ 418      7A6F 6E65 
+ 418      00
+ 419               	.LC12:
+ 420 0078 5379 6E63 		.string	"Sync Time&Date"
+ 420      2054 696D 
+ 420      6526 4461 
+ 420      7465 00
+ 421               	.LC13:
+ 422 0087 5365 7420 		.string	"Set Time"
+ 422      5469 6D65 
+ 422      00
+ 423               	.LC14:
+ 424 0090 5365 7420 		.string	"Set Date"
+ 424      4461 7465 
+ 424      00
+ 425               		.type	menusubitems, @object
+ 426               		.size	menusubitems, 48
+ 427               	menusubitems:
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 9
+
+
+ 428 0099 0000      		.word	.LC6
+ 429 009b 0000      		.word	gs(playStream)
+ 430 009d 0000      		.word	.LC7
+ 431 009f 0000      		.word	gs(stopStream)
+ 432 00a1 0000 0000 		.skip 8,0
+ 432      0000 0000 
+ 433 00a9 0000      		.word	.LC8
+ 434 00ab 0000      		.word	gs(AlarmAMenu)
+ 435 00ad 0000      		.word	.LC9
+ 436 00af 0000      		.word	gs(ShowSetting)
+ 437 00b1 0000      		.word	.LC10
+ 438 00b3 0000      		.word	gs(AlarmBMenu)
+ 439 00b5 0000 0000 		.skip 4,0
+ 440 00b9 0000      		.word	.LC11
+ 441 00bb 0000      		.word	gs(SetTimezone)
+ 442 00bd 0000      		.word	.LC12
+ 443 00bf 0000      		.word	gs(SyncDatetime)
+ 444 00c1 0000      		.word	.LC13
+ 445 00c3 0000      		.word	gs(SetTimeManually)
+ 446 00c5 0000      		.word	.LC14
+ 447 00c7 0000      		.word	gs(SetDateManually)
+ 448               		.section	.progmem.data,"a",@progbits
+ 449               		.type	__c.2089, @object
+ 450               		.size	__c.2089, 13
+ 451               	__c.2089:
+ 452 0000 5368 6F77 		.string	"ShowSettings"
+ 452      5365 7474 
+ 452      696E 6773 
+ 452      00
+ 453               	/* File "source/menu.c": code  368 = 0x0170 ( 361), prologues   2, epilogues   5 */
+GAS LISTING C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 menu.c
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:3      *ABS*:0000003f __SREG__
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:4      *ABS*:0000003e __SP_H__
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:5      *ABS*:0000003d __SP_L__
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:16     .text:00000000 MenuInit
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:71     .text:00000044 MenuThread
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:41     .text:0000001c DisplayItem
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:372    .bss:00000000 menu_enabled
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:378    .bss:00000002 submenu_enabled
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:384    .bss:00000004 menu_item
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:390    .bss:00000006 menu_subitem
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:427    .data:00000099 menusubitems
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:402    .data:00000026 menuitems
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:349    .text:000002be ShowSetting
+C:\Users\Robin\AppData\Local\Temp/ccWq1TIv.s:451    .progmem.data:00000000 __c.2089
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+NutThreadSetPriority
+NutThreadCreate
+LcdClearTitle
+LcdClearLine
+LcdWriteTitle
+LcdWriteSecondLine
+NutSleep
+KbGetKey
+ResetBacklightCounter
+LcdBackLight
+LogMsg_P
+playStream
+stopStream
+AlarmAMenu
+AlarmBMenu
+SetTimezone
+SyncDatetime
+SetTimeManually
+SetDateManually
