@@ -37,6 +37,11 @@
 #define READ_COMMAND      			0x04      // 0000 0100 B
 #define READ_DATA         			0x06      // 0000 0110 B
 
+/*--------------------------------------------------*/
+/* custom defines                            		*/
+/* \author Ricardo									*/
+/*--------------------------------------------------*/
+
 #define LINE_1_1                                0x80
 #define LINE_1_2                                0x81
 #define LINE_1_3                                0x82
@@ -87,6 +92,10 @@ extern void LcdBackLight(u_char);
 extern void LcdInit(void);
 extern void LcdLowLevelInit(void);
 
+/*----------------------------------------------------------*/
+/* export custom global routines                            */
+/* \author Ricardo				                            */
+/*----------------------------------------------------------*/
 void LcdTimeDisplay(char text[]);
 void LcdWriteTitle(char text[]);
 void LcdWriteFirstLine(char text[]);

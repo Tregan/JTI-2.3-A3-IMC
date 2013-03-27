@@ -5,7 +5,7 @@
  * [FILE]       display.c
  * [VSN]        1.0
  * [CREATED]    26092003
- * [LASTCHNGD]  06102006
+ * [LASTCHNGD]  27032013
  * [COPYRIGHT]  Copyright (C) STREAMIT BV
  * [PURPOSE]    contains all interface- and low-level routines to
  *              control the LCD and write characters or strings (menu-items)
@@ -224,7 +224,8 @@ static void LcdWaitBusy()
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Writes bytes to specific locations.
+ * \brief Writes bytes to specific locations.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void WriteByteToLocation(u_char locationByte, u_char byteToWrite)
@@ -239,7 +240,8 @@ void WriteByteToLocation(u_char locationByte, u_char byteToWrite)
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Writes the title on the display.
+ * \brief Writes the title on the display.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdWriteShortTitle(char text[])
@@ -260,7 +262,8 @@ void LcdWriteShortTitle(char text[])
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Writes the first line on the display.
+ * \brief Writes the first line on the display.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdWriteShortFirstLine(char text[])
@@ -281,7 +284,8 @@ void LcdWriteShortFirstLine(char text[])
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Writes the second line on the display.
+ * \brief Writes the second line on the display.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdWriteShortSecondLine(char text[])
@@ -302,7 +306,8 @@ void LcdWriteShortSecondLine(char text[])
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Updates the time with the new time.
+ * \brief Updates the time with the new time.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdTimeDisplay(char text[])
@@ -318,7 +323,8 @@ void LcdTimeDisplay(char text[])
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Clears the title.
+ * \brief Clears the title.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdClearTitle()
@@ -328,7 +334,8 @@ void LcdClearTitle()
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Clears the first line.
+ * \brief Clears the first line.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdClearFirstLine()
@@ -339,7 +346,8 @@ void LcdClearFirstLine()
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Clears the second line.
+ * \brief Clears the second line.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdClearSecondLine()
@@ -349,8 +357,9 @@ void LcdClearSecondLine()
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Clears the second line.
- * \Deprecated
+ * \brief Clears the second line.
+ * \author Ricardo Blommers.
+ * \deprecated
  */
 /* ����������������������������������������������������������������������� */
 void LcdClearLine()
@@ -360,7 +369,8 @@ void LcdClearLine()
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Clears both lines.
+ * \brief Clears both lines.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdClearTitleLine()
@@ -371,7 +381,8 @@ void LcdClearTitleLine()
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Clears the display of all text.
+ * \brief Clears the display of all text.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdClearAll()
@@ -386,7 +397,8 @@ void LcdClearAll()
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Thread to make the title scroll
+ * \brief Thread to make the title scroll.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 THREAD(TitleThread, args)
@@ -438,7 +450,8 @@ THREAD(TitleThread, args)
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Thread to scroll the second line.
+ * \brief Thread to scroll the second line.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 THREAD(SecondLineThread, args)
@@ -489,13 +502,14 @@ THREAD(SecondLineThread, args)
 }
 
 /*-------------------------------------------------------------------------*/
-/*                         Methods that require threads                                 */
+/*                         Methods from which threads are called.          */
 /*-------------------------------------------------------------------------*/
 
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Fills out the title portion of the screen.
+ * \brief Fills out the title portion of the screen.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdWriteTitle(char text[])
@@ -512,7 +526,8 @@ void LcdWriteTitle(char text[])
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Fills out the first row of the display.
+ * \brief Fills out the first row of the display.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdWriteFirstLine(char text[])
@@ -522,7 +537,8 @@ void LcdWriteFirstLine(char text[])
 
 /* ����������������������������������������������������������������������� */
 /*!
- * \Fills out the second row of the display.
+ * \brief Fills out the second row of the display.
+ * \author Ricardo Blommers.
  */
 /* ����������������������������������������������������������������������� */
 void LcdWriteSecondLine(char text[])
