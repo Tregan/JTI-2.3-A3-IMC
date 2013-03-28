@@ -56,7 +56,7 @@ int NetworkInit(void)
         LcdWriteSecondLine("Configuring network...");
         printf("\nConfiguring network...");
 
-        if(NutDhcpIfConfig(eth0IfName, mac_addr, 0))
+        if(NutDhcpIfConfig(eth0IfName, mac_addr, 30000))
         {
             LogMsg_P(LOG_ERR, PSTR("Error: >> NutDhcpIfConfig()"));
             result = NOK;
