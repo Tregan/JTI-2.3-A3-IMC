@@ -1265,8 +1265,8 @@ THREAD(NoteAlarmBThread, args)
 /* ����������������������������������������������������������������������� */
 /*!
  * \brief setting Scheduler thread
- * aangevuld met de datum door Matthijs
- * \author Bas, Matthijs
+ * aangevuld door Farhad
+ * \author Bas, Farhad
  */
 /* ����������������������������������������������������������������������� */
 THREAD(SchedulerThread, args)

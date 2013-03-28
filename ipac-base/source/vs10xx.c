@@ -878,7 +878,9 @@ int VsBeep(u_char fsin, u_short ms)
     return(0);
 }
 /*
- * SoundA is an quick repating sound
+ * \brief SoundA is an quick repating sound
+ * 
+ * \auhtor Matthijs
  */
 int SoundA(void)
 {
@@ -890,7 +892,9 @@ int SoundA(void)
 }
 
 /*
- * SoundB is an slow repeating sound on a high pitch
+ * \brief SoundB is an slow repeating sound on a high pitch
+ *
+ * \auhtor Matthijs
  */
 int SoundB(void)
 {   
