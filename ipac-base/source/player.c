@@ -42,6 +42,7 @@ THREAD(FallingAsleep, arg)
         {
             NutSleep(sleepTime);
             VsSetVolume(currentVolume + 1, currentVolume + 1);
+            printf("Falling Asleep Mode tick now. Volume lowered %d", VsGetVolume());
             currentVolume++;
         }
         

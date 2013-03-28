@@ -1848,11 +1848,11 @@ void AlarmBMenu(void)
             case 6:
                 if(alarmbstruct.set == 0)
                 {
-                        sprintf(output, "On/Off: Off");
+                    sprintf(output, "On/Off: Off");
                 }
                 else
                 {
-                        sprintf(output, "On/Off: On");
+                    sprintf(output, "On/Off: On");
                 }
                 LcdWriteSecondLine(output);
                 break;

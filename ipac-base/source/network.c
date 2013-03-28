@@ -155,7 +155,7 @@ int connectToStream(void)
 
     sock = NutTcpCreateSocket();
 
-    if(NutTcpConnect(sock, inet_addr("193.17.192.13"), 80) != 0)
+    if(NutTcpConnect(sock, inet_addr("81.173.3.132"), 8082) != 0)
         LogMsg_P(LOG_ERR, PSTR("Stream not available. Errorcode: %d"), NutTcpError(sock));
     else
     {
