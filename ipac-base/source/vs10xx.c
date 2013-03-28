@@ -963,11 +963,6 @@ THREAD(SnoozethreadA, args)
         // If snooze takes longer than the value set at MaxSnoozeTime the snooze function will stop.
         if((mathTime - mathTimeStart) > MaxSnoozeTime || key == KEY_01 )
         {            
-            current.tm_hour = 13;
-            current.tm_min = 10;
-            current.tm_sec = 0;
-            current.tm_mday = 5;
-            current.tm_mon = 3;
             X12RtcSetClock(&current);
             NutThreadExit();
         }
@@ -1015,7 +1010,7 @@ THREAD(SchedulerSetthread, args)
         X12RtcGetClock(&gmt);
       
         u_char key = KbGetKey();
-        if(SchedulerDate1.tm_sec <= gmt.tm_sec && SchedulerDate1.tm_min <= gmt.tm_min && SchedulerDate1.tm_hour <= gmt.tm_hour && SchedulerDate1.tm_mday <= gmt.tm_mday && SchedulerDate1.tm_mon <= gmt.tm_mon)
+        if(SchedulerDate1.tm_sec == gmt.tm_sec && SchedulerDate1.tm_min == gmt.tm_min && SchedulerDate1.tm_hour == gmt.tm_hour && SchedulerDate1.tm_mday == gmt.tm_mday && SchedulerDate1.tm_mon == gmt.tm_mon)
         {
            playStream();
         }
