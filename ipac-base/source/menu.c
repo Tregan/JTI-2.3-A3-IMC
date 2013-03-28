@@ -56,10 +56,10 @@ char* menuitems[3] = {
     "Settings"
 };
 
-struct menuSubItem menusubitems[3][4] = {
+struct menuSubItem menusubitems[3][5] = {
     {{"Start Radio Stream", &playStream}, {"Stop Radio Stream", &stopStream}, {"Falling Asleep Mode", &enableFallingAsleepMode}},
     {{"Alarm A", &AlarmAMenu}, {"Weekend Alarm", &AlarmWeekendMenu},{"Alarm B", &MainAlarmBMenu}, {"Scheduler", &SchedulerMenu}},
-    {{"Timezone", &SetTimezone}, {"Sync Time&Date", &SyncDatetime}, {"Set Time", &SetTimeManually}, {"Set Date", &SetDateManually}}
+    {{"Timezone", &SetTimezone}, {"Sync Time&Date", &SyncDatetime}, {"Set Time", &SetTimeManually}, {"Set Date", &SetDateManually}, {"Set Volume", &VolumeMenu}}
 };
 
 /*

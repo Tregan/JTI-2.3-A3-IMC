@@ -1392,6 +1392,48 @@ THREAD(SchedulerThread, args)
     }
 }
 
+/*!
+ * \brief setting Volume thread
+ * aangevuld met de datum door Matthijs
+ * \author Farhad
+ */
+/* ����������������������������������������������������������������������� */
+THREAD(VolumeThread, args)
+{
+    selectedAlarmtimeUnit = 0;
+    volume = VsGetVolume();
+    
+    for(;;)
+    {
+        NutSleep(300);
+        //Wait for keyboard event
+        if(KbWaitForKeyEvent(500) != KB_ERROR)
+        {
+            u_char key = KbGetKey();
+            if(key == KEY_UP)
+            {
+                if(volume >= 250)
+                    volume = 0;
+                else
+                    volume += 10;
+            }
+            else if(key == KEY_DOWN)
+            {
+                if(volume <= 0)
+                    volume = 250;
+                else
+                    volume -= 10;
+            }
+            else if(key == KEY_OK)
+            {
+                VolumeSet = 1;
+                //Thread no longer needed, exit please
+                NutThreadExit();
+            }
+        }
+    }
+}
+
 /*-------------------------------------------------------------------------*/
 /* Functions                                                                */
 /*-------------------------------------------------------------------------*/
@@ -1973,8 +2015,7 @@ void NoteAlarmBMenu(void)
 /* ����������������������������������������������������������������������� */
 /*!
  * \brief set Scheduler
- * \author Bas, Matthijs
- * \modified Farhad
+ * \author Bas, Farhad
  */
 /* ����������������������������������������������������������������������� */
 void SchedulerMenu(void)
@@ -2052,6 +2093,45 @@ void SchedulerMenu(void)
         printf("\nSuccess. First Scheduler Time: %02d:%02d:%02d %d-%d-%d", scheduler.tm_hour, scheduler.tm_min, scheduler.tm_sec, scheduler.tm_mday, scheduler.tm_mon + 1, scheduler.tm_year + 1900);
         SchedulerMenu();
     }
+}
+
+/*!
+ * \brief set Volume
+ * \author Farhad
+ */
+/* ����������������������������������������������������������������������� */
+void VolumeMenu(void)
+{
+    VolumeSet = 0; 
+    //key listener starten
+    NutThreadCreate("VolumeThread", VolumeThread, NULL, 1024);
+    
+    char output[20];
+    //Backlight on during setting
+    LcdBackLight(LCD_BACKLIGHT_ON);
+    //Clear the title
+    LcdClearAll();
+    LcdWriteTitle("Set Volume");
+    
+    ShowCurrentTime();
+    
+    while(VolumeSet != 1)
+    {
+        NutSleep(100);
+        
+        //Clear the second line
+        LcdClearLine();
+      
+        sprintf(output, "Set Volume: %03d", volume);
+        LcdWriteSecondLine(output);
+    }   
+    LcdClearAll();
+    //Backlight no longer needed, turn off
+    LcdBackLight(LCD_BACKLIGHT_OFF);
+    
+    VsSetVolume(volume,volume);
+    //VsDecoderSetBass(0, 0, 0, 0, 0);
+    printf("\nSuccess. Volume: %03d", volume);
 }
 
 

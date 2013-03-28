@@ -1013,30 +1013,13 @@ THREAD(SchedulerSetthread, args)
     {  
         tm gmt;
         X12RtcGetClock(&gmt);
-        int GMTsec = gmt.tm_sec;
-        int GMTmin = gmt.tm_min;
-        int GMThour = gmt.tm_hour;
-        int GMTday = gmt.tm_mday;
-        int GMTmonth = gmt.tm_mon;
-        
-        int SCDLRsec = SchedulerDate1.tm_sec;
-        int SCDLRmin = SchedulerDate1.tm_min;
-        int SCDLRhour = SchedulerDate1.tm_hour;
-        int SCDLRday = SchedulerDate1.tm_mday;       
-        int SCDLRmonth = SchedulerDate1.tm_mon;
-        
-        int SCDLR2sec = SchedulerDate2.tm_sec;
-        int SCDLR2min = SchedulerDate2.tm_min;
-        int SCDLR2hour = SchedulerDate2.tm_hour;
-        int SCDLR2day = SchedulerDate2.tm_mday;       
-        int SCDLR2month = SchedulerDate2.tm_mon;
-        
+      
         u_char key = KbGetKey();
-        if(SCDLRsec <= GMTsec && SCDLRmin <= GMTmin && SCDLRhour <= GMThour && SCDLRday <= GMTday && SCDLRmonth <= GMTmonth)
+        if(SchedulerDate1.tm_sec <= gmt.tm_sec && SchedulerDate1.tm_min <= gmt.tm_min && SchedulerDate1.tm_hour <= gmt.tm_hour && SchedulerDate1.tm_mday <= gmt.tm_mday && SchedulerDate1.tm_mon <= gmt.tm_mon)
         {
            playStream();
         }
-        if((SCDLR2sec == GMTsec && SCDLR2min == GMTmin && SCDLR2hour == GMThour && SCDLR2day == GMTday && SCDLR2month == GMTmonth) || key == KEY_01)
+        if((SchedulerDate2.tm_sec == gmt.tm_sec && SchedulerDate2.tm_min == gmt.tm_min && SchedulerDate2.tm_hour == gmt.tm_hour && SchedulerDate2.tm_mday == gmt.tm_mday && SchedulerDate2.tm_mon == gmt.tm_mon) || key == KEY_01)
         {                
             stopStream();
             NutThreadExit(); 
