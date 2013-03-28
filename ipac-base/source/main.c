@@ -97,7 +97,6 @@ tm SchedulerDate2;
 
 //Volume
 int VolumeSet;
-
 int volume;
 
 
@@ -520,7 +519,7 @@ THREAD(BacklightThread, args)
  * \author Bas, Matthijs
  */
 /* ����������������������������������������������������������������������� */
-THREAD(SetAlarmAThread, args)
+THREAD(MainSetAlarmBThread, args)
 {
     selectedAlarmtimeUnit = DATETIME_DAYS;
     
@@ -626,7 +625,7 @@ THREAD(SetAlarmAThread, args)
  * \author Bas, Matthijs
  */
 /* ����������������������������������������������������������������������� */
-THREAD(MainSetAlarmBThread, args)
+THREAD(SetAlarmAThread, args)
 {
     selectedAlarmtimeUnit = 0;
     if(alarmBArray[selectedAlarmBindex].timeSet.tm_year == 0)
